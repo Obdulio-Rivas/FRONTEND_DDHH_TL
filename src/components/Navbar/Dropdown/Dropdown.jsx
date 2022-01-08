@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { BsDash } from "react-icons/bs";
-
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 const Dropdown = (props) => {
   const { title, options } = props;
   const [isOpenDropdown, setIsOpenDropdown] = useState(false);
@@ -15,6 +15,7 @@ const Dropdown = (props) => {
   }
 
   return (
+    <Route>
     <li className="relative">
       <button
         onClick={() => haddlerClick()}
@@ -28,17 +29,18 @@ const Dropdown = (props) => {
         <ul className="space-y-2 lg:w-48">
           {options.map(({ key, option, href }) => (
             <li key={key}>
-              <a
-                href={href}
+              <Link
+                to={href}
                 className="flex p-2 font-normal text-sm text-gray-600 rounded-md  hover:bg-gray-100 hover:text-black"
               >
                 <BsDash className="self-center text-black mr-1"/>{option}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>
       </div>
     </li>
+    </Route>
   );
 };
 
