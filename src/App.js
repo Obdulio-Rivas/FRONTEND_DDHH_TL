@@ -4,8 +4,8 @@ import Login from "./components/Login/Login";
 function App() {
   return (
     //Navbar
-    //<Navbar/>
-    <Login/>
+    <Navbar/>
+    //<Login/>
   );
 }
 

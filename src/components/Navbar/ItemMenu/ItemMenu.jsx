@@ -5,7 +5,7 @@ const ItemMenu = (props) => {
     const {title, href} = props;
 
     return (
-      <Route>
+      <Router>
         <li>
           <Link
             to={href}
@@ -14,7 +14,7 @@ const ItemMenu = (props) => {
             {title}
           </Link>
         </li>
-      </Route>
+        </Router>
     )
 }
 
