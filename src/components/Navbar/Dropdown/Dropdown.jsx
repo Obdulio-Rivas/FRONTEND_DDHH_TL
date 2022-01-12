@@ -15,7 +15,6 @@ const Dropdown = (props) => {
   }
 
   return (
-    <Router>
     <li className="relative">
       <button
         onClick={() => haddlerClick()}
@@ -40,7 +39,6 @@ const Dropdown = (props) => {
         </ul>
       </div>
     </li>
-    </Router>
   );
 };
 

@@ -5,7 +5,6 @@ import {
 import Avatar from "../Avatar/Avatar";
 import Dropdown from "../Dropdown/Dropdown";
 import ItemMenu from "../ItemMenu/ItemMenu";
-
 const example_options_menu = [
   {
     key: 0,
@@ -13,7 +12,7 @@ const example_options_menu = [
     href: "#",
     type: "dropdown",
     options: [
-      { key: 0, option: "Archivo 1", href: "#" },
+      { key: 0, option: "Archivo 1", href: "/" },
       { key: 1, option: "Archivo 2", href: "#" },
       { key: 2, option: "Archivo 3", href: "#" },
     ],

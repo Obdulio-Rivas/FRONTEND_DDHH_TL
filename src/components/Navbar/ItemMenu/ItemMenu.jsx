@@ -5,7 +5,6 @@ const ItemMenu = (props) => {
     const {title, href} = props;
 
     return (
-      <Router>
         <li>
           <Link
             to={href}
@@ -14,7 +13,6 @@ const ItemMenu = (props) => {
             {title}
           </Link>
         </li>
-        </Router>
     )
 }
 

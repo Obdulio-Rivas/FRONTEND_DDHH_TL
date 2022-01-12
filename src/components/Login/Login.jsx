@@ -7,7 +7,6 @@ import Input from "../Forms/Input/Input";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 const Login = () => {
   return (
-    <Router>
       <div className="lg:h-screen lg:w-screen flex flex-wrap lg:flex-nowrap">
         <div className="flex justify-center w-screen h-max lg:h-screen p-4">
           <div className="flex flex-row flex-wrap self-center h-5/6 w-10/12 max-w-full">
@@ -56,7 +55,7 @@ const Login = () => {
                 Inicia sesion.
               </h2>
             </div>
-            <form className="block w-full" action="">
+            <form className="block w-full" action="/navbar">
               <Input
                 label={"Email"}
                 name={"email"}
@@ -75,7 +74,6 @@ const Login = () => {
           </div>
         </div>
       </div>
-    </Router>
   );
 };
 
