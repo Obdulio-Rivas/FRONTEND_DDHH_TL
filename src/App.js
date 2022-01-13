@@ -10,7 +10,7 @@ function App() {
         <Routes>
            <Route exact path="/" element={<Login/>}/>
            {/*<Route exact path="/navbar" element={<Navbar/>}/>*/}
-           <PrivateRoutes exact path="/navbar" element={<Navbar/>}/>
+           {/*<PrivateRoutes exact path="/navbar" element={<Navbar/>}/>*/}
         </Routes>
       </div>
     </Router>

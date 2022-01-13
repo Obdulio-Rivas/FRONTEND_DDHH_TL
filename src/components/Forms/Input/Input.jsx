@@ -1,12 +1,12 @@
 import React from "react";
 
 const Input = (props) => {
-  const { label, name, type, placeholder } = props;
+  const { label, value, name, type, placeholder, handlerChange } = props;
 
   return (
     <div className="block my-4 w-full">
       <label
-        for={name}
+        htmlFor={name}
         className="select-none text-lg inline-block text-gray-800 w-auto m-auto mb-0.5 font-medium"
       >
         {label}
@@ -17,6 +17,8 @@ const Input = (props) => {
         name={name}
         placeholder={placeholder}
         type={type}
+        value={value}
+        onChange={handlerChange}
       />
     </div>
   );
