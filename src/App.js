@@ -11,6 +11,15 @@ function App() {
            <Route exact path="/" element={<Login/>}/>
            {/*<Route exact path="/navbar" element={<Navbar/>}/>*/}
            {/*<PrivateRoutes exact path="/navbar" element={<Navbar/>}/>*/}
+
+           <Route
+          path="/navbar"
+          element={
+            <PrivateRoutes>
+              <Navbar/>
+            </PrivateRoutes>
+          }
+          />
         </Routes>
       </div>
     </Router>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 
 {/*const PrivateRoutes = (props) => {
     return (
@@ -7,9 +7,8 @@ import { Route, Routes } from 'react-router-dom'
     );
 };*/}
 
-const PrivateRoutes = (props) => {
-    return (
-        <Route {...props}/>
-    );
+const PrivateRoutes = ({children}) => {
+    const auth = true;
+    return auth ? children : <Navigate to="/" />;
 };
 export default PrivateRoutes;
