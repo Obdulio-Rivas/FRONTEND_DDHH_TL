@@ -7,8 +7,10 @@ import { Navigate, Route, Routes } from 'react-router-dom'
     );
 };*/}
 
-const PrivateRoutes = ({children}) => {
-    const auth = true;
+const PrivateRoutes = ({children, auth}) => {
     return auth ? children : <Navigate to="/" />;
 };
+
+
+
 export default PrivateRoutes;

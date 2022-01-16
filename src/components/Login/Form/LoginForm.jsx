@@ -1,9 +1,10 @@
 import React, {useState} from "react";
+import { Navigate, Route, Router, Routes } from "react-router-dom";
 import postLogin from "../../../services/POST/postLogin";
 import Button from "../../Forms/Button/Button";
 import Checkbox from "../../Forms/Checkbox/Checkbox";
 import Input from "../../Forms/Input/Input";
-
+import Navbar from "../../Navbar/Navbar";
 const LoginForm = () => {
 
   const [values, setValues] = useState({email: '', password: ''});
@@ -12,6 +13,9 @@ const LoginForm = () => {
     e.preventDefault();
     //console.log(values)
     postLogin(values);
+    return (
+      <Navigate to="/navbar"/>
+    );
   }
 
   const handlerChange = (e) => {

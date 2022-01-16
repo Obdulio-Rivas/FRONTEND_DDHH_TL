@@ -2,30 +2,12 @@ import Navbar from "./components/Navbar/Navbar";
 import Login from "./components/Login/Login";
 import { BrowserRouter as Router, Switch, Route, Link, Routes } from "react-router-dom";
 import  PrivateRoutes  from "./components/PrivateRoutes/PrivateRoutes";
-
+import AplicationRoutes from "./components/Routes/AplicationRoutes";
 function App() {
   return (
-    <Router>
-      <div className="App">
-        <Routes>
-           <Route exact path="/" element={<Login/>}/>
-           {/*<Route exact path="/navbar" element={<Navbar/>}/>*/}
-           {/*<PrivateRoutes exact path="/navbar" element={<Navbar/>}/>*/}
 
-           <Route
-          path="/navbar"
-          element={
-            <PrivateRoutes>
-              <Navbar/>
-            </PrivateRoutes>
-          }
-          />
-        </Routes>
-      </div>
-    </Router>
-    //Navbar
-    
-    //
+    <AplicationRoutes/>
+
   );
 }
 
