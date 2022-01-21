@@ -10,14 +10,9 @@ const postLogin = async (values) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(values)
     };
-    const response = await fetch('https://testing--environment.herokuapp.com/API/authentication/login_user', requestOptions);
-    const data = await response.json();
-    const {is_successful, msg} = data;
-    console.log(data);
-    if(is_successful)
-    {
-        
-    }
+    const fetchData = await fetch('https://testing--environment.herokuapp.com/API/authentication/login_user', requestOptions);
+    const response = await fetchData.json();
+    return response;
 }
 
 export default postLogin;

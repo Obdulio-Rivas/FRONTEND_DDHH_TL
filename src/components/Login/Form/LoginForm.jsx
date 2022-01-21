@@ -1,30 +1,29 @@
-import React, {useState} from "react";
-import { Navigate, Route, Router, Routes } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import postLogin from "../../../services/POST/postLogin";
 import Button from "../../Forms/Button/Button";
 import Checkbox from "../../Forms/Checkbox/Checkbox";
 import Input from "../../Forms/Input/Input";
-import Navbar from "../../Navbar/Navbar";
 const LoginForm = () => {
+  let navigate = useNavigate();
 
-  const [values, setValues] = useState({email: '', password: ''});
+  const [values, setValues] = useState({ email: "", password: "" });
 
-  const handlerSubmit = (e) => {
+  const handlerSubmit = async e => {
     e.preventDefault();
-    //console.log(values)
-    postLogin(values);
-    return (
-      <Navigate to="/navbar"/>
-    );
+    const credentials = await postLogin(values);
+    if(credentials.is_successful){
+      navigate('/navbar')
+    }
   }
 
-  const handlerChange = (e) => {
-    const {value, name} = e.target;
+  const handleChange = (e) => {
+    const { value, name } = e.target;
     setValues({
       ...values,
-      [name]: value
+      [name]: value,
     });
-  }
+  };
 
   return (
     <>
@@ -40,7 +39,7 @@ const LoginForm = () => {
           type={"text"}
           value={values.email}
           placeholder={"Ingresa tu email"}
-          handlerChange = {handlerChange}
+          handlerChange={handleChange}
         />
         <Input
           label={"Contraseña"}
@@ -48,7 +47,7 @@ const LoginForm = () => {
           type={"password"}
           value={values.password}
           placeholder={"Ingresa tu contraseña"}
-          handlerChange = {handlerChange}
+          handlerChange={handleChange}
         />
         <Checkbox
           id={"show_password"}
