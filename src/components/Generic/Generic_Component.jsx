@@ -1,15 +1,16 @@
-import React from 'react';
+import React from "react";
 import { useParams } from "react-router-dom";
+import Navbar from "../Navbar/Navbar";
 
 const Generic_Component = () => {
+  let { module } = useParams();
 
-    let { module } = useParams();
+  return (
+    <>
+      <Navbar/>
+      <div>{module}</div>
+    </>
+  );
+};
 
-    return (
-        <div>
-            {module}
-        </div>
-    )
-}
-
-export default Generic_Component
+export default Generic_Component;

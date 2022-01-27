@@ -6,6 +6,8 @@ import {
   AiOutlineLogout,
 } from "react-icons/ai";
 
+import AuthService from "../../../services/Auth/Auth.Service.js";
+
 const options = [
   {
     key: 1,
@@ -26,8 +28,9 @@ const options = [
 const SingOut = () => {
   let navigate = useNavigate();
   
-  const handdlerSingOut = () => {
-    //Destroy sessionStorage
+  const handdlerSingOut = async () => {
+    //Destroy sessionStorage.
+    AuthService.logout();
     navigate("/");
   };
 
@@ -35,7 +38,7 @@ const SingOut = () => {
     <li>
       <div
         onClick={() => handdlerSingOut()}
-        className={`flex p-2 font-normal text-sm text-red-600 rounded-md hover:bg-zinc-100 hover:text-red-900`}
+        className={`flex hover:cursor-pointer p-2 font-normal text-sm text-red-600 rounded-md hover:bg-zinc-100 hover:text-red-900`}
       >
         <span className="self-center mr-1">{<AiOutlineLogout />}</span>
         {"Cerrar Sesion"}

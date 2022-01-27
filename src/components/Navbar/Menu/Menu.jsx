@@ -12,9 +12,9 @@ const example_options_menu = [
     href: "#",
     type: "dropdown",
     options: [
-      { key: 0, option: "Archivo 1", href: "/" },
-      { key: 1, option: "Archivo 2", href: "#" },
-      { key: 2, option: "Archivo 3", href: "#" },
+      { key: 0, option: "Archivo 1", href: "/A1" },
+      { key: 1, option: "Archivo 2", href: "/A2" },
+      { key: 2, option: "Archivo 3", href: "/A3" },
     ],
   },
   {
@@ -23,14 +23,14 @@ const example_options_menu = [
     href: "#",
     type: "dropdown",
     options: [
-      { key: 0, option: "Caso 1", href: "#" },
-      { key: 1, option: "Caso 2", href: "#" },
-      { key: 2, option: "Caso 3", href: "#" },
+      { key: 0, option: "Caso 1", href: "/C1" },
+      { key: 1, option: "Caso 2", href: "/C2" },
+      { key: 2, option: "Caso 3", href: "/C3" },
     ],
   },
-  { key: 2, title: "Seguimiento", href: "#", type: "normal" },
-  { key: 3, title: "Directorio", href: "#", type: "normal" },
-  { key: 4, title: "Dashboard", href: "#", type: "normal" },
+  { key: 2, title: "Seguimiento", href: "/Seguimiento", type: "normal" },
+  { key: 3, title: "Directorio", href: "/Directorio", type: "normal" },
+  { key: 4, title: "Dashboard", href: "/Dashboard", type: "normal" },
 ];
 
 const Menu = () => {

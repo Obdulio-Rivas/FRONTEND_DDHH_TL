@@ -1,26 +1,38 @@
-import React from "react";
-import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Generic_Component from "../Generic/Generic_Component";
+import Home from "../Home/Home";
 import Login from "../Login/Login";
-import Navbar from "../Navbar/Navbar";
 import PrivateRoutes from "../PrivateRoutes/PrivateRoutes";
+import AuthService from "../../services/Auth/Auth.Service.js";
 
 const AplicationRoutes = () => {
-
-  //Session storage.
+  const getAuth = () => {
+    return AuthService.getCurrentUser() ? true : false;
+  };
 
   return (
-      <div>
-          <Router>
-            <Routes>
-                <Route exact path="/" element={<Login/>}/>
-                <Route path="/navbar" element={<PrivateRoutes children={<Navbar/>} auth={true}/>} />
-                <Route exact path="/:module" element={<Generic_Component/>}/>
-            </Routes>
-        </Router>
-      </div>
+    <div>
+      <Router>
+        <Routes>
+          <Route exact path="/" element={<Login />} />
+          <Route
+            path="/home"
+            element={<PrivateRoutes children={<Home />} auth={getAuth()} />}
+          />
+          <Route
+            path="/:module"
+            element={
+              <PrivateRoutes
+                children={<Generic_Component />}
+                auth={getAuth()}
+              />
+            }
+          />
+        </Routes>
+      </Router>
+    </div>
   );
 };
-
 
 export default AplicationRoutes;

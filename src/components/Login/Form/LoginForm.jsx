@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import postLogin from "../../../services/POST/postLogin";
+import AuthService from "../../../services/Auth/Auth.Service.js";
 import Button from "../../Forms/Button/Button";
 import Checkbox from "../../Forms/Checkbox/Checkbox";
 import Input from "../../Forms/Input/Input";
+
 const LoginForm = () => {
   let navigate = useNavigate();
 
@@ -11,9 +12,9 @@ const LoginForm = () => {
 
   const handlerSubmit = async e => {
     e.preventDefault();
-    const credentials = await postLogin(values);
+    const credentials = await AuthService.login(values);
     if(credentials.is_successful){
-      navigate('/navbar')
+      navigate('/home')
     }
   }
 
@@ -24,6 +25,13 @@ const LoginForm = () => {
       [name]: value,
     });
   };
+
+  
+  useEffect(() => {
+    if(!AuthService.getCurrentUser()){
+      navigate('/home')
+    }
+  }, []);
 
   return (
     <>
