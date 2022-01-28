@@ -4,7 +4,7 @@ import Navbar from "../Navbar/Navbar";
 
 const Generic_Component = () => {
   let { module } = useParams();
-
+ 
   return (
     <>
       <Navbar/>
