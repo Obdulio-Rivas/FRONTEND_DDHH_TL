@@ -67,7 +67,7 @@ const Avatar = (props) => {
           src={user ? user.avatarURL : "./profile.jpg"}
           alt="user avatar"
         />
-        <span className="px-2 my-auto leading-none">{AuthService.getCurrentUser().name+ ' ' + AuthService.getCurrentUser().last_name[0]}</span>
+        <span className="px-2 my-auto leading-none">{AuthService.getCurrentUser()?.name+ ' ' + AuthService.getCurrentUser()?.last_name[0]+'.'}</span>
       </button>
       <div
         className={`right-0 p-2 mt-1 bg-white rounded-md lg:shadow lg:absolute lg:border ${

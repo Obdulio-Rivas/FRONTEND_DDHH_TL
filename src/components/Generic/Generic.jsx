@@ -2,7 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
 
-const Generic_Component = () => {
+const GenericComponent = () => {
   let { module } = useParams();
  
   return (
@@ -13,4 +13,4 @@ const Generic_Component = () => {
   );
 };
 
-export default Generic_Component;
+export default GenericComponent;

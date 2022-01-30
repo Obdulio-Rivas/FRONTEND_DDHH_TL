@@ -1,17 +1,18 @@
 import moment from "moment";
-const API_URL = "https://testing--environment.herokuapp.com/API/";
-//const API_URL = "http://localhost:3001/api/";
+import API_URL from "../../const/api.js";
 
 const check_JWT = () => {
   try {
 
-    if (getCurrentUser()?.expires_in) {
-      const expires_in = getCurrentUser().expires_in;
-      const current_time = moment()
-        .add(+6, "h")
-        .format("YYYY-MM-DD HH:mm:ss");
-      if (expires_in >= current_time) {
-        return true;
+    if(getCurrentUser()){
+      if (getCurrentUser()?.expires_in) {
+        const expires_in = getCurrentUser().expires_in;
+        const current_time = moment()
+          .add(+6, "h")
+          .format("YYYY-MM-DD HH:mm:ss");
+        if (expires_in >= current_time) {
+          return true;
+        }
       }
     }
 
