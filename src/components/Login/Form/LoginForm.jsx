@@ -8,7 +8,7 @@ import Input from "../../Forms/Input/Input";
 const LoginForm = () => {
   let navigate = useNavigate();
   
-  const [values, setValues] = useState({ email: "", password: "" });
+  const [values, setValues] = useState({ email: "YEsperanza@mail.com", password: "password123" });
 
   const handlerSubmit = async (e) => {
     e.preventDefault();

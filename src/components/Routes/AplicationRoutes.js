@@ -5,8 +5,10 @@ import Home from "../Home/Home";
 import Login from "../Login/Login";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import User from "../User/User";
+import TemplateForm from "../template/TemplateForm";
 
 const AplicationRoutes = () => {
+
   return (
     <div>
       <Router>
@@ -22,6 +24,13 @@ const AplicationRoutes = () => {
             path="/users"
             element={
               <PrivateRoute forRoles={[1]} children={< User />} />
+            }
+          />
+          <Route
+            exact
+            path="/users/Add"
+            element={
+              <PrivateRoute forRoles={[1]} children={<TemplateForm/>} />
             }
           />
           <Route
@@ -44,6 +53,7 @@ const AplicationRoutes = () => {
               />
             }
           />
+           
         </Routes>
       </Router>
     </div>
