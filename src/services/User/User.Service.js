@@ -14,8 +14,29 @@ const getUsers = async () => {
   return response;
 };
 
+
+const postUsers = async (values) =>{
+  const requestOptions = {
+    method: "POST",
+    headers: { 
+      "Content-Type": "application/json",
+    "user-access-token": AuthService.getCurrentUser().jwt,
+  },
+    body: JSON.stringify(values),
+  };
+
+  const fetchData = await fetch(
+    `${API_URL}user/`,
+    requestOptions
+  );
+
+  const response = await fetchData.json();
+  return response;
+}
+
 const UserService = {
   getUsers,
+  postUsers,
 };
 
 export default UserService;
