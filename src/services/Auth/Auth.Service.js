@@ -31,7 +31,7 @@ const login = async (values) => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "access-control-allow-credentials": true,
+      "access-control-allow-credentials": false,
     },
     body: JSON.stringify(values),
   };

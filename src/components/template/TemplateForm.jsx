@@ -19,13 +19,14 @@ function GeneralForm({ template }) {
         value,
         message,
         onChange,
-        controll = "input"
+        controll = "input",
+        options = []
       } = field;
 
       switch (controll) {
         case "input":
           return (
-            <div key={name} class="sm:w-full md:w-1/2 px-3 mb-6 md:mb-0">
+            <div key={name} class="sm:w-full md:w-1/2 lg:1/3 px-3 mb-6 md:mb-0">
               <label
                 htmlFor={name}
                 class="uppercase tracking-wide text-black text-xs font-bold mb-2"
@@ -50,12 +51,44 @@ function GeneralForm({ template }) {
               </div>
             </div>
           );
+
+        case "select":
+          return (
+            <div key={name} class="sm:w-full md:w-1/2 lg:1/3 px-3 mb-6 md:mb-0">
+              <label
+                class="uppercase tracking-wide text-black text-xs font-bold mb-2"
+                htmlFor={name}
+              >
+                {title}
+              </label>
+              <div>
+                <select
+                  name={name}
+                  class="w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3"
+                  id={name}
+                  onChange={onChange}
+                >
+                    {options.map(({title, value}, index)=>{
+                        console.log(index)
+                        return (<option value={value} className="py-3">{title}</option>);
+                    })}
+                </select>
+                <div>
+                {errors[name] && (
+                  <span className="text-red-500 text-xs italic">
+                    {errors[name].message}
+                  </span>
+                )}
+              </div>
+              </div>
+            </div>
+          );
         case "button":
           return (
-            <div class="-mx-3 md:flex mt-2">
-              <div class="md:w-full px-3">
-                <button class="md:w-full bg-green-500 text-white font-bold py-2 px-6 rounded-md hover:bg-green-600 uppercase">
-                    {value}
+            <div key={name} class="w-full flex justify-end mt-4">
+              <div class="md:w-auto px-3">
+                <button class="w-full bg-green-500 text-white font-bold py-2 px-6 rounded-md hover:bg-green-600 uppercase">
+                  {value}
                 </button>
               </div>
             </div>
@@ -86,7 +119,6 @@ function GeneralForm({ template }) {
       }
     });
   };
-
 
   return (
     <div className=" mx-auto max-w-9xl lg:px-24">

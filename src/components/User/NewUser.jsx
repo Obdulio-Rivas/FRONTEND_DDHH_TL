@@ -98,7 +98,14 @@ const NewUser = () => {
         name: "status",
         value: values.status,
         message: "El estado es requerido.",
-        controll: "input",
+        controll: "select",
+        options: [{
+            title: 'Activo',
+            value: 1
+        },{
+            title: 'Inactivo',
+            value: 0
+        }],
         onChange: handleChange,
       },
       {
@@ -107,7 +114,17 @@ const NewUser = () => {
         name: "role",
         value: values.role,
         message: "El rol es requerido.",
-        controll: "input",
+        controll: "select",
+        options: [{
+            title: 'Administrador',
+            value: 1
+        },{
+            title: 'Abogado',
+            value: 2
+        },{
+            title: 'Asistente',
+            value: 3
+        }],
         onChange: handleChange,
       },
       {
@@ -125,7 +142,14 @@ const NewUser = () => {
         name: "gender",
         value: values.gender,
         message: "El genero es requerido.",
-        controll: "input",
+        controll: "select",
+        options: [{
+            title: 'Masculino',
+            value: 1
+        },{
+            title: 'Femenino',
+            value: 0
+        }],
         onChange: handleChange,
       },
       {
