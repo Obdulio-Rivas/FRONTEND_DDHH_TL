@@ -7,6 +7,7 @@ const getUsers = async () => {
     headers: {
       "Content-Type": "application/json",
       "user-access-token": AuthService.getCurrentUser().jwt,
+      "access-control-allow-credentials": true,
     },
   };
   const fetchData = await fetch(`${API_URL}/user/`, requestOptions);
@@ -14,25 +15,22 @@ const getUsers = async () => {
   return response;
 };
 
-
-const postUsers = async (values) =>{
+const postUsers = async (values) => {
   const requestOptions = {
     method: "POST",
-    headers: { 
+    headers: {
       "Content-Type": "application/json",
-    "user-access-token": AuthService.getCurrentUser().jwt,
-  },
+      "user-access-token": AuthService.getCurrentUser().jwt,
+      "access-control-allow-credentials": true,
+    },
     body: JSON.stringify(values),
   };
 
-  const fetchData = await fetch(
-    `${API_URL}user/`,
-    requestOptions
-  );
+  const fetchData = await fetch(`${API_URL}user/`, requestOptions);
 
   const response = await fetchData.json();
   return response;
-}
+};
 
 const UserService = {
   getUsers,

@@ -64,7 +64,7 @@ const Avatar = (props) => {
       >
         <img
           className="rounded-full w-8 h-8 max-h-8 border-2 border-slate-200"
-          src={user ? user.avatarURL : "./profile.jpg"}
+          src={user ? user.avatarURL : "../../profile.jpg"}
           alt="user avatar"
         />
         <span className="px-2 my-auto leading-none">{AuthService.getCurrentUser()?.name+ ' ' + AuthService.getCurrentUser()?.last_name[0]+'.'}</span>

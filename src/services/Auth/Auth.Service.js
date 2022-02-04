@@ -3,8 +3,7 @@ import API_URL from "../../const/api.js";
 
 const check_JWT = () => {
   try {
-
-    if(getCurrentUser()){
+    if (getCurrentUser()) {
       if (getCurrentUser()?.expires_in) {
         const expires_in = getCurrentUser().expires_in;
         const current_time = moment()
@@ -20,7 +19,7 @@ const check_JWT = () => {
   } catch (e) {
     //Crear un servicio de log.
     console.log(e);
-    console.log(!getCurrentUser()?.expires_in)
+    console.log(!getCurrentUser()?.expires_in);
 
     return false;
   }
@@ -30,7 +29,10 @@ const login = async (values) => {
   // POST request using fetch with async/await
   const requestOptions = {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      "access-control-allow-credentials": true,
+    },
     body: JSON.stringify(values),
   };
 

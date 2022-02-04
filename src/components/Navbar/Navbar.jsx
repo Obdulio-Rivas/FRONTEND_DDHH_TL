@@ -1,6 +1,6 @@
 import React from "react";
 import Menu from "./Menu/Menu";
-import { BrowserRouter as Router,Link } from "react-router-dom";
+import { BrowserRouter as Router, Link } from "react-router-dom";
 const Navbar = () => {
 
   return (
@@ -11,7 +11,7 @@ const Navbar = () => {
           to="#"
           className="inline-flex p-2 text-xl font-bold tracking-wide uppercase "
         >
-          <img className="w-auto h-10" src="./legalistica_logo.png"/>
+          <img className="w-auto h-10" src={"../../legalistica_logo.png"}/>
         </Link>
         {/*Menu*/}
         <Menu/>
