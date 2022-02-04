@@ -1,8 +1,16 @@
 const options_menu = {
   1: [
     { key: 0, title: "Inicio", href: "/home", type: "normal" },
-    { key: 1, title: "Usuarios", href: "/users", type: "normal" },
-    { key: 2, title: "Agregar Usuarios", href: "/users/Add", type: "normal" },
+    {
+      key: 1,
+      title: "Usuarios",
+      href: "#",
+      type: "dropdown",
+      options: [
+        { key: 0, option: "Nuevo Usuario", href: "/user/newUser" },
+        { key: 1, option: "Listado de Usuarios", href: "/user/users" }
+      ],
+    },
   ],
   2: [
     {
