@@ -69,8 +69,7 @@ function GeneralForm({ template }) {
                   onChange={onChange}
                 >
                     {options.map(({title, value}, index)=>{
-                        console.log(index)
-                        return (<option value={value} className="py-3">{title}</option>);
+                        return (<option key={value} selected={index==0?true:false}  value={value} className="py-3">{title}</option>);
                     })}
                 </select>
                 <div>
