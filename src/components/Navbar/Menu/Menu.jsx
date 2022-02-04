@@ -6,10 +6,12 @@ import getMenu from "../../../const/menus";
 import Avatar from "../Avatar/Avatar";
 import Dropdown from "../Dropdown/Dropdown";
 import ItemMenu from "../ItemMenu/ItemMenu";
+import AuthService from "../../../services/Auth/Auth.Service";
 
 const Menu = () => {
 
-  const options_menu = getMenu(1);
+  let userRole = AuthService.getCurrentUser() ? AuthService.getCurrentUser().role : 0;
+  const options_menu = getMenu(userRole);
   const [isNavbarOpen, setIsNavbarOpen] = useState(false);
 
   const haddlerClick = () => {
