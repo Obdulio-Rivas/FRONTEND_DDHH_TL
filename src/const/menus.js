@@ -52,17 +52,7 @@ const options_menu = {
         { key: 2, option: "Archivo 3", href: "/A3" },
       ],
     },
-    {
-      key: 1,
-      title: "Crear Caso",
-      href: "#",
-      type: "dropdown",
-      options: [
-        { key: 0, option: "Caso 1", href: "/C1" },
-        { key: 1, option: "Caso 2", href: "/C2" },
-        { key: 2, option: "Caso 3", href: "/C3" },
-      ],
-    },
+    {key: 1, title: "Crear Caso", href: "/CrearCaso", type: "normal",},
     { key: 2, title: "Seguimiento", href: "/Seguimiento", type: "normal" },
     { key: 3, title: "Directorio", href: "/Directorio", type: "normal" },
     { key: 4, title: "Dashboard", href: "/Dashboard", type: "normal" },
