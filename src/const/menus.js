@@ -11,6 +11,7 @@ const options_menu = {
         { key: 1, option: "Listado de Usuarios", href: "/user/users" }
       ],
     },
+    { key: 3, title: "Testing", href: "/test", type: "normal" },
   ],
   2: [
     {

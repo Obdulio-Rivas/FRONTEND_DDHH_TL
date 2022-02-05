@@ -65,11 +65,26 @@ const getCurrentUser = () => {
   return JSON.parse(localStorage.getItem("user"));
 };
 
+const setCurrentUser = (response) => {
+  if (response.jwt) {
+    localStorage.setItem(
+      "user",
+      JSON.stringify({
+        ...getCurrentUser(),
+        jwt: response.jwt,
+        is_successful: response.is_successful,
+        expires_in: response.expires_in,
+      })
+    );
+  }
+};
+
 const AuthService = {
   login,
   logout,
   check_JWT,
   getCurrentUser,
+  setCurrentUser
 };
 
 export default AuthService;

@@ -21,7 +21,7 @@ const postUsers = async (values) => {
     headers: {
       "Content-Type": "application/json",
       "user-access-token": AuthService.getCurrentUser().jwt,
-      "access-control-allow-credentials": true,
+      "Access-Control-Allow-Origin": true,
     },
     body: JSON.stringify(values),
   };

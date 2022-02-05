@@ -16,6 +16,11 @@ const AplicationRoutes = () => {
           <Route exact path="/" element={<Login />} />
           <Route
             exact
+            path="/test"
+            element={<PrivateRoute forRoles={[1, 2, 3]} children={<Generic />} />}
+          />
+          <Route
+            exact
             path="/home"
             element={<PrivateRoute forRoles={[1, 2, 3]} children={<Home />} />}
           />

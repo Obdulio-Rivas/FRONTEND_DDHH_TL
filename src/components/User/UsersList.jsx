@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import AuthService from "../../services/Auth/Auth.Service";
 import UserService from "../../services/User/User.Service";
 
 const UsersList = () => {
@@ -9,9 +10,12 @@ const UsersList = () => {
     async function fetchUsers() {
       // You can await here
       const response = await UserService.getUsers();
-      console.log(response.data);
+      //console.log(response.data);
       setUsers(response.data);
       setIsLoading(false);
+      if (response.is_successful) {
+        AuthService.setCurrentUser(response);
+      }
       // ...
     }
     fetchUsers();
