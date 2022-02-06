@@ -7,8 +7,7 @@ import Input from "../../Forms/Input/Input";
 
 const LoginForm = () => {
   let navigate = useNavigate();
-  
-  const [values, setValues] = useState({ email: "YEsperanza@mail.com", password: "password123" });
+  const [values, setValues] = useState({ email: "JCeron@mail.com", password: "password123" });
 
   const handlerSubmit = async (e) => {
     e.preventDefault();
@@ -44,6 +43,7 @@ const LoginForm = () => {
             value={values.email}
             placeholder={"Ingresa tu email"}
             handlerChange={handleChange}
+            message={"El correo es requerido."}
           />
           <Input
             label={"Contraseña"}

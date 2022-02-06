@@ -1,7 +1,7 @@
 import React, {useState} from "react";
-import Navbar from "../../../Navbar/Navbar";
-import TemplateForm from "../../../template/TemplateForm";
-import VictimService from "../../../../services/Victim/Victim.Service";
+import Navbar from "../../Navbar/Navbar";
+import TemplateForm from "../../../templates/Form";
+import VictimService from "../../../services/Victim/Victim.Service";
 const NewVictim = ()=>{
 
     const [values, setValues] = useState({ 
