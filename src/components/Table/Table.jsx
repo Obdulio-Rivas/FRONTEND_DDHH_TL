@@ -1,35 +1,102 @@
-import React, { useState } from "react";
+import React from "react";
+import { useTable, usePagination, useSortBy } from "react-table";
 
-import useTable from "../../hooks/useTable";
-import Pagination from "./Pagination/Pagination";
-import styles from "./Table.module.css";
+function Table({ columns, data, options }) {
 
-const Table = ({ data, rowsPerPage }) => {
-  const [page, setPage] = useState(1);
-  const { slice, range } = useTable(data, page, rowsPerPage);
+  const { 
+    getTableProps, 
+    getTableBodyProps, 
+    headerGroups, 
+    page, 
+    prepareRow,
+    canPreviousPage,
+    canNextPage,
+    pageOptions,
+    pageCount,
+    gotoPage,
+    nextPage,
+    previousPage,
+    setPageSize,
+    state,
+  } =
+    useTable({
+      columns,
+      data,
+    },
+    useSortBy,
+    usePagination
+    );
+
+
   return (
     <>
-      <table className={styles.table}>
-        <thead className={styles.tableRowHeader}>
-          <tr>
-            <th className={styles.tableHeader}>Country</th>
-            <th className={styles.tableHeader}>Capital</th>
-            <th className={styles.tableHeader}>Language</th>
-          </tr>
-        </thead>
-        <tbody>
-          {slice.map((el) => (
-            <tr className={styles.tableRowItems} key={el.id}>
-              <td className={styles.tableCell}>{el.name}</td>
-              <td className={styles.tableCell}>{el.capital}</td>
-              <td className={styles.tableCell}>{el.language}</td>
+      <table {...getTableProps()} border="1">
+        <thead>
+          {headerGroups.map((headerGroup) => (
+            <tr {...headerGroup.getHeaderGroupProps()}>
+              {headerGroup.headers.map((column) => (
+                <th {...column.getHeaderProps(column.getSortByToggleProps())}>{column.render("Header")}
+                <span>
+                    {column.isSorted
+                      ? column.isSortedDesc
+                        ? ' ▼'
+                        : ' ▲'
+                      : ''}
+                  </span>
+                </th>
+              ))}
             </tr>
           ))}
+        </thead>
+        <tbody {...getTableBodyProps()}>
+          {page.map((page, i) => {
+            prepareRow(page);
+            return (
+              <tr {...page.getRowProps()}>
+                {page.cells.map((cell) => {
+                  return (
+                    <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                  );
+                })}
+              </tr>
+            );
+          })}
         </tbody>
       </table>
-      <Pagination range={range} slice={slice} setPage={setPage} page={page} />
+      <div className="pagination">
+        <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
+          {"<<"}
+        </button>{" "}
+        <button onClick={() => previousPage()} disabled={!canPreviousPage}>
+          {"<"}
+        </button>{" "}
+        <button onClick={() => nextPage()} disabled={!canNextPage}>
+          {">"}
+        </button>{" "}
+        <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
+          {">>"}
+        </button>{" "}
+        <span>
+          Page{" "}
+          <strong>
+            {state.pageIndex + 1} of {pageOptions.length}
+          </strong>{" "}
+        </span>
+        <select
+          value={state.pageSize}
+          onChange={(e) => {
+            setPageSize(Number(e.target.value));
+          }}
+        >
+          {[5, 10, 20].map((pageSize) => (
+            <option key={pageSize} value={pageSize}>
+              Show {pageSize}
+            </option>
+          ))}
+        </select>
+      </div>
     </>
   );
-};
+}
 
 export default Table;

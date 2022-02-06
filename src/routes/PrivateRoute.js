@@ -1,7 +1,7 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
-import AuthService from "../../services/Auth/Auth.Service";
-import Unauthorized from "../Unauthorized/Unauthorized";
+import AuthService from "../services/Auth/Auth.Service";
+import Unauthorized from "../components/Unauthorized/Unauthorized";
 
 const PrivateRoute = ({ forRoles, children }) => {
   let authed = AuthService.check_JWT();

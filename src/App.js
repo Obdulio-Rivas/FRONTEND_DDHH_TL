@@ -1,8 +1,8 @@
 import React from "react";
-import AplicationRoutes from "./components/Routes/AplicationRoutes";
+import RouteManager from "../src/routes/RouteManager";
 
 function App() {
-  return <AplicationRoutes />;
+  return <RouteManager />;
 }
 
 export default App;

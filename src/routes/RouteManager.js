@@ -1,14 +1,13 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Generic from "../Generic/Generic";
-import Home from "../Home/Home";
-import Login from "../Login/Login";
-import PrivateRoute from "../PrivateRoute/PrivateRoute";
-import User from "../User/User";
-import NewUser from "../User/NewUser";
-import NewVictim from "../Case/Incident/Victim/NewVictim";
+import Generic from "../components/Generic/Generic";
+import Home from "../components/Home/Home";
+import Login from "../components/Login/Login";
+import UserRoutes from "./User/UserRoutes";
+import PrivateRoute from "./PrivateRoute";
+import VictimRoutes from "./Victim/VictimRoutes";
 
-const AplicationRoutes = () => {
+const RouteManager = () => {
 
   return (
     <div>
@@ -26,24 +25,16 @@ const AplicationRoutes = () => {
             element={<PrivateRoute forRoles={[1, 2, 3]} children={<Home />} />}
           />
           <Route
-            exact
-            path="/user/users"
+            path="/users/*"
             element={
-              <PrivateRoute forRoles={[1]} children={< User />} />
+              <PrivateRoute forRoles={[1]} children={< UserRoutes />} />
             }
           />
           <Route
             exact
-            path="/user/newUser"
+            path="/victim/*"
             element={
-              <PrivateRoute forRoles={[1]} children={<NewUser/>} />
-            }
-          />
-          <Route
-            exact
-            path="/CrearCaso"
-            element={
-              <PrivateRoute forRoles={[3]} children={<NewVictim/>} />
+              <PrivateRoute forRoles={[3]} children={<VictimRoutes/>} />
             }
           />
           <Route
@@ -51,7 +42,7 @@ const AplicationRoutes = () => {
             path="/about"
             element={
               <PrivateRoute
-                forRoles={[1, 2, 3]}
+                forRoles={[1, 2, 3]} 
                 children={<Generic />}
               />
             }
@@ -73,4 +64,4 @@ const AplicationRoutes = () => {
   );
 };
 
-export default AplicationRoutes;
+export default RouteManager;
