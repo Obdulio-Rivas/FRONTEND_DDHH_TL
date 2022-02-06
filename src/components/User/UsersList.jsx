@@ -82,7 +82,7 @@ const UsersList = () => {
               <h2>Users</h2>
             </div>
             <div className="flex">
-              <Link to={"/newUser"}>Nuevo usuario</Link>
+              <Link to={"newUser"}>Nuevo usuario</Link>
             </div>
           </div>
           <div className="mt-4">

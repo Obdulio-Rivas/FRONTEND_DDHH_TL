@@ -6,6 +6,8 @@ import Login from "../components/Login/Login";
 import UserRoutes from "./User/UserRoutes";
 import PrivateRoute from "./PrivateRoute";
 import VictimRoutes from "./Victim/VictimRoutes";
+import Profile from "../pages/Profile/Profile";
+import About from "../pages/About/About";
 
 const RouteManager = () => {
 
@@ -19,12 +21,12 @@ const RouteManager = () => {
             path="/test"
             element={<PrivateRoute forRoles={[1, 2, 3]} children={<Generic />} />}
           />
+
           <Route
             exact
             path="/home"
             element={<PrivateRoute forRoles={[1, 2, 3]} children={<Home />} />}
           />
-          
           <Route
             path="/users/*"
             element={
@@ -44,7 +46,7 @@ const RouteManager = () => {
             element={
               <PrivateRoute
                 forRoles={[1, 2, 3]} 
-                children={<Generic />}
+                children={<About />}
               />
             }
           />
@@ -54,7 +56,7 @@ const RouteManager = () => {
             element={
               <PrivateRoute
                 forRoles={[1, 2, 3]}
-                children={<Generic />}
+                children={<Profile />}
               />
             }
           />
