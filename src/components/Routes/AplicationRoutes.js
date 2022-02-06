@@ -6,8 +6,8 @@ import Login from "../Login/Login";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import User from "../User/User";
 import NewUser from "../User/NewUser";
-import NewVictim from "../Case/Incident/Victim/NewVictim";
-
+import NewVictim from "../Case/Victim/NewVictim";
+import { UpdateUser } from "../User/UpdateUser";
 const AplicationRoutes = () => {
 
   return (
@@ -32,6 +32,14 @@ const AplicationRoutes = () => {
             path="/user/newUser"
             element={
               <PrivateRoute forRoles={[1]} children={<NewUser/>} />
+            }
+          />
+          
+          <Route
+            exact
+            path="/user/updateUser"
+            element={
+              <PrivateRoute forRoles={[1]} children={<UpdateUser id_user={1} />} />
             }
           />
           <Route

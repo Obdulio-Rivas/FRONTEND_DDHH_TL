@@ -8,7 +8,8 @@ const options_menu = {
       type: "dropdown",
       options: [
         { key: 0, option: "Nuevo Usuario", href: "/user/newUser" },
-        { key: 1, option: "Listado de Usuarios", href: "/user/users" }
+        { key: 1, option: "Listado de Usuarios", href: "/user/users" },
+        { key: 2, option: "Modificar Usuarios", href: "/user/updateUser" }
       ],
     },
   ],
