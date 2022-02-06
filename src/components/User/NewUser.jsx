@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import Navbar from "../Navbar/Navbar";
-import TemplateForm from "../template/TemplateForm";
+import Form from "../../templates/Form";
 import UserService from "../../services/User/User.Service";
+import AuthService from "../../services/Auth/Auth.Service";
 const NewUser = () => {
   const [values, setValues] = useState({
     name: "",
@@ -20,10 +21,9 @@ const NewUser = () => {
 
   const handlerSubmit = async (e) => {
     //console.log(values);
-    const postdata = await UserService.postUsers(values);
-    console.log(postdata);
-    if (postdata.is_successful) {
-      console.log(postdata);
+    const response = await UserService.postUsers(values);
+    if (response.is_successful) {
+      AuthService.setCurrentUser(response);
     }
   };
 
@@ -36,7 +36,7 @@ const NewUser = () => {
   };
 
   const template = {
-    title: "Formulario",
+    title: "Nuevo usuario",
     fields: [
       {
         title: "Nombres:",
@@ -182,7 +182,7 @@ const NewUser = () => {
   return (
     <>
       <Navbar />
-      <TemplateForm template={template} />
+      <Form template={template} />
     </>
   );
 };

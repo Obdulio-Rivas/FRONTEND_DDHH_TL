@@ -7,11 +7,11 @@ const options_menu = {
       href: "#",
       type: "dropdown",
       options: [
-        { key: 0, option: "Nuevo Usuario", href: "/user/newUser" },
-        { key: 1, option: "Listado de Usuarios", href: "/user/users" },
-        { key: 2, option: "Modificar Usuarios", href: "/user/updateUser" }
+        { key: 0, option: "Nuevo Usuario", href: "/users/newUser" },
+        { key: 1, option: "Listado de Usuarios", href: "/users/" }
       ],
     },
+    { key: 3, title: "Testing", href: "/test", type: "normal" },
   ],
   2: [
     {

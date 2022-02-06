@@ -1,83 +1,102 @@
 import React from "react";
-import { useTable } from "react-table";
-import TBody from "./TBody/TBody";
-import THead from "./THead/THead";
+import { useTable, usePagination, useSortBy } from "react-table";
 
-const Table = ({
-  tableData = [
-    {
-      Error: "No data provider",
-      Description:
-        "The prop tableData no has provided on the component declaration!",
+function Table({ columns, data, options }) {
+
+  const { 
+    getTableProps, 
+    getTableBodyProps, 
+    headerGroups, 
+    page, 
+    prepareRow,
+    canPreviousPage,
+    canNextPage,
+    pageOptions,
+    pageCount,
+    gotoPage,
+    nextPage,
+    previousPage,
+    setPageSize,
+    state,
+  } =
+    useTable({
+      columns,
+      data,
     },
-  ],
-  options = null,
-}) => {
+    useSortBy,
+    usePagination
+    );
 
-  function getColumnsName(data = {}, options) {
-    const columns = [];
-    const columns_name = Object.keys(data[0]);
-    console.log(columns_name)
-    if (options?.colums) {
-      columns_name.map((column_name, index) => {
-        if (options?.colums.includes(index)) {
-          columns.push({
-            Header: column_name,
-            accessor: "col" + (index + 1), // accessor is the "key" in the data
-          });
-        }
-      });
-    } else {
-      columns_name.map((column_name, index) => {
-        columns.push({
-          Header: column_name,
-          accessor: "col" + (index + 1), // accessor is the "key" in the data
-        });
-      });
-    }
-    console.log(columns);
-    return columns;
-  }
-
-  function getDataRows(data = {}) {
-    const rows = [];
-    const number_rows = [...data].length;
-    for (let i = 0; i < number_rows; i++) {
-      let j = 0;
-      let row = {};
-      const keys = data[i];
-      for (let key in keys) {
-        j++;
-        row = {
-          ...row,
-          ["col" + j]: keys[key],
-        };
-      }
-      rows.push(row);
-    }
-    return rows;
-  }
-
-  const columns = React.useMemo(
-    () => getColumnsName(tableData, options),
-    [tableData, options]
-  );
-
-  const data = React.useMemo(() => getDataRows(tableData), [tableData]);
-
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    useTable({ columns, data });
 
   return (
-    <table {...getTableProps()} style={{ border: "solid 1px blue" }}>
-      <THead headerGroups={headerGroups} />
-      <TBody
-        getTableBodyProps={getTableBodyProps}
-        rows={rows}
-        prepareRow={prepareRow}
-      />
-    </table>
+    <>
+      <table {...getTableProps()} border="1">
+        <thead>
+          {headerGroups.map((headerGroup) => (
+            <tr {...headerGroup.getHeaderGroupProps()}>
+              {headerGroup.headers.map((column) => (
+                <th {...column.getHeaderProps(column.getSortByToggleProps())}>{column.render("Header")}
+                <span>
+                    {column.isSorted
+                      ? column.isSortedDesc
+                        ? ' ▼'
+                        : ' ▲'
+                      : ''}
+                  </span>
+                </th>
+              ))}
+            </tr>
+          ))}
+        </thead>
+        <tbody {...getTableBodyProps()}>
+          {page.map((page, i) => {
+            prepareRow(page);
+            return (
+              <tr {...page.getRowProps()}>
+                {page.cells.map((cell) => {
+                  return (
+                    <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                  );
+                })}
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+      <div className="pagination">
+        <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
+          {"<<"}
+        </button>{" "}
+        <button onClick={() => previousPage()} disabled={!canPreviousPage}>
+          {"<"}
+        </button>{" "}
+        <button onClick={() => nextPage()} disabled={!canNextPage}>
+          {">"}
+        </button>{" "}
+        <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
+          {">>"}
+        </button>{" "}
+        <span>
+          Page{" "}
+          <strong>
+            {state.pageIndex + 1} of {pageOptions.length}
+          </strong>{" "}
+        </span>
+        <select
+          value={state.pageSize}
+          onChange={(e) => {
+            setPageSize(Number(e.target.value));
+          }}
+        >
+          {[5, 10, 20].map((pageSize) => (
+            <option key={pageSize} value={pageSize}>
+              Show {pageSize}
+            </option>
+          ))}
+        </select>
+      </div>
+    </>
   );
-};
+}
 
 export default Table;
