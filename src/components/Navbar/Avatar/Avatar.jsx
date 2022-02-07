@@ -63,8 +63,8 @@ const Avatar = (props) => {
         className="flex w-full px-4 py-1 font-medium rounded-md outline-none focus:outline-none justify-start align-middle"
       >
         <img
-          className="rounded-full w-8 h-8 max-h-8 border-2 border-slate-200"
-          src={user ? user.avatarURL : "../../profile.jpg"}
+          className="rounded-full w-8 h-8 max-h-8 border-2 border-slate-200 object-cover"
+          src={AuthService.getCurrentUser()?.url_image ? AuthService.getCurrentUser().url_image : "../../profile.jpg"}
           alt="user avatar"
         />
         <span className="px-2 my-auto leading-none">{AuthService.getCurrentUser()?.name+ ' ' + AuthService.getCurrentUser()?.last_name[0]+'.'}</span>
