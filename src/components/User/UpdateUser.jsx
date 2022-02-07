@@ -14,7 +14,7 @@ const UpdateUser = ({id_userUpdate}) => {
         role: 0,
         phone: "",
         gender: 0, //0 = W || 1 = M
-        urlimage: "",
+        url_image: "",
         nit: "",
         id_user:0,
       });
@@ -22,7 +22,7 @@ const UpdateUser = ({id_userUpdate}) => {
     async function fetchUsers() {
         // You can await here
         const response = await UserService.getUser(id_userUpdate);
-        const [{name, last_name, email, password,dui, birth_date,status, role, phone, gender, urlimage, nit,id_user}] = response.data;
+        const [{name, last_name, email, password,dui, birth_date,status, role, phone, gender, url_image, nit,id_user}] = response.data;
         setValues({
             name:name,
             last_name:last_name,
@@ -34,7 +34,7 @@ const UpdateUser = ({id_userUpdate}) => {
             role:role,
             phone:phone,
             gender:gender,
-            urlimage:urlimage,
+            url_image:url_image,
             nit:nit,
             id_user:id_user
         });
@@ -180,7 +180,7 @@ const UpdateUser = ({id_userUpdate}) => {
             title: "Imagen:",
             type: "text",
             name: "urlimage",
-            value: values.urlimage,
+            value: values.url_image,
             message: "La imagen es requerido.",
             controll: "input",
             onChange: handleChange,

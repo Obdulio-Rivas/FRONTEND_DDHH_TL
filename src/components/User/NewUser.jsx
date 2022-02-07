@@ -15,7 +15,7 @@ const NewUser = () => {
     role: 0,
     phone: "",
     gender: 0, //0 = W || 1 = M
-    urlimage: "",
+    url_image: "",
     nit: "",
   });
 
@@ -156,7 +156,7 @@ const NewUser = () => {
         title: "Imagen:",
         type: "text",
         name: "urlimage",
-        value: values.urlimage,
+        value: values.url_image,
         message: "La imagen es requerido.",
         controll: "input",
         onChange: handleChange,
