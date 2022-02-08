@@ -2,6 +2,7 @@ import React,{useState,useEffect} from 'react';
 import TemplateForm from '../../templates/Form';
 import Navbar from '../Navbar/Navbar';
 import UserService from '../../services/User/User.Service';
+import AuthService from "../../services/Auth/Auth.Service";
 const UpdateUser = ({id_userUpdate}) => {    
     const [values, setValues] = useState({
         name: "",
@@ -41,13 +42,13 @@ const UpdateUser = ({id_userUpdate}) => {
         // ...
         }
           fetchUsers();
-    }, []);
+    },[]);
     
       const handlerSubmit = async (e) => {
         //console.log(values);
         const putdata = await UserService.putUsers(values);
-        console.log(putdata);
         if (putdata.is_successful) {
+          AuthService.setCurrentUser(putdata);
           console.log(putdata);
         }
       };
@@ -176,7 +177,7 @@ const UpdateUser = ({id_userUpdate}) => {
             }],
             onChange: handleChange,
           },
-          {
+          /*{
             title: "Imagen:",
             type: "text",
             name: "urlimage",
@@ -184,7 +185,7 @@ const UpdateUser = ({id_userUpdate}) => {
             message: "La imagen es requerido.",
             controll: "input",
             onChange: handleChange,
-          },
+          },*/
           {
             title: "NIT:",
             type: "text",

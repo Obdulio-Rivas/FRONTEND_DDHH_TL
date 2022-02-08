@@ -15,6 +15,7 @@ const LoginForm = () => {
     if (credentials.is_successful) {
       navigate("/home");
     }
+    console.log(credentials);
   };
 
   const handleChange = (e) => {
