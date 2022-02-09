@@ -23,7 +23,7 @@ const NewUser = () => {
     //console.log(values);
     const response = await UserService.postUsers(values);
     if (response.is_successful) {
-      AuthService.setCurrentUser(response);
+      AuthService.updateJwtUser(response);
     }
   };
 

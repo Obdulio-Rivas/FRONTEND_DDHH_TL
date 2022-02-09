@@ -15,7 +15,7 @@ const UsersList = () => {
       setUsers(response.data);
       setIsLoading(false);
       if (response.is_successful) {
-        AuthService.setCurrentUser(response);
+        AuthService.updateJwtUser(response);
       }
     }
     fetchUsers();

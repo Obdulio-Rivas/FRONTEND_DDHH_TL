@@ -1,19 +1,13 @@
 import React, { useState } from "react";
 import moment from "moment";
 import { AiOutlinePrinter, AiOutlineLock } from "react-icons/ai";
-import { FiImage, FiSave } from "react-icons/fi";
 import AuthService from "../../services/Auth/Auth.Service";
 import uploadFile from "../../services/Firebase/Firebase.Service";
 import UserService from "../../services/User/User.Service";
+import Avatar from "./Avatar";
 
 const Side = ({ user }) => {
-  const [image, setImage] = useState({
-    avatar: null,
-    type: null,
-    isValid: false,
-    isReady: false,
-    isUpload: false,
-  });
+
   const { id_user, name, last_name, role, status, created_at } = user;
 
   const isCurrentUser = (id_user) => {
@@ -71,89 +65,12 @@ const Side = ({ user }) => {
     }
   };
 
-  const fileHandler = async (e) => {
-    const image = e.target.files[0];
-    if (image) {
-      const extension = image.type?.split("/")[1];
-      const isValid = ["png", "jpg", "jpeg"].some(
-        (fileExtesion) => fileExtesion === extension
-      );
-      if (isValid) {
-        setImage({
-          avatar: image,
-          extension: extension,
-          isValid: true,
-          isReady: true,
-          isUpload: false,
-        });
-      } else {
-        setImage({
-          avatar: null,
-          extension: null,
-          isValid: false,
-          isReady: false,
-          isUpload: false,
-        });
-      }
-    }
-  };
-
-  const handlerSubmit = async (e) => {
-    e.preventDefault();
-    const { avatar = null, extension = null } = image;
-    if (avatar) {
-      const metadata = await uploadFile("images/users/", avatar, { extension });
-      setImage({
-        avatar: null,
-        type: null,
-        isValid: false,
-        isReady: false,
-        isUpload: false,
-      });
-      const currentUser = await AuthService.getCurrentUser();
-      const userUpdated = await UserService.putUsers({
-        ...currentUser,
-        url_image: metadata?.url,
-      });
-      AuthService.setCurrentUser(userUpdated);
-    }
-  };
+  
 
   return (
     <div className="w-full md:w-3/12 md:mx-2 mby-3">
       <div className="bg-white p-3 border-t-4 border-blue-400">
-        <div className="image overflow-hidden relative">
-          <form action="#" onSubmit={handlerSubmit}>
-            <label
-              className="absolute z-10 bottom-0 right-0 bg-slate-800 opacity-80 p-2 text-white cursor-pointer"
-              htmlFor="avatar"
-            >
-              {image.isReady ? (
-                <button className="p-0 m-0 border-0" type="submit">
-                  <FiSave className="text-4xl" />
-                </button>
-              ) : (
-                <FiImage className="text-4xl" />
-              )}
-            </label>
-            <input
-              className="hidden"
-              type="file"
-              name="avatar"
-              id="avatar"
-              onChange={fileHandler}
-            ></input>
-          </form>
-          <img
-            className="max-h-96 h-auto w-full mx-auto object-cover"
-            src={
-              AuthService.getCurrentUser()?.url_image
-                ? AuthService.getCurrentUser().url_image
-                : "../../profile.jpg"
-            }
-            alt="avatar"
-          />
-        </div>
+        <Avatar/>
         <h1 className="text-gray-900 font-bold text-xl leading-8 my-1">
           {name + " " + last_name}
         </h1>

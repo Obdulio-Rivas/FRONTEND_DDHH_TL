@@ -65,7 +65,18 @@ const getCurrentUser = () => {
   return JSON.parse(localStorage.getItem("user"));
 };
 
-const setCurrentUser = (response) => {
+const updateCuerrentUser = (response) => {
+  if (response.jwt) {
+    localStorage.setItem(
+      "user",
+      JSON.stringify({
+        ...response,
+      })
+    );
+  }
+};
+
+const updateJwtUser = (response) => {
   if (response.jwt) {
     localStorage.setItem(
       "user",
@@ -84,7 +95,8 @@ const AuthService = {
   logout,
   check_JWT,
   getCurrentUser,
-  setCurrentUser
+  updateCuerrentUser,
+  updateJwtUser
 };
 
 export default AuthService;
