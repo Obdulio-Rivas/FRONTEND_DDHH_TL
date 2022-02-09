@@ -15,7 +15,7 @@ const NewUser = () => {
     role: 0,
     phone: "",
     gender: 0, //0 = W || 1 = M
-    url_image: "",
+    url_image: "https://firebasestorage.googleapis.com/v0/b/legalistica.appspot.com/o/images%2Fusers%2Fbb44cf-d7e-d27-7502-bf1ea077b6e.undefined?alt=media&token=aaaf32b3-e744-4bdb-ad72-b84705d19c6c",
     nit: "",
   });
 
@@ -152,7 +152,7 @@ const NewUser = () => {
         }],
         onChange: handleChange,
       },
-      {
+      /*{
         title: "Imagen:",
         type: "text",
         name: "urlimage",
@@ -160,7 +160,7 @@ const NewUser = () => {
         message: "La imagen es requerido.",
         controll: "input",
         onChange: handleChange,
-      },
+      },*/
       {
         title: "NIT:",
         type: "text",

@@ -6,9 +6,9 @@ function GeneralForm({ template }) {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm();
   let { title, fields, onSubmit } = template;
-
   const renderFields = (fields) => {
     return fields.map((field) => {
       let {
@@ -21,7 +21,7 @@ function GeneralForm({ template }) {
         controll = "input",
         options = []
       } = field;
-
+      setValue(name,value);
       switch (controll) {
         case "input":
           return (
@@ -34,12 +34,9 @@ function GeneralForm({ template }) {
               </label>
               <input
                 class="w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3"
-                {...register(name, { required: message })}
+                {...register(name, { required: message, onChange:onChange })}
                 type={type}
-                name={name}
                 id={name}
-                value={value}
-                onChange={onChange}
               />
               <div>
                 {errors[name] && (
