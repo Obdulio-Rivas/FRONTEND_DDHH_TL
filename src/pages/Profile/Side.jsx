@@ -1,9 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import moment from "moment";
 import { AiOutlinePrinter, AiOutlineLock } from "react-icons/ai";
 import AuthService from "../../services/Auth/Auth.Service";
-import uploadFile from "../../services/Firebase/Firebase.Service";
-import UserService from "../../services/User/User.Service";
 import Avatar from "./Avatar";
 
 const Side = ({ user }) => {
@@ -70,7 +68,7 @@ const Side = ({ user }) => {
   return (
     <div className="w-full md:w-3/12 md:mx-2 mby-3">
       <div className="bg-white p-3 border-t-4 border-blue-400">
-        <Avatar/>
+        <Avatar id_user={id_user}/>
         <h1 className="text-gray-900 font-bold text-xl leading-8 my-1">
           {name + " " + last_name}
         </h1>
