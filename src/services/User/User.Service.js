@@ -15,7 +15,6 @@ const getUsers = async () => {
   return response;
 };
 
-
 const getUser = async (id_user) => {
   const requestOptions = {
     method: "GET",
@@ -64,11 +63,29 @@ const putUsers = async (values) => {
   return response;
 };
 
+const putNewPasswordUser = async (values) => {
+  const requestOptions = {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      "user-access-token": AuthService.getCurrentUser().jwt,
+      "access-control-allow-credentials": true,
+    },
+    body: JSON.stringify(values),
+  };
+
+  const fetchData = await fetch(`${API_URL}user/chage_password`, requestOptions);
+
+  const response = await fetchData.json();
+  return response;
+};
+
 const UserService = {
   getUsers,
   getUser,
   postUsers,
   putUsers,
+  putNewPasswordUser,
 };
 
 export default UserService;

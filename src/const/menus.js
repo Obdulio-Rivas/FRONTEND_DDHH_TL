@@ -1,5 +1,5 @@
 const options_menu = {
-  1: [
+  0: [
     { key: 0, title: "Inicio", href: "/home", type: "normal" },
     {
       key: 1,
@@ -14,7 +14,7 @@ const options_menu = {
     },
     { key: 3, title: "Testing", href: "/test", type: "normal" },
   ],
-  2: [
+  1: [
     {
       key: 0,
       title: "Archivo",
@@ -41,7 +41,7 @@ const options_menu = {
     { key: 3, title: "Directorio", href: "/Directorio", type: "normal" },
     { key: 4, title: "Dashboard", href: "/Dashboard", type: "normal" },
   ],
-  3: [
+  2: [
     {
       key: 0,
       title: "Archivo",
