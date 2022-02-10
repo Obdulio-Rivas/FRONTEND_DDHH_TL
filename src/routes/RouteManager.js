@@ -19,25 +19,25 @@ const RouteManager = () => {
           <Route
             exact
             path="/test"
-            element={<PrivateRoute forRoles={[1, 2, 3]} children={<Generic />} />}
+            element={<PrivateRoute forRoles={[0, 1, 2]} children={<Generic />} />}
           />
 
           <Route
             exact
             path="/home"
-            element={<PrivateRoute forRoles={[1, 2, 3]} children={<Home />} />}
+            element={<PrivateRoute forRoles={[0, 1, 2]} children={<Home />} />}
           />
           <Route
             path="/users/*"
             element={
-              <PrivateRoute forRoles={[1]} children={< UserRoutes />} />
+              <PrivateRoute forRoles={[0]} children={< UserRoutes />} />
             }
           />
           <Route
             exact
             path="/victim/*"
             element={
-              <PrivateRoute forRoles={[3]} children={<VictimRoutes/>} />
+              <PrivateRoute forRoles={[2]} children={<VictimRoutes/>} />
             }
           />
           <Route
@@ -45,7 +45,7 @@ const RouteManager = () => {
             path="/about"
             element={
               <PrivateRoute
-                forRoles={[1, 2, 3]} 
+                forRoles={[0, 1, 2]} 
                 children={<About />}
               />
             }

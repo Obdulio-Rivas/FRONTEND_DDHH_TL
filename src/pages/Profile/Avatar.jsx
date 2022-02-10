@@ -93,7 +93,6 @@ const Avatar = ({id_user}) => {
         ...currentUser,
         url_image: response?.url,
       });
-      console.log(userUpdated + "Submit");
       if (userUpdated.is_successful) {
         //Actualizar metodo a que reciba y haga spread de las props...
         AuthService.updateCuerrentUser(userUpdated?.data);
@@ -104,7 +103,6 @@ const Avatar = ({id_user}) => {
           isValid: false,
           isUploading: false,
         });
-        console.log(file);
         toast.success("Imagen de perfil cambiada con exito!", {
           position: "bottom-center",
         });

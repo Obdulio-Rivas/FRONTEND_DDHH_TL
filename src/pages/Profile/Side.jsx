@@ -1,22 +1,11 @@
 import React from "react";
 import moment from "moment";
-import { AiOutlinePrinter, AiOutlineLock } from "react-icons/ai";
-import AuthService from "../../services/Auth/Auth.Service";
 import Avatar from "./Avatar";
+import Actions from "./Actions";
 
 const Side = ({ user }) => {
 
   const { id_user, name, last_name, role, status, created_at } = user;
-
-  const isCurrentUser = (id_user) => {
-    const currentIdUser = AuthService.getCurrentUser().id_user;
-    return id_user === currentIdUser ? (
-      <AiOutlineLock
-        className="text-4xl mx-1 cursor-pointer"
-        onClick={() => handlerClick(1)}
-      />
-    ) : null;
-  };
 
   const getStatus = (status) => {
     return status === 1 ? (
@@ -49,22 +38,6 @@ const Side = ({ user }) => {
     return typeUser;
   };
 
-  const handlerClick = (action) => {
-    switch (action) {
-      case 0:
-        alert("Imprimiendo vista");
-        break;
-      case 1:
-        alert("Formulario de cambio de contraseña.");
-        break;
-      default:
-        alert("Caso por default");
-        break;
-    }
-  };
-
-  
-
   return (
     <div className="w-full md:w-3/12 md:mx-2 mby-3">
       <div className="bg-white p-3 border-t-4 border-blue-400">
@@ -91,13 +64,7 @@ const Side = ({ user }) => {
               {moment(created_at).format("DD-MM-YYYY")}
             </span>
           </li>
-          <li className="flex flex-row justify-around items-center py-3">
-            <AiOutlinePrinter
-              className="text-4xl mx-1 cursor-pointer"
-              onClick={() => handlerClick(0)}
-            />
-            {isCurrentUser(id_user)}
-          </li>
+          <Actions user={user}/>
         </ul>
       </div>
     </div>
