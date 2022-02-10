@@ -55,7 +55,7 @@ const RouteManager = () => {
             path="/profile"
             element={
               <PrivateRoute
-                forRoles={[1, 2, 3]}
+                forRoles={[0, 1, 2]}
                 children={<Profile />}
               />
             }
