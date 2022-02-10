@@ -46,10 +46,10 @@ const UpdateUser = ({id_userUpdate}) => {
     
       const handlerSubmit = async (e) => {
         //console.log(values);
-        const putdata = await UserService.putUsers(values);
-        if (putdata.is_successful) {
-          AuthService.setCurrentUser(putdata);
-          console.log(putdata);
+        const response = await UserService.putUsers(values);
+        if (response.is_successful) {
+          AuthService.updateJwtUser(response);
+          console.log(response);
         }
       };
       const handleChange = (e) => {
@@ -142,13 +142,13 @@ const UpdateUser = ({id_userUpdate}) => {
             controll: "select",
             options: [{
                 title: 'Administrador',
-                value: 1
+                value: 0
             },{
                 title: 'Abogado',
-                value: 2
+                value: 1
             },{
                 title: 'Asistente',
-                value: 3
+                value: 2
             }],
             onChange: handleChange,
           },

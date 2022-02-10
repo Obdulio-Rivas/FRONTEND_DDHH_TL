@@ -9,7 +9,7 @@ const UserRoutes = () => {
     <Routes>
       <Route path="/" element={<UsersList />} />
       <Route path="/newUser" element={<NewUser />} />
-      <Route path="/updateUser" element={<UpdateUser id_userUpdate={27}/>} />
+      <Route path="/updateUser" element={<UpdateUser id_userUpdate={3}/>} />
     </Routes>
   );
 };

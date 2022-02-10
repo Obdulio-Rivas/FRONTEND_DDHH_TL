@@ -117,13 +117,13 @@ const NewUser = () => {
         controll: "select",
         options: [{
             title: 'Administrador',
-            value: 1
+            value: 0
         },{
             title: 'Abogado',
-            value: 2
+            value: 1
         },{
             title: 'Asistente',
-            value: 3
+            value: 2
         }],
         onChange: handleChange,
       },

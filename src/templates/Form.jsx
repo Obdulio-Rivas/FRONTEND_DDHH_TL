@@ -59,13 +59,14 @@ function GeneralForm({ template }) {
               </label>
               <div>
                 <select
+                  {...register(name, { required: message, onChange:onChange})}
                   name={name}
                   class="w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3"
                   id={name}
                   onChange={onChange}
                 >
                     {options.map(({title, value}, index)=>{
-                        return (<option key={value} selected={index==0?true:false}  value={value} className="py-3">{title}</option>);
+                        return (<option key={value} selected={index===0?true:false}  value={value} className="py-3">{title}</option>);
                     })}
                 </select>
                 <div>
