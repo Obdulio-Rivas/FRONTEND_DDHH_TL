@@ -99,7 +99,11 @@ const NewUser = () => {
         value: values.status,
         message: "El estado es requerido.",
         controll: "select",
+        defaultValue: 'DEFAULT',
         options: [{
+          title: 'Seleccione una opcion.',
+          value: 'DEFAULT'
+        },{
             title: 'Activo',
             value: 1
         },{
@@ -115,7 +119,11 @@ const NewUser = () => {
         value: values.role,
         message: "El rol es requerido.",
         controll: "select",
+        defaultValue: 'DEFAULT',
         options: [{
+          title: 'Seleccione una opcion.',
+          value: 'DEFAULT'
+        },{
             title: 'Administrador',
             value: 0
         },{
@@ -143,7 +151,11 @@ const NewUser = () => {
         value: values.gender,
         message: "El genero es requerido.",
         controll: "select",
+        defaultValue: 'DEFAULT',
         options: [{
+          title: 'Seleccione una opcion.',
+          value: 'DEFAULT'
+        },{
             title: 'Masculino',
             value: 1
         },{

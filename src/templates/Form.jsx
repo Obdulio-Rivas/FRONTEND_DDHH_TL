@@ -18,6 +18,7 @@ function GeneralForm({ template }) {
         value,
         message,
         onChange,
+        defaultValue,
         controll = "input",
         options = []
       } = field;
@@ -25,15 +26,15 @@ function GeneralForm({ template }) {
       switch (controll) {
         case "input":
           return (
-            <div key={name} class="sm:w-full md:w-1/2 lg:1/3 px-3 mb-6 md:mb-0">
+            <div key={name} className="sm:w-full md:w-1/2 lg:1/3 px-3 mb-6 md:mb-0">
               <label
                 htmlFor={name}
-                class="uppercase tracking-wide text-black text-xs font-bold mb-2"
+                className="uppercase tracking-wide text-black text-xs font-bold mb-2"
               >
                 {title}
               </label>
               <input
-                class="w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3"
+                className="w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3"
                 {...register(name, { required: message, onChange:onChange })}
                 type={type}
                 id={name}
@@ -50,9 +51,9 @@ function GeneralForm({ template }) {
 
         case "select":
           return (
-            <div key={name} class="sm:w-full md:w-1/2 lg:1/3 px-3 mb-6 md:mb-0">
+            <div key={name} className="sm:w-full md:w-1/2 lg:1/3 px-3 mb-6 md:mb-0">
               <label
-                class="uppercase tracking-wide text-black text-xs font-bold mb-2"
+                className="uppercase tracking-wide text-black text-xs font-bold mb-2"
                 htmlFor={name}
               >
                 {title}
@@ -60,13 +61,14 @@ function GeneralForm({ template }) {
               <div>
                 <select
                   {...register(name, { required: message, onChange:onChange})}
+                  defaultValue={defaultValue}
                   name={name}
-                  class="w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3"
+                  className="w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3"
                   id={name}
                   onChange={onChange}
                 >
-                    {options.map(({title, value}, index)=>{
-                        return (<option key={value} selected={index===0?true:false}  value={value} className="py-3">{title}</option>);
+                    {options.map(({title, value})=>{
+                        return (<option key={value} value={value} disabled={value==='DEFAULT'?true:false} className="py-3">{title}</option>);
                     })}
                 </select>
                 <div>
@@ -81,9 +83,9 @@ function GeneralForm({ template }) {
           );
         case "button":
           return (
-            <div key={name} class="w-full flex justify-end mt-4">
-              <div class="md:w-auto px-3">
-                <button class="w-full bg-green-500 text-white font-bold py-2 px-6 rounded-md hover:bg-green-600 uppercase">
+            <div key={name} className="w-full flex justify-end mt-4">
+              <div className="md:w-auto px-3">
+                <button className="w-full bg-green-500 text-white font-bold py-2 px-6 rounded-md hover:bg-green-600 uppercase">
                   {value}
                 </button>
               </div>
@@ -128,7 +130,7 @@ function GeneralForm({ template }) {
           className="px-4 pt-2 pb-2 mb-4 flex flex-col"
           onSubmit={handleSubmit(onSubmit)}
         >
-          <div class="-mx-3 md:flex mb-6">
+          <div className="-mx-3 md:flex mb-6">
             <div className="flex flex-row flex-wrap w-4/5 mx-auto">
               {renderFields(fields)}
             </div>
