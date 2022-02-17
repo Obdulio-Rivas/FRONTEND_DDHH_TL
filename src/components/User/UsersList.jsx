@@ -84,6 +84,9 @@ const UsersList = () => {
             <div className="flex">
               <Link to={"newUser"}>Nuevo usuario</Link>
             </div>
+            <div className="flex">
+              <Link to={`updateUser/${3}`}>Modificar usuario</Link>
+            </div>
           </div>
           <div className="mt-4">
             <Table columns={columns} data={users} options={null} />

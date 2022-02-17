@@ -1,9 +1,11 @@
 import React,{useState,useEffect} from 'react';
+import {Navigate, useParams } from "react-router-dom";
 import TemplateForm from '../../templates/Form';
 import Navbar from '../Navbar/Navbar';
 import UserService from '../../services/User/User.Service';
 import AuthService from "../../services/Auth/Auth.Service";
-const UpdateUser = ({id_userUpdate}) => {    
+const UpdateUser = () => {    
+    let param = useParams(); 
     const [values, setValues] = useState({
         name: "",
         last_name: "",
@@ -22,7 +24,7 @@ const UpdateUser = ({id_userUpdate}) => {
     useEffect(() => {
     async function fetchUsers() {
         // You can await here
-        const response = await UserService.getUser(id_userUpdate);
+        const response = await UserService.getUser(param.updateUserId);
         const [{name, last_name, email, password,dui, birth_date,status, role, phone, gender, url_image, nit,id_user}] = response.data;
         setValues({
             name:name,
@@ -213,13 +215,17 @@ const UpdateUser = ({id_userUpdate}) => {
         ],
         onSubmit: handlerSubmit,
       };
-    
-      return (
-        <>
-          <Navbar />
-          <TemplateForm template={template} />
-        </>
-      );
+      if(param.updateUserId===undefined)
+      {
+        return <Navigate to="/home" />;
+      }else{
+        return (
+          <>
+            <Navbar />
+            <TemplateForm template={template} />
+          </>
+        );
+      }
     };
 
     export default UpdateUser;
