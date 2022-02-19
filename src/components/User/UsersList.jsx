@@ -47,6 +47,30 @@ const UsersList = () => {
         Header: "Acciones",
         accessor: "id_user",
       },
+      {
+        Header: "Avatar",
+        accessor: "urlimage",
+      },
+      {
+        Header: "Nombres",
+        accessor: "name",
+      },
+      {
+        Header: "Apellidos",
+        accessor: "last_name",
+      },
+      {
+        Header: "Role",
+        accessor: "role",
+      },
+      {
+        Header: "Status",
+        accessor: "status",
+      },
+      {
+        Header: "Id",
+        accessor: "id_user",
+      },
     ],
     []
   );
@@ -86,6 +110,22 @@ const UsersList = () => {
               <Table columns={columns} data={users} options={null} />
             </div>
           </main>
+          
+        <div className="container flex flex-wrap flex-col px-6 py-2 mx-auto lg:space-x-4 justify-between">
+          <div className="flex flex-wrap flex-row justify-between  w-max">
+            <div className="flex">
+              <h2>Users</h2>
+            </div>
+            <div className="flex">
+              <Link to={"newUser"}>Nuevo usuario</Link>
+            </div>
+            <div className="flex">
+              <Link to={`updateUser/${3}`}>Modificar usuario</Link>
+            </div>
+          </div>
+          <div className="mt-4">
+            <Table columns={columns} data={users} options={null} />
+          </div>
         </div>
       </>
     );

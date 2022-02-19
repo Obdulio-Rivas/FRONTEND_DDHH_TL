@@ -1,9 +1,11 @@
 import React,{useState,useEffect} from 'react';
+import {Navigate, useParams } from "react-router-dom";
 import TemplateForm from '../../templates/Form';
 import Navbar from '../Navbar/Navbar';
 import UserService from '../../services/User/User.Service';
 import AuthService from "../../services/Auth/Auth.Service";
-const UpdateUser = ({id_userUpdate}) => {    
+const UpdateUser = () => {    
+    let param = useParams(); 
     const [values, setValues] = useState({
         name: "",
         last_name: "",
@@ -22,7 +24,7 @@ const UpdateUser = ({id_userUpdate}) => {
     useEffect(() => {
     async function fetchUsers() {
         // You can await here
-        const response = await UserService.getUser(id_userUpdate);
+        const response = await UserService.getUser(param.updateUserId);
         const [{name, last_name, email, password,dui, birth_date,status, role, phone, gender, url_image, nit,id_user}] = response.data;
         setValues({
             name:name,
@@ -46,10 +48,10 @@ const UpdateUser = ({id_userUpdate}) => {
     
       const handlerSubmit = async (e) => {
         //console.log(values);
-        const putdata = await UserService.putUsers(values);
-        if (putdata.is_successful) {
-          AuthService.setCurrentUser(putdata);
-          console.log(putdata);
+        const response = await UserService.putUsers(values);
+        if (response.is_successful) {
+          AuthService.updateJwtUser(response);
+          console.log(response);
         }
       };
       const handleChange = (e) => {
@@ -125,6 +127,9 @@ const UpdateUser = ({id_userUpdate}) => {
             message: "El estado es requerido.",
             controll: "select",
             options: [{
+              title: 'Seleccione una opcion.',
+              value: 'DEFAULT'
+            },{
                 title: 'Activo',
                 value: 1
             },{
@@ -140,15 +145,19 @@ const UpdateUser = ({id_userUpdate}) => {
             value: values.role,
             message: "El rol es requerido.",
             controll: "select",
+            defaultValue: 'DEFAULT',
             options: [{
+              title: 'Seleccione una opcion.',
+              value: 'DEFAULT'
+            },{
                 title: 'Administrador',
-                value: 1
+                value: 0
             },{
                 title: 'Abogado',
-                value: 2
+                value: 1
             },{
                 title: 'Asistente',
-                value: 3
+                value: 2
             }],
             onChange: handleChange,
           },
@@ -169,6 +178,9 @@ const UpdateUser = ({id_userUpdate}) => {
             message: "El genero es requerido.",
             controll: "select",
             options: [{
+              title: 'Seleccione una opcion.',
+              value: 'DEFAULT'
+            },{
                 title: 'Masculino',
                 value: 1
             },{
@@ -203,13 +215,17 @@ const UpdateUser = ({id_userUpdate}) => {
         ],
         onSubmit: handlerSubmit,
       };
-    
-      return (
-        <>
-          <Navbar />
-          <TemplateForm template={template} />
-        </>
-      );
+      if(param.updateUserId===undefined)
+      {
+        return <Navigate to="/home" />;
+      }else{
+        return (
+          <>
+            <Navbar />
+            <TemplateForm template={template} />
+          </>
+        );
+      }
     };
 
     export default UpdateUser;
