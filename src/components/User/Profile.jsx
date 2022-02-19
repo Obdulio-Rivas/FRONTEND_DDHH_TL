@@ -1,28 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Navbar from "../../components/Navbar/Navbar";
+import Navbar from '../Navbar/Navbar';
 import AuthService from "../../services/Auth/Auth.Service";
-import UserService from "../../services/User/User.Service";
-import About from "./About";
-import Historical from "./Historical";
-import Side from "./Side";
+import About from "../../pages/Profile/About";
+import Historical from "../../pages/Profile/Historical";
+import Side from "../../pages/Profile/Side";
 
 const Profile = () => {
+  let param = useParams();
 
-  let {id_user} = useParams();
+  console.log(param)
+  
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    if(!id_user){
-      setUser(AuthService.getCurrentUser());
-    }else{
-      async function getUserData(id_user) {
-      const response = await UserService.getUser(id_user);
-      setUser(response.data[0]);
-      }
-      getUserData(id_user);
-    }
-  }, [id_user]);
+    setUser(AuthService.getCurrentUser());
+  }, []);
 
   if (!user) {
     return (

@@ -5,8 +5,9 @@ import AuthService from "../../services/Auth/Auth.Service";
 import UserService from "../../services/User/User.Service";
 import uploadFile from "../../services/Firebase/Firebase.Service";
 
-const Avatar = ({id_user}) => {
-  const [image, setImage] = useState(AuthService.getCurrentUser().url_image);
+const Avatar = ({ user }) => {
+  const { id_user, url_image } = user;
+  const [image, setImage] = useState(id_user === AuthService.getCurrentUser().id_user ? AuthService.getCurrentUser().url_image : url_image);
   const [file, setFile] = useState({
     metadata: null,
     type: null,
@@ -25,10 +26,10 @@ const Avatar = ({id_user}) => {
 
     if (isUploading) {
       return (
-        <div class="flex items-center justify-center space-x-2 animate-pulse cursor-progress w-full h-full absolute bg-slate-400 bg-opacity-60">
-          <div class="w-8 h-8 bg-white rounded-full"></div>
-          <div class="w-8 h-8 bg-white rounded-full"></div>
-          <div class="w-8 h-8 bg-white rounded-full"></div>
+        <div className="flex items-center justify-center space-x-2 animate-pulse cursor-progress w-full h-full absolute bg-slate-400 bg-opacity-60">
+          <div className="w-8 h-8 bg-white rounded-full"></div>
+          <div className="w-8 h-8 bg-white rounded-full"></div>
+          <div className="w-8 h-8 bg-white rounded-full"></div>
         </div>
       );
     } else {

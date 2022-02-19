@@ -5,7 +5,7 @@ import Actions from "./Actions";
 
 const Side = ({ user }) => {
 
-  const { id_user, name, last_name, role, status, created_at } = user;
+  const { id_user, name, last_name, role, status, created_at, url_image } = user;
 
   const getStatus = (status) => {
     return status === 1 ? (
@@ -41,7 +41,7 @@ const Side = ({ user }) => {
   return (
     <div className="w-full md:w-3/12 md:mx-2 mby-3">
       <div className="bg-white p-3 border-t-4 border-blue-400">
-        <Avatar id_user={id_user}/>
+        <Avatar user={user}/>
         <h1 className="text-gray-900 font-bold text-xl leading-8 my-1">
           {name + " " + last_name}
         </h1>

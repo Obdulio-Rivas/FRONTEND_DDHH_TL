@@ -4,9 +4,10 @@ import {
   AiOutlineLock,
   AiOutlineUnlock,
 } from "react-icons/ai";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import AuthService from "../../services/Auth/Auth.Service";
 import UserService from "../../services/User/User.Service";
+import Profile from "../../templates/pdfs/profile/Profile";
 
 const Actions = ({ user }) => {
   const { id_user } = user;
@@ -35,7 +36,7 @@ const Actions = ({ user }) => {
         position: "bottom-center",
       });
     }else{
-      toast.error("Contraseña actualizada con exito!", {
+      toast.error("No fue posible actualizar la contraseña!", {
         position: "bottom-center",
       });
     }
@@ -71,7 +72,7 @@ const Actions = ({ user }) => {
   const handlerClick = (action) => {
     switch (action) {
       case 0:
-        alert("Imprimiendo vista");
+        return (<Profile />);
         break;
       case 1:
         setForm({

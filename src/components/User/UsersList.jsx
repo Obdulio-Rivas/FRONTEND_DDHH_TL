@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useMemo } from "react";
-import { Link } from "react-router-dom";
 import AuthService from "../../services/Auth/Auth.Service";
 import UserService from "../../services/User/User.Service";
 import Navbar from "../Navbar/Navbar";
@@ -26,7 +25,7 @@ const UsersList = () => {
     () => [
       {
         Header: "Avatar",
-        accessor: "urlimage",
+        accessor: "url_image",
       },
       {
         Header: "Nombres",
@@ -41,11 +40,11 @@ const UsersList = () => {
         accessor: "role",
       },
       {
-        Header: "Status",
+        Header: "Estado",
         accessor: "status",
       },
       {
-        Header: "Id",
+        Header: "Acciones",
         accessor: "id_user",
       },
     ],
@@ -76,18 +75,17 @@ const UsersList = () => {
     return (
       <>
         <Navbar />
-        <div className="container flex flex-wrap flex-col px-6 py-2 mx-auto lg:space-x-4 justify-between">
-          <div className="flex flex-wrap flex-row justify-between  w-max">
-            <div className="flex">
-              <h2>Users</h2>
+        <div className="container mx-auto my-4 min-h-full pt-4 text-gray-900">
+          <main className="max-w-full mx-auto px-4 sm:px-6 lg:px-4 pt-4">
+            <div className="">
+              <h1 className="text-xl font-semibold">
+                User Tables
+              </h1>
             </div>
-            <div className="flex">
-              <Link to={"newUser"}>Nuevo usuario</Link>
+            <div className="mt-4">
+              <Table columns={columns} data={users} options={null} />
             </div>
-          </div>
-          <div className="mt-4">
-            <Table columns={columns} data={users} options={null} />
-          </div>
+          </main>
         </div>
       </>
     );
