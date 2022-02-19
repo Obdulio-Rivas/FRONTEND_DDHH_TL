@@ -19,8 +19,8 @@ const NewUser = () => {
     nit: "",
   });
 
-  const handlerSubmit = async (e) => {
-    //console.log(values);
+  const onSubmit = async (data,e) => {
+    e.preventDefault();
     const response = await UserService.postUsers(values);
     if (response.is_successful) {
       AuthService.updateJwtUser(response);
@@ -188,13 +188,13 @@ const NewUser = () => {
         controll: "button",
       },
     ],
-    onSubmit: handlerSubmit,
   };
 
   return (
     <>
       <Navbar />
-      <Form template={template} />
+      <Form template={template}
+      onSubmit={onSubmit} />
     </>
   );
 };

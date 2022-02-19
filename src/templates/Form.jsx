@@ -1,14 +1,14 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 
-function GeneralForm({ template }) {
+function GeneralForm({ template, onSubmit }) {
   let {
     register,
     handleSubmit,
     formState: { errors },
     setValue,
   } = useForm();
-  let { title, fields, onSubmit } = template;
+  let { title, fields } = template;
   const renderFields = (fields) => {
     return fields.map((field) => {
       let {
@@ -128,7 +128,7 @@ function GeneralForm({ template }) {
       <div className="flex flex-wrap flex-col lg:w-5/5 mt-4">
         <form
           className="px-4 pt-2 pb-2 mb-4 flex flex-col"
-          onSubmit={handleSubmit(onSubmit)}
+          onSubmit={(e)=>handleSubmit(onSubmit)(e)}
         >
           <div className="-mx-3 md:flex mb-6">
             <div className="flex flex-row flex-wrap w-4/5 mx-auto">

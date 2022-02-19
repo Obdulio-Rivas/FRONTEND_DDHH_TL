@@ -4,6 +4,7 @@ import TemplateForm from "../../templates/Form";
 import Navbar from "../Navbar/Navbar";
 import UserService from "../../services/User/User.Service";
 import AuthService from "../../services/Auth/Auth.Service";
+import toast ,{ Toaster } from "react-hot-toast";
 const UpdateUser = () => {
   const params = useParams();
   const { id_user : id_user_params } = params;
@@ -23,7 +24,6 @@ const UpdateUser = () => {
     nit: "",
     id_user: 0,
   });
-
   useEffect(() => {
     async function fetchUsers() {
       // You can await here
@@ -65,13 +65,22 @@ const UpdateUser = () => {
     fetchUsers();
   }, [id_user_params]);
 
-  const handlerSubmit = async (e) => {
-    //console.log(values);
+  
+  const onSubmit = async (data,e) => {
+    e.preventDefault();
     const response = await UserService.putUsers(values);
     if (response.is_successful) {
       AuthService.updateJwtUser(response);
       console.log(response);
+        toast.success("Usuario actualizado con exito!", {
+        position: "bottom-center",
+      });
+    }else{
+      toast.error("No fue posible actualizar el usuario!", {
+        position: "bottom-center",
+      });
     }
+    
   };
   const handleChange = (e) => {
     const { value, name } = e.target;
@@ -245,14 +254,17 @@ const UpdateUser = () => {
         controll: "button",
       },
     ],
-    onSubmit: handlerSubmit,
   };
   return (
     <>
       <Navbar />
-      <TemplateForm template={template} />
+      <TemplateForm template={template}
+      onSubmit={onSubmit}
+      />
+      <Toaster/>
     </>
   );
 };
 
 export default UpdateUser;
+
