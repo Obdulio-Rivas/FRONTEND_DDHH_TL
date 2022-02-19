@@ -9,7 +9,6 @@ const options_menu = {
       options: [
         { key: 0, option: "Nuevo Usuario", href: "/users/newUser" },
         { key: 1, option: "Listado de Usuarios", href: "/users/" },
-        { key: 2, option: "Modificar Usuario", href: "/users/updateUser" },
       ],
     },
     { key: 3, title: "Testing", href: "/test", type: "normal" },
