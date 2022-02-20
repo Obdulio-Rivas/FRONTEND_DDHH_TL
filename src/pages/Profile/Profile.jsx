@@ -28,9 +28,9 @@ const Profile = () => {
     return (
         <>
           <Navbar />
-          <div className="container mx-auto my-16 p-5">
+          <div className="container flex mx-auto my-16 p-5 h-full w-full justify-center">
             <div className="md:flex no-wrap md:-mx-2 ">
-              Cargando informacion de perfil...
+              <span>Cargando informacion de perfil...</span>
             </div>
           </div>
         </>

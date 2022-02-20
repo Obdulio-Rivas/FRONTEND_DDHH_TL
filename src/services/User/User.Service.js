@@ -80,12 +80,27 @@ const putNewPasswordUser = async (values) => {
   return response;
 };
 
+const deleteUser = async (id_user) => {
+  const requestOptions = {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      "user-access-token": AuthService.getCurrentUser().jwt,
+      "access-control-allow-credentials": true,
+    },
+  };
+  const fetchData = await fetch(`${API_URL}/user/${id_user}`, requestOptions);
+  const response = await fetchData.json();
+  return response;
+};
+
 const UserService = {
   getUsers,
   getUser,
   postUsers,
   putUsers,
   putNewPasswordUser,
+  deleteUser
 };
 
 export default UserService;

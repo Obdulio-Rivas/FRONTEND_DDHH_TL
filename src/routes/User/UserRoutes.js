@@ -1,12 +1,11 @@
 import React from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import NewUser from "../../components/User/NewUser";
 import UsersList from "../../components/User/UsersList";
 import UpdateUser from "../../components/User/UpdateUser";
 import Profile from "../../pages/Profile/Profile";
 
 const UserRoutes = () => {
-  let navigate = useNavigate();
 
   return (
     <Routes>
