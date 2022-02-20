@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react";
-import toast from "react-hot-toast";
+import toast, {Toaster} from "react-hot-toast";
 import AuthService from "../../services/Auth/Auth.Service";
 import UserService from "../../services/User/User.Service";
 import Navbar from "../Navbar/Navbar";
@@ -70,8 +70,9 @@ const UsersList = () => {
   };
 
   const handlerActionAbort = () => {
-    toast('Good Job!', {
-      icon: '👏',
+    toast.success('Se cancelo correctamente la accion.', {
+      icon: '💣',
+      position: "bottom-center",
     });
     setIsOpen(false);
   };
@@ -158,6 +159,7 @@ const UsersList = () => {
   } else {
     return (
       <>
+      <Toaster/>
         <Navbar />
         <div className="container mx-auto my-4 min-h-full pt-4 text-gray-900">
           <main className="max-w-full mx-auto px-4 sm:px-6 lg:px-4 pt-4">
