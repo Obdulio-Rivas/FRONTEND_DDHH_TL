@@ -3,6 +3,7 @@ import Navbar from "../Navbar/Navbar";
 import Form from "../../templates/Form";
 import UserService from "../../services/User/User.Service";
 import AuthService from "../../services/Auth/Auth.Service";
+import toast ,{ Toaster } from "react-hot-toast";
 const NewUser = () => {
   const [values, setValues] = useState({
     name: "",
@@ -24,6 +25,13 @@ const NewUser = () => {
     const response = await UserService.postUsers(values);
     if (response.is_successful) {
       AuthService.updateJwtUser(response);
+      toast.success("El usuario a sido agregado correctamente.",{
+        position:"bottom-center"
+      });
+    }else{
+      toast.error("No fue posible agregar el usuario!",{
+        position:"bottom-center"
+      })
     }
   };
 
@@ -195,6 +203,7 @@ const NewUser = () => {
       <Navbar />
       <Form template={template}
       onSubmit={onSubmit} />
+      <Toaster/>
     </>
   );
 };

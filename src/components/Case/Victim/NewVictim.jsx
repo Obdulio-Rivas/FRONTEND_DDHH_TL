@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import Navbar from "../../Navbar/Navbar";
 import TemplateForm from "../../../templates/Form";
 import VictimService from "../../../services/Victim/Victim.Service";
+import toast ,{ Toaster } from "react-hot-toast";
 const NewVictim = ()=>{
 
     const [values, setValues] = useState({ 
@@ -15,12 +16,20 @@ const NewVictim = ()=>{
         gender: 0, //0 = W || 1 = M
         nit: "", });
 
-    const handlerSubmit = async (e) => {
-        //console.log(values);
-      const postdata = await VictimService.postVictim(values);
-      console.log(postdata);
-      if (postdata.is_successful) {
-        console.log(postdata);
+    const onSubmit = async (data,e) => {
+      e.preventDefault();
+      const response = await VictimService.postVictim(values);
+      console.log(response);
+
+      if (response.is_successful) {
+        toast.success("Se ha guardado correctamente el registro.",{
+          position:"bottom-center"
+        });
+      }else
+      {
+        toast.error("No fue posible guardar el registro!",{
+          position:"bottom-center"
+        });
       }
     };
   
@@ -122,7 +131,6 @@ const NewVictim = ()=>{
             controll: "button",
           },
         ],
-        onSubmit: handlerSubmit,
       };
 
     return(
@@ -130,7 +138,9 @@ const NewVictim = ()=>{
             <Navbar/>
             <TemplateForm
                 template={template}
+                onSubmit={onSubmit}
             />
+            <Toaster/>
         </>
         
     );
