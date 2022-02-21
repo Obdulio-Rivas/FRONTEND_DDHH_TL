@@ -7,11 +7,22 @@ const options_menu = {
       href: "#",
       type: "dropdown",
       options: [
-        { key: 0, option: "Nuevo Usuario", href: "/users/newUser" },
-        { key: 1, option: "Listado de Usuarios", href: "/users/" },
+        { key: 0, option: "Nuevo usuario", href: "/users/newUser" },
+        { key: 1, option: "Listado de usuarios", href: "/users/" },
       ],
     },
-    { key: 3, title: "Testing", href: "/test", type: "normal" },
+    {
+      key: 2,
+      title: "Victimas",
+      href: "#",
+      type: "dropdown",
+      options: [
+        { key: 0, option: "Nueva victima", href: "/victim/newUser" },
+        { key: 1, option: "Listado de victimas", href: "/victim/" },
+      ],
+    },
+    { key: 3, title: "Archivos", href: "/files", type: "normal" },
+    { key: 4, title: "Testing", href: "/test", type: "normal" },
   ],
   1: [
     {

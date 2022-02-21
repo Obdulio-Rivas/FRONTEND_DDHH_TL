@@ -3,7 +3,7 @@ import { FiImage, FiSave } from "react-icons/fi";
 import toast, { Toaster } from "react-hot-toast";
 import AuthService from "../../services/Auth/Auth.Service";
 import UserService from "../../services/User/User.Service";
-import uploadFile from "../../services/Firebase/Firebase.Service";
+import FirebaseService from "../../services/Firebase/Firebase.Service";
 
 const Avatar = ({ user }) => {
   const { id_user, url_image } = user;
@@ -88,7 +88,7 @@ const Avatar = ({ user }) => {
       isUploading: true,
     });
     if (!!metadata) {
-      const response = await uploadFile("images/users/", metadata, { type });
+      const response = await FirebaseService.uploadFile("images/users/", metadata, { type });
       const currentUser = await AuthService.getCurrentUser();
       const userUpdated = await UserService.putUsers({
         ...currentUser,

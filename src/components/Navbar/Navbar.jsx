@@ -11,7 +11,7 @@ const Navbar = () => {
           to="#"
           className="inline-flex p-2 text-xl font-bold tracking-wide uppercase "
         >
-          <img className="w-auto h-10" src={"../../legalistica_logo.png"}/>
+          <img className="w-auto h-10" src={"../../legalistica_logo.png"} alt={"Logo app"}/>
         </Link>
         {/*Menu*/}
         <Menu/>
