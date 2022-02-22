@@ -10,7 +10,8 @@ const UserRoutes = () => {
     <Routes>
       <Route path="/" element={<Files/>} />
       <Route path="/:fullPath" element={<Files />} />
-      <Route path="*" element={'Null'} />
+      <Route path="/*/:fullPath" element={<Files />} />
+      <Route path="*" element={<Files />} />
     </Routes>
   );
 };
