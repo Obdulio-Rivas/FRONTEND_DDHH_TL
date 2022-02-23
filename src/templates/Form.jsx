@@ -1,13 +1,20 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 
-function GeneralForm({ template, onSubmit }) {
+function GeneralForm({ template,watchFields, onSubmit, code=0 }) {
   let {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
     setValue,
   } = useForm();
+  let watchValues = [];
+  if(code===2)
+  {
+    watchValues = watch();
+    console.log(watchValues);
+  }
   let { title, fields } = template;
   const renderFields = (fields) => {
     return fields.map((field) => {
@@ -20,9 +27,15 @@ function GeneralForm({ template, onSubmit }) {
         onChange,
         defaultValue,
         controll = "input",
-        options = []
+        options = [],
+        dynamic = {}
       } = field;
-      setValue(name,value);
+      let showFields = dynamic ? watchValues[dynamic["field"]] === dynamic["value"] :true;        
+      if(!showFields) return;
+      if(code===1)
+      {
+        setValue(name,value);
+      }
       switch (controll) {
         case "input":
           return (
@@ -81,6 +94,31 @@ function GeneralForm({ template, onSubmit }) {
               </div>
             </div>
           );
+          case "checkbox":
+            return (
+              <div key={name} className="w-full flex justify-end mt-4">
+                    <label
+                    htmlFor={name}
+                    className="uppercase tracking-wide text-black text-xs font-bold mb-2"
+                  >
+                    {title}
+                  </label>
+                  <input
+                    className="w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3"
+                    type={type}
+                    id={name}
+                    name={name}
+                    {...register(name,{onChange:onChange})}
+                  />
+                  <div>
+                    {errors[name] && (
+                      <span className="text-red-500 text-xs italic">
+                        {errors[name].message}
+                      </span>
+                    )}
+                  </div>
+              </div>
+            );
         case "button":
           return (
             <div key={name} className="w-full flex justify-end mt-4">
@@ -91,23 +129,21 @@ function GeneralForm({ template, onSubmit }) {
               </div>
             </div>
           );
+          
         default:
           return (
             <div key={name} className="block my-4 mx-2 lg:w-2/6">
-              <label
-                htmlFor={name}
-                className="select-none text-lg inline-block text-gray-800 w-auto m-auto mb-0.5 font-medium"
-              >
-                {title}
-              </label>
+                <label
+                  htmlFor={name}
+                  className="select-none text-lg inline-block text-gray-800 w-auto m-auto mb-0.5 font-medium">
+                  {title}
+                </label>
               <input
                 className="block w-full m-auto p-2 border-2 rounded-md mt-0.5 focus:outline-gray-400 focus:shadow-outline"
                 {...register(name, { required: message })}
                 type={type}
                 name={name}
                 id={name}
-                value={value}
-                onChange={onChange}
               ></input>
               {errors[name] && (
                 <span className="red-text">{errors[name].message}</span>

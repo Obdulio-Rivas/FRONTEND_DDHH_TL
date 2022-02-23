@@ -6,16 +6,34 @@ import AuthService from "../../../services/Auth/Auth.Service";
 import toast ,{ Toaster } from "react-hot-toast";
 export default function NewIncident() {
     const [values, setValues] = useState({
-        name: "",
-        last_name: "",
-        email: "",
-        password: "",
-        dui: "",
-        birth_date: "",
-        status: 0,
-        role: 0,
-        phone: "",
-        gender: 0, //0 = W || 1 = M
+      //registro institucional
+        expediente: "",
+        incident_date: "",
+        hour: "",
+        incident_institution: 0,
+        incident_institution_name: "",
+        name_reference: "",
+        contact: 0,
+        incident_identification: 0,
+        //datos especificos del caso
+        date_hechos: "",
+        adress: "",
+        incident_time: "",
+        incident_time: "",
+        incident_time: "",
+        incident_time: "",
+        incident_time: "",
+        incident_time: "",
+        incident_time: "",
+        incident_time: "",
+        incident_time: "",
+        incident_time: "",
+        incident_time: "",
+        incident_time: "",
+        incident_time: "",
+        incident_time: "",
+        incident_time: "",
+        incident_time: "",
         url_image: "https://firebasestorage.googleapis.com/v0/b/legalistica.appspot.com/o/images%2Fusers%2Fbb44cf-d7e-d27-7502-bf1ea077b6e.undefined?alt=media&token=aaaf32b3-e744-4bdb-ad72-b84705d19c6c",
         nit: "",
       });
@@ -202,7 +220,9 @@ export default function NewIncident() {
         <>
           <Navbar />
           <Form template={template}
-          onSubmit={onSubmit} />
+          onSubmit={onSubmit}
+          code={2}
+          />
           <Toaster/>
         </>
       );

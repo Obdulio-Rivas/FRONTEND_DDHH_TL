@@ -17,7 +17,7 @@ const options_menu = {
       href: "#",
       type: "dropdown",
       options: [
-        { key: 0, option: "Nueva victima", href: "/victim/newUser" },
+        { key: 0, option: "Nueva victima", href: "/victim/newVictim" },
         { key: 1, option: "Listado de victimas", href: "/victim/" },
       ],
     },

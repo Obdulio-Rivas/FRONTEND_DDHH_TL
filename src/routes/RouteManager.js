@@ -38,7 +38,7 @@ const RouteManager = () => {
             exact
             path="/victim/*"
             element={
-              <PrivateRoute forRoles={[2]} children={<VictimRoutes/>} />
+              <PrivateRoute forRoles={[0,2]} children={<VictimRoutes/>} />
             }
           />
           <Route

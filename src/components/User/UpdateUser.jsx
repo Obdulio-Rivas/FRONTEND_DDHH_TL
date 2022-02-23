@@ -260,6 +260,7 @@ const UpdateUser = () => {
       <Navbar />
       <TemplateForm template={template}
       onSubmit={onSubmit}
+      code={1}
       />
       <Toaster/>
     </>
