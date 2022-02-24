@@ -12,7 +12,7 @@ function GeneralForm({ template,watchFields, onSubmit, code=0 }) {
   let watchValues = [];
   if(code===2)
   {
-    watchValues = watch();
+    watchValues = watch(watchFields);
     console.log(watchValues);
   }
   let { title, fields } = template;
