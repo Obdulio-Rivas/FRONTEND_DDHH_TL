@@ -12,7 +12,7 @@ function GeneralForm({ template,watchFields, onSubmit, code=0 }) {
   let watchValues = [];
   if(code===2)
   {
-    watchValues = watch(watchFields);
+    watchValues = watch();
     console.log(watchValues);
   }
   let { title, fields } = template;
@@ -101,15 +101,17 @@ function GeneralForm({ template,watchFields, onSubmit, code=0 }) {
                     htmlFor={name}
                     className="uppercase tracking-wide text-black text-xs font-bold mb-2"
                   >
-                    {title}
-                  </label>
-                  <input
+                    <input
                     className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
                     type={type}
                     id={name}
                     name={name}
+                    value={value}
                     {...register(name,{onChange:onChange})}
                   />
+                    {title}
+                  </label>
+                  
               </div>
             );
         case "button":

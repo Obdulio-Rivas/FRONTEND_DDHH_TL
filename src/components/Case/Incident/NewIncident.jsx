@@ -1,9 +1,9 @@
-import React from 'react'
+import React,{useState} from 'react'
 import Navbar from "../Navbar/Navbar";
 import Form from "../../../templates/Form";
-import UserService from "../../../services/Case/Case.Service";
 import AuthService from "../../../services/Auth/Auth.Service";
 import toast ,{ Toaster } from "react-hot-toast";
+import CaseService from '../../../services/Case/Case.Service';
 export default function NewIncident() {
     const [values, setValues] = useState({
       //registro institucional
@@ -44,7 +44,7 @@ export default function NewIncident() {
     
       const onSubmit = async (data,e) => {
         e.preventDefault();
-        const response = await UserService.postUsers(values);
+        const response = await CaseService.postIncident(values);
         if (response.is_successful) {
           AuthService.updateJwtUser(response);
           toast.success("El usuario a sido agregado correctamente.",{
@@ -58,7 +58,11 @@ export default function NewIncident() {
       };
     
       const handleChange = (e) => {
-        const { value, name } = e.target;
+        const { value, name,type } = e.target;
+        if(type==='checkbox')
+        {
+          console.log(value)
+        }
         setValues({
           ...values,
           [name]: value,
@@ -68,112 +72,196 @@ export default function NewIncident() {
       const template = {
         title: "Nuevo usuario",
         fields: [
+          //Registro institucional------------------------------------------------------------
           {
-            title: "Nombres:",
+            title: "Nombre del expediente:",
             type: "text",
-            name: "name",
+            name: "expediente",
             value: values.expediente,
-            message: "El nombre es requerido.",
+            message: "El expediente es requerido.",
             controll: "input",
             onChange: handleChange,
           },
           {
-            title: "Apellidos:",
-            type: "text",
-            name: "last_name",
-            value: values.last_name,
-            message: "El apellido es requerido.",
-            controll: "input",
-            onChange: handleChange,
-          },
-          {
-            title: "Correo:",
-            type: "email",
-            name: "email",
-            value: values.email,
-            message: "El correo es requerido.",
-            controll: "input",
-            onChange: handleChange,
-          },
-          {
-            title: "Password:",
-            type: "password",
-            name: "password",
-            value: values.password,
-            message: "El password es requerido.",
-            controll: "input",
-            onChange: handleChange,
-          },
-          {
-            title: "DUI:",
-            type: "text",
-            name: "dui",
-            value: values.dui,
-            message: "El dui es requerido.",
-            controll: "input",
-            onChange: handleChange,
-          },
-          {
-            title: "Fecha de Nacimiento:",
+            title: "Fecha:",
             type: "date",
-            name: "birth_date",
-            value: values.birth_date,
-            message: "la fecha de nacimiento es requerido.",
+            name: "incident_date",
+            value: values.incident_date,
+            message: "La fecha es requerido.",
             controll: "input",
             onChange: handleChange,
           },
           {
-            title: "Estado:",
+            title: "Hora:",
             type: "number",
-            name: "status",
-            value: values.status,
-            message: "El estado es requerido.",
+            name: "hour",
+            value: values.hour,
+            message: "La hora es requerido.",
+            controll: "input",
+            onChange: handleChange,
+          },
+          {
+            title: "Intitucion del caso:",
+            type: "number",
+            name: "incident_institution",
+            value: values.incident_institution,
+            message: "La institucion es requerido.",
+            controll: "input",
+            onChange: handleChange,
+          },
+          {
+            title: "Nombre de la institucion:",
+            type: "text",
+            name: "incident_institution_name",
+            value: values.incident_institution_name,
+            message: "El nombre de la institucion es requerida.",
+            controll: "input",
+            onChange: handleChange,
+          },
+          {
+            title: "Nombre de referencia:",
+            type: "text",
+            name: "name_reference",
+            value: values.name_reference,
+            message: "El nombre de referencia es requerido.",
+            controll: "input",
+            onChange: handleChange,
+          },
+          {
+            title: "Contacto:",
+            type: "number",
+            name: "contact",
+            value: values.contact,
+            message: "El contacto es requerido.",
+            controll: "input",
+            onChange: handleChange,
+          },
+          {
+            title: "Numero de identificacion del caso:",
+            type: "number",
+            name: "incident_identification",
+            value: values.incident_identification,
+            message: "El numero de identificacion del caso es requerido.",
+            controll: "input",
+            onChange: handleChange,
+          },
+          //Datos especificaos del caso---------------------------------------------------------------
+          {
+            title: "Fecha de los hechos:",
+            type: "date",
+            name: "date_hechos",
+            value: values.date_hechos,
+            message: "La fecha de los hechos es requerido.",
+            controll: "input",
+            onChange: handleChange,
+          },
+          {
+            title: "Dirección:",
+            type: "text",
+            name: "adress",
+            value: values.adress,
+            message: "La direccion es requerida.",
+            controll: "input",
+            onChange: handleChange,
+          },
+          {
+            title: "Departamento:",
+            type: "number",
+            name: "deparment",
+            value: values.deparment,
+            message: "El departamento es requerido.",
             controll: "select",
             defaultValue: 'DEFAULT',
             options: [{
               title: 'Seleccione una opcion.',
               value: 'DEFAULT'
             },{
-                title: 'Activo',
+                title: 'San Salvador',
                 value: 1
             },{
-                title: 'Inactivo',
+                title: 'La Paz',
                 value: 0
             }],
             onChange: handleChange,
           },
           {
-            title: "Rol:",
+            title: "Municipio:",
             type: "number",
-            name: "role",
-            value: values.role,
-            message: "El rol es requerido.",
+            name: "municipality",
+            value: values.municipality,
+            message: "El municipio es requerido.",
             controll: "select",
             defaultValue: 'DEFAULT',
             options: [{
               title: 'Seleccione una opcion.',
               value: 'DEFAULT'
             },{
-                title: 'Administrador',
+                title: 'San Salvador',
                 value: 0
             },{
-                title: 'Abogado',
+                title: 'Apopa',
                 value: 1
             },{
-                title: 'Asistente',
+                title: 'Soyapango',
                 value: 2
             }],
             onChange: handleChange,
           },
           {
-            title: "Telefono:",
+            title: "Causa del desplazamiento:",
             type: "text",
-            name: "phone",
-            value: values.phone,
-            message: "El telefono es requerido.",
+            name: "cause_displacement",
+            value: values.cause_displacement,
+            message: "La causa del desplazamiento es requerido.",
             controll: "input",
             onChange: handleChange,
           },
+          {
+            title: "Desplazamiento de personas:",
+            type: "text",
+            name: "people_displacement",
+            value: values.people_displacement,
+            message: "El Desplazamiento de personas es requerido.",
+            controll: "input",
+            onChange: handleChange,
+          },
+          {
+            title: "Institucion comprometida:",
+            type: "text",
+            name: "institutions_accompanied",
+            value: values.institutions_accompanied,
+            message: "La institucion comprometida es requerido.",
+            controll: "input",
+            onChange: handleChange,
+          },
+          {
+            title: "Institucion estatal:",
+            type: "number",
+            name: "statal_institution",
+            value: values.statal_institution,
+            message: "La intitucion estatal es requerido.",
+            controll: "input",
+            onChange: handleChange,
+          },
+          {
+            title: "Nombre de la institucion estatal:",
+            type: "text",
+            name: "statal_institution_name",
+            value: values.statal_institution_name,
+            message: "El nombre de la institucion estatal es requerido.",
+            controll: "input",
+            onChange: handleChange,
+          },
+          {
+            title: "Descripcion del acompañante:",
+            type: "text",
+            name: "accompanied_descriptions",
+            value: values.accompanied_descriptions,
+            message: "La descripcion del acompañante es requerido.",
+            controll: "input",
+            onChange: handleChange,
+          },
+          //Perfil socioeconomico
           {
             title: "Genero:",
             type: "number",
