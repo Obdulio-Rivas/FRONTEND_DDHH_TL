@@ -4,7 +4,6 @@ import TemplateForm from "../../../templates/Form";
 import VictimService from "../../../services/Victim/Victim.Service";
 import toast ,{ Toaster } from "react-hot-toast";
 const NewVictim = ()=>{
-
     const [values, setValues] = useState({ 
         name: "",
         last_name:"",
