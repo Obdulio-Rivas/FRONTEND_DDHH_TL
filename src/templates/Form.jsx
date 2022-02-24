@@ -96,7 +96,7 @@ function GeneralForm({ template,watchFields, onSubmit, code=0 }) {
           );
           case "checkbox":
             return (
-              <div key={name} className="w-full flex justify-end mt-4">
+              <div key={name} className="sm:w-full md:w-1/2 lg:1/3 px-3 mb-6 md:mb-0">
                     <label
                     htmlFor={name}
                     className="uppercase tracking-wide text-black text-xs font-bold mb-2"
@@ -104,19 +104,12 @@ function GeneralForm({ template,watchFields, onSubmit, code=0 }) {
                     {title}
                   </label>
                   <input
-                    className="w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3"
+                    className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
                     type={type}
                     id={name}
                     name={name}
                     {...register(name,{onChange:onChange})}
                   />
-                  <div>
-                    {errors[name] && (
-                      <span className="text-red-500 text-xs italic">
-                        {errors[name].message}
-                      </span>
-                    )}
-                  </div>
               </div>
             );
         case "button":
