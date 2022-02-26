@@ -1,10 +1,13 @@
 import React,{useState} from 'react'
-import Navbar from "../Navbar/Navbar";
+import Navbar from "../../Navbar/Navbar";
 import Form from "../../../templates/Form";
 import AuthService from "../../../services/Auth/Auth.Service";
 import toast ,{ Toaster } from "react-hot-toast";
 import CaseService from '../../../services/Case/Case.Service';
 export default function NewIncident() {
+  let concatenacion1=''
+  let concatenacion2=''
+  let concatenacion3=''
     const [values, setValues] = useState({
       //registro institucional
         expediente: "",
@@ -61,7 +64,16 @@ export default function NewIncident() {
         const { value, name,type } = e.target;
         if(type==='checkbox')
         {
-          console.log(value)
+          if(name==='cause_displacement')
+          {
+            concatenacion1=concatenacion1+' '+value
+            console.log(concatenacion1);
+          }else if(name==='people_displacement')
+          {
+
+          }else if(name==='institutions_accompanied'){
+
+          }
         }
         setValues({
           ...values,
@@ -207,15 +219,35 @@ export default function NewIncident() {
             }],
             onChange: handleChange,
           },
+          //checbox de cause_displacement
           {
             title: "Causa del desplazamiento:",
-            type: "text",
+            type: "checkbox",
             name: "cause_displacement",
-            value: values.cause_displacement,
+            value: 'Valor1',
             message: "La causa del desplazamiento es requerido.",
-            controll: "input",
+            controll: "checkbox",
             onChange: handleChange,
           },
+          {
+            title: "Causa del desplazamiento:",
+            type: "checkbox",
+            name: "cause_displacement",
+            value: 'Valor2',
+            message: "La causa del desplazamiento es requerido.",
+            controll: "checkbox",
+            onChange: handleChange,
+          },
+          {
+            title: "Causa del desplazamiento:",
+            type: "checkbox",
+            name: "cause_displacement",
+            value: 'Valor3',
+            message: "La causa del desplazamiento es requerido.",
+            controll: "checkbox",
+            onChange: handleChange,
+          },
+          //----------
           {
             title: "Desplazamiento de personas:",
             type: "text",
