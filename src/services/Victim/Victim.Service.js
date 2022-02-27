@@ -1,13 +1,13 @@
 import API_URL from "../../const/api.js";
 import AuthService from "../Auth/Auth.Service.js";
 
-const getVictim = async () => {
+const getVictims = async () => {
   const requestOptions = {
     method: "GET",
     headers: {
-        "Content-Type": "application/json",
-        "user-access-token": AuthService.getCurrentUser().jwt,
-        "access-control-allow-credentials": true,
+      "Content-Type": "application/json",
+      "user-access-token": AuthService.getCurrentUser().jwt,
+      "access-control-allow-credentials": true,
     },
   };
   const fetchData = await fetch(`${API_URL}/victim/`, requestOptions);
@@ -16,29 +16,41 @@ const getVictim = async () => {
 };
 
 
-const postVictim = async (values) =>{
+const getVictim = async (id_victim) => {
+  const requestOptions = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "user-access-token": AuthService.getCurrentUser().jwt,
+      "access-control-allow-credentials": true,
+    },
+  };
+  const fetchData = await fetch(`${API_URL}/victim/${id_victim}`, requestOptions);
+  const response = await fetchData.json();
+  return response;
+};
+
+const postVictim = async (values) => {
   const requestOptions = {
     method: "POST",
-    headers: { 
-        "Content-Type": "application/json",
-        "user-access-token": AuthService.getCurrentUser().jwt,
-        "access-control-allow-credentials": true,
-  },
+    headers: {
+      "Content-Type": "application/json",
+      "user-access-token": AuthService.getCurrentUser().jwt,
+      "access-control-allow-credentials": true,
+    },
     body: JSON.stringify(values),
   };
 
-  const fetchData = await fetch(
-    `${API_URL}/victim/`,
-    requestOptions
-  );
+  const fetchData = await fetch(`${API_URL}/victim/`, requestOptions);
 
   const response = await fetchData.json();
   return response;
-}
+};
 
 const VictimService = {
-    getVictim,
-    postVictim,
+  getVictim,
+  getVictims,
+  postVictim,
 };
 
 export default VictimService;

@@ -9,6 +9,8 @@ import VictimRoutes from "./Victim/VictimRoutes";
 import FilesRoutes from "./Files/FilesRoutes";
 import Profile from "../pages/Profile/Profile";
 import About from "../pages/About/About";
+import NewIncident from "../pages/Incidents/NewIncident/NewIncident";
+import IncidentRoutes from "./Incident/IncidentRoutes";
 
 const RouteManager = () => {
 
@@ -20,7 +22,7 @@ const RouteManager = () => {
           <Route
             exact
             path="/test"
-            element={<PrivateRoute forRoles={[0, 1, 2]} children={<Generic />} />}
+            element={<PrivateRoute forRoles={[0, 1, 2]} children={<NewIncident />} />}
           />
 
           <Route
@@ -46,6 +48,13 @@ const RouteManager = () => {
             path="/files/*"
             element={
               <PrivateRoute forRoles={[0]} children={<FilesRoutes/>} />
+            }
+          />
+          <Route
+            exact
+            path="/incident/*"
+            element={
+              <PrivateRoute forRoles={[0]} children={<IncidentRoutes/>} />
             }
           />
           <Route

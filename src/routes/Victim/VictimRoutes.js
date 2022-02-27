@@ -1,12 +1,12 @@
 import React from "react";
 import { BrowserRouter, Routes, Route, Link, Outlet } from "react-router-dom";
-import UsersList from "../../components/User/UsersList";
+import VictimList from "../../components/Victim/VictimList";
 import NewVictim from "../../components/Case/Victim/NewVictim";
 
 const VictimRoutes = () => {
   return (
     <Routes>
-      <Route path="/" element={<UsersList />} />
+      <Route path="/" element={<VictimList />} />
       <Route path="/newVictim" element={<NewVictim />} />
     </Routes>
   );

@@ -23,6 +23,17 @@ const options_menu = {
     },
     { key: 3, title: "Archivos", href: "/files", type: "normal" },
     { key: 4, title: "Testing", href: "/test", type: "normal" },
+
+    {
+      key: 5,
+      title: "Incidentes",
+      href: "#",
+      type: "dropdown",
+      options: [
+        { key: 0, option: "Nuevo incidente", href: "/incident/step1" },
+        { key: 1, option: "Listado de incidentes", href: "/incident/" },
+      ],
+    },
   ],
   1: [
     {
@@ -63,15 +74,15 @@ const options_menu = {
         { key: 2, option: "Archivo 3", href: "/A3" },
       ],
     },
-    {key: 1, title: "Crear Caso", href: "/CrearCaso", type: "normal",},
+    { key: 1, title: "Crear Caso", href: "/CrearCaso", type: "normal" },
     { key: 2, title: "Seguimiento", href: "/Seguimiento", type: "normal" },
     { key: 3, title: "Directorio", href: "/Directorio", type: "normal" },
     { key: 4, title: "Dashboard", href: "/Dashboard", type: "normal" },
-  ]
+  ],
 };
 
 const getMenu = (user_rol) => {
-    return options_menu[user_rol]
-}
+  return options_menu[user_rol];
+};
 
 export default getMenu;

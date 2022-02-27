@@ -291,7 +291,7 @@ const UsersList = () => {
               <Modal
                 title={"Eliminar usuario"}
                 children={`Realmente desea elminar el usuario "${userSelected?.name}"`}
-                open={isOpen}
+                isOpen={isOpen}
                 closeModal={closeModal}
                 handlerActionOK={handlerActionOK}
                 handlerActionAbort={handlerActionAbort}
