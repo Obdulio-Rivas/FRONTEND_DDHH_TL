@@ -5,9 +5,10 @@ import AuthService from "../../../services/Auth/Auth.Service";
 import toast ,{ Toaster } from "react-hot-toast";
 import CaseService from '../../../services/Case/Case.Service';
 export default function NewIncident() {
-  let concatenacion1=''
+  let concatenacion1='1'
   let concatenacion2=''
   let concatenacion3=''
+  let contador =0
     const [values, setValues] = useState({
       //registro institucional
         expediente: "",
@@ -44,12 +45,15 @@ export default function NewIncident() {
         //Foreign key
         id_user: "",
       });
-    
-      const onSubmit = async (data,e) => {
+      
+      const onSubmit =(data,e) => {
+        const {input} = e.target
         e.preventDefault();
-        const response = await CaseService.postIncident(values);
+        console.log(data.cause_displacement);
+        /*const response = await CaseService.postIncident(values);
         if (response.is_successful) {
           AuthService.updateJwtUser(response);
+
           toast.success("El usuario a sido agregado correctamente.",{
             position:"bottom-center"
           });
@@ -57,17 +61,18 @@ export default function NewIncident() {
           toast.error("No fue posible agregar el usuario!",{
             position:"bottom-center"
           })
-        }
+        }*/
+
       };
     
       const handleChange = (e) => {
-        const { value, name,type } = e.target;
-        if(type==='checkbox')
+        const { value, name,type, checked } = e.target;
+        if(type==='checkbox' && checked===true)
         {
           if(name==='cause_displacement')
           {
-            concatenacion1=concatenacion1+' '+value
-            console.log(concatenacion1);
+            concatenacion1=value
+            console.log(checked);
           }else if(name==='people_displacement')
           {
 
@@ -222,31 +227,35 @@ export default function NewIncident() {
           //checbox de cause_displacement
           {
             title: "Causa del desplazamiento:",
-            type: "checkbox",
-            name: "cause_displacement",
-            value: 'Valor1',
-            message: "La causa del desplazamiento es requerido.",
-            controll: "checkbox",
-            onChange: handleChange,
+            controll: "checkboxlist",
+            checkboxlist:[
+              {
+                title: "Amenaza:",
+                type: "checkbox",
+                name: "cause_displacement",
+                value: 'Amenaza',
+                message: "La causa del desplazamiento es requerido.",
+                onChange: handleChange,
+              },
+              {
+                title: "Homicidio:",
+                type: "checkbox",
+                name: "cause_displacement",
+                value: 'Homicidio',
+                message: "La causa del desplazamiento es requerido.",
+                onChange: handleChange,
+              },
+              {
+                title: "Extorsión:",
+                type: "checkbox",
+                name: "cause_displacement",
+                value: 'Extorsión',
+                message: "La causa del desplazamiento es requerido.",
+                onChange: handleChange,
+              },
+            ]
           },
-          {
-            title: "Causa del desplazamiento:",
-            type: "checkbox",
-            name: "cause_displacement",
-            value: 'Valor2',
-            message: "La causa del desplazamiento es requerido.",
-            controll: "checkbox",
-            onChange: handleChange,
-          },
-          {
-            title: "Causa del desplazamiento:",
-            type: "checkbox",
-            name: "cause_displacement",
-            value: 'Valor3',
-            message: "La causa del desplazamiento es requerido.",
-            controll: "checkbox",
-            onChange: handleChange,
-          },
+          
           //----------
           {
             title: "Desplazamiento de personas:",
