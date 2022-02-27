@@ -23,7 +23,7 @@ const Step1 = ({handlerStore}) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <input {...register("firstName", {required: 'Error'})} />
+      <input className="border border-black" {...register("firstName", {required: 'Error'})} />
       <input {...register("lastName")} />
       <input type="submit" />
     </form>

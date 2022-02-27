@@ -28,7 +28,8 @@ function GeneralForm({ template,watchFields, onSubmit, code=0 }) {
         defaultValue,
         controll = "input",
         options = [],
-        dynamic = {}
+        dynamic = {},
+        checkboxlist=[]
       } = field;
       let showFields = dynamic ? watchValues[dynamic["field"]] === dynamic["value"] :true;        
       if(!showFields) return;
@@ -112,6 +113,30 @@ function GeneralForm({ template,watchFields, onSubmit, code=0 }) {
                     {title}
                   </label>
                   
+              </div>
+            );
+            case "checkboxlist":
+            return (
+              <div key={name} className="sm:w-full md:w-1/2 lg:1/3 px-3 mb-6 md:mb-0">
+                <label  className="uppercase tracking-wide text-black text-xs font-bold mb-2">
+                {title}
+                  {checkboxlist.map(({title,type,name,value, message, onChange})=>{
+                   return( <label
+                    htmlFor={name}
+                    className="uppercase tracking-wide text-black text-xs font-bold mb-2"
+                    >
+                      <input
+                      className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
+                      type={type}
+                      id={name}
+                      name={name}
+                      value={value}
+                      {...register(name,{onChange:onChange})}
+                    />
+                    {title}
+                  </label>)
+                  })}
+                </label>
               </div>
             );
         case "button":

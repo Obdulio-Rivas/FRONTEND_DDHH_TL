@@ -4,22 +4,22 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 
-const Step3 = ({handlerStore}) => {
+const Step5 = ({handlerStore}) => {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
 
   const onSubmit = (data) => {
     handlerStore(data);
-    navigate('/incident/step4');
+    navigate('/incident/step6');
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <input {...register("firstName3", {required: 'Error'})} />
-      <input {...register("lastName3")} />
+      <input {...register("firstName5", {required: 'Error'})} />
+      <input {...register("lastName5")} />
       <input type="submit" />
     </form>
   );
 };
 
-export default Step3;
+export default Step5;
