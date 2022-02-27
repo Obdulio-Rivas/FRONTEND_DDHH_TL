@@ -19,6 +19,7 @@ const options_menu = {
       options: [
         { key: 0, option: "Nueva victima", href: "/victim/newVictim" },
         { key: 1, option: "Listado de victimas", href: "/victim/" },
+        { key: 2, option: "Crear Caso", href: "/victim/newIncident" },
       ],
     },
     { key: 3, title: "Archivos", href: "/files", type: "normal" },
