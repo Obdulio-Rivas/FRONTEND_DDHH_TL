@@ -11,6 +11,7 @@ import Profile from "../pages/Profile/Profile";
 import About from "../pages/About/About";
 import NewIncident from "../pages/Incidents/NewIncident/NewIncident";
 import IncidentRoutes from "./Incident/IncidentRoutes";
+import Page404 from "../pages/Page404/Page404";
 
 const RouteManager = () => {
 
@@ -77,7 +78,8 @@ const RouteManager = () => {
               />
             }
           />
-           
+        
+          <Route exact path="/*" element={<Page404/>} />
         </Routes>
       </Router>
     </div>

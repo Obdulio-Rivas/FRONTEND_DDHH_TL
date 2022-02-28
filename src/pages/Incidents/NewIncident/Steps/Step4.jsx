@@ -9,7 +9,12 @@ const Step4 = ({handlerStore}) => {
   const navigate = useNavigate();
 
   const onSubmit = (data) => {
-    handlerStore(data);
+    handlerStore({
+      step4: {
+        title: "Step4",
+        values: data,
+      },
+    });
     navigate('/incident/step5');
   };
 

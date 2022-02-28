@@ -11,19 +11,26 @@ import { useNavigate } from "react-router-dom";
   website: yup.string().url(),
 });*/
 
-const Step1 = ({handlerStore}) => {
+const Step1 = ({ handlerStore }) => {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
 
-
   const onSubmit = (data) => {
-    handlerStore(data);
-    navigate('/incident/step2');
+    handlerStore({
+      step1: {
+        title: "Datos Iniciales",
+        values: data,
+      },
+    });
+    navigate("/incident/step2");
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <input className="border border-black" {...register("firstName", {required: 'Error'})} />
+      <input
+        className="border border-black"
+        {...register("firstName", { required: "Error" })}
+      />
       <input {...register("lastName")} />
       <input type="submit" />
     </form>
