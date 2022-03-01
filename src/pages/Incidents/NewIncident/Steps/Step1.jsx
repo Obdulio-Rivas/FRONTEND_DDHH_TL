@@ -66,6 +66,90 @@ const Step1 = ({ handlerStore }) => {
                       </span>)}
                 </div>
             </div>
+            <div key="hour" className="sm:w-1/2 lg:1/2 px-3 mb-6 md:mb-0">
+                  <label htmlFor="hour" className="uppercase tracking-wide text-black text-xs font-bold mb-2">
+                    Hora:
+                  </label>
+                  <input className="w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3"
+                    {...register("hour", { required:"La hora es requerida"})} type="text" id="hour"/>
+                  <div>
+                    {errors["hour"] && (
+                      <span className="text-red-500 text-xs italic">
+                        {errors["hour"].message}
+                      </span>)}
+                </div>
+            </div>
+  
+            <div key="incident_institution" className="sm:w-1/2 lg:1/2 px-3 mb-6 md:mb-0">
+                  <label htmlFor="incident_institution" className="uppercase tracking-wide text-black text-xs font-bold mb-2">
+                    Fecha:
+                  </label>
+                  <input className="w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3"
+                    {...register("incident_institution", { required:"La hora es requerida"})} type="checkbox" id="incident_institution"/>
+                  <div>
+                    {errors["incident_institution"] && (
+                      <span className="text-red-500 text-xs italic">
+                        {errors["incident_institution"].message}
+                      </span>)}
+                </div>
+            </div>
+
+            <div key="incident_institution_name" className="sm:w-1/2 lg:1/2 px-3 mb-6 md:mb-0">
+                  <label htmlFor="incident_institution_name" className="uppercase tracking-wide text-black text-xs font-bold mb-2">
+                    Fecha:
+                  </label>
+                  <input className="w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3"
+                    {...register("incident_institution_name", { required:"El nombre de la institucion es requerida"})} type="text" id="incident_institution_name"/>
+                  <div>
+                    {errors["incident_institution_name"] && (
+                      <span className="text-red-500 text-xs italic">
+                        {errors["incident_institution_name"].message}
+                      </span>)}
+                </div>
+            </div>
+
+            <div key="name_reference" className="sm:w-1/2 lg:1/2 px-3 mb-6 md:mb-0">
+                  <label htmlFor="name_reference" className="uppercase tracking-wide text-black text-xs font-bold mb-2">
+                    Fecha:
+                  </label>
+                  <input className="w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3"
+                    {...register("name_reference", { required:"El nombre de referencia es requerida"})} type="text" id="name_reference"/>
+                  <div>
+                    {errors["name_reference"] && (
+                      <span className="text-red-500 text-xs italic">
+                        {errors["name_reference"].message}
+                      </span>)}
+                </div>
+            </div>
+
+            <div key="contact" className="sm:w-1/2 lg:1/2 px-3 mb-6 md:mb-0">
+                  <label htmlFor="contact" className="uppercase tracking-wide text-black text-xs font-bold mb-2">
+                    Fecha:
+                  </label>
+                  <input className="w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3"
+                    {...register("contact", { required:"El contacto es requerida"})} type="number" id="contact"/>
+                  <div>
+                    {errors["contact"] && (
+                      <span className="text-red-500 text-xs italic">
+                        {errors["contact"].message}
+                      </span>)}
+                </div>
+            </div>
+
+            <div key="incident_identification" className="sm:w-1/2 lg:1/2 px-3 mb-6 md:mb-0">
+                  <label htmlFor="incident_identification" className="uppercase tracking-wide text-black text-xs font-bold mb-2">
+                    Fecha:
+                  </label>
+                  <input className="w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3"
+                    {...register("incident_identification", { required:"La identificacion del incidente es requerida"})} type="number" id="incident_identification"/>
+                  <div>
+                    {errors["incident_identification"] && (
+                      <span className="text-red-500 text-xs italic">
+                        {errors["incident_identification"].message}
+                      </span>)}
+                </div>
+            </div>
+            <input type="submit" />
           </div>
       </div>
   </div>
