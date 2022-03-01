@@ -82,10 +82,10 @@ const Step1 = ({ handlerStore }) => {
   
             <div key="incident_institution" className="sm:w-1/2 lg:1/2 px-3 mb-6 md:mb-0">
                   <label htmlFor="incident_institution" className="uppercase tracking-wide text-black text-xs font-bold mb-2">
-                    Fecha:
+                    ¿Conoce alguna institucion de ayuda?
                   </label>
                   <input className="w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3"
-                    {...register("incident_institution", { required:"La hora es requerida"})} type="checkbox" id="incident_institution"/>
+                    {...register("incident_institution")} type="checkbox" id="incident_institution"/>
                   <div>
                     {errors["incident_institution"] && (
                       <span className="text-red-500 text-xs italic">

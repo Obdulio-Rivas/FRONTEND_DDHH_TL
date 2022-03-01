@@ -31,32 +31,19 @@ const Step5 = ({handlerStore}) => {
       </div>
       <div className="my-4">
             <h1 className="border border-slate-300 text-lg text-gray-800 font-semibold text-left py-2 px-4 mb-2">
-              I. DATOS DE REGISTRO INSTITUCIONAL.
+              VII. NARRATIVA DE LOS HECHOS.
             </h1>
             <div className="flex flex-row flex-wrap w-4/5 mx-auto">
-            <div key="expediente" className="sm:w-1/2 lg:1/2 px-3 mb-6 md:mb-0">
-                  <label htmlFor="expediente" className="uppercase tracking-wide text-black text-xs font-bold mb-2">
-                    Expediente:
+            <div key="description_incident" className="sm:w-1/2 lg:1/2 px-3 mb-6 md:mb-0">
+                  <label htmlFor="description_incident" className="uppercase tracking-wide text-black text-xs font-bold mb-2">
+                    Narrativa:
                   </label>
                   <input className="w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3"
-                    {...register("expediente", { required:"El expediente es requerido" })} type="text" id="expediente"/>
+                    {...register("description_incident", { required:"El expediente es requerido" })} type="text" id="description_incident"/>
                   <div>
-                    {errors["expediente"] && (
+                    {errors["description_incident"] && (
                       <span className="text-red-500 text-xs italic">
-                        {errors["expediente"].message}
-                      </span>)}
-                </div>
-            </div>
-            <div key="incident_date" className="sm:w-1/2 lg:1/2 px-3 mb-6 md:mb-0">
-                  <label htmlFor="incident_date" className="uppercase tracking-wide text-black text-xs font-bold mb-2">
-                    Fecha:
-                  </label>
-                  <input className="w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3"
-                    {...register("incident_date", { required:"La fecha es requerida"})} type="date" id="incident_date"/>
-                  <div>
-                    {errors["incident_date"] && (
-                      <span className="text-red-500 text-xs italic">
-                        {errors["incident_date"].message}
+                        {errors["description_incident"].message}
                       </span>)}
                 </div>
             </div>
