@@ -1,7 +1,31 @@
 import React, { useState, useEffect } from "react";
 import { BsSquare, BsCheckSquare } from "react-icons/bs";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { useNavigate } from "react-router-dom";
+import AuthService from "../../../../services/Auth/Auth.Service";
 
-const Step7 = ({ store }) => {
+const Step7 = ({ store, handlerStore }) => {
+  const [currentUser, setcurrentUser] = useState(AuthService.getCurrentUser());
+
+  const { register, handleSubmit } = useForm();
+  const navigate = useNavigate();
+
+  const getMonthName = (monthNumber) => {
+    return ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'][monthNumber]
+  }
+
+  const onSubmit = (data) => {
+    handlerStore({
+      step2: {
+        title: "Step7",
+        values: data,
+      },
+    });
+    navigate("/incident/step8");
+  };
+
   return (
     <div className="max-w-5xl mx-auto my-10 bg-white p-16 border border-slate-200">
       <div className="my-4 mb-10">
@@ -187,12 +211,18 @@ const Step7 = ({ store }) => {
           <span>Propia Alquilada Financiada Casa Familiar Otros</span>
         </ul>
         <ul className="flex flex-row flex-wrap justify-between px-5">
-          <span className="text-base">Ingresos Mensuales del grupo familiar:</span>
+          <span className="text-base">
+            Ingresos Mensuales del grupo familiar:
+          </span>
           <span>Ingreso actual del grupo familiar: </span>
         </ul>
         <ul className="flex flex-row flex-wrap justify-between px-5">
-          <span className="text-base">¿Cómo ha logrado sobrevivir durante el desplazamiento?</span>
-          <span>Ahorros Trabajo Informal Préstamo Remesas Empeños Mendicidad Otros:</span>
+          <span className="text-base">
+            ¿Cómo ha logrado sobrevivir durante el desplazamiento?
+          </span>
+          <span>
+            Ahorros Trabajo Informal Préstamo Remesas Empeños Mendicidad Otros:
+          </span>
         </ul>
       </div>
       <div className="my-4">
@@ -233,6 +263,34 @@ const Step7 = ({ store }) => {
             aliquam recusandae ullam dolor.
           </span>
         </ul>
+      </div>
+      <div className="my-6">
+        <h1 className="flex flex-row justify-between border border-slate-300 text-lg text-gray-800 font-semibold py-2 px-4 mb-6">
+          <span>VIII. ACUERDO DE CREACION.</span>
+        </h1>
+        <div className="flex flex-row flex-wrap justify-between px-5">
+          <p className="text-base text-justify">
+            Yo <b>{`${currentUser.name} ${currentUser.last_name}`}</b>, doy fe que la
+            informacion plasmada en la ficha actual y elaborada por mi persona
+            ha sido recopilada de viva voz por la persona que ha venido en
+            calidad de victima directa o conocido de la misma a declarar los
+            hechos anteriormente descritos a mi persona, a las{" "}
+            {new Date().getHours()} horas con {new Date().getMinutes()} minutos
+            del dia {new Date().getDate()} del mes de {getMonthName(new Date().getMonth())}{" "}
+            del año {new Date().getFullYear()}.
+          </p>
+        </div>
+        <form
+          className="flex flex-row flex-wrap justify-end px-5 mt-6"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <input
+            className="hidden"
+            {...register("id_creater_user")}
+            value={currentUser?.id_user}
+          />
+          <input className="cursor-pointer font-bold text-gray-800" type="submit" value={"Acepto el acuerdo"} />
+        </form>
       </div>
     </div>
   );

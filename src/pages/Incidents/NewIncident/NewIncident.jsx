@@ -9,6 +9,7 @@ import Step4 from "./Steps/Step4";
 import Step5 from "./Steps/Step5";
 import Step6 from "./Steps/Step6";
 import Step7 from "./Steps/Step7";
+import Step8 from "./Steps/Step8";
 import StepManager from "./StepManager";
 
 const NewIncident = () => {
@@ -41,7 +42,9 @@ const NewIncident = () => {
       case "step6":
         return <Step6 handlerStore={handlerStore} />;
       case "step7":
-        return <Step7 store={store} />;
+        return <Step7 store={store} handlerStore={handlerStore} />;
+      case "step8":
+        return <Step8 store={store} handlerStore={handlerStore} />;
 
       default:
         return <Step1 />;

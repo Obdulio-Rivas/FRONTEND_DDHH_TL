@@ -15,6 +15,7 @@ const IncidentRoutes = () => {
       <Route path="/step5" element={<NewIncident />} />
       <Route path="/step6" element={<NewIncident />} />
       <Route path="/step7" element={<NewIncident />} />
+      <Route path="/step8" element={<NewIncident />} />
       <Route path="*" element={<Page404/>} />
     </Routes>
   );

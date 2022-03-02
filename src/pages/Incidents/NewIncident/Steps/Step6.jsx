@@ -1,29 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 
-const Step6 = ({handlerStore}) => {
+const Step6 = ({ handlerStore }) => {
+  const [victims, setVictims] = useState([]);
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
 
-  const onSubmit = (data) => {
-    handlerStore({
-      step6: {
-        title: "Step6",
-        values: data,
-      },
-    });
-    navigate('/incident/step7');
+  const addVictimToIncident = (data) => {
+    let listOfVictims = victims;
+    listOfVictims.push({...data}) 
+    setVictims(listOfVictims);
+    console.log(victims)
+    //navigate("/incident/step7");
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <input {...register("firstName6", {required: 'Error'})} />
-      <input {...register("lastName6")} />
-      <input type="submit" />
-    </form>
+    <div>
+      <div>
+        <form onSubmit={handleSubmit(addVictimToIncident)}>
+          
+          <input className="border border-gray-500" {...register("name", { required: "Error" })} />
+          <input type="submit" />
+        </form>
+      </div>
+      <div>
+        {victims.map((victim) => {
+          return <span>{JSON.stringify(victim)}</span>;
+        })}
+      </div>
+    </div>
   );
 };
 
