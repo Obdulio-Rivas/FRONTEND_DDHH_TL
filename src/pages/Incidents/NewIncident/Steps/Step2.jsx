@@ -5,8 +5,18 @@ import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 
 const Step2 = ({ handlerStore }) => {
-  const { register, handleSubmit, formState:{errors} } = useForm();
+  const { register, handleSubmit, formState:{errors}, watch } = useForm();
   const navigate = useNavigate();
+  const useWatch = watch("statal_institution")
+
+  const handlerChange = (e)=>{
+    const {name,value,type,checked} = e.target
+    if(name==="statal_institution" && value===1 && checked===true)
+    {
+        
+    }
+    console.log(checked)
+  }
 
   const onSubmit = (data) => {
     handlerStore({
@@ -18,6 +28,8 @@ const Step2 = ({ handlerStore }) => {
     navigate("/incident/step3");
   };
 
+
+  console.log(useWatch)
   return (
     <div className=" mx-auto max-w-9xl lg:px-24">
       <div className="flex flex-wrap flex-col lg:w-5/5 mt-4">
@@ -71,6 +83,7 @@ const Step2 = ({ handlerStore }) => {
                   className="w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3"
                   id="deparment"
                 >
+                  <option key="San salvador" value="San salvador" className="py-3">San salvador</option>
                     {/*{options.map(({title, value})=>{
                         return (<option key={value} value={value} disabled={value==='DEFAULT'?true:false} className="py-3">{title}</option>);
                     })}*/}
@@ -93,6 +106,7 @@ const Step2 = ({ handlerStore }) => {
                   className="w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3"
                   id="municipality"
                 >
+                  <option key="San salvador" value="San salvador" className="py-3">San salvador</option>
                     {/*{options.map(({title, value})=>{
                         return (<option key={value} value={value} disabled={value==='DEFAULT'?true:false} className="py-3">{title}</option>);
                     })}*/}
@@ -104,7 +118,6 @@ const Step2 = ({ handlerStore }) => {
                       </span>)}
                 </div>
             </div>
-            
               <div key="cause_displacement" className="sm:w-full md:w-1/2 lg:1/3 px-3 mb-6 md:mb-0">
                 <label  className="uppercase tracking-wide text-black text-xs font-bold mb-2">
                 Causa del desplazamiento
@@ -112,6 +125,8 @@ const Step2 = ({ handlerStore }) => {
                     htmlFor="cause_displacement"
                     className="uppercase tracking-wide text-black text-xs font-bold mb-2"
                     >
+                      <br></br>
+                      1.Amenaza
                       <input
                       className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
                       type="checkbox"
@@ -120,12 +135,14 @@ const Step2 = ({ handlerStore }) => {
                       value="Amenanza"
                       {...register("cause_displacement")}
                     />
-                    Amenaza
+                    
                   </label>
+                  <br></br>
                   <label
                     htmlFor="cause_displacement"
                     className="uppercase tracking-wide text-black text-xs font-bold mb-2"
                     >
+                       2.Homicidio
                       <input
                       className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
                       type="checkbox"
@@ -134,49 +151,81 @@ const Step2 = ({ handlerStore }) => {
                       value="Amenanza"
                       {...register("cause_displacement")}
                     />
-                    Homicidio
                   </label>
+                  <br></br>
                   <label
                     htmlFor="cause_displacement"
                     className="uppercase tracking-wide text-black text-xs font-bold mb-2"
                     >
+                      3.Extorsión
                       <input
                       className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
                       type="checkbox"
                       id="cause_displacement"
                       name="cause_displacement"
-                      value="Homicidio"
+                      value=" Extorsión"
                       {...register("cause_displacement")}
                     />
-                    Amenaza
                   </label>
+                  <br></br>
                   <label
                     htmlFor="cause_displacement"
                     className="uppercase tracking-wide text-black text-xs font-bold mb-2"
                     >
+                      4.Desaparición de un Miembro de la Familia
                       <input
                       className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
                       type="checkbox"
                       id="cause_displacement"
                       name="cause_displacement"
-                      value="Amenanza"
+                      value="Desaparición de un Miembro de la Familia"
                       {...register("cause_displacement")}
                     />
-                    Amenaza
                   </label>
+                  <br></br>
                   <label
                     htmlFor="cause_displacement"
                     className="uppercase tracking-wide text-black text-xs font-bold mb-2"
                     >
+                      5.Reclutamiento Forzoso
                       <input
                       className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
                       type="checkbox"
                       id="cause_displacement"
                       name="cause_displacement"
-                      value="Amenanza"
+                      value="Reclutamiento Forzoso"
                       {...register("cause_displacement")}
                     />
-                    Amenaza
+                  </label>
+                  <br></br>
+                  <label
+                    htmlFor="cause_displacement"
+                    className="uppercase tracking-wide text-black text-xs font-bold mb-2"
+                    >
+                      6.Testigo de un hecho Delictivo
+                      <input
+                      className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
+                      type="checkbox"
+                      id="cause_displacement"
+                      name="cause_displacement"
+                      value="Testigo de un hecho Delictivo"
+                      {...register("cause_displacement")}
+                    />
+                  </label>
+                  <br></br>
+                  <label
+                    htmlFor="cause_displacement"
+                    className="uppercase tracking-wide text-black text-xs font-bold mb-2"
+                    >
+                      7.Agresión Física
+                      <input
+                      className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
+                      type="checkbox"
+                      id="cause_displacement"
+                      name="cause_displacement"
+                      value="Agresión Física"
+                      {...register("cause_displacement")}
+                    />
                   </label>
                 </label>
               </div>
@@ -195,8 +244,24 @@ const Step2 = ({ handlerStore }) => {
                       value="FAES"
                       {...register("people_displacement")}
                     />
-                    FAES
+                    1.FAES
                   </label>
+                  <br></br>
+                  <label
+                    htmlFor="people_displacement"
+                    className="uppercase tracking-wide text-black text-xs font-bold mb-2"
+                    >
+                      <input
+                      className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
+                      type="checkbox"
+                      id="people_displacement"
+                      name="people_displacement"
+                      value="PNC"
+                      {...register("people_displacement")}
+                    />
+                    2.PNC
+                  </label>
+                  <br></br>
                   <label
                     htmlFor="people_displacement"
                     className="uppercase tracking-wide text-black text-xs font-bold mb-2"
@@ -209,8 +274,10 @@ const Step2 = ({ handlerStore }) => {
                       value="Crimen Organizado"
                       {...register("people_displacement")}
                     />
-                    Crimen Organizado
-                  </label><label
+                    3.Crimen Organizado
+                  </label>
+                  <br></br>
+                  <label
                     htmlFor="people_displacement"
                     className="uppercase tracking-wide text-black text-xs font-bold mb-2"
                     >
@@ -219,11 +286,13 @@ const Step2 = ({ handlerStore }) => {
                       type="checkbox"
                       id="people_displacement"
                       name="people_displacement"
-                      value="Crimen Organizado"
+                      value="Desconocidos"
                       {...register("people_displacement")}
                     />
-                    Crimen Organizado
-                  </label><label
+                    4.Desconocidos
+                  </label>
+                  <br></br>
+                  <label
                     htmlFor="people_displacement"
                     className="uppercase tracking-wide text-black text-xs font-bold mb-2"
                     >
@@ -232,16 +301,62 @@ const Step2 = ({ handlerStore }) => {
                       type="checkbox"
                       id="people_displacement"
                       name="people_displacement"
-                      value="FAES"
+                      value="Pandillas MS"
                       {...register("people_displacement")}
                     />
-                    FAES
+                    5.Pandillas MS
+                  </label>
+                  <br></br>
+                  <label
+                    htmlFor="people_displacement"
+                    className="uppercase tracking-wide text-black text-xs font-bold mb-2"
+                    >
+                      <input
+                      className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
+                      type="checkbox"
+                      id="people_displacement"
+                      name="people_displacement"
+                      value="Pandillas BARRIO 18"
+                      {...register("people_displacement")}
+                    />
+                    6.Pandillas BARRIO 18
+                  </label>
+                  <br></br>
+                  <label
+                    htmlFor="people_displacement"
+                    className="uppercase tracking-wide text-black text-xs font-bold mb-2"
+                    >
+                      <input
+                      className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
+                      type="checkbox"
+                      id="people_displacement"
+                      name="people_displacement"
+                      value="Particulares"
+                      {...register("people_displacement")}
+                    />
+                    7.Particulares
                   </label>
                 </label>
               </div>
               <div key="institutions_accompanied" className="sm:w-full md:w-1/2 lg:1/3 px-3 mb-6 md:mb-0">
                 <label  className="uppercase tracking-wide text-black text-xs font-bold mb-2">
                 ¿Cuáles instituciones han acompañado?
+                <label
+                    htmlFor="institutions_accompanied"
+                    className="uppercase tracking-wide text-black text-xs font-bold mb-2"
+                    >
+                      <br></br>
+                      <input
+                      className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
+                      type="checkbox"
+                      id="institutions_accompanied"
+                      name="institutions_accompanied"
+                      value="Ninguna"
+                      {...register("institutions_accompanied")}
+                    />
+                    1.Ninguna
+                  </label>
+                  <br></br>
                  <label
                     htmlFor="institutions_accompanied"
                     className="uppercase tracking-wide text-black text-xs font-bold mb-2"
@@ -254,8 +369,9 @@ const Step2 = ({ handlerStore }) => {
                       value="PNC"
                       {...register("institutions_accompanied")}
                     />
-                    PNC
+                    2.PNC
                   </label>
+                  <br></br>
                   <label
                     htmlFor="institutions_accompanied"
                     className="uppercase tracking-wide text-black text-xs font-bold mb-2"
@@ -268,8 +384,10 @@ const Step2 = ({ handlerStore }) => {
                       value="FGR"
                       {...register("institutions_accompanied")}
                     />
-                    FGR
-                  </label><label
+                    3.FGR
+                  </label>
+                  <br></br>
+                  <label
                     htmlFor="institutions_accompanied"
                     className="uppercase tracking-wide text-black text-xs font-bold mb-2"
                     >
@@ -278,10 +396,55 @@ const Step2 = ({ handlerStore }) => {
                       type="checkbox"
                       id="institutions_accompanied"
                       name="institutions_accompanied"
-                      value="FAES"
+                      value="PDDH"
                       {...register("institutions_accompanied")}
                     />
-                    FAES
+                    4.PDDH
+                  </label>
+                  <br></br>
+                  <label
+                    htmlFor="institutions_accompanied"
+                    className="uppercase tracking-wide text-black text-xs font-bold mb-2"
+                    >
+                      <input
+                      className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
+                      type="checkbox"
+                      id="institutions_accompanied"
+                      name="institutions_accompanied"
+                      value="PGR"
+                      {...register("institutions_accompanied")}
+                    />
+                    5.PGR
+                  </label>
+                  <br></br>
+                  <label
+                    htmlFor="institutions_accompanied"
+                    className="uppercase tracking-wide text-black text-xs font-bold mb-2"
+                    >
+                      <input
+                      className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
+                      type="checkbox"
+                      id="institutions_accompanied"
+                      name="institutions_accompanied"
+                      value="ISDEMU"
+                      {...register("institutions_accompanied")}
+                    />
+                    6.ISDEMU
+                  </label>
+                  <br></br>
+                  <label
+                    htmlFor="institutions_accompanied"
+                    className="uppercase tracking-wide text-black text-xs font-bold mb-2"
+                    >
+                      <input
+                      className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
+                      type="checkbox"
+                      id="institutions_accompanied"
+                      name="institutions_accompanied"
+                      value="CONNA"
+                      {...register("institutions_accompanied")}
+                    />
+                    7.CONNA
                   </label>
                 </label>
               </div>
@@ -293,13 +456,14 @@ const Step2 = ({ handlerStore }) => {
                     htmlFor="statal_institution"
                     className="uppercase tracking-wide text-black text-xs font-bold mb-2"
                     >
+                      <br></br>
                       <input
                       className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
                       type="checkbox"
                       id="statal_institution"
                       name="statal_institution"
                       value={1}
-                      {...register("statal_institution")}
+                      {...register("statal_institution",{onChange:handlerChange})}
                     />
                     SI
                   </label>
@@ -313,7 +477,7 @@ const Step2 = ({ handlerStore }) => {
                       id="statal_institution"
                       name="statal_institution"
                       value={0}
-                      {...register("statal_institution")}
+                      {...register("statal_institution",{onChange:handlerChange})}
                     />
                     NO
                   </label>
@@ -344,7 +508,13 @@ const Step2 = ({ handlerStore }) => {
                       </span>)}
                 </div>
             </div>
-            <input type="submit" />
+            <div key="Button" className="w-full flex justify-end mt-4">
+              <div className="md:w-auto px-3">
+                <button className="w-full bg-green-500 text-white font-bold py-2 px-6 rounded-md hover:bg-green-600 uppercase">
+                  Siguiente
+                </button>
+              </div>
+            </div>
           </div>
       </div>
   </div>

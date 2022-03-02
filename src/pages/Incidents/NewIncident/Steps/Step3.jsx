@@ -42,6 +42,7 @@ const Step3 = ({handlerStore}) => {
                     htmlFor="home"
                     className="uppercase tracking-wide text-black text-xs font-bold mb-2"
                     >
+                      <br></br>
                       <input
                       className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
                       type="checkbox"
@@ -51,6 +52,51 @@ const Step3 = ({handlerStore}) => {
                       {...register("home")}
                     />
                     Propia
+                  </label>
+                  <br></br>
+                  <label
+                    htmlFor="home"
+                    className="uppercase tracking-wide text-black text-xs font-bold mb-2"
+                    >
+                      <input
+                      className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
+                      type="checkbox"
+                      id="home"
+                      name="home"
+                      value="Alquilada"
+                      {...register("home")}
+                    />
+                    Alquilada
+                  </label>
+                  <br></br>
+                  <label
+                    htmlFor="home"
+                    className="uppercase tracking-wide text-black text-xs font-bold mb-2"
+                    >
+                      <input
+                      className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
+                      type="checkbox"
+                      id="home"
+                      name="home"
+                      value="Financiada"
+                      {...register("home")}
+                    />
+                    Financiada
+                  </label>
+                  <br></br>
+                  <label
+                    htmlFor="home"
+                    className="uppercase tracking-wide text-black text-xs font-bold mb-2"
+                    >
+                      <input
+                      className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
+                      type="checkbox"
+                      id="home"
+                      name="home"
+                      value="Caso Familiar"
+                      {...register("home")}
+                    />
+                    Caso Familiar
                   </label>
             </div>
             <div key="monthly_income" className="sm:w-1/2 lg:1/2 px-3 mb-6 md:mb-0">
@@ -97,6 +143,7 @@ const Step3 = ({handlerStore}) => {
                     />
                     Ahorros
                   </label>
+                  <br></br>
                   <label
                     htmlFor="survive_displacement"
                     className="uppercase tracking-wide text-black text-xs font-bold mb-2"
@@ -111,6 +158,7 @@ const Step3 = ({handlerStore}) => {
                     />
                     Trabajo Informal
                   </label>
+                  <br></br>
                   <label
                     htmlFor="survive_displacement"
                     className="uppercase tracking-wide text-black text-xs font-bold mb-2"
@@ -125,6 +173,7 @@ const Step3 = ({handlerStore}) => {
                     />
                     Préstamo 
                   </label>
+                  <br></br>
                   <label
                     htmlFor="survive_displacement"
                     className="uppercase tracking-wide text-black text-xs font-bold mb-2"
@@ -143,6 +192,7 @@ const Step3 = ({handlerStore}) => {
                     htmlFor="survive_displacement"
                     className="uppercase tracking-wide text-black text-xs font-bold mb-2"
                     >
+                      <br></br>
                       <input
                       className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
                       type="checkbox"
@@ -153,6 +203,7 @@ const Step3 = ({handlerStore}) => {
                     />
                     Empeños
                   </label>
+                  <br></br>
                   <label
                     htmlFor="survive_displacement"
                     className="uppercase tracking-wide text-black text-xs font-bold mb-2"
@@ -168,7 +219,13 @@ const Step3 = ({handlerStore}) => {
                     Mendicidad
                   </label>
             </div>
-            <input type="submit" />
+            <div key="Button" className="w-full flex justify-end mt-4">
+              <div className="md:w-auto px-3">
+                <button className="w-full bg-green-500 text-white font-bold py-2 px-6 rounded-md hover:bg-green-600 uppercase">
+                  Siguiente
+                </button>
+              </div>
+            </div>
           </div>
       </div>
   </div>

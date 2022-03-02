@@ -12,9 +12,8 @@ import { useNavigate } from "react-router-dom";
 });*/
 
 const Step1 = ({ handlerStore }) => {
-  const { register, handleSubmit, formState: {errors}, setValue} = useForm();
+  const { register, handleSubmit, formState: {errors}, setValue,watch} = useForm();
   const navigate = useNavigate();
-
   const onSubmit = (data) => {
     handlerStore({
       step1: {
@@ -96,7 +95,7 @@ const Step1 = ({ handlerStore }) => {
 
             <div key="incident_institution_name" className="sm:w-1/2 lg:1/2 px-3 mb-6 md:mb-0">
                   <label htmlFor="incident_institution_name" className="uppercase tracking-wide text-black text-xs font-bold mb-2">
-                    Fecha:
+                  ¿Cuál?
                   </label>
                   <input className="w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3"
                     {...register("incident_institution_name", { required:"El nombre de la institucion es requerida"})} type="text" id="incident_institution_name"/>
@@ -110,7 +109,7 @@ const Step1 = ({ handlerStore }) => {
 
             <div key="name_reference" className="sm:w-1/2 lg:1/2 px-3 mb-6 md:mb-0">
                   <label htmlFor="name_reference" className="uppercase tracking-wide text-black text-xs font-bold mb-2">
-                    Fecha:
+                  Nombre de quien Refiere:
                   </label>
                   <input className="w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3"
                     {...register("name_reference", { required:"El nombre de referencia es requerida"})} type="text" id="name_reference"/>
@@ -124,7 +123,7 @@ const Step1 = ({ handlerStore }) => {
 
             <div key="contact" className="sm:w-1/2 lg:1/2 px-3 mb-6 md:mb-0">
                   <label htmlFor="contact" className="uppercase tracking-wide text-black text-xs font-bold mb-2">
-                    Fecha:
+                  Contacto:
                   </label>
                   <input className="w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3"
                     {...register("contact", { required:"El contacto es requerida"})} type="number" id="contact"/>
@@ -138,7 +137,7 @@ const Step1 = ({ handlerStore }) => {
 
             <div key="incident_identification" className="sm:w-1/2 lg:1/2 px-3 mb-6 md:mb-0">
                   <label htmlFor="incident_identification" className="uppercase tracking-wide text-black text-xs font-bold mb-2">
-                    Fecha:
+                  Identificación del Caso:
                   </label>
                   <input className="w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3"
                     {...register("incident_identification", { required:"La identificacion del incidente es requerida"})} type="number" id="incident_identification"/>
@@ -149,7 +148,13 @@ const Step1 = ({ handlerStore }) => {
                       </span>)}
                 </div>
             </div>
-            <input type="submit" />
+            <div key="Button" className="w-full flex justify-end mt-4">
+              <div className="md:w-auto px-3">
+                <button className="w-full bg-green-500 text-white font-bold py-2 px-6 rounded-md hover:bg-green-600 uppercase">
+                  Siguiente
+                </button>
+              </div>
+            </div>
           </div>
       </div>
   </div>

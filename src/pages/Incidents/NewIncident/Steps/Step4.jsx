@@ -93,7 +93,13 @@ const Step4 = ({handlerStore}) => {
                       </span>)}
                 </div>
             </div>
-            <input type="submit" />
+            <div key="Button" className="w-full flex justify-end mt-4">
+              <div className="md:w-auto px-3">
+                <button className="w-full bg-green-500 text-white font-bold py-2 px-6 rounded-md hover:bg-green-600 uppercase">
+                  Siguiente
+                </button>
+              </div>
+            </div>
           </div>
       </div>
   </div>
