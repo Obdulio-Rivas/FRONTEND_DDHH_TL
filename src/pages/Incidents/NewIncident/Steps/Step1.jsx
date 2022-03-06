@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 const Step1 = ({ handlerStore }) => {
   const { register, handleSubmit, formState: {errors}, setValue,watch} = useForm();
   const navigate = useNavigate();
+  const useWatch = watch("incident_institution",0)
   const onSubmit = (data) => {
     handlerStore({
       step1: {
@@ -83,17 +84,40 @@ const Step1 = ({ handlerStore }) => {
                   <label htmlFor="incident_institution" className="uppercase tracking-wide text-black text-xs font-bold mb-2">
                     ¿Conoce alguna institucion de ayuda?
                   </label>
-                  <input className="w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3"
-                    {...register("incident_institution")} type="checkbox" id="incident_institution"/>
-                  <div>
-                    {errors["incident_institution"] && (
-                      <span className="text-red-500 text-xs italic">
-                        {errors["incident_institution"].message}
-                      </span>)}
-                </div>
+                  <label
+                    htmlFor="incident_institution"
+                    className="uppercase tracking-wide text-black text-xs font-bold mb-2"
+                    >
+                      <br></br>
+                      <input
+                      className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
+                      type="radio"
+                      id="incident_institution"
+                      name="incident_institution"
+                      value={1}
+                      {...register("incident_institution")}
+                    />
+                    SI
+                  </label>
+                  <label
+                    htmlFor="incident_institution"
+                    className="uppercase tracking-wide text-black text-xs font-bold mb-2"
+                    >
+                      <input
+                      className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
+                      type="radio"
+                      id="incident_institution"
+                      name="incident_institution"
+                      value={0}
+                      {...register("incident_institution")}
+                    />
+                    NO
+                  </label>
+
             </div>
 
-            <div key="incident_institution_name" className="sm:w-1/2 lg:1/2 px-3 mb-6 md:mb-0">
+            {useWatch==1 &&( <>
+              <div key="incident_institution_name" className="sm:w-1/2 lg:1/2 px-3 mb-6 md:mb-0">
                   <label htmlFor="incident_institution_name" className="uppercase tracking-wide text-black text-xs font-bold mb-2">
                   ¿Cuál?
                   </label>
@@ -106,6 +130,7 @@ const Step1 = ({ handlerStore }) => {
                       </span>)}
                 </div>
             </div>
+            </>)}
 
             <div key="name_reference" className="sm:w-1/2 lg:1/2 px-3 mb-6 md:mb-0">
                   <label htmlFor="name_reference" className="uppercase tracking-wide text-black text-xs font-bold mb-2">

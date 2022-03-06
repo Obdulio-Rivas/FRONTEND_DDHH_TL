@@ -7,15 +7,15 @@ import { useNavigate } from "react-router-dom";
 const Step2 = ({ handlerStore }) => {
   const { register, handleSubmit, formState:{errors}, watch } = useForm();
   const navigate = useNavigate();
-  const useWatch = watch("statal_institution")
+  const useWatch = watch("statal_institution",0)
 
   const handlerChange = (e)=>{
     const {name,value,type,checked} = e.target
-    if(name==="statal_institution" && value===1 && checked===true)
+    if(name==="statal_institution" && checked===true)
     {
-        
+      console.log(name)
     }
-    console.log(checked)
+
   }
 
   const onSubmit = (data) => {
@@ -459,7 +459,7 @@ const Step2 = ({ handlerStore }) => {
                       <br></br>
                       <input
                       className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
-                      type="checkbox"
+                      type="radio"
                       id="statal_institution"
                       name="statal_institution"
                       value={1}
@@ -473,7 +473,7 @@ const Step2 = ({ handlerStore }) => {
                     >
                       <input
                       className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
-                      type="checkbox"
+                      type="radio"
                       id="statal_institution"
                       name="statal_institution"
                       value={0}
@@ -482,7 +482,8 @@ const Step2 = ({ handlerStore }) => {
                     NO
                   </label>
             </div>
-            <div key="statal_institution_name" className="sm:w-1/2 lg:1/2 px-3 mb-6 md:mb-0">
+            {useWatch==1 && (<>
+              <div key="statal_institution_name" className="sm:w-1/2 lg:1/2 px-3 mb-6 md:mb-0">
                   <label htmlFor="statal_institution_name" className="uppercase tracking-wide text-black text-xs font-bold mb-2">
                     Nombre de la institucion estatal:
                   </label>
@@ -495,6 +496,8 @@ const Step2 = ({ handlerStore }) => {
                       </span>)}
                 </div>
             </div>
+            </>
+            )}
             <div key="accompanied_descriptions" className="sm:w-1/2 lg:1/2 px-3 mb-6 md:mb-0">
                   <label htmlFor="accompanied_descriptions" className="uppercase tracking-wide text-black text-xs font-bold mb-2">
                     Descripcion del acompañamiento brindado:

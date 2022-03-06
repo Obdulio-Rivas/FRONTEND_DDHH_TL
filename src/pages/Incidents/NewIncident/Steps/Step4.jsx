@@ -5,9 +5,9 @@ import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 
 const Step4 = ({handlerStore}) => {
-  const { register, handleSubmit, formState:{errors} } = useForm();
+  const { register, handleSubmit, formState:{errors}, watch } = useForm();
   const navigate = useNavigate();
-
+  const useWatch = watch("country_leave",0)
   const onSubmit = (data) => {
     handlerStore({
       step4: {
@@ -44,7 +44,7 @@ const Step4 = ({handlerStore}) => {
                     >
                       <input
                       className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
-                      type="checkbox"
+                      type="radio"
                       id="country_leave"
                       name="country_leave"
                       value={1}
@@ -58,7 +58,7 @@ const Step4 = ({handlerStore}) => {
                     >
                       <input
                       className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
-                      type="checkbox"
+                      type="radio"
                       id="country_leave"
                       name="country_leave"
                       value={0}
@@ -67,7 +67,8 @@ const Step4 = ({handlerStore}) => {
                     NO
                   </label>
             </div>
-            <div key="country_leave_name" className="sm:w-1/2 lg:1/2 px-3 mb-6 md:mb-0">
+            { useWatch==1 && (<>
+              <div key="country_leave_name" className="sm:w-1/2 lg:1/2 px-3 mb-6 md:mb-0">
                   <label htmlFor="country_leave_name" className="uppercase tracking-wide text-black text-xs font-bold mb-2">
                   ¿A qué país?
                   </label>
@@ -80,6 +81,7 @@ const Step4 = ({handlerStore}) => {
                       </span>)}
                 </div>
             </div>
+            </>)}
             <div key="family_cant" className="sm:w-1/2 lg:1/2 px-3 mb-6 md:mb-0">
                   <label htmlFor="family_cant" className="uppercase tracking-wide text-black text-xs font-bold mb-2">
                   ¿Cuántas personas de su grupo familiar?
