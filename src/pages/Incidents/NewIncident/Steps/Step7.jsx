@@ -7,14 +7,28 @@ import { useNavigate } from "react-router-dom";
 import AuthService from "../../../../services/Auth/Auth.Service";
 
 const Step7 = ({ store, handlerStore }) => {
-  const [currentUser, setcurrentUser] = useState(AuthService.getCurrentUser());
-
+  const [currentUser, setCurrentUser] = useState(AuthService.getCurrentUser());
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
 
   const getMonthName = (monthNumber) => {
-    return ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'][monthNumber]
-  }
+    return [
+      "Enero",
+      "Febrero",
+      "Marzo",
+      "Abril",
+      "Mayo",
+      "Junio",
+      "Julio",
+      "Agosto",
+      "Septiembre",
+      "Octubre",
+      "Noviembre",
+      "Diciembre",
+    ][monthNumber];
+  };
+
+  //const getBiAnsewer
 
   const onSubmit = (data) => {
     handlerStore({
@@ -101,41 +115,85 @@ const Step7 = ({ store, handlerStore }) => {
       <div className="my-4">
         <h1 className="flex flex-row justify-between border border-slate-300 text-lg text-gray-800 font-semibold py-2 px-4 mb-2">
           <span>III. DATOS DE LAS VICTIMAS.</span>
-          <span className="text-base">Número Total de personas Afectadas:</span>
+          <span className="text-base">
+            Número total de personas afectadas: {store?.step6?.values?.length}
+          </span>
         </h1>
-        <ul className="flex flex-row flex-wrap justify-between px-5">
-          <li className="py-1">Nombre Completo:</li>
-          <li className="py-1">Edad:</li>
-        </ul>
-        <ul className="flex flex-row flex-wrap justify-between px-5">
-          <li className="py-1">Tipo de Documento de Identidad:</li>
-          <li className="py-1">N° de Documento:</li>
-          <li className="py-1">Sabe Leer y Escribir:</li>
-        </ul>
-        <ul className="flex flex-row flex-wrap justify-between px-5">
-          <li className="py-1">Sexo: Hombre Mujer</li>
-          <li className="py-1">Orientación Sexual/Identidad de Género:</li>
-        </ul>
-        <ul className="flex flex-row flex-wrap justify-between px-5">
-          <li className="py-1">Grado Académico:</li>
-          <li className="py-1">Profesión u Oficio:</li>
-        </ul>
-        <ul className="flex flex-row flex-wrap justify-between px-5">
-          <li className="py-1">
-            Padece de alguna Discapacidad Física: No{" "}
-            <BsSquare className="inline-flex text-sm" /> SI{" "}
-            <BsCheckSquare className="inline-flex text-sm" />
-          </li>
-          <li className="py-1">Tipo de Discapacidad:</li>
-        </ul>
-        <ul className="flex flex-row flex-wrap justify-between px-5">
-          <li className="py-1">
-            Padece de Alguna Enfermedad Crónica: No{" "}
-            <BsSquare className="inline-flex text-sm" /> SI{" "}
-            <BsCheckSquare className="inline-flex text-sm" />
-          </li>
-          <li className="py-1">Medicamento Recetado:</li>
-        </ul>
+        <div className="divide-y divide-dashed divide-slate-300">
+          {store?.step6?.values.map(
+            (
+              {
+                name,
+                last_name,
+                age,
+                type_dui,
+                dui,
+                illiterate,
+                gender,
+                gender_identity,
+                academic_grade,
+                profession,
+              },
+              index
+            ) => {
+              return (
+                <div className="py-4" key={index}>
+                  <ul className="flex flex-row flex-wrap justify-between px-5">
+                    <li className="py-1">{`Nombre Completo: ${name} ${last_name}`}</li>
+                    <li className="py-1">{`Edad: ${age}`}</li>
+                  </ul>
+                  <ul className="flex flex-row flex-wrap justify-between px-5">
+                    <li className="py-1">{`${type_dui}: ${dui}`}</li>
+                    <li className="py-1">{`Sabe Leer y Escribir: ${
+                      illiterate ? `Si ` : "No"
+                    }`}</li>
+                  </ul>
+                  <ul className="flex flex-row flex-wrap justify-between px-5">
+                    <li className="py-1">{`Sexo: ${
+                      gender ? "Hombre" : "Mujer"
+                    }`}</li>
+                    <li className="py-1">
+                      {`
+                    Orientación Sexual/Identidad de Género: ${gender_identity}`}
+                    </li>
+                  </ul>
+                  <ul className="flex flex-row flex-wrap justify-between px-5">
+                    <li className="py-1">
+                      {`
+                    Grado Académico: ${academic_grade}`}
+                    </li>
+                    <li className="py-1">
+                      {`
+                    Profesión u Oficio: ${profession}`}
+                    </li>
+                  </ul>
+                  <ul className="flex flex-row flex-wrap justify-between px-5">
+                    <li className="py-1">
+                      Padece de alguna Discapacidad Física: No{" "}
+                      <BsSquare className="inline-flex text-sm" /> SI{" "}
+                      <BsCheckSquare className="inline-flex text-sm" />
+                    </li>
+                    <li className="py-1">
+                      {`
+                    Tipo de Discapacidad: ${academic_grade}`}
+                    </li>
+                  </ul>
+                  <ul className="flex flex-row flex-wrap justify-between px-5">
+                    <li className="py-1">
+                      Padece de Alguna Enfermedad Crónica: No{" "}
+                      <BsSquare className="inline-flex text-sm" /> SI{" "}
+                      <BsCheckSquare className="inline-flex text-sm" />
+                    </li>
+                    <li className="py-1">
+                      {`
+                    Medicamento Recetado: ${academic_grade}`}
+                    </li>
+                  </ul>
+                </div>
+              );
+            }
+          )}
+        </div>
       </div>
       <div className="my-4">
         <h1 className="flex flex-row justify-between border border-slate-300 text-lg text-gray-800 font-semibold py-2 px-4 mb-2">
@@ -270,14 +328,15 @@ const Step7 = ({ store, handlerStore }) => {
         </h1>
         <div className="flex flex-row flex-wrap justify-between px-5">
           <p className="text-base text-justify">
-            Yo <b>{`${currentUser.name} ${currentUser.last_name}`}</b>, doy fe que la
-            informacion plasmada en la ficha actual y elaborada por mi persona
-            ha sido recopilada de viva voz por la persona que ha venido en
-            calidad de victima directa o conocido de la misma a declarar los
+            Yo <b>{`${currentUser.name} ${currentUser.last_name}`}</b>, doy fe
+            que la informacion plasmada en la ficha actual y elaborada por mi
+            persona ha sido recopilada de viva voz por la persona que ha venido
+            en calidad de victima directa o conocido de la misma a declarar los
             hechos anteriormente descritos a mi persona, a las{" "}
             {new Date().getHours()} horas con {new Date().getMinutes()} minutos
-            del dia {new Date().getDate()} del mes de {getMonthName(new Date().getMonth())}{" "}
-            del año {new Date().getFullYear()}.
+            del dia {new Date().getDate()} del mes de{" "}
+            {getMonthName(new Date().getMonth())} del año{" "}
+            {new Date().getFullYear()}.
           </p>
         </div>
         <form
@@ -289,7 +348,11 @@ const Step7 = ({ store, handlerStore }) => {
             {...register("id_creater_user")}
             value={currentUser?.id_user}
           />
-          <input className="cursor-pointer font-bold text-gray-800" type="submit" value={"Acepto el acuerdo"} />
+          <input
+            className="cursor-pointer font-bold text-gray-800"
+            type="submit"
+            value={"Acepto el acuerdo"}
+          />
         </form>
       </div>
     </div>
