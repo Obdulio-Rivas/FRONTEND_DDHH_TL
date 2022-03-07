@@ -24,6 +24,7 @@ const Step1 = ({ handlerStore }) => {
     });
     navigate("/incident/step2");
   };
+  
   return (
     <div className=" mx-auto max-w-9xl lg:px-24">
       <div className="flex flex-wrap flex-col lg:w-5/5 mt-4">
@@ -39,48 +40,49 @@ const Step1 = ({ handlerStore }) => {
             <h1 className="border border-slate-300 text-lg text-gray-800 font-semibold text-left py-2 px-4 mb-2">
               I. DATOS DE REGISTRO INSTITUCIONAL.
             </h1>
-            <div className="flex flex-row flex-wrap w-4/5 mx-auto">
-            <div key="expediente" className="sm:w-1/2 lg:1/2 px-3 mb-6 md:mb-0">
-                  <label htmlFor="expediente" className="uppercase tracking-wide text-black text-xs font-bold mb-2">
-                    Expediente:
-                  </label>
-                  <input className="w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3"
-                    {...register("expediente", { required:"El expediente es requerido" })} type="text" id="expediente"/>
-                  <div>
-                    {errors["expediente"] && (
-                      <span className="text-red-500 text-xs italic">
-                        {errors["expediente"].message}
-                      </span>)}
-                </div>
+            <div className="-mx-3 md:flex mb-6">
+              <div key="expediente" className="md:w-2/5 px-3 mb-6 md:mb-0">
+                    <label htmlFor="expediente" className="uppercase tracking-wide text-black text-xs font-bold mb-2">
+                      Expediente:
+                    </label>
+                    <input className="w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3"
+                      {...register("expediente", { required:"El expediente es requerido" })} type="text" id="expediente"/>
+                    <div>
+                      {errors["expediente"] && (
+                        <span className="text-red-500 text-xs italic">
+                          {errors["expediente"].message}
+                        </span>)}
+                  </div>
+              </div>
+              <div key="incident_date" className="md:w-2/5 px-3 mb-6 md:mb-0">
+                    <label htmlFor="incident_date" className="uppercase tracking-wide text-black text-xs font-bold mb-2">
+                      Fecha:
+                    </label>
+                    <input className="w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3"
+                      {...register("incident_date", { required:"La fecha es requerida"})} type="date" id="incident_date"/>
+                    <div>
+                      {errors["incident_date"] && (
+                        <span className="text-red-500 text-xs italic">
+                          {errors["incident_date"].message}
+                        </span>)}
+                  </div>
+              </div>
+              <div key="hour" className="md:w-1/5 px-3 mb-6 md:mb-0">
+                    <label htmlFor="hour" className="uppercase tracking-wide text-black text-xs font-bold mb-2">
+                      Hora:
+                    </label>
+                    <input className="w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3"
+                      {...register("hour", { required:"La hora es requerida"})} type="text" id="hour"/>
+                    <div>
+                      {errors["hour"] && (
+                        <span className="text-red-500 text-xs italic">
+                          {errors["hour"].message}
+                        </span>)}
+                  </div>
+              </div>
             </div>
-            <div key="incident_date" className="sm:w-1/2 lg:1/2 px-3 mb-6 md:mb-0">
-                  <label htmlFor="incident_date" className="uppercase tracking-wide text-black text-xs font-bold mb-2">
-                    Fecha:
-                  </label>
-                  <input className="w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3"
-                    {...register("incident_date", { required:"La fecha es requerida"})} type="date" id="incident_date"/>
-                  <div>
-                    {errors["incident_date"] && (
-                      <span className="text-red-500 text-xs italic">
-                        {errors["incident_date"].message}
-                      </span>)}
-                </div>
-            </div>
-            <div key="hour" className="sm:w-1/2 lg:1/2 px-3 mb-6 md:mb-0">
-                  <label htmlFor="hour" className="uppercase tracking-wide text-black text-xs font-bold mb-2">
-                    Hora:
-                  </label>
-                  <input className="w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3"
-                    {...register("hour", { required:"La hora es requerida"})} type="text" id="hour"/>
-                  <div>
-                    {errors["hour"] && (
-                      <span className="text-red-500 text-xs italic">
-                        {errors["hour"].message}
-                      </span>)}
-                </div>
-            </div>
-  
-            <div key="incident_institution" className="sm:w-1/2 lg:1/2 px-3 mb-6 md:mb-0">
+            <div className="-mx-3 md:flex mb-6">
+            <div key="incident_institution" className="md:w-2/5 px-3 mb-6 md:mb-0">
                   <label htmlFor="incident_institution" className="uppercase tracking-wide text-black text-xs font-bold mb-2">
                     ¿Conoce alguna institucion de ayuda?
                   </label>
@@ -117,7 +119,7 @@ const Step1 = ({ handlerStore }) => {
             </div>
 
             {useWatch==1 &&( <>
-              <div key="incident_institution_name" className="sm:w-1/2 lg:1/2 px-3 mb-6 md:mb-0">
+              <div key="incident_institution_name" className="md:w-2/5 px-3 mb-6 md:mb-0">
                   <label htmlFor="incident_institution_name" className="uppercase tracking-wide text-black text-xs font-bold mb-2">
                   ¿Cuál?
                   </label>
@@ -132,7 +134,7 @@ const Step1 = ({ handlerStore }) => {
             </div>
             </>)}
 
-            <div key="name_reference" className="sm:w-1/2 lg:1/2 px-3 mb-6 md:mb-0">
+            <div key="name_reference" className="md:w-3/5 px-3 mb-6 md:mb-0">
                   <label htmlFor="name_reference" className="uppercase tracking-wide text-black text-xs font-bold mb-2">
                   Nombre de quien Refiere:
                   </label>
@@ -145,8 +147,9 @@ const Step1 = ({ handlerStore }) => {
                       </span>)}
                 </div>
             </div>
-
-            <div key="contact" className="sm:w-1/2 lg:1/2 px-3 mb-6 md:mb-0">
+            </div>
+            <div className="-mx-3 md:flex mb-6">
+            <div key="contact" className="md:w-2/5 px-3 mb-6 md:mb-0">
                   <label htmlFor="contact" className="uppercase tracking-wide text-black text-xs font-bold mb-2">
                   Contacto:
                   </label>
@@ -160,7 +163,7 @@ const Step1 = ({ handlerStore }) => {
                 </div>
             </div>
 
-            <div key="incident_identification" className="sm:w-1/2 lg:1/2 px-3 mb-6 md:mb-0">
+            <div key="incident_identification" className="md:w-3/5 px-3 mb-6 md:mb-0">
                   <label htmlFor="incident_identification" className="uppercase tracking-wide text-black text-xs font-bold mb-2">
                   Identificación del Caso:
                   </label>
@@ -173,6 +176,7 @@ const Step1 = ({ handlerStore }) => {
                       </span>)}
                 </div>
             </div>
+            </div>
             <div key="Button" className="w-full flex justify-end mt-4">
               <div className="md:w-auto px-3">
                 <button className="w-full bg-green-500 text-white font-bold py-2 px-6 rounded-md hover:bg-green-600 uppercase">
@@ -180,7 +184,6 @@ const Step1 = ({ handlerStore }) => {
                 </button>
               </div>
             </div>
-          </div>
       </div>
   </div>
     </form>

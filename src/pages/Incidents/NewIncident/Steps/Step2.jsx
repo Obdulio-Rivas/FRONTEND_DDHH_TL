@@ -15,7 +15,6 @@ const Step2 = ({ handlerStore }) => {
     {
       console.log(name)
     }
-
   }
 
   const onSubmit = (data) => {
