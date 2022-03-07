@@ -44,8 +44,8 @@ const Step2 = ({ handlerStore }) => {
             <h1 className="border border-slate-300 text-lg text-gray-800 font-semibold text-left py-2 px-4 mb-2">
             IV. PERFIL ESPECIFICO DE LOS HECHOS.
             </h1>
-            <div className="flex flex-row flex-wrap w-4/5 mx-auto">
-            <div key="date_hechos" className="sm:w-1/2 lg:1/2 px-3 mb-6 md:mb-0">
+            <div className="-mx-3 md:flex mb-6">
+            <div key="date_hechos" className="md:w-2/5 px-3 mb-6 md:mb-0">
                   <label htmlFor="date_hechos" className="uppercase tracking-wide text-black text-xs font-bold mb-2">
                   Fecha en que Ocurrieron los Hechos:
                   </label>
@@ -58,7 +58,7 @@ const Step2 = ({ handlerStore }) => {
                       </span>)}
                 </div>
             </div>
-            <div key="adress" className="sm:w-1/2 lg:1/2 px-3 mb-6 md:mb-0">
+            <div key="adress" className="md:w-3/5 px-3 mb-6 md:mb-0">
                   <label htmlFor="adress" className="uppercase tracking-wide text-black text-xs font-bold mb-2">
                     Direccion:
                   </label>
@@ -71,7 +71,9 @@ const Step2 = ({ handlerStore }) => {
                       </span>)}
                 </div>
             </div>
-            <div key="deparment" className="sm:w-1/2 lg:1/2 px-3 mb-6 md:mb-0">
+            </div>
+            <div className="-mx-3 md:flex mb-6">
+            <div key="deparment" className="md:w-2/4 px-3 mb-6 md:mb-0">
                   <label htmlFor="deparment" className="uppercase tracking-wide text-black text-xs font-bold mb-2">
                     Departamento:
                   </label>
@@ -94,7 +96,7 @@ const Step2 = ({ handlerStore }) => {
                       </span>)}
                 </div>
             </div>
-            <div key="municipality" className="sm:w-1/2 lg:1/2 px-3 mb-6 md:mb-0">
+            <div key="municipality" className="md:w-2/4 px-3 mb-6 md:mb-0">
                   <label htmlFor="municipality" className="uppercase tracking-wide text-black text-xs font-bold mb-2">
                     Municipalidad:
                   </label>
@@ -116,6 +118,7 @@ const Step2 = ({ handlerStore }) => {
                         {errors["municipality"].message}
                       </span>)}
                 </div>
+            </div>
             </div>
               <div key="cause_displacement" className="sm:w-full md:w-1/2 lg:1/3 px-3 mb-6 md:mb-0">
                 <label  className="uppercase tracking-wide text-black text-xs font-bold mb-2">
@@ -517,7 +520,6 @@ const Step2 = ({ handlerStore }) => {
                 </button>
               </div>
             </div>
-          </div>
       </div>
   </div>
     </form>
