@@ -103,8 +103,8 @@ const Step3 = ({handlerStore}) => {
                   <label htmlFor="monthly_income" className="uppercase tracking-wide text-black text-xs font-bold mb-2">
                   Ingresos Mensuales del grupo familiar:
                   </label>
-                  <input className="w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3"
-                    {...register("monthly_income", { required:"El monto mensual es requerida"})} type="number" id="monthly_income"/>
+                  <input className="block w-full m-auto p-2 border-2 rounded-md mt-0.5 focus:outline-gray-400 focus:shadow-outline"
+                    {...register("monthly_income", { required:"El monto mensual es requerida"})} type="number" id="monthly_income" placeholder="Ingresos mensuales..."/>
                   <div>
                     {errors["monthly_income"] && (
                       <span className="text-red-500 text-xs italic">
@@ -116,8 +116,8 @@ const Step3 = ({handlerStore}) => {
                   <label htmlFor="familiar_income" className="uppercase tracking-wide text-black text-xs font-bold mb-2">
                   Ingreso actual del grupo familiar:
                   </label>
-                  <input className="w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3"
-                    {...register("familiar_income", { required:"El monto mensual es requerida"})} type="number" id="familiar_income"/>
+                  <input className="block w-full m-auto p-2 border-2 rounded-md mt-0.5 focus:outline-gray-400 focus:shadow-outline"
+                    {...register("familiar_income", { required:"El monto mensual es requerida"})} type="number" id="familiar_income" placeholder="Ingresos actuales..."/>
                   <div>
                     {errors["familiar_income"] && (
                       <span className="text-red-500 text-xs italic">

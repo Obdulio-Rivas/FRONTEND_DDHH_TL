@@ -49,7 +49,7 @@ const Step2 = ({ handlerStore }) => {
                   <label htmlFor="date_hechos" className="uppercase tracking-wide text-black text-xs font-bold mb-2">
                   Fecha en que Ocurrieron los Hechos:
                   </label>
-                  <input className="w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3"
+                  <input className="block w-full m-auto p-2 border-2 rounded-md mt-0.5 focus:outline-gray-400 focus:shadow-outline"
                     {...register("date_hechos", { required:"El expediente es requerido" })} type="date" id="date_hechos"/>
                   <div>
                     {errors["date_hechos"] && (
@@ -62,8 +62,8 @@ const Step2 = ({ handlerStore }) => {
                   <label htmlFor="adress" className="uppercase tracking-wide text-black text-xs font-bold mb-2">
                     Direccion:
                   </label>
-                  <input className="w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3"
-                    {...register("adress", { required:"La fecha es requerida"})} type="text" id="adress"/>
+                  <input className="block w-full m-auto p-2 border-2 rounded-md mt-0.5 focus:outline-gray-400 focus:shadow-outline"
+                    {...register("adress", { required:"La fecha es requerida"})} type="text" id="adress" placeholder="Direccion"/>
                   <div>
                     {errors["adress"] && (
                       <span className="text-red-500 text-xs italic">
@@ -74,14 +74,14 @@ const Step2 = ({ handlerStore }) => {
             </div>
             <div className="-mx-3 md:flex mb-6">
             <div key="deparment" className="md:w-2/4 px-3 mb-6 md:mb-0">
-                  <label htmlFor="deparment" className="uppercase tracking-wide text-black text-xs font-bold mb-2">
+                  <label htmlFor="deparment" className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2">
                     Departamento:
                   </label>
                   <select
                   {...register("deparment", { required:"debe seleccionar uno"})}
                   defaultValue="DEFAULT"
                   name="deparment"
-                  className="w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3"
+                  className="block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded"
                   id="deparment"
                 >
                   <option key="San salvador" value="San salvador" className="py-3">San salvador</option>
@@ -104,7 +104,7 @@ const Step2 = ({ handlerStore }) => {
                   {...register("municipality", { required:"debe seleccionar uno"})}
                   defaultValue="DEFAULT"
                   name="municipality"
-                  className="w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3"
+                  className="block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded"
                   id="municipality"
                 >
                   <option key="San salvador" value="San salvador" className="py-3">San salvador</option>
@@ -120,7 +120,8 @@ const Step2 = ({ handlerStore }) => {
                 </div>
             </div>
             </div>
-              <div key="cause_displacement" className="sm:w-full md:w-1/2 lg:1/3 px-3 mb-6 md:mb-0">
+            <div className="-mx-3 md:flex mb-6">
+              <div key="cause_displacement" className="md:w-2/4 px-3 mb-6 md:mb-0">
                 <label  className="uppercase tracking-wide text-black text-xs font-bold mb-2">
                 Causa del desplazamiento
                  <label
@@ -128,7 +129,6 @@ const Step2 = ({ handlerStore }) => {
                     className="uppercase tracking-wide text-black text-xs font-bold mb-2"
                     >
                       <br></br>
-                      1.Amenaza
                       <input
                       className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
                       type="checkbox"
@@ -137,14 +137,13 @@ const Step2 = ({ handlerStore }) => {
                       value="Amenanza"
                       {...register("cause_displacement")}
                     />
-                    
+                    1.Amenaza
                   </label>
                   <br></br>
                   <label
                     htmlFor="cause_displacement"
                     className="uppercase tracking-wide text-black text-xs font-bold mb-2"
                     >
-                       2.Homicidio
                       <input
                       className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
                       type="checkbox"
@@ -153,13 +152,13 @@ const Step2 = ({ handlerStore }) => {
                       value="Amenanza"
                       {...register("cause_displacement")}
                     />
+                    2.Homicidio
                   </label>
                   <br></br>
                   <label
                     htmlFor="cause_displacement"
                     className="uppercase tracking-wide text-black text-xs font-bold mb-2"
                     >
-                      3.Extorsión
                       <input
                       className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
                       type="checkbox"
@@ -168,13 +167,13 @@ const Step2 = ({ handlerStore }) => {
                       value=" Extorsión"
                       {...register("cause_displacement")}
                     />
+                    3.Extorsión
                   </label>
                   <br></br>
                   <label
                     htmlFor="cause_displacement"
                     className="uppercase tracking-wide text-black text-xs font-bold mb-2"
                     >
-                      4.Desaparición de un Miembro de la Familia
                       <input
                       className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
                       type="checkbox"
@@ -183,13 +182,13 @@ const Step2 = ({ handlerStore }) => {
                       value="Desaparición de un Miembro de la Familia"
                       {...register("cause_displacement")}
                     />
+                    4.Desaparición de un Miembro de la Familia
                   </label>
                   <br></br>
                   <label
                     htmlFor="cause_displacement"
                     className="uppercase tracking-wide text-black text-xs font-bold mb-2"
                     >
-                      5.Reclutamiento Forzoso
                       <input
                       className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
                       type="checkbox"
@@ -198,13 +197,13 @@ const Step2 = ({ handlerStore }) => {
                       value="Reclutamiento Forzoso"
                       {...register("cause_displacement")}
                     />
+                    5.Reclutamiento Forzoso
                   </label>
                   <br></br>
                   <label
                     htmlFor="cause_displacement"
                     className="uppercase tracking-wide text-black text-xs font-bold mb-2"
                     >
-                      6.Testigo de un hecho Delictivo
                       <input
                       className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
                       type="checkbox"
@@ -213,13 +212,13 @@ const Step2 = ({ handlerStore }) => {
                       value="Testigo de un hecho Delictivo"
                       {...register("cause_displacement")}
                     />
+                    6.Testigo de un hecho Delictivo
                   </label>
                   <br></br>
                   <label
                     htmlFor="cause_displacement"
                     className="uppercase tracking-wide text-black text-xs font-bold mb-2"
                     >
-                      7.Agresión Física
                       <input
                       className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
                       type="checkbox"
@@ -228,16 +227,17 @@ const Step2 = ({ handlerStore }) => {
                       value="Agresión Física"
                       {...register("cause_displacement")}
                     />
+                     7.Agresión Física
                   </label>
                 </label>
               </div>
-              <div key="people_displacement" className="sm:w-full md:w-1/2 lg:1/3 px-3 mb-6 md:mb-0">
+              <div key="people_displacement" className="md:w-2/4 px-3 mb-6 md:mb-0">
                 <label  className="uppercase tracking-wide text-black text-xs font-bold mb-2">
                 Personas o grupos que generaron el desplazamiento:
+                <br></br>
                  <label
                     htmlFor="people_displacement"
-                    className="uppercase tracking-wide text-black text-xs font-bold mb-2"
-                    >
+                    className="uppercase tracking-wide text-black text-xs font-bold mb-2">
                       <input
                       className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
                       type="checkbox"
@@ -340,7 +340,9 @@ const Step2 = ({ handlerStore }) => {
                   </label>
                 </label>
               </div>
-              <div key="institutions_accompanied" className="sm:w-full md:w-1/2 lg:1/3 px-3 mb-6 md:mb-0">
+              </div>
+              <div className="-mx-3 md:flex mb-6">
+              <div key="institutions_accompanied" className="md:w-2/5 px-3 mb-6 md:mb-0">
                 <label  className="uppercase tracking-wide text-black text-xs font-bold mb-2">
                 ¿Cuáles instituciones han acompañado?
                 <label
@@ -450,7 +452,7 @@ const Step2 = ({ handlerStore }) => {
                   </label>
                 </label>
               </div>
-            <div key="statal_institution" className="sm:w-1/2 lg:1/2 px-3 mb-6 md:mb-0">
+            <div key="statal_institution" className="md:w-2/5 px-3 mb-6 md:mb-0">
                   <label htmlFor="statal_institution" className="uppercase tracking-wide text-black text-xs font-bold mb-2">
                   ¿Interpuso denuncia en alguna instancia estatal?
                   </label>
@@ -485,11 +487,11 @@ const Step2 = ({ handlerStore }) => {
                   </label>
             </div>
             {useWatch==1 && (<>
-              <div key="statal_institution_name" className="sm:w-1/2 lg:1/2 px-3 mb-6 md:mb-0">
+              <div key="statal_institution_name" className="md:w-2/5 px-3 mb-6 md:mb-0">
                   <label htmlFor="statal_institution_name" className="uppercase tracking-wide text-black text-xs font-bold mb-2">
                     Nombre de la institucion estatal:
                   </label>
-                  <input className="w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3"
+                  <input className="block w-full m-auto p-2 border-2 rounded-md mt-0.5 focus:outline-gray-400 focus:shadow-outline"
                     {...register("statal_institution_name")} type="text" id="statal_institution_name"/>
                   <div>
                     {errors["statal_institution_name"] && (
@@ -500,11 +502,12 @@ const Step2 = ({ handlerStore }) => {
             </div>
             </>
             )}
+            </div>
             <div key="accompanied_descriptions" className="sm:w-1/2 lg:1/2 px-3 mb-6 md:mb-0">
                   <label htmlFor="accompanied_descriptions" className="uppercase tracking-wide text-black text-xs font-bold mb-2">
                     Descripcion del acompañamiento brindado:
                   </label>
-                  <input className="w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3"
+                  <input className="block w-full m-auto p-2 border-2 rounded-md mt-0.5 focus:outline-gray-400 focus:shadow-outline"
                     {...register("accompanied_descriptions")} type="text" id="accompanied_descriptions"/>
                   <div>
                     {errors["accompanied_descriptions"] && (

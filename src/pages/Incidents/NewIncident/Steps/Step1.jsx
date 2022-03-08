@@ -45,8 +45,8 @@ const Step1 = ({ handlerStore }) => {
                     <label htmlFor="expediente" className="uppercase tracking-wide text-black text-xs font-bold mb-2">
                       Expediente:
                     </label>
-                    <input className="w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3"
-                      {...register("expediente", { required:"El expediente es requerido" })} type="text" id="expediente"/>
+                    <input className="block w-full m-auto p-2 border-2 rounded-md mt-0.5 focus:outline-gray-400 focus:shadow-outline"
+                      {...register("expediente", { required:"El expediente es requerido" })} type="text" id="expediente" placeholder="Expediente"/>
                     <div>
                       {errors["expediente"] && (
                         <span className="text-red-500 text-xs italic">
@@ -58,7 +58,7 @@ const Step1 = ({ handlerStore }) => {
                     <label htmlFor="incident_date" className="uppercase tracking-wide text-black text-xs font-bold mb-2">
                       Fecha:
                     </label>
-                    <input className="w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3"
+                    <input className="block w-full m-auto p-2 border-2 rounded-md mt-0.5 focus:outline-gray-400 focus:shadow-outline"
                       {...register("incident_date", { required:"La fecha es requerida"})} type="date" id="incident_date"/>
                     <div>
                       {errors["incident_date"] && (
@@ -71,7 +71,7 @@ const Step1 = ({ handlerStore }) => {
                     <label htmlFor="hour" className="uppercase tracking-wide text-black text-xs font-bold mb-2">
                       Hora:
                     </label>
-                    <input className="w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3"
+                    <input className="block w-full m-auto p-2 border-2 rounded-md mt-0.5 focus:outline-gray-400 focus:shadow-outline"
                       {...register("hour", { required:"La hora es requerida"})} type="text" id="hour"/>
                     <div>
                       {errors["hour"] && (
@@ -123,8 +123,8 @@ const Step1 = ({ handlerStore }) => {
                   <label htmlFor="incident_institution_name" className="uppercase tracking-wide text-black text-xs font-bold mb-2">
                   ¿Cuál?
                   </label>
-                  <input className="w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3"
-                    {...register("incident_institution_name", { required:"El nombre de la institucion es requerida"})} type="text" id="incident_institution_name"/>
+                  <input className="block w-full m-auto p-2 border-2 rounded-md mt-0.5 focus:outline-gray-400 focus:shadow-outline"
+                    {...register("incident_institution_name", { required:"El nombre de la institucion es requerida"})} type="text" id="incident_institution_name" placeholder="Institucion"/>
                   <div>
                     {errors["incident_institution_name"] && (
                       <span className="text-red-500 text-xs italic">
@@ -138,8 +138,8 @@ const Step1 = ({ handlerStore }) => {
                   <label htmlFor="name_reference" className="uppercase tracking-wide text-black text-xs font-bold mb-2">
                   Nombre de quien Refiere:
                   </label>
-                  <input className="w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3"
-                    {...register("name_reference", { required:"El nombre de referencia es requerida"})} type="text" id="name_reference"/>
+                  <input className="block w-full m-auto p-2 border-2 rounded-md mt-0.5 focus:outline-gray-400 focus:shadow-outline"
+                    {...register("name_reference", { required:"El nombre de referencia es requerida"})} type="text" id="name_reference" placeholder="Nombre a quien refiere"/>
                   <div>
                     {errors["name_reference"] && (
                       <span className="text-red-500 text-xs italic">
@@ -153,8 +153,8 @@ const Step1 = ({ handlerStore }) => {
                   <label htmlFor="contact" className="uppercase tracking-wide text-black text-xs font-bold mb-2">
                   Contacto:
                   </label>
-                  <input className="w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3"
-                    {...register("contact", { required:"El contacto es requerida"})} type="number" id="contact"/>
+                  <input className="block w-full m-auto p-2 border-2 rounded-md mt-0.5 focus:outline-gray-400 focus:shadow-outline"
+                    {...register("contact", { required:"El contacto es requerida"})} type="number" id="contact"placeholder="Contacto"/>
                   <div>
                     {errors["contact"] && (
                       <span className="text-red-500 text-xs italic">
@@ -167,7 +167,7 @@ const Step1 = ({ handlerStore }) => {
                   <label htmlFor="incident_identification" className="uppercase tracking-wide text-black text-xs font-bold mb-2">
                   Identificación del Caso:
                   </label>
-                  <input className="w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3"
+                  <input className="block w-full m-auto p-2 border-2 rounded-md mt-0.5 focus:outline-gray-400 focus:shadow-outline"
                     {...register("incident_identification", { required:"La identificacion del incidente es requerida"})} type="number" id="incident_identification"/>
                   <div>
                     {errors["incident_identification"] && (

@@ -72,8 +72,8 @@ const Step4 = ({handlerStore}) => {
                   <label htmlFor="country_leave_name" className="uppercase tracking-wide text-black text-xs font-bold mb-2">
                   ¿A qué país?
                   </label>
-                  <input className="w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3"
-                    {...register("country_leave_name")} type="text" id="country_leave_name"/>
+                  <input className="block w-full m-auto p-2 border-2 rounded-md mt-0.5 focus:outline-gray-400 focus:shadow-outline"
+                    {...register("country_leave_name")} type="text" id="country_leave_name" placeholder="País"/>
                   <div>
                     {errors["country_leave_name"] && (
                       <span className="text-red-500 text-xs italic">
@@ -86,8 +86,8 @@ const Step4 = ({handlerStore}) => {
                   <label htmlFor="family_cant" className="uppercase tracking-wide text-black text-xs font-bold mb-2">
                   ¿Cuántas personas de su grupo familiar?
                   </label>
-                  <input className="w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3"
-                    {...register("family_cant")} type="number" id="family_cant"/>
+                  <input className="block w-full m-auto p-2 border-2 rounded-md mt-0.5 focus:outline-gray-400 focus:shadow-outline"
+                    {...register("family_cant")} type="number" id="family_cant" placeholder="Cantidad de personas del grupo familiar"/>
                   <div>
                     {errors["family_cant"] && (
                       <span className="text-red-500 text-xs italic">
