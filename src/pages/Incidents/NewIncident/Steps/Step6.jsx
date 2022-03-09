@@ -31,6 +31,7 @@ const Step6 = ({ handlerStore }) => {
       toast.success("El usuario a sido agregado correctamente.", {
         position: "bottom-center",
       });
+      return;
     }
 
     for (let i = 0; i < victims.length; i++) {
