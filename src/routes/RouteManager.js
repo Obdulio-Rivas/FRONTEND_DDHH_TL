@@ -1,17 +1,16 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Generic from "../components/Generic/Generic";
 import Home from "../components/Home/Home";
 import Login from "../components/Login/Login";
 import UserRoutes from "./User/UserRoutes";
 import PrivateRoute from "./PrivateRoute";
-import VictimRoutes from "./Victim/VictimRoutes";
 import FilesRoutes from "./Files/FilesRoutes";
 import Profile from "../pages/Profile/Profile";
 import About from "../pages/About/About";
 import NewIncident from "../pages/Incidents/NewIncident/NewIncident";
 import IncidentRoutes from "./Incident/IncidentRoutes";
 import Page404 from "../pages/Page404/Page404";
+import ViewRoutes from "./Views/ViewRoutes";
 
 const RouteManager = () => {
 
@@ -39,13 +38,6 @@ const RouteManager = () => {
           />
           <Route
             exact
-            path="/victim/*"
-            element={
-              <PrivateRoute forRoles={[0,2]} children={<VictimRoutes/>} />
-            }
-          />
-          <Route
-            exact
             path="/files/*"
             element={
               <PrivateRoute forRoles={[0]} children={<FilesRoutes/>} />
@@ -56,6 +48,13 @@ const RouteManager = () => {
             path="/incident/*"
             element={
               <PrivateRoute forRoles={[0]} children={<IncidentRoutes/>} />
+            }
+          />
+          <Route
+            exact
+            path="/view/*"
+            element={
+              <PrivateRoute forRoles={[0,1,2]} children={<ViewRoutes/>} />
             }
           />
           <Route

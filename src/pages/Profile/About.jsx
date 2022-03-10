@@ -6,12 +6,12 @@ const About = ({ user }) => {
   const { name, last_name, gender, phone, dui, nit, email, birth_date } = user;
 
   return (
-    <div className="bg-white p-3 border-gray-200 border-2 rounded-md">
-      <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8">
+    <div className="bg-white p-6 border-gray-200 border-2 rounded-md">
+      <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8 mb-2">
         <span clas="text-green-500">
-          <AiOutlineUser className="text-xl" />
+          <AiOutlineUser className="text-2xl" />
         </span>
-        <span className="tracking-wide">Informacion personal.</span>
+        <span className="tracking-wide text-xl">Informacion personal.</span>
       </div>
       <div className="text-gray-700">
         <div className="grid md:grid-cols-2 text-sm">

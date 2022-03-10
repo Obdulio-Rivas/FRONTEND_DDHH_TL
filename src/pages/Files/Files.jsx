@@ -3,22 +3,28 @@ import Navbar from "../../components/Navbar/Navbar";
 import Breadcrumb from "./Breadcrumb/Breadcrumb";
 import Content from "./Content/Content";
 import FirebaseService from "../../services/Firebase/Firebase.Service";
+import Dots from "../../components/Loaders/Dots";
 
 const Files = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const [content, setContent] = useState(null);
 
   useEffect(() => {
     async function getRootFiles() {
+      setIsLoading(true);
       const response = await FirebaseService.listFiles("/");
       setContent(response);
+      setIsLoading(false);
     }
     getRootFiles();
   }, []);
 
   const changeFolder = (value) => {
     async function getContentFolder(value) {
+      setIsLoading(true);
       const response = await FirebaseService.listFiles(value);
       setContent(response);
+      setIsLoading(false);
     }
     getContentFolder(value);
   };
@@ -27,11 +33,7 @@ const Files = () => {
     return (
       <>
         <Navbar />
-        <div className="container flex mx-auto my-16 p-5 h-full w-full justify-center">
-          <div className="md:flex no-wrap md:-mx-2 ">
-            <span>Cargando informacion de los archivos...</span>
-          </div>
-        </div>
+        <Dots />
       </>
     );
   }
@@ -43,7 +45,7 @@ const Files = () => {
         <div className="w-full md:w-12/12 mx-auto h-64">
           <Breadcrumb changeFolder={changeFolder} />
 
-          <Content content={content} changeFolder={changeFolder} />
+          <Content isLoading={isLoading} content={content} changeFolder={changeFolder} handlerLoading = {setIsLoading}/>
         </div>
       </div>
     </>

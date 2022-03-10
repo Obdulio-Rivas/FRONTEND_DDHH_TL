@@ -1,31 +1,107 @@
-import React from 'react';
-import { AiOutlineFolder } from "react-icons/ai";
+import React, { useEffect, useState } from "react";
+import { AiOutlineFileText, AiOutlineFolder } from "react-icons/ai";
+import { Link } from "react-router-dom";
+import Skeleton from "../../components/Loaders/Skeleton";
+import IncidentService from "../../services/Incident/Incident.Service";
 
-const Historical = ({user}) => {
-  return <div className="bg-white p-3 border-gray-200 border-2 rounded-md">
-    
-  <div className="grid grid-cols-2">
-      <div>
-          <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8 mb-2">
+const Historical = ({ user }) => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [incidents, setIncidents] = useState([]);
+
+  const getIncidentType = (id_type_incident) => {
+    return "Incidente de tipo x.";
+  };
+
+  useEffect(() => {
+    async function getIncidentsOfUser(id_user) {
+      const response = await IncidentService.getIncidentsByUser(id_user);
+      setIncidents(response.data);
+      setIsLoading(false);
+    }
+    getIncidentsOfUser(user.id_user);
+  }, []);
+
+  if (isLoading) {
+    return (
+      <div className="flex bg-white p-6 border-gray-200 border-2 rounded-md">
+        <div className="w-full">
+          <div>
+            <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8 mb-2">
               <span clas="text-green-500">
-                  <AiOutlineFolder className={"text-xl"} />
+                <AiOutlineFolder className={"text-2xl"} />
               </span>
-              <span className="tracking-wide">Ultimos Casos</span>
+              <span className="tracking-wide text-xl">Cargando contenido...</span>
+            </div>
+            <Skeleton elements={3}/>
           </div>
-          <ul className="list-inside space-y-2 px-4">
-              <li>
-                  <div className="text-teal-600">Creacion de caso "Violencia Familiar".</div>
-                  <div className="text-gray-500 text-xs">1/2/2022</div>
-              </li>
-              <li>
-                  <div className="text-teal-600">Creacion de caso "Maltrato familiar".</div>
-                  <div className="text-gray-500 text-xs">1/2/2022</div>
-              </li>
-          </ul>
+        </div>
       </div>
-  </div>
+    );
+  }
 
-</div>;
+  if (!incidents?.length) {
+    return (
+      <div className="bg-white p-6 border-gray-200 border-2 rounded-md">
+        <div className="w-full">
+          <div>
+            <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8 mb-2">
+              <span clas="text-green-500">
+                <AiOutlineFolder className={"text-2xl"} />
+              </span>
+              <span className="tracking-wide text-xl">Ultimos Casos</span>
+            </div>
+            <span>No se han encontrado casos para este usuario.</span>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="bg-white p-6 border-gray-200 border-2 rounded-md">
+      <div className="w-full">
+        <div>
+          <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8 mb-2">
+            <span clas="text-green-500">
+              <AiOutlineFolder className={"text-2xl"} />
+            </span>
+            <span className="tracking-wide text-xl">Ultimos Casos</span>
+          </div>
+          <ul className="list-inside space-y-2 px-4 divide-y divide-slate-300 divide-dashed">
+            {incidents.map(
+              (
+                { id_incident, id_type_incident, expediente, created_at },
+                index
+              ) => {
+                if (index === 5) {
+                  return null;
+                }
+
+                return (
+                  <li key={index} className="pt-4 pb-2">
+                    <div className="text-teal-600">
+                      <div className="flex flex-row items-center">
+                        <AiOutlineFileText className="mr-2 text-gray-700 text-xl" />
+                        <Link
+                          to={`/view/incident/${id_incident}`}
+                          className="font-semibold text-slate-700 text-lg"
+                        >{`${expediente} - ${getIncidentType(
+                          id_type_incident
+                        )}`}</Link>
+                      </div>
+                    </div>
+                    <div className="text-gray-500 text-md">
+                      {created_at.split("T")[0]}
+                    </div>
+                  </li>
+                );
+              }
+            )}
+          </ul>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default Historical;

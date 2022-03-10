@@ -13,6 +13,7 @@ import StatusPill from "../Table/StatusPill/StatusPill";
 import Pagination from "../Table/Pagination/Pagination";
 import Modal from "../Modal/Modal";
 import { Link } from "react-router-dom";
+import Dots from "../Loaders/Dots";
 
 const UsersList = () => {
   const [users, setUsers] = useState([]);
@@ -138,9 +139,7 @@ const UsersList = () => {
     return (
       <>
         <Navbar />
-        <div className="container flex flex-wrap flex-row px-6 py-2 mx-auto lg:space-x-4 justify-between">
-          <span>Estamos cargando el contenido...</span>
-        </div>
+        <Dots />
       </>
     );
   }

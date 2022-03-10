@@ -12,15 +12,20 @@ import img_jpg from "./icons/img_jpg.png";
 import img_mpeg from "./icons/img_mpeg.png";
 import img_docx from "./icons/img_docx.png";
 import img_binary from "./icons/img_binary.png";
+import Cubes from "../../../components/Loaders/Cubes";
 
-const Content = ({ content = [], changeFolder }) => {
+const Content = ({
+  content = [],
+  isLoading = true,
+  changeFolder,
+  handlerIsLoading = null,
+}) => {
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(0);
 
   const handlerChange = (e) => {
     const { value } = e.target;
     setSearch(value);
-    
   };
 
   const handlerClick = (value) => {
@@ -94,7 +99,7 @@ const Content = ({ content = [], changeFolder }) => {
                 src={getIconElement(type)}
                 alt="Icon element"
               />
-              <span
+              <div
                 className="capitalize text-base text-ellipsis overflow-hidden whitespace-nowrap"
                 style={{
                   white_space: "nowrap",
@@ -103,7 +108,7 @@ const Content = ({ content = [], changeFolder }) => {
                 }}
               >
                 {name}
-              </span>
+              </div>
             </div>
           </Link>
         );
@@ -122,7 +127,7 @@ const Content = ({ content = [], changeFolder }) => {
                 src={getIconElement(type)}
                 alt="Icon element"
               />
-              <span
+              <div
                 className="capitalize text-base text-ellipsis overflow-hidden whitespace-nowrap"
                 style={{
                   white_space: "nowrap",
@@ -131,7 +136,7 @@ const Content = ({ content = [], changeFolder }) => {
                 }}
               >
                 {name}
-              </span>
+              </div>
             </div>
           </div>
         );
@@ -152,22 +157,28 @@ const Content = ({ content = [], changeFolder }) => {
           onChange={handlerChange}
         />
         <ReactPaginate
-        className="flex flex-row "
-          previousLabel={<RiArrowLeftSLine/>}
-          nextLabel={<RiArrowRightSLine/>}
+          className={`flex flex-row text-slate-500 font-medium justify-between items-center text-xl ${(pageCount === 0) ? 'hidden': null}`}
+          previousLabel={<RiArrowLeftSLine  className="text-3xl"/>}
+          nextLabel={<RiArrowRightSLine className="text-3xl"/>}
           pageCount={pageCount}
           onPageChange={handlePageClick}
-          containerClassName={"pagination"}
-          disabledClassName={"pagination__link--disabled"}
-          activeClassName={"pagination__link--active"}
+          containerClassName={"flex flex-row justify-between items-center"}
+          disabledClassName={"text-slate-600 cursor-not-allowed"}
+          activeClassName={"text-slate-800 font-bold"}
         />
       </div>
-      <div
-        className={
-          "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8 mt-4 pb-10"
-        }
-      >
-        {currentPageData}
+      <div>
+        {isLoading ? (
+          <Cubes elements={(Math.random() * (11 - 1) + 1)} />
+        ) : (
+          <div
+            className={
+              "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8 mt-4 pb-10 p-2"
+            }
+          >
+            {currentPageData}
+          </div>
+        )}
       </div>
     </>
   );
