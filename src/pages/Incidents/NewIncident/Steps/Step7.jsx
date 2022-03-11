@@ -11,6 +11,8 @@ const Step7 = ({ store, handlerStore }) => {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
 
+console.log(store)
+
   const getMonthName = (monthNumber) => {
     return [
       "Enero",

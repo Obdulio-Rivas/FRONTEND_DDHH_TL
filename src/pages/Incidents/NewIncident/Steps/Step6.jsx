@@ -14,6 +14,9 @@ const Step6 = ({ handlerStore }) => {
   const [showVictimsList, setShowVictimsList] = useState(false);
   const [victims, setVictims] = useState([]);
   const navigate = useNavigate();
+
+  const [radioValues, setRadioValues] = useState({});
+
   const {
     register,
     handleSubmit,
@@ -24,6 +27,10 @@ const Step6 = ({ handlerStore }) => {
   const handlerClick = () => {
     setShowVictimsList(!showVictimsList);
   };
+
+  const handlerChecked = ({name, value}) => {
+    setRadioValues({...radioValues, [name]: value});
+  }
 
   const onSubmitVictimToList = (data) => {
     if (victims.length === 0) {
@@ -213,6 +220,7 @@ const Step6 = ({ handlerStore }) => {
             options={["Si", "No"]}
             register={register}
             errors={errors}
+            handlerChecked={handlerChecked}
             required={"*Este campo es obligatorio."}
           />
         </div>
@@ -223,6 +231,7 @@ const Step6 = ({ handlerStore }) => {
             options={["Masculino", "Femenino"]}
             register={register}
             errors={errors}
+            handlerChecked={handlerChecked}
             required={"*Este campo es obligatorio."}
           />
         </div>
@@ -314,6 +323,7 @@ const Step6 = ({ handlerStore }) => {
             options={["Si", "No"]}
             register={register}
             errors={errors}
+            handlerChecked={handlerChecked}
             required={"*Este campo es obligatorio."}
           />
         </div>
@@ -345,6 +355,7 @@ const Step6 = ({ handlerStore }) => {
             options={["Si", "No"]}
             register={register}
             errors={errors}
+            handlerChecked={handlerChecked}
             required={"*Este campo es obligatorio."}
           />
         </div>

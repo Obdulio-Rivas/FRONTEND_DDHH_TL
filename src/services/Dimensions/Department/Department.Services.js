@@ -1,5 +1,5 @@
-import API_URL from "../../const/api.js";
-import AuthService from "../Auth/Auth.Service.js";
+import API_URL from "../../../const/api.js";
+import AuthService from "../../Auth/Auth.Service.js";
 
 const getDepartments = async () => {
   const requestOptions = {

@@ -1,13 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { GiPassport } from "react-icons/gi";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
+import RadioButtons from "../../../../components/Forms/RadioButtons/RadioButtons";
 
-const Step4 = ({handlerStore}) => {
-  const { register, handleSubmit, formState:{errors}, watch } = useForm();
+import Select from "../../../../components/Forms/Select/Select";
+import Input from "../../../../components/Forms/Inputs/Input";
+
+const Step4 = ({ handlerStore }) => {
+  const [radioValues, setRadioValues] = useState({
+    country_leave: 1
+  });
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
   const navigate = useNavigate();
-  const useWatch = watch("country_leave",0)
+
+  const handlerChecked = ({ name, value }) => {
+    setRadioValues({ ...radioValues, [name]: value });
+  };
+
   const onSubmit = (data) => {
     handlerStore({
       step4: {
@@ -15,99 +33,86 @@ const Step4 = ({handlerStore}) => {
         values: data,
       },
     });
-    navigate('/incident/step5');
+    navigate("/incident/step5");
   };
 
   return (
-    <div className=" mx-auto max-w-9xl lg:px-24">
-      <div className="flex flex-wrap flex-col lg:w-5/5 mt-4">
-    <form className="px-4 pt-2 pb-2 mb-4 flex flex-col" onSubmit={handleSubmit(onSubmit)}>
-      <div className="max-w-5x1 mx-auto my-10 bg-white p-16 border border-slate-200">
-        <div className="my-4 mb-10">
-        <h1 className="text-2xl text-gray-900 font-bold text-center">
-          FICHA DE REGISTRO Y SEGUIMIENTO DE CASOS DE DESPLAZAMIENTO FORZADO
-          (Interno/Externo)
-        </h1>
+    <form
+      className="bg-white border border-slate-300 m-auto rounded px-8 py-8 mt-10 mb-4 flex flex-col md:w-2/3 sm:w-3/4 w-3/4"
+      onSubmit={handleSubmit(onSubmit)}
+    >
+      <div className="flex flex-row items-center justify-start mb-4">
+        <GiPassport className="text-4xl" />
+        <h2 className="ml-2 text-3xl">Perfil migratorio.</h2>
       </div>
-      <div className="my-4">
-            <h1 className="border border-slate-300 text-lg text-gray-800 font-semibold text-left py-2 px-4 mb-2">
-              VI. PERFIL MIGRATORIO.
-            </h1>
-            <div className="flex flex-row flex-wrap w-4/5 mx-auto">
-            <div key="country_leave" className="sm:w-1/2 lg:1/2 px-3 mb-6 md:mb-0">
-                  <label htmlFor="country_leave" className="uppercase tracking-wide text-black text-xs font-bold mb-2">
-                  ¿Ha decidido salir del país?
-                  </label>
-                  <label
-                    htmlFor="country_leave"
-                    className="uppercase tracking-wide text-black text-xs font-bold mb-2"
-                    >
-                      <input
-                      className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
-                      type="radio"
-                      id="country_leave"
-                      name="country_leave"
-                      value={1}
-                      {...register("country_leave")}
-                    />
-                    SI
-                  </label>
-                  <label
-                    htmlFor="country_leave"
-                    className="uppercase tracking-wide text-black text-xs font-bold mb-2"
-                    >
-                      <input
-                      className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
-                      type="radio"
-                      id="country_leave"
-                      name="country_leave"
-                      value={0}
-                      {...register("country_leave")}
-                    />
-                    NO
-                  </label>
-            </div>
-            { useWatch==1 && (<>
-              <div key="country_leave_name" className="sm:w-1/2 lg:1/2 px-3 mb-6 md:mb-0">
-                  <label htmlFor="country_leave_name" className="uppercase tracking-wide text-black text-xs font-bold mb-2">
-                  ¿A qué país?
-                  </label>
-                  <input className="block w-full m-auto p-2 border-2 rounded-md mt-0.5 focus:outline-gray-400 focus:shadow-outline"
-                    {...register("country_leave_name")} type="text" id="country_leave_name" placeholder="País"/>
-                  <div>
-                    {errors["country_leave_name"] && (
-                      <span className="text-red-500 text-xs italic">
-                        {errors["country_leave_name"].message}
-                      </span>)}
-                </div>
-            </div>
-            </>)}
-            <div key="family_cant" className="sm:w-1/2 lg:1/2 px-3 mb-6 md:mb-0">
-                  <label htmlFor="family_cant" className="uppercase tracking-wide text-black text-xs font-bold mb-2">
-                  ¿Cuántas personas de su grupo familiar?
-                  </label>
-                  <input className="block w-full m-auto p-2 border-2 rounded-md mt-0.5 focus:outline-gray-400 focus:shadow-outline"
-                    {...register("family_cant")} type="number" id="family_cant" placeholder="Cantidad de personas del grupo familiar"/>
-                  <div>
-                    {errors["family_cant"] && (
-                      <span className="text-red-500 text-xs italic">
-                        {errors["family_cant"].message}
-                      </span>)}
-                </div>
-            </div>
-            <div key="Button" className="w-full flex justify-end mt-4">
-              <div className="md:w-auto px-3">
-                <button className="w-full bg-green-500 text-white font-bold py-2 px-6 rounded-md hover:bg-green-600 uppercase">
-                  Siguiente
-                </button>
-              </div>
-            </div>
-          </div>
+      <div class="md:w-2/4 px-3 mb-6 md:mb-0">
+        <RadioButtons
+          label={"¿Ha decidido salir del país?"}
+          name={"country_leave"}
+          options={["Si", "No"]}
+          register={register}
+          errors={errors}
+          handlerChecked={handlerChecked}
+          required={"*Este campo es obligatorio."}
+        />
       </div>
-  </div>
+      <div className="relative md:w-2/4 px-3">
+        <Select
+          label={"¿A qué país?"}
+          options={[
+            { option: "El Salvador", value: "El Salvador" },
+            { option: "Guatemala", value: "Guatemala" },
+            { option: "Nicaragua", value: "Nicaragua" },
+          ]}
+          disabled={radioValues?.country_leave}
+          name={"country_leave_name"}
+          required={"*Este campo es obligatorio."}
+          register={register}
+          errors={errors}
+        />
+      </div>
+      <div className="md:w-2/5 px-3 mb-6 md:mb-0">
+          <Input
+            label={"Nombres"}
+            name={"name"}
+            type={"text"}
+            placeholder={"Nombres"}
+            register={register}
+            errors={errors}
+            disabled={radioValues?.country_leave}
+            required={"*Este campo es obligatorio."}
+          />
+        </div>
+      <div key="family_cant" className="sm:w-1/2 lg:1/2 px-3 mb-6 md:mb-0">
+        <label
+          htmlFor="family_cant"
+          className="uppercase tracking-wide text-black text-xs font-bold mb-2"
+        >
+          ¿Cuántas personas de su grupo familiar?
+        </label>
+        <input
+          className="block w-full m-auto p-2 border-2 rounded-md mt-0.5 focus:outline-gray-400 focus:shadow-outline"
+          {...register("family_cant")}
+          type="number"
+          id="family_cant"
+          placeholder="Cantidad de personas del grupo familiar"
+        />
+        <div>
+          {errors["family_cant"] && (
+            <span className="text-red-500 text-xs italic">
+              {errors["family_cant"].message}
+            </span>
+          )}
+        </div>
+      </div>
+      <div key="Button" className="w-full flex justify-end mt-4">
+        <div className="md:w-auto px-3">
+          <button className="w-full bg-green-500 text-white font-bold py-2 px-6 rounded-md hover:bg-green-600 uppercase">
+            Siguiente
+          </button>
+        </div>
+      </div>
     </form>
-    </div>
-    </div>
   );
 };
 
