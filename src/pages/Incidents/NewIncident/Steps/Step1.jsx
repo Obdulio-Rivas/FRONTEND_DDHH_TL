@@ -4,6 +4,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { BsBuilding } from "react-icons/bs";
+import Input from "../../../../components/Forms/Inputs/Input";
+import RadioButtons from "../../../../components/Forms/RadioButtons/RadioButtons";
 
 /*const SignupSchema = yup.object().shape({
   firstName: yup.string().required(),
@@ -13,6 +15,9 @@ import { BsBuilding } from "react-icons/bs";
 });*/
 
 const Step1 = ({ handlerStore }) => {
+  const [radioValues, setRadioValues] = useState({
+    incident_institution: 1
+  });
   const {
     register,
     handleSubmit,
@@ -22,6 +27,10 @@ const Step1 = ({ handlerStore }) => {
   } = useForm();
   const navigate = useNavigate();
   const useWatch = watch("incident_institution", 0);
+
+  const handlerChecked = ({ name, value }) => {
+    setRadioValues({ ...radioValues, [name]: value });
+  };
   const onSubmit = (data) => {
     handlerStore({
       step1: {
@@ -43,144 +52,63 @@ const Step1 = ({ handlerStore }) => {
       </div>
       <div className="-mx-3 md:flex mb-6">
         <div key="expediente" className="md:w-2/5 px-3 mb-6 md:mb-0">
-          <label
-            htmlFor="expediente"
-            className="uppercase tracking-wide text-black text-xs font-bold mb-2"
-          >
-            Expediente:
-          </label>
-          <input
-            className="block w-full m-auto p-2 border-2 rounded-md mt-0.5 focus:outline-gray-400 focus:shadow-outline"
-            {...register("expediente", {
-              required: "El expediente es requerido",
-            })}
-            type="text"
-            id="expediente"
-            placeholder="Expediente"
+        <Input
+            label={"Expediente"}
+            name={"expediente"}
+            type={"text"}
+            placeholder={"Expediente"}
+            register={register}
+            errors={errors}
+            required={"*Este campo es obligatorio."}
           />
-          <div>
-            {errors["expediente"] && (
-              <span className="text-red-500 text-xs italic">
-                {errors["expediente"].message}
-              </span>
-            )}
-          </div>
         </div>
         <div key="incident_date" className="md:w-2/5 px-3 mb-6 md:mb-0">
-          <label
-            htmlFor="incident_date"
-            className="uppercase tracking-wide text-black text-xs font-bold mb-2"
-          >
-            Fecha:
-          </label>
-          <input
-            className="block w-full m-auto p-2 border-2 rounded-md mt-0.5 focus:outline-gray-400 focus:shadow-outline"
-            {...register("incident_date", {
-              required: "La fecha es requerida",
-            })}
-            type="date"
-            id="incident_date"
+        <Input
+            label={"Fecha"}
+            name={"incident_date"}
+            type={"date"}
+            placeholder={"Fecha"}
+            register={register}
+            errors={errors}
+            required={"*Este campo es obligatorio."}
           />
-          <div>
-            {errors["incident_date"] && (
-              <span className="text-red-500 text-xs italic">
-                {errors["incident_date"].message}
-              </span>
-            )}
-          </div>
         </div>
         <div key="hour" className="md:w-1/5 px-3 mb-6 md:mb-0">
-          <label
-            htmlFor="hour"
-            className="uppercase tracking-wide text-black text-xs font-bold mb-2"
-          >
-            Hora:
-          </label>
-          <input
-            className="block w-full m-auto p-2 border-2 rounded-md mt-0.5 focus:outline-gray-400 focus:shadow-outline"
-            {...register("hour", { required: "La hora es requerida" })}
-            type="text"
-            id="hour"
+          <Input
+            label={"Hora"}
+            name={"hour"}
+            type={"number"}
+            placeholder={"Hora"}
+            register={register}
+            errors={errors}
+            required={"*Este campo es obligatorio."}
           />
-          <div>
-            {errors["hour"] && (
-              <span className="text-red-500 text-xs italic">
-                {errors["hour"].message}
-              </span>
-            )}
-          </div>
         </div>
       </div>
       <div className="-mx-3 md:flex mb-6">
         <div key="incident_institution" className="md:w-2/5 px-3 mb-6 md:mb-0">
-          <label
-            htmlFor="incident_institution"
-            className="uppercase tracking-wide text-black text-xs font-bold mb-2"
-          >
-            ¿Conoce alguna institucion de ayuda?
-          </label>
-          <label
-            htmlFor="incident_institution"
-            className="uppercase tracking-wide text-black text-xs font-bold mb-2"
-          >
-            <br></br>
-            <input
-              className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
-              type="radio"
-              id="incident_institution"
-              name="incident_institution"
-              value={1}
-              {...register("incident_institution")}
-            />
-            SI
-          </label>
-          <label
-            htmlFor="incident_institution"
-            className="uppercase tracking-wide text-black text-xs font-bold mb-2"
-          >
-            <input
-              className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
-              type="radio"
-              id="incident_institution"
-              name="incident_institution"
-              value={0}
-              {...register("incident_institution")}
-            />
-            NO
-          </label>
+        <RadioButtons
+          label={"¿Ha decidido salir del país?"}
+          name={"incident_institution"}
+          options={["Si", "No"]}
+          register={register}
+          errors={errors}
+          handlerChecked={handlerChecked}
+          required={"*Este campo es obligatorio."}
+        />
         </div>
-
-        {useWatch == 1 && (
-          <>
-            <div
-              key="incident_institution_name"
-              className="md:w-2/5 px-3 mb-6 md:mb-0"
-            >
-              <label
-                htmlFor="incident_institution_name"
-                className="uppercase tracking-wide text-black text-xs font-bold mb-2"
-              >
-                ¿Cuál?
-              </label>
-              <input
-                className="block w-full m-auto p-2 border-2 rounded-md mt-0.5 focus:outline-gray-400 focus:shadow-outline"
-                {...register("incident_institution_name", {
-                  required: "El nombre de la institucion es requerida",
-                })}
-                type="text"
-                id="incident_institution_name"
-                placeholder="Institucion"
-              />
-              <div>
-                {errors["incident_institution_name"] && (
-                  <span className="text-red-500 text-xs italic">
-                    {errors["incident_institution_name"].message}
-                  </span>
-                )}
-              </div>
-            </div>
-          </>
-        )}
+        <div key="incident_institution_name"className="md:w-2/5 px-3 mb-6 md:mb-0">
+          <Input
+            label={"¿Cuál?"}
+            name={"incident_institution_name"}
+            type={"text"}
+            placeholder={"¿Cuál?"}
+            disabled={radioValues?.incident_institution}
+            register={register}
+            errors={errors}
+            required={"*Este campo es obligatorio."}
+          />
+        </div>
 
         <div key="name_reference" className="md:w-3/5 px-3 mb-6 md:mb-0">
           <label
