@@ -111,81 +111,43 @@ const Step1 = ({ handlerStore }) => {
         </div>
 
         <div key="name_reference" className="md:w-3/5 px-3 mb-6 md:mb-0">
-          <label
-            htmlFor="name_reference"
-            className="uppercase tracking-wide text-black text-xs font-bold mb-2"
-          >
-            Nombre de quien Refiere:
-          </label>
-          <input
-            className="block w-full m-auto p-2 border-2 rounded-md mt-0.5 focus:outline-gray-400 focus:shadow-outline"
-            {...register("name_reference", {
-              required: "El nombre de referencia es requerida",
-            })}
-            type="text"
-            id="name_reference"
-            placeholder="Nombre a quien refiere"
+        <Input
+            label={"Nombre de quien Refiere"}
+            name={"name_reference"}
+            type={"text"}
+            placeholder={"Nombre de quien Refiere"}
+            register={register}
+            errors={errors}
+            required={"*Este campo es obligatorio."}
           />
-          <div>
-            {errors["name_reference"] && (
-              <span className="text-red-500 text-xs italic">
-                {errors["name_reference"].message}
-              </span>
-            )}
-          </div>
         </div>
       </div>
       <div className="-mx-3 md:flex mb-6">
         <div key="contact" className="md:w-2/5 px-3 mb-6 md:mb-0">
-          <label
-            htmlFor="contact"
-            className="uppercase tracking-wide text-black text-xs font-bold mb-2"
-          >
-            Contacto:
-          </label>
-          <input
-            className="block w-full m-auto p-2 border-2 rounded-md mt-0.5 focus:outline-gray-400 focus:shadow-outline"
-            {...register("contact", {
-              required: "El contacto es requerida",
-            })}
-            type="number"
-            id="contact"
-            placeholder="Contacto"
+        <Input
+            label={"Contacto"}
+            name={"contact"}
+            type={"number"}
+            placeholder={"Contacto"}
+            register={register}
+            errors={errors}
+            required={"*Este campo es obligatorio."}
           />
-          <div>
-            {errors["contact"] && (
-              <span className="text-red-500 text-xs italic">
-                {errors["contact"].message}
-              </span>
-            )}
-          </div>
         </div>
 
         <div
           key="incident_identification"
           className="md:w-3/5 px-3 mb-6 md:mb-0"
         >
-          <label
-            htmlFor="incident_identification"
-            className="uppercase tracking-wide text-black text-xs font-bold mb-2"
-          >
-            Identificación del Caso:
-          </label>
-          <input
-            className="block w-full m-auto p-2 border-2 rounded-md mt-0.5 focus:outline-gray-400 focus:shadow-outline"
-            {...register("incident_identification", {
-              required: "La identificacion del incidente es requerida",
-            })}
-            type="number"
-            id="incident_identification"
+          <Input
+            label={"Identificación del Caso"}
+            name={"contact"}
+            type={"incident_identification"}
+            placeholder={"Identificación del Caso"}
+            register={register}
+            errors={errors}
+            required={"*Este campo es obligatorio."}
           />
-          <div>
-            {errors["incident_identification"] && (
-              <span className="text-red-500 text-xs italic">
-                {errors["incident_identification"].message}
-              </span>
-            )}
-          </div>
         </div>
       </div>
       <div key="Button" className="w-full flex justify-end mt-4">
