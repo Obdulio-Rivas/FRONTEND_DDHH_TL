@@ -6,6 +6,8 @@ import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import DepartmentService from "../../../../services/Dimensions/Department/Department.Services";
 import MunicipalityService from "../../../../services/Dimensions/Municipality/Municipality.Service";
+import Input from "../../../../components/Forms/Inputs/Input";
+import RadioButtons from "../../../../components/Forms/RadioButtons/RadioButtons";
 
 const Step2 = ({ handlerStore }) => {
   const {
@@ -58,51 +60,26 @@ const Step2 = ({ handlerStore }) => {
       </div>
       <div className="-mx-3 md:flex mb-6">
         <div key="date_hechos" className="md:w-2/5 px-3 mb-6 md:mb-0">
-          <label
-            htmlFor="date_hechos"
-            className="uppercase tracking-wide text-black text-xs font-bold mb-2"
-          >
-            Fecha en que Ocurrieron los Hechos:
-          </label>
-          <input
-            className="block w-full m-auto p-2 border-2 rounded-md mt-0.5 focus:outline-gray-400 focus:shadow-outline"
-            {...register("date_hechos", {
-              required: "El expediente es requerido",
-            })}
-            type="date"
-            id="date_hechos"
+        <Input
+            label={"Fecha en que Ocurrieron los Hechos"}
+            name={"date_hechos"}
+            type={"date"}
+            placeholder={"Fecha en que Ocurrieron los Hechos"}
+            register={register}
+            errors={errors}
+            required={"*Este campo es obligatorio."}
           />
-          <div>
-            {errors["date_hechos"] && (
-              <span className="text-red-500 text-xs italic">
-                {errors["date_hechos"].message}
-              </span>
-            )}
-          </div>
         </div>
         <div key="adress" className="md:w-3/5 px-3 mb-6 md:mb-0">
-          <label
-            htmlFor="adress"
-            className="uppercase tracking-wide text-black text-xs font-bold mb-2"
-          >
-            Direccion:
-          </label>
-          <input
-            className="block w-full m-auto p-2 border-2 rounded-md mt-0.5 focus:outline-gray-400 focus:shadow-outline"
-            {...register("adress", {
-              required: "La fecha es requerida",
-            })}
-            type="text"
-            id="adress"
-            placeholder="Direccion"
+        <Input
+            label={"Direccion"}
+            name={"adress"}
+            type={"text"}
+            placeholder={"Direccion"}
+            register={register}
+            errors={errors}
+            required={"*Este campo es obligatorio."}
           />
-          <div>
-            {errors["adress"] && (
-              <span className="text-red-500 text-xs italic">
-                {errors["adress"].message}
-              </span>
-            )}
-          </div>
         </div>
       </div>
       <div className="-mx-3 md:flex mb-6">
