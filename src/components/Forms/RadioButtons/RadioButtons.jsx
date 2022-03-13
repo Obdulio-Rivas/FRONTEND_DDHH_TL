@@ -7,7 +7,7 @@ const RadioButtons = ({
   required,
   register,
   errors,
-  handlerChecked
+  handlerChange = null
 }) => {
 
   return (
@@ -18,7 +18,7 @@ const RadioButtons = ({
       >
         {label}
       </label>
-      <div className="flex flex-row justify-start items-center" onChange={(e)=>handlerChecked(e.target)}>
+      <div className="flex flex-row justify-start items-center" onChange={ !!handlerChange ? (e)=>handlerChange(e.target) : null}>
         {options.map((option, index, array) => {
           return (
             <label key={index} className={`inline-flex items-center mt-3 ${index !== 0 ? 'ml-3': null}`}>

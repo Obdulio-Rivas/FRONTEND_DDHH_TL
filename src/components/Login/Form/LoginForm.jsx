@@ -54,12 +54,6 @@ const LoginForm = () => {
             placeholder={"Ingresa tu contraseña"}
             handlerChange={handleChange}
           />
-          <Checkbox
-            id={"show_password"}
-            name={"show_password"}
-            value={"show_password"}
-            label={"Mostrar contraseña."}
-          />
           <Button
             value={"Ingresar"}
             type={"submit"}

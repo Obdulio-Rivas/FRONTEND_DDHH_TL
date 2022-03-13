@@ -1,41 +1,76 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { AiOutlineFileDone } from "react-icons/ai";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
-import DepartmentService from "../../../../services/Dimensions/Department/Department.Services";
+import DepartmentService from "../../../../services/Dimensions/Department/Department.Service";
 import MunicipalityService from "../../../../services/Dimensions/Municipality/Municipality.Service";
 import Input from "../../../../components/Forms/Inputs/Input";
 import RadioButtons from "../../../../components/Forms/RadioButtons/RadioButtons";
+import Select from "../../../../components/Forms/Select/Select";
+import Checkbox from "../../../../components/Forms/Checkbox/Checkbox";
+import Textarea from "../../../../components/Forms/Textarea/Textarea";
 
 const Step2 = ({ handlerStore }) => {
+  const screenHeight = document.body.clientHeight;
+
+  const [radioValues, setRadioValues] = useState({
+    statal_institution: 1,
+  });
+
+  const [checkboxValues, setCheckboxValues] = useState({
+    cause_displacement: 1,
+    institutions_accompanied: 1,
+    people_displacement: 1,
+  });
+
+  const [municipalities, setMunicipalities] = useState([
+    { option: "Selecciona una opcion", value: "Default value" },
+  ]);
+  const [departments, setDepartments] = useState([
+    { option: "Selecciona una opcion", value: "Default value" },
+  ]);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-    watch,
+    setValue,
   } = useForm();
+
   const navigate = useNavigate();
-  const useWatch = watch("statal_institution", 0);
 
   useEffect(() => {
     async function getSelectOptions() {
-      const response = await MunicipalityService.getMunicipalitiesByDepartment(
-        1
-      );
-      console.log(response);
-      const response2 = await DepartmentService.getDepartments();
-      console.log(response2);
+      let arrayValues = [
+        { option: "Selecciona una opcion por favor", value: 0 },
+      ];
+      let response = await DepartmentService.getDepartments();
+      arrayValues = response?.data?.map(({ id_department, department }) => {
+        return { option: department, value: id_department };
+      });
+      setDepartments(arrayValues);
     }
     getSelectOptions();
   }, []);
 
-  const handlerChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    if (name === "statal_institution" && checked === true) {
-      console.log(name);
+  useEffect(() => {
+    async function getSelectOptions() {
+      let arrayValues = [
+        { option: "Selecciona una opcion por favor", value: 0 },
+      ];
+      let response = await MunicipalityService.getMunicipalities();
+      arrayValues = response?.data?.map(({ id_municipality, municipality }) => {
+        return { option: municipality, value: id_municipality };
+      });
+      setMunicipalities(arrayValues);
     }
+    getSelectOptions();
+  }, []);
+
+  const handlerRadioButton = ({ name, value }) => {
+    setRadioValues({ ...radioValues, [name]: value });
   };
 
   const onSubmit = (data) => {
@@ -48,7 +83,10 @@ const Step2 = ({ handlerStore }) => {
     navigate("/incident/step3");
   };
 
-  console.log(useWatch);
+  const handlerClick = () => {
+    navigate("/incident/step1");
+  };
+
   return (
     <form
       className="bg-white border border-slate-300 m-auto rounded px-8 py-8 mt-10 mb-4 flex flex-col md:w-2/3 sm:w-3/4 w-3/4"
@@ -59,8 +97,8 @@ const Step2 = ({ handlerStore }) => {
         <h2 className="ml-2 text-3xl">Perfil especifico de los hechos.</h2>
       </div>
       <div className="-mx-3 md:flex mb-6">
-        <div key="date_hechos" className="md:w-2/5 px-3 mb-6 md:mb-0">
-        <Input
+        <div className="md:w-2/5 px-3 mb-6 md:mb-0">
+          <Input
             label={"Fecha en que Ocurrieron los Hechos"}
             name={"date_hechos"}
             type={"date"}
@@ -70,8 +108,41 @@ const Step2 = ({ handlerStore }) => {
             required={"*Este campo es obligatorio."}
           />
         </div>
-        <div key="adress" className="md:w-3/5 px-3 mb-6 md:mb-0">
-        <Input
+        <div className="md:w-1/5 px-3 mb-6 md:mb-0">
+          <Input
+            label={"Hora Aprox."}
+            name={"datetime_hechos"}
+            type={"time"}
+            placeholder={"Hora aproximada de los hehos"}
+            register={register}
+            errors={errors}
+            required={"*Este campo es obligatorio."}
+          />
+        </div>
+        <div className="relative md:w-2/5 px-3">
+          <Select
+            label={"Departamento"}
+            name={"deparment"}
+            options={departments}
+            required={"*Este campo es obligatorio."}
+            register={register}
+            errors={errors}
+          />
+        </div>
+      </div>
+      <div className="-mx-3 md:flex mb-6">
+        <div className="relative md:w-2/6 px-3">
+          <Select
+            label={"Municipio"}
+            name={"municipality"}
+            options={municipalities}
+            required={"*Este campo es obligatorio."}
+            register={register}
+            errors={errors}
+          />
+        </div>
+        <div className="md:w-4/6 px-3 mb-6 md:mb-0">
+          <Input
             label={"Direccion"}
             name={"adress"}
             type={"text"}
@@ -83,505 +154,117 @@ const Step2 = ({ handlerStore }) => {
         </div>
       </div>
       <div className="-mx-3 md:flex mb-6">
-        <div key="deparment" className="md:w-2/4 px-3 mb-6 md:mb-0">
-          <label
-            htmlFor="deparment"
-            className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
-          >
-            Departamento:
-          </label>
-          <select
-            {...register("deparment", {
-              required: "debe seleccionar uno",
-            })}
-            defaultValue="DEFAULT"
-            name="deparment"
-            className="block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded"
-            id="deparment"
-          >
-            <option key="San salvador" value="San salvador" className="py-3">
-              San salvador
-            </option>
-            {/*{options.map(({title, value})=>{
-                        return (<option key={value} value={value} disabled={value==='DEFAULT'?true:false} className="py-3">{title}</option>);
-                    })}*/}
-          </select>
-          <div>
-            {errors["deparment"] && (
-              <span className="text-red-500 text-xs italic">
-                {errors["deparment"].message}
-              </span>
-            )}
-          </div>
+        <div className="md:w-2/4 px-3 mb-6 md:mb-0">
+          <Checkbox
+            label={"Causa del desplazamiento"}
+            name={"cause_displacement"}
+            options={[
+              "Amenazas",
+              "Homicidio",
+              "Extorsión",
+              "Desaparición de un Miembro de la Familia",
+              "Reclutamiento Forzoso",
+              "Testigo de un hecho Delictivo",
+              "Agresión Física",
+            ]}
+            register={register}
+            errors={errors}
+            required={"*Este campo es obligatorio."}
+          />
         </div>
-        <div key="municipality" className="md:w-2/4 px-3 mb-6 md:mb-0">
-          <label
-            htmlFor="municipality"
-            className="uppercase tracking-wide text-black text-xs font-bold mb-2"
-          >
-            Municipalidad:
-          </label>
-          <select
-            {...register("municipality", {
-              required: "debe seleccionar uno",
-            })}
-            defaultValue="DEFAULT"
-            name="municipality"
-            className="block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded"
-            id="municipality"
-          >
-            <option key="San salvador" value="San salvador" className="py-3">
-              San salvador
-            </option>
-            {/*{options.map(({title, value})=>{
-                        return (<option key={value} value={value} disabled={value==='DEFAULT'?true:false} className="py-3">{title}</option>);
-                    })}*/}
-          </select>
-          <div>
-            {errors["municipality"] && (
-              <span className="text-red-500 text-xs italic">
-                {errors["municipality"].message}
-              </span>
-            )}
-          </div>
+        <div className="md:w-2/4 px-3 mb-6 md:mb-0">
+          <Checkbox
+            label={"Personas o grupos que generaron el desplazamiento"}
+            name={"people_displacement"}
+            options={[
+              "FAES",
+              "PNC",
+              "Crimen Organizado",
+              "Desconocidos",
+              "Pandillas (MS)",
+              "Pandillas (Barrio 18)",
+              "Particulares"
+            ]}
+            register={register}
+            errors={errors}
+            openOption={{ type: "text", value: 'Otro' }}
+            required={"*Este campo es obligatorio."}
+          />
         </div>
       </div>
       <div className="-mx-3 md:flex mb-6">
-        <div key="cause_displacement" className="md:w-2/4 px-3 mb-6 md:mb-0">
-          <label className="uppercase tracking-wide text-black text-xs font-bold mb-2">
-            Causa del desplazamiento
-            <label
-              htmlFor="cause_displacement"
-              className="uppercase tracking-wide text-black text-xs font-bold mb-2"
-            >
-              <br></br>
-              <input
-                className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
-                type="checkbox"
-                id="cause_displacement"
-                name="cause_displacement"
-                value="Amenanza"
-                {...register("cause_displacement")}
-              />
-              1.Amenaza
-            </label>
-            <br></br>
-            <label
-              htmlFor="cause_displacement"
-              className="uppercase tracking-wide text-black text-xs font-bold mb-2"
-            >
-              <input
-                className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
-                type="checkbox"
-                id="cause_displacement"
-                name="cause_displacement"
-                value="Amenanza"
-                {...register("cause_displacement")}
-              />
-              2.Homicidio
-            </label>
-            <br></br>
-            <label
-              htmlFor="cause_displacement"
-              className="uppercase tracking-wide text-black text-xs font-bold mb-2"
-            >
-              <input
-                className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
-                type="checkbox"
-                id="cause_displacement"
-                name="cause_displacement"
-                value=" Extorsión"
-                {...register("cause_displacement")}
-              />
-              3.Extorsión
-            </label>
-            <br></br>
-            <label
-              htmlFor="cause_displacement"
-              className="uppercase tracking-wide text-black text-xs font-bold mb-2"
-            >
-              <input
-                className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
-                type="checkbox"
-                id="cause_displacement"
-                name="cause_displacement"
-                value="Desaparición de un Miembro de la Familia"
-                {...register("cause_displacement")}
-              />
-              4.Desaparición de un Miembro de la Familia
-            </label>
-            <br></br>
-            <label
-              htmlFor="cause_displacement"
-              className="uppercase tracking-wide text-black text-xs font-bold mb-2"
-            >
-              <input
-                className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
-                type="checkbox"
-                id="cause_displacement"
-                name="cause_displacement"
-                value="Reclutamiento Forzoso"
-                {...register("cause_displacement")}
-              />
-              5.Reclutamiento Forzoso
-            </label>
-            <br></br>
-            <label
-              htmlFor="cause_displacement"
-              className="uppercase tracking-wide text-black text-xs font-bold mb-2"
-            >
-              <input
-                className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
-                type="checkbox"
-                id="cause_displacement"
-                name="cause_displacement"
-                value="Testigo de un hecho Delictivo"
-                {...register("cause_displacement")}
-              />
-              6.Testigo de un hecho Delictivo
-            </label>
-            <br></br>
-            <label
-              htmlFor="cause_displacement"
-              className="uppercase tracking-wide text-black text-xs font-bold mb-2"
-            >
-              <input
-                className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
-                type="checkbox"
-                id="cause_displacement"
-                name="cause_displacement"
-                value="Agresión Física"
-                {...register("cause_displacement")}
-              />
-              7.Agresión Física
-            </label>
-          </label>
-        </div>
-        <div key="people_displacement" className="md:w-2/4 px-3 mb-6 md:mb-0">
-          <label className="uppercase tracking-wide text-black text-xs font-bold mb-2">
-            Personas o grupos que generaron el desplazamiento:
-            <br></br>
-            <label
-              htmlFor="people_displacement"
-              className="uppercase tracking-wide text-black text-xs font-bold mb-2"
-            >
-              <input
-                className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
-                type="checkbox"
-                id="people_displacement"
-                name="people_displacement"
-                value="FAES"
-                {...register("people_displacement")}
-              />
-              1.FAES
-            </label>
-            <br></br>
-            <label
-              htmlFor="people_displacement"
-              className="uppercase tracking-wide text-black text-xs font-bold mb-2"
-            >
-              <input
-                className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
-                type="checkbox"
-                id="people_displacement"
-                name="people_displacement"
-                value="PNC"
-                {...register("people_displacement")}
-              />
-              2.PNC
-            </label>
-            <br></br>
-            <label
-              htmlFor="people_displacement"
-              className="uppercase tracking-wide text-black text-xs font-bold mb-2"
-            >
-              <input
-                className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
-                type="checkbox"
-                id="people_displacement"
-                name="people_displacement"
-                value="Crimen Organizado"
-                {...register("people_displacement")}
-              />
-              3.Crimen Organizado
-            </label>
-            <br></br>
-            <label
-              htmlFor="people_displacement"
-              className="uppercase tracking-wide text-black text-xs font-bold mb-2"
-            >
-              <input
-                className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
-                type="checkbox"
-                id="people_displacement"
-                name="people_displacement"
-                value="Desconocidos"
-                {...register("people_displacement")}
-              />
-              4.Desconocidos
-            </label>
-            <br></br>
-            <label
-              htmlFor="people_displacement"
-              className="uppercase tracking-wide text-black text-xs font-bold mb-2"
-            >
-              <input
-                className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
-                type="checkbox"
-                id="people_displacement"
-                name="people_displacement"
-                value="Pandillas MS"
-                {...register("people_displacement")}
-              />
-              5.Pandillas MS
-            </label>
-            <br></br>
-            <label
-              htmlFor="people_displacement"
-              className="uppercase tracking-wide text-black text-xs font-bold mb-2"
-            >
-              <input
-                className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
-                type="checkbox"
-                id="people_displacement"
-                name="people_displacement"
-                value="Pandillas BARRIO 18"
-                {...register("people_displacement")}
-              />
-              6.Pandillas BARRIO 18
-            </label>
-            <br></br>
-            <label
-              htmlFor="people_displacement"
-              className="uppercase tracking-wide text-black text-xs font-bold mb-2"
-            >
-              <input
-                className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
-                type="checkbox"
-                id="people_displacement"
-                name="people_displacement"
-                value="Particulares"
-                {...register("people_displacement")}
-              />
-              7.Particulares
-            </label>
-          </label>
+        <div className="md:w-full px-3 mb-6 md:mb-0">
+          <Checkbox
+            label={"¿Cuáles instituciones han acompañado?"}
+            name={"institutions_accompanied"}
+            options={[
+              "Ninguna",
+              "PNC",
+              "FGR",
+              "PDDH",
+              "PGR",
+              "ISDEMU",
+              "CONNA"
+            ]}
+            register={register}
+            errors={errors}
+            openOption={{ type: "text", value: 'Otra' }}
+            required={"*Este campo es obligatorio."}
+          />
         </div>
       </div>
       <div className="-mx-3 md:flex mb-6">
-        <div
-          key="institutions_accompanied"
-          className="md:w-2/5 px-3 mb-6 md:mb-0"
-        >
-          <label className="uppercase tracking-wide text-black text-xs font-bold mb-2">
-            ¿Cuáles instituciones han acompañado?
-            <label
-              htmlFor="institutions_accompanied"
-              className="uppercase tracking-wide text-black text-xs font-bold mb-2"
-            >
-              <br></br>
-              <input
-                className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
-                type="checkbox"
-                id="institutions_accompanied"
-                name="institutions_accompanied"
-                value="Ninguna"
-                {...register("institutions_accompanied")}
-              />
-              1.Ninguna
-            </label>
-            <br></br>
-            <label
-              htmlFor="institutions_accompanied"
-              className="uppercase tracking-wide text-black text-xs font-bold mb-2"
-            >
-              <input
-                className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
-                type="checkbox"
-                id="institutions_accompanied"
-                name="institutions_accompanied"
-                value="PNC"
-                {...register("institutions_accompanied")}
-              />
-              2.PNC
-            </label>
-            <br></br>
-            <label
-              htmlFor="institutions_accompanied"
-              className="uppercase tracking-wide text-black text-xs font-bold mb-2"
-            >
-              <input
-                className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
-                type="checkbox"
-                id="institutions_accompanied"
-                name="institutions_accompanied"
-                value="FGR"
-                {...register("institutions_accompanied")}
-              />
-              3.FGR
-            </label>
-            <br></br>
-            <label
-              htmlFor="institutions_accompanied"
-              className="uppercase tracking-wide text-black text-xs font-bold mb-2"
-            >
-              <input
-                className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
-                type="checkbox"
-                id="institutions_accompanied"
-                name="institutions_accompanied"
-                value="PDDH"
-                {...register("institutions_accompanied")}
-              />
-              4.PDDH
-            </label>
-            <br></br>
-            <label
-              htmlFor="institutions_accompanied"
-              className="uppercase tracking-wide text-black text-xs font-bold mb-2"
-            >
-              <input
-                className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
-                type="checkbox"
-                id="institutions_accompanied"
-                name="institutions_accompanied"
-                value="PGR"
-                {...register("institutions_accompanied")}
-              />
-              5.PGR
-            </label>
-            <br></br>
-            <label
-              htmlFor="institutions_accompanied"
-              className="uppercase tracking-wide text-black text-xs font-bold mb-2"
-            >
-              <input
-                className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
-                type="checkbox"
-                id="institutions_accompanied"
-                name="institutions_accompanied"
-                value="ISDEMU"
-                {...register("institutions_accompanied")}
-              />
-              6.ISDEMU
-            </label>
-            <br></br>
-            <label
-              htmlFor="institutions_accompanied"
-              className="uppercase tracking-wide text-black text-xs font-bold mb-2"
-            >
-              <input
-                className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
-                type="checkbox"
-                id="institutions_accompanied"
-                name="institutions_accompanied"
-                value="CONNA"
-                {...register("institutions_accompanied")}
-              />
-              7.CONNA
-            </label>
-          </label>
+        <div className="md:w-2/5 px-3 mb-6 md:mb-0">
+          <RadioButtons
+            label={"¿Interpuso denuncia en alguna instancia estatal?"}
+            name={"statal_institution"}
+            options={["Si", "No"]}
+            register={register}
+            errors={errors}
+            handlerChange={handlerRadioButton}
+            required={"*Este campo es obligatorio."}
+          />
         </div>
-        <div key="statal_institution" className="md:w-2/5 px-3 mb-6 md:mb-0">
-          <label
-            htmlFor="statal_institution"
-            className="uppercase tracking-wide text-black text-xs font-bold mb-2"
-          >
-            ¿Interpuso denuncia en alguna instancia estatal?
-          </label>
-          <label
-            htmlFor="statal_institution"
-            className="uppercase tracking-wide text-black text-xs font-bold mb-2"
-          >
-            <br></br>
-            <input
-              className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
-              type="radio"
-              id="statal_institution"
-              name="statal_institution"
-              value={1}
-              {...register("statal_institution", {
-                onChange: handlerChange,
-              })}
-            />
-            SI
-          </label>
-          <label
-            htmlFor="statal_institution"
-            className="uppercase tracking-wide text-black text-xs font-bold mb-2"
-          >
-            <input
-              className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
-              type="radio"
-              id="statal_institution"
-              name="statal_institution"
-              value={0}
-              {...register("statal_institution", {
-                onChange: handlerChange,
-              })}
-            />
-            NO
-          </label>
-        </div>
-        {useWatch == 1 && (
-          <>
-            <div
-              key="statal_institution_name"
-              className="md:w-2/5 px-3 mb-6 md:mb-0"
-            >
-              <label
-                htmlFor="statal_institution_name"
-                className="uppercase tracking-wide text-black text-xs font-bold mb-2"
-              >
-                Nombre de la institucion estatal:
-              </label>
-              <input
-                className="block w-full m-auto p-2 border-2 rounded-md mt-0.5 focus:outline-gray-400 focus:shadow-outline"
-                {...register("statal_institution_name")}
-                type="text"
-                id="statal_institution_name"
-              />
-              <div>
-                {errors["statal_institution_name"] && (
-                  <span className="text-red-500 text-xs italic">
-                    {errors["statal_institution_name"].message}
-                  </span>
-                )}
-              </div>
-            </div>
-          </>
-        )}
-      </div>
-      <div
-        key="accompanied_descriptions"
-        className="sm:w-1/2 lg:1/2 px-3 mb-6 md:mb-0"
-      >
-        <label
-          htmlFor="accompanied_descriptions"
-          className="uppercase tracking-wide text-black text-xs font-bold mb-2"
-        >
-          Descripcion del acompañamiento brindado:
-        </label>
-        <input
-          className="block w-full m-auto p-2 border-2 rounded-md mt-0.5 focus:outline-gray-400 focus:shadow-outline"
-          {...register("accompanied_descriptions")}
-          type="text"
-          id="accompanied_descriptions"
-        />
-        <div>
-          {errors["accompanied_descriptions"] && (
-            <span className="text-red-500 text-xs italic">
-              {errors["accompanied_descriptions"].message}
-            </span>
-          )}
+        <div className="md:w-3/5 px-3 mb-6 md:mb-0">
+          <Input
+            label={"Nombre de la institucion estatal"}
+            name={"statal_institution_name"}
+            type={"text"}
+            placeholder={"Direccion"}
+            register={register}
+            errors={errors}
+            disabled={radioValues?.statal_institution}
+            required={"*Este campo es obligatorio."}
+          />
         </div>
       </div>
-      <div key="Button" className="w-full flex justify-end mt-4">
-        <div className="md:w-auto px-3">
-          <button className="w-full bg-green-500 text-white font-bold py-2 px-6 rounded-md hover:bg-green-600 uppercase">
-            Siguiente
-          </button>
+      <div className="-mx-3 md:flex mb-6">
+        <div className="md:w-full md:h-min px-3 mb-6 md:mb-0">
+          <Textarea
+            label={"Descripcion del acompañamiento brindado"}
+            name={"accompanied_descriptions"}
+            type={"text"}
+            height={screenHeight / 6}
+            placeholder={"Narrativa de los hechos..."}
+            register={register}
+            errors={errors}
+            required={"*Este campo es obligatorio."}
+          />
         </div>
+      </div>
+      <div class="flex flex-row justify-between -mx-0.5 md:flex mb-2">
+        <div onClick={() => handlerClick()}>
+          <div className="flex flex-row items-center bg-slate-200 border border-slate-300 rounded-md px-4 py-3 text-lg cursor-pointer">
+            <span className="text-slate-600 h-full ml-2">Regresar</span>
+          </div>
+        </div>
+        <button
+          className="bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-md px-7 py-3 transition duration-1000"
+          type="submit"
+          value={"Enviar"}
+        >
+          Siguiente
+        </button>
       </div>
     </form>
   );

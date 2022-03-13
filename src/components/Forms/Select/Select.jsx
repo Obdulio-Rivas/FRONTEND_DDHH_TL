@@ -7,7 +7,7 @@ const Select = ({
   required,
   register,
   errors,
-  disabled = 0
+  disabled = 0,
 }) => {
   return (
     <>
@@ -25,7 +25,7 @@ const Select = ({
           className={`block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded ${disabled ==! 0 ? 'cursor-not-allowed' : null}`}
           {...register(name, { required: required })}
         >
-          {options.map(({ option, value }, index) => {
+          {options?.map(({ option, value }, index) => {
             return (
               <option
                 key={index}

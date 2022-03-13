@@ -28,7 +28,7 @@ const Step6 = ({ handlerStore }) => {
     setShowVictimsList(!showVictimsList);
   };
 
-  const handlerChecked = ({name, value}) => {
+  const handlerRadioButton = ({name, value}) => {
     setRadioValues({...radioValues, [name]: value});
   }
 
@@ -131,9 +131,10 @@ const Step6 = ({ handlerStore }) => {
             </div>
           </div>
           <button
-            className="bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-md px-7 py-3 transition duration-1000"
+            className={`${victims.length === 0 ? "bg-slate-500 hover:bg-slate-600 cursor-not-allowed" : "bg-blue-500 hover:bg-blue-600 cursor-pointer"} text-white font-bold rounded-md px-7 py-3 transition duration-1000`}
             type="submit"
             value={"Enviar"}
+            disabled={victims.length === 0 ? true : false}
           >
             Siguiente
           </button>
@@ -220,7 +221,7 @@ const Step6 = ({ handlerStore }) => {
             options={["Si", "No"]}
             register={register}
             errors={errors}
-            handlerChecked={handlerChecked}
+            handlerChange={handlerRadioButton}
             required={"*Este campo es obligatorio."}
           />
         </div>
@@ -231,7 +232,7 @@ const Step6 = ({ handlerStore }) => {
             options={["Masculino", "Femenino"]}
             register={register}
             errors={errors}
-            handlerChecked={handlerChecked}
+            handlerChange={handlerRadioButton}
             required={"*Este campo es obligatorio."}
           />
         </div>
@@ -323,7 +324,7 @@ const Step6 = ({ handlerStore }) => {
             options={["Si", "No"]}
             register={register}
             errors={errors}
-            handlerChecked={handlerChecked}
+            handlerChange={handlerRadioButton}
             required={"*Este campo es obligatorio."}
           />
         </div>
@@ -355,7 +356,7 @@ const Step6 = ({ handlerStore }) => {
             options={["Si", "No"]}
             register={register}
             errors={errors}
-            handlerChecked={handlerChecked}
+            handlerChange={handlerRadioButton}
             required={"*Este campo es obligatorio."}
           />
         </div>

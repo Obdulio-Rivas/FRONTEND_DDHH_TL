@@ -2,7 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 const Input = (props) => {
   const { label, value, name, type, placeholder, handlerChange, message } = props;
-  let {register,handleSubmit,formState: { errors },} = useForm();
+  let {register, handleSubmit, formState: { errors },} = useForm();
 
   return (
     <div className="block my-4 w-full">
@@ -30,7 +30,6 @@ const Input = (props) => {
         )}
       </div>
     </div>
-    
   );
 };
 

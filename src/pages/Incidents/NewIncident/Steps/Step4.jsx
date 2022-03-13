@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { GiPassport } from "react-icons/gi";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -11,18 +11,19 @@ import Input from "../../../../components/Forms/Inputs/Input";
 
 const Step4 = ({ handlerStore }) => {
   const [radioValues, setRadioValues] = useState({
-    country_leave: 1
+    country_leave: 1,
   });
 
   const {
     register,
     handleSubmit,
     formState: { errors },
+    setValue
   } = useForm();
 
   const navigate = useNavigate();
 
-  const handlerChecked = ({ name, value }) => {
+  const handlerRadioButton = ({ name, value }) => {
     setRadioValues({ ...radioValues, [name]: value });
   };
 
@@ -36,6 +37,30 @@ const Step4 = ({ handlerStore }) => {
     navigate("/incident/step5");
   };
 
+  const handlerClick = () => {
+    navigate("/incident/step3");
+  };
+
+  useEffect(() => {
+    const defaultValues = [
+      {
+        key: "country_leave_name",
+        value: 0,
+      },
+      {
+        key: "family_cant",
+        value: "",
+      },
+    ];
+    const setDefaultValues = (defaultValues) => {
+      defaultValues.map(({ key, value }) => {
+        setValue(key, value);
+        return null;
+      });
+    };
+    setDefaultValues(defaultValues);
+  }, [setValue]);
+
   return (
     <form
       className="bg-white border border-slate-300 m-auto rounded px-8 py-8 mt-10 mb-4 flex flex-col md:w-2/3 sm:w-3/4 w-3/4"
@@ -45,72 +70,61 @@ const Step4 = ({ handlerStore }) => {
         <GiPassport className="text-4xl" />
         <h2 className="ml-2 text-3xl">Perfil migratorio.</h2>
       </div>
-      <div class="md:w-2/4 px-3 mb-6 md:mb-0">
-        <RadioButtons
-          label={"¿Ha decidido salir del país?"}
-          name={"country_leave"}
-          options={["Si", "No"]}
-          register={register}
-          errors={errors}
-          handlerChecked={handlerChecked}
-          required={"*Este campo es obligatorio."}
-        />
-      </div>
-      <div className="relative md:w-2/4 px-3">
-        <Select
-          label={"¿A qué país?"}
-          options={[
-            { option: "El Salvador", value: "El Salvador" },
-            { option: "Guatemala", value: "Guatemala" },
-            { option: "Nicaragua", value: "Nicaragua" },
-          ]}
-          disabled={radioValues?.country_leave}
-          name={"country_leave_name"}
-          required={"*Este campo es obligatorio."}
-          register={register}
-          errors={errors}
-        />
-      </div>
-      <div className="md:w-2/5 px-3 mb-6 md:mb-0">
-          <Input
-            label={"Nombres"}
-            name={"name"}
-            type={"text"}
-            placeholder={"Nombres"}
+      <div className="-mx-3 md:flex mb-6">
+        <div class="md:w-1/5 px-3 mb-6 md:mb-0">
+          <RadioButtons
+            label={"¿Ha decidido salir del país?"}
+            name={"country_leave"}
+            options={["Si", "No"]}
             register={register}
             errors={errors}
-            disabled={radioValues?.country_leave}
+            handlerChange={handlerRadioButton}
             required={"*Este campo es obligatorio."}
           />
         </div>
-      <div key="family_cant" className="sm:w-1/2 lg:1/2 px-3 mb-6 md:mb-0">
-        <label
-          htmlFor="family_cant"
-          className="uppercase tracking-wide text-black text-xs font-bold mb-2"
-        >
-          ¿Cuántas personas de su grupo familiar?
-        </label>
-        <input
-          className="block w-full m-auto p-2 border-2 rounded-md mt-0.5 focus:outline-gray-400 focus:shadow-outline"
-          {...register("family_cant")}
-          type="number"
-          id="family_cant"
-          placeholder="Cantidad de personas del grupo familiar"
-        />
-        <div>
-          {errors["family_cant"] && (
-            <span className="text-red-500 text-xs italic">
-              {errors["family_cant"].message}
-            </span>
-          )}
+        <div className="md:w-2/5 px-3 mb-6 md:mb-0">
+          <Input
+            label={"¿Cuántas personas de su grupo familiar?"}
+            name={"family_cant"}
+            type={"number"}
+            placeholder={"Numero de personas."}
+            register={register}
+            errors={errors}
+            disabled={radioValues?.country_leave}
+          />
+        </div>
+        <div className="relative md:w-2/5 px-3">
+          <Select
+            label={"¿A qué país?"}
+            options={[
+              { option: "Seleccione una opcion", value: 0 },
+              { option: "El Salvador", value: 1 },
+              { option: "Guatemala", value: 2 },
+              { option: "Nicaragua", value: 3 },
+            ]}
+            disabled={radioValues?.country_leave}
+            name={"country_leave_name"}
+            register={register}
+            errors={errors}
+          />
         </div>
       </div>
-      <div key="Button" className="w-full flex justify-end mt-4">
-        <div className="md:w-auto px-3">
-          <button className="w-full bg-green-500 text-white font-bold py-2 px-6 rounded-md hover:bg-green-600 uppercase">
-            Siguiente
-          </button>
+      <div class="flex flex-row justify-between -mx-0.5 md:flex mb-2">
+        <div onClick={() => handlerClick()}>
+          <div className="flex flex-row items-center bg-slate-200 border border-slate-300 rounded-md px-4 py-3 text-lg cursor-pointer">
+            
+            <span className="text-slate-600 h-full ml-2">
+              Regresar
+            </span>
+          </div>
         </div>
+        <button
+          className="bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-md px-7 py-3 transition duration-1000"
+          type="submit"
+          value={"Enviar"}
+        >
+          Siguiente
+        </button>
       </div>
     </form>
   );

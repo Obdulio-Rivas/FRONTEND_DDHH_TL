@@ -4,6 +4,9 @@ import { GrMoney } from "react-icons/gr";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
+import Input from "../../../../components/Forms/Inputs/Input";
+import RadioButtons from "../../../../components/Forms/RadioButtons/RadioButtons";
+import Checkbox from "../../../../components/Forms/Checkbox/Checkbox";
 
 const Step3 = ({ handlerStore }) => {
   const {
@@ -23,6 +26,10 @@ const Step3 = ({ handlerStore }) => {
     navigate("/incident/step4");
   };
 
+  const handlerClick = () => {
+    navigate("/incident/step2");
+  };
+
   return (
     <form
       className="bg-white border border-slate-300 m-auto rounded px-8 py-8 mt-10 mb-4 flex flex-col md:w-2/3 sm:w-3/4 w-3/4"
@@ -32,228 +39,78 @@ const Step3 = ({ handlerStore }) => {
         <GrMoney className="text-4xl" />
         <h2 className="ml-2 text-3xl">Perfil socioeconomico.</h2>
       </div>
-      <div key="home" className="sm:w-1/2 lg:1/2 px-3 mb-6 md:mb-0">
-        <label
-          htmlFor="home"
-          className="uppercase tracking-wide text-black text-xs font-bold mb-2"
-        >
-          La casa donde resido/ residía era:
-        </label>
-        <label
-          htmlFor="home"
-          className="uppercase tracking-wide text-black text-xs font-bold mb-2"
-        >
-          <br></br>
-          <input
-            className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
-            type="checkbox"
-            id="home"
-            name="home"
-            value="Propia"
-            {...register("home")}
+      <div className="-mx-3 md:flex mb-6">
+        <div className="md:w-full px-3 mb-6 md:mb-0">
+          <RadioButtons
+            label={"La casa donde resido/ residía era"}
+            name={"home"}
+            options={[
+              "Propia",
+              "Alquilada",
+              "Financiada",
+              "Casa Familiar"
+            ]}
+            register={register}
+            errors={errors}
+            required={"*Este campo es obligatorio."}
           />
-          Propia
-        </label>
-        <br></br>
-        <label
-          htmlFor="home"
-          className="uppercase tracking-wide text-black text-xs font-bold mb-2"
-        >
-          <input
-            className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
-            type="checkbox"
-            id="home"
-            name="home"
-            value="Alquilada"
-            {...register("home")}
-          />
-          Alquilada
-        </label>
-        <br></br>
-        <label
-          htmlFor="home"
-          className="uppercase tracking-wide text-black text-xs font-bold mb-2"
-        >
-          <input
-            className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
-            type="checkbox"
-            id="home"
-            name="home"
-            value="Financiada"
-            {...register("home")}
-          />
-          Financiada
-        </label>
-        <br></br>
-        <label
-          htmlFor="home"
-          className="uppercase tracking-wide text-black text-xs font-bold mb-2"
-        >
-          <input
-            className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
-            type="checkbox"
-            id="home"
-            name="home"
-            value="Caso Familiar"
-            {...register("home")}
-          />
-          Caso Familiar
-        </label>
-      </div>
-      <div key="monthly_income" className="sm:w-1/2 lg:1/2 px-3 mb-6 md:mb-0">
-        <label
-          htmlFor="monthly_income"
-          className="uppercase tracking-wide text-black text-xs font-bold mb-2"
-        >
-          Ingresos Mensuales del grupo familiar:
-        </label>
-        <input
-          className="block w-full m-auto p-2 border-2 rounded-md mt-0.5 focus:outline-gray-400 focus:shadow-outline"
-          {...register("monthly_income", {
-            required: "El monto mensual es requerida",
-          })}
-          type="number"
-          id="monthly_income"
-          placeholder="Ingresos mensuales..."
-        />
-        <div>
-          {errors["monthly_income"] && (
-            <span className="text-red-500 text-xs italic">
-              {errors["monthly_income"].message}
-            </span>
-          )}
         </div>
       </div>
-      <div key="familiar_income" className="sm:w-1/2 lg:1/2 px-3 mb-6 md:mb-0">
-        <label
-          htmlFor="familiar_income"
-          className="uppercase tracking-wide text-black text-xs font-bold mb-2"
-        >
-          Ingreso actual del grupo familiar:
-        </label>
-        <input
-          className="block w-full m-auto p-2 border-2 rounded-md mt-0.5 focus:outline-gray-400 focus:shadow-outline"
-          {...register("familiar_income", {
-            required: "El monto mensual es requerida",
-          })}
-          type="number"
-          id="familiar_income"
-          placeholder="Ingresos actuales..."
-        />
-        <div>
-          {errors["familiar_income"] && (
-            <span className="text-red-500 text-xs italic">
-              {errors["familiar_income"].message}
-            </span>
-          )}
+      <div className="-mx-3 md:flex mb-6">
+        <div className="md:w-2/4 px-3 mb-6 md:mb-0">
+          <Input
+            label={"Ingresos Mensuales del grupo familiar"}
+            name={"monthly_income"}
+            type={"text"}
+            placeholder={"Institución u organización que conoce sobre el caso..."}
+            register={register}
+            errors={errors}
+          />
+        </div>
+        <div className="md:w-2/4 px-3 mb-6 md:mb-0">
+          <Input
+            label={"Ingreso actual del grupo familiar"}
+            name={"familiar_income"}
+            type={"text"}
+            placeholder={"Institución u organización que conoce sobre el caso..."}
+            register={register}
+            errors={errors}
+          />
         </div>
       </div>
-      <div
-        key="survive_displacement"
-        className="sm:w-1/2 lg:1/2 px-3 mb-6 md:mb-0"
-      >
-        <label
-          htmlFor="survive_displacement"
-          className="uppercase tracking-wide text-black text-xs font-bold mb-2"
-        >
-          ¿Cómo ha logrado sobrevivir durante el desplazamiento?
-        </label>
-        <label
-          htmlFor="survive_displacement"
-          className="uppercase tracking-wide text-black text-xs font-bold mb-2"
-        >
-          <input
-            className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
-            type="checkbox"
-            id="survive_displacement"
-            name="survive_displacement"
-            value="Ahorros"
-            {...register("survive_displacement")}
+      <div className="-mx-3 md:flex mb-6">
+        <div className="md:w-full px-3 mb-6 md:mb-0">
+          <Checkbox
+            label={"¿Cómo ha logrado sobrevivir durante el desplazamiento?"}
+            name={"survive_displacement"}
+            options={[
+              "Ahorros",
+              "Trabajo Informal",
+              "Préstamo",
+              "Remesas",
+              "Empeños",
+              "Mendicidad"
+            ]}
+            register={register}
+            errors={errors}
+            openOption={{ type: "text", value: 'Otros' }}
+            required={"*Este campo es obligatorio."}
           />
-          Ahorros
-        </label>
-        <br></br>
-        <label
-          htmlFor="survive_displacement"
-          className="uppercase tracking-wide text-black text-xs font-bold mb-2"
-        >
-          <input
-            className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
-            type="checkbox"
-            id="survive_displacement"
-            name="survive_displacement"
-            value="Trabajo Informal"
-            {...register("survive_displacement")}
-          />
-          Trabajo Informal
-        </label>
-        <br></br>
-        <label
-          htmlFor="survive_displacement"
-          className="uppercase tracking-wide text-black text-xs font-bold mb-2"
-        >
-          <input
-            className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
-            type="checkbox"
-            id="survive_displacement"
-            name="survive_displacement"
-            value="Prestamo"
-            {...register("survive_displacement")}
-          />
-          Préstamo
-        </label>
-        <br></br>
-        <label
-          htmlFor="survive_displacement"
-          className="uppercase tracking-wide text-black text-xs font-bold mb-2"
-        >
-          <input
-            className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
-            type="checkbox"
-            id="survive_displacement"
-            name="survive_displacement"
-            value="Remesas"
-            {...register("survive_displacement")}
-          />
-          Remesas
-        </label>
-        <label
-          htmlFor="survive_displacement"
-          className="uppercase tracking-wide text-black text-xs font-bold mb-2"
-        >
-          <br></br>
-          <input
-            className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
-            type="checkbox"
-            id="survive_displacement"
-            name="survive_displacement"
-            value="Empeños "
-            {...register("survive_displacement")}
-          />
-          Empeños
-        </label>
-        <br></br>
-        <label
-          htmlFor="survive_displacement"
-          className="uppercase tracking-wide text-black text-xs font-bold mb-2"
-        >
-          <input
-            className="accent-emerald-500/25 w-1/6 py-3 px-4 mb-3"
-            type="checkbox"
-            id="survive_displacement"
-            name="survive_displacement"
-            value="Mendicidad"
-            {...register("survive_displacement")}
-          />
-          Mendicidad
-        </label>
-      </div>
-      <div key="Button" className="w-full flex justify-end mt-4">
-        <div className="md:w-auto px-3">
-          <button className="w-full bg-green-500 text-white font-bold py-2 px-6 rounded-md hover:bg-green-600 uppercase">
-            Siguiente
-          </button>
         </div>
+      </div>
+      <div class="flex flex-row justify-between -mx-0.5 md:flex mb-2">
+        <div onClick={() => handlerClick()}>
+          <div className="flex flex-row items-center bg-slate-200 border border-slate-300 rounded-md px-4 py-3 text-lg cursor-pointer">
+            <span className="text-slate-600 h-full ml-2">Regresar</span>
+          </div>
+        </div>
+        <button
+          className="bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-md px-7 py-3 transition duration-1000"
+          type="submit"
+          value={"Enviar"}
+        >
+          Siguiente
+        </button>
       </div>
     </form>
   );

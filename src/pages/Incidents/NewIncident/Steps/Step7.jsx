@@ -11,7 +11,7 @@ const Step7 = ({ store, handlerStore }) => {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
 
-console.log(store)
+  console.log(store);
 
   const getMonthName = (monthNumber) => {
     return [
@@ -309,18 +309,7 @@ console.log(store)
         </h1>
         <ul className="flex flex-row flex-wrap justify-between px-5">
           <span className="text-base text-justify">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem
-            voluptas soluta praesentium at nemo nisi repellendus fugit eaque
-            molestiae, perspiciatis provident iure atque fuga, maiores debitis
-            sint natus repudiandae sed assumenda totam. Molestias, molestiae.
-            Sapiente repellat laudantium dignissimos porro hic? Laudantium
-            aliquid doloribus vitae natus tempora provident nobis consectetur.
-            Tempore nobis rem eum tenetur vero sit magni exercitationem, veniam,
-            velit alias quas adipisci nihil quae qui dolores quibusdam
-            perferendis harum enim! Labore aliquid natus voluptate! Ipsam modi
-            nostrum quos porro nobis ducimus iste illo suscipit eius, fugiat
-            sed? Sequi corrupti, sed et voluptatem modi dolor. Dignissimos
-            aliquam recusandae ullam dolor.
+            {store?.step5?.values?.description_incident}
           </span>
         </ul>
       </div>
