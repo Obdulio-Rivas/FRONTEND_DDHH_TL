@@ -19,12 +19,6 @@ const Step2 = ({ handlerStore }) => {
     statal_institution: 1,
   });
 
-  const [checkboxValues, setCheckboxValues] = useState({
-    cause_displacement: 1,
-    institutions_accompanied: 1,
-    people_displacement: 1,
-  });
-
   const [municipalities, setMunicipalities] = useState([
     { option: "Selecciona una opcion", value: "Default value" },
   ]);
@@ -36,7 +30,6 @@ const Step2 = ({ handlerStore }) => {
     register,
     handleSubmit,
     formState: { errors },
-    setValue,
   } = useForm();
 
   const navigate = useNavigate();
@@ -183,11 +176,12 @@ const Step2 = ({ handlerStore }) => {
               "Desconocidos",
               "Pandillas (MS)",
               "Pandillas (Barrio 18)",
-              "Particulares"
+              "Particulares",
+              "Otro"
             ]}
             register={register}
             errors={errors}
-            openOption={{ type: "text", value: 'Otro' }}
+            openOption={{ type: "text", index: 8 }}
             required={"*Este campo es obligatorio."}
           />
         </div>
@@ -204,11 +198,12 @@ const Step2 = ({ handlerStore }) => {
               "PDDH",
               "PGR",
               "ISDEMU",
-              "CONNA"
+              "CONNA",
+              "Otra"
             ]}
             register={register}
             errors={errors}
-            openOption={{ type: "text", value: 'Otra' }}
+            openOption={{ type: "text", index: 8 }}
             required={"*Este campo es obligatorio."}
           />
         </div>
@@ -230,7 +225,7 @@ const Step2 = ({ handlerStore }) => {
             label={"Nombre de la institucion estatal"}
             name={"statal_institution_name"}
             type={"text"}
-            placeholder={"Direccion"}
+            placeholder={"Nombre de la institucion estatal"}
             register={register}
             errors={errors}
             disabled={radioValues?.statal_institution}
@@ -245,7 +240,7 @@ const Step2 = ({ handlerStore }) => {
             name={"accompanied_descriptions"}
             type={"text"}
             height={screenHeight / 6}
-            placeholder={"Narrativa de los hechos..."}
+            placeholder={"Descripcion del acompañamiento brindado..."}
             register={register}
             errors={errors}
             required={"*Este campo es obligatorio."}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 
 const Checkbox = ({
   label,
@@ -7,25 +7,36 @@ const Checkbox = ({
   required,
   register,
   errors,
-  openOption,
+  openOption
 }) => {
 
-  const getOpenOption = (name, register, openOption, errors) => {
+  const [field, setField] = useState({value: '', isDisabled: true});
+
+  const handlerChangeInput = (e) => {
+    setField({...field, value: e.target.value});
+  }
+
+  const handlerChangeCheckbox = (e) => {
+    setField({...field, isDisabled: !field.isDisabled});
+  }
+
+  const getOpenOption = (name, openOption, isDisabled) => {
     return (
       <>
         <label
           className="flex flex-row flex-wrap justify-start items-center w-full mt-2 mb-1"
-          for={'test'}
+          for={`${name}_${openOption.index-1}`}
         >
-          {`${openOption.value}:`}
+          {`${options[openOption.index-1]}:`}
         </label>
         <input
-          id={'test'}
+          id={`${name}_${openOption.index-1}`}
           name={name}
+          disabled={isDisabled}
           className={`appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3`}
           type={openOption.type}
           placeholder={openOption.value}
-          {...register(name, { required: required })}
+          onChange={(e)=>handlerChangeInput(e)}
         />
       </>
     );
@@ -47,17 +58,19 @@ const Checkbox = ({
             <label key={index} className={`inline-flex items-center mt-3 mr-4`}>
               <input
                 type="checkbox"
-                value={index}
+                value={index === openOption?.index ? field?.value : option}
                 name={name}
                 id={name}
                 className="form-checkbox h-5 w-5 text-gray-600"
                 {...register(name, { required: required })}
+                onChange={index === openOption?.index ? (e)=>handlerChangeCheckbox(e): null}
               />
               <span className="ml-2 text-gray-700">{option}</span>
             </label>
           );
         })}
-        {!!openOption ? getOpenOption(name, register, openOption, errors) : null}
+        <input id={name} className={"invisible"} defaultChecked={true} name={name} type="checkbox" value={field.value}/>
+        {!!openOption ? getOpenOption(name, openOption, field.isDisabled) : null}
       </div>
       {errors[name] && (
         <span className="text-red-500 text-xs italic">

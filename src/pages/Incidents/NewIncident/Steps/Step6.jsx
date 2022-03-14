@@ -15,7 +15,10 @@ const Step6 = ({ handlerStore }) => {
   const [victims, setVictims] = useState([]);
   const navigate = useNavigate();
 
-  const [radioValues, setRadioValues] = useState({});
+  const [radioValues, setRadioValues] = useState({
+    chronic_disease: 1,
+    physical_disability: 1,
+  });
 
   const {
     register,
@@ -341,6 +344,7 @@ const Step6 = ({ handlerStore }) => {
               { option: "Enfermedad 3", value: "Enfermedad 3" },
               { option: "Otro", value: "Otro" },
             ]}
+            disabled={radioValues?.physical_disability}
             name={"type_disability"}
             required={"*Este campo es obligatorio."}
             register={register}
@@ -373,6 +377,7 @@ const Step6 = ({ handlerStore }) => {
               { option: "Medicamento 3", value: "Medicamento 3" },
               { option: "Otro", value: "Otro" },
             ]}
+            disabled={radioValues?.chronic_disease}
             name={"medicamento"}
             required={"*Este campo es obligatorio."}
             register={register}
