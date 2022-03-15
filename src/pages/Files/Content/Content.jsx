@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import ReactPaginate from "react-paginate";
 import { RiArrowLeftSLine, RiArrowRightSLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
@@ -18,15 +18,17 @@ const Content = ({
   content = [],
   isLoading = true,
   changeFolder,
+  filter,
   handlerIsLoading = null,
 }) => {
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(0);
-
   const handlerChange = (e) => {
     const { value } = e.target;
+    filter(value);
     setSearch(value);
   };
+
 
   const handlerClick = (value) => {
     changeFolder(value);

@@ -8,12 +8,14 @@ import Dots from "../../components/Loaders/Dots";
 const Files = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [content, setContent] = useState(null);
+  const [contentFiltro,setContentFiltro] = useState(null);
 
   useEffect(() => {
     async function getRootFiles() {
       setIsLoading(true);
       const response = await FirebaseService.listFiles("/");
       setContent(response);
+      setContentFiltro(response);
       setIsLoading(false);
     }
     getRootFiles();
@@ -24,10 +26,20 @@ const Files = () => {
       setIsLoading(true);
       const response = await FirebaseService.listFiles(value);
       setContent(response);
+      setContentFiltro(response);
       setIsLoading(false);
     }
     getContentFolder(value);
   };
+
+  const filter = (busquedaObjeto)=>{
+    var resultadoBusqueda = contentFiltro.filter((element)=>{
+      if(element.name.toString().toLowerCase().includes(busquedaObjeto.toLowerCase())){
+        return element;
+      }
+    })
+    setContent(resultadoBusqueda);
+  }
 
   if (!content) {
     return (
@@ -45,7 +57,7 @@ const Files = () => {
         <div className="w-full md:w-12/12 mx-auto h-64">
           <Breadcrumb changeFolder={changeFolder} />
 
-          <Content isLoading={isLoading} content={content} changeFolder={changeFolder} handlerLoading = {setIsLoading}/>
+          <Content isLoading={isLoading} content={content} filter={filter} changeFolder={changeFolder} handlerLoading = {setIsLoading}/>
         </div>
       </div>
     </>
