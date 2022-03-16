@@ -181,7 +181,7 @@ const Step2 = ({ handlerStore }) => {
             ]}
             register={register}
             errors={errors}
-            openOption={{ type: "text", index: 8 }}
+            openOption={{ type: "text", index: 7 }}
             required={"*Este campo es obligatorio."}
           />
         </div>
@@ -203,7 +203,7 @@ const Step2 = ({ handlerStore }) => {
             ]}
             register={register}
             errors={errors}
-            openOption={{ type: "text", index: 8 }}
+            openOption={{ type: "text", index: 7 }}
             required={"*Este campo es obligatorio."}
           />
         </div>

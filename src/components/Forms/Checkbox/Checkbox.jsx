@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 
 const Checkbox = ({
   label,
@@ -7,36 +7,35 @@ const Checkbox = ({
   required,
   register,
   errors,
-  openOption
+  openOption,
 }) => {
-
-  const [field, setField] = useState({value: '', isDisabled: true});
+  const [field, setField] = useState({ value: "", isDisabled: true });
 
   const handlerChangeInput = (e) => {
-    setField({...field, value: e.target.value});
-  }
+    setField({ ...field, value: e.target.value });
+  };
 
   const handlerChangeCheckbox = (e) => {
-    setField({...field, isDisabled: !field.isDisabled});
-  }
+    setField({ ...field, isDisabled: !field.isDisabled });
+  };
 
   const getOpenOption = (name, openOption, isDisabled) => {
     return (
       <>
         <label
-          className="flex flex-row flex-wrap justify-start items-center w-full mt-2 mb-1"
-          for={`${name}_${openOption.index-1}`}
+          className={`flex flex-row flex-wrap justify-start items-center w-full mt-2 mb-1`}
+          for={`${name}_${openOption.index}`}
         >
-          {`${options[openOption.index-1]}:`}
+          {`${options[openOption.index]}:`}
         </label>
         <input
-          id={`${name}_${openOption.index-1}`}
+          id={`${name}_${openOption.index}`}
           name={name}
           disabled={isDisabled}
-          className={`appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3`}
+          className={`appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3 ${isDisabled ? 'cursor-not-allowed' : null}`}
           type={openOption.type}
-          placeholder={openOption.value}
-          onChange={(e)=>handlerChangeInput(e)}
+          placeholder={options[openOption.index]}
+          onChange={(e) => handlerChangeInput(e)}
         />
       </>
     );
@@ -50,9 +49,7 @@ const Checkbox = ({
       >
         {label}
       </label>
-      <div
-        className="flex flex-row flex-wrap justify-start items-center"
-      >
+      <div className="flex flex-row flex-wrap justify-start items-center">
         {options.map((option, index, array) => {
           return (
             <label key={index} className={`inline-flex items-center mt-3 mr-4`}>
@@ -63,14 +60,27 @@ const Checkbox = ({
                 id={name}
                 className="form-checkbox h-5 w-5 text-gray-600"
                 {...register(name, { required: required })}
-                onChange={index === openOption?.index ? (e)=>handlerChangeCheckbox(e): null}
+                onChange={
+                  index === openOption?.index
+                    ? (e) => handlerChangeCheckbox(e)
+                    : null
+                }
               />
               <span className="ml-2 text-gray-700">{option}</span>
             </label>
           );
         })}
-        <input id={name} className={"invisible"} defaultChecked={true} name={name} type="checkbox" value={field.value}/>
-        {!!openOption ? getOpenOption(name, openOption, field.isDisabled) : null}
+        <input
+          id={name}
+          className={"invisible"}
+          defaultChecked={true}
+          name={name}
+          type="checkbox"
+          value={field.value}
+        />
+        {!!openOption
+          ? getOpenOption(name, openOption, field.isDisabled)
+          : null}
       </div>
       {errors[name] && (
         <span className="text-red-500 text-xs italic">

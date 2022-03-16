@@ -55,24 +55,64 @@ const Step7 = ({ store, handlerStore }) => {
           I. DATOS DE REGISTRO INSTITUCIONAL.
         </h1>
         <ul className="flex flex-row flex-wrap justify-between px-5">
-          <li className="py-1">Expediente: TDH-0000000000-000/000</li>
-          <li className="py-1">Fecha: 2/27/2022</li>
-          <li className="py-1">Hora: 8:00 am</li>
+          <li className="py-1">
+            <span>Expediente:</span>
+            <span>{store?.step1?.values?.expediente}</span>
+          </li>
+          <li className="py-1">
+            <span className="mr-2">Fecha:</span>
+            <span>{store?.step1?.values?.incident_date}</span>
+          </li>
+          <li className="py-1">
+            <span className="mr-2">Hora:</span>
+            <span>
+              {store?.step1?.values?.hour?.split(":")[0] >= 12 &&
+              store?.step1?.values?.hour?.split(":")[1] > 0
+                ? `${store?.step1?.values?.hour} PM`
+                : `${store?.step1?.values?.hour} AM`}
+            </span>
+          </li>
         </ul>
         <ul className="flex flex-row flex-wrap justify-between px-5">
           <li className="py-1">
-            ¿Conoce otra institución u organización sobre el caso? No{" "}
-            <BsSquare className="inline-flex text-sm" /> SI{" "}
-            <BsCheckSquare className="inline-flex text-sm" />{" "}
+            <span className="mr-2">
+              ¿Conoce otra institución u organización sobre el caso?
+            </span>
+            <span className="mx-2">
+              Si{" "}
+              {store?.step1?.values?.incident_institution === "0" ? (
+                <BsCheckSquare className="inline-flex text-sm" />
+              ) : (
+                <BsSquare className="inline-flex text-sm" />
+              )}
+            </span>
+            <span className="mx-2">
+              No{" "}
+              {store?.step1?.values?.incident_institution === "1" ? (
+                <BsCheckSquare className="inline-flex text-sm" />
+              ) : (
+                <BsSquare className="inline-flex text-sm" />
+              )}
+            </span>
           </li>
           <li className="py-1">
-            ¿Cuál? Institucion de Ingenieros Asociados por un mundo Tecnologico.
+            <span className="mr-2">¿Cuál?</span>
+            <span>{store?.step1?.values?.incident_institution_name}</span>
           </li>
         </ul>
         <ul className="flex flex-row flex-wrap justify-between px-5">
-          <li className="py-1">Nombre de quien Refiere:</li>
-          <li className="py-1">Contacto:</li>
-          <li className="py-1">Identificación del Caso:</li>
+          <li className="py-1">
+            <span className="mr-2">Nombre de quien Refiere:</span>
+            <span>{store?.step1?.values?.name_reference}</span>
+          </li>
+          <li className="py-1">
+            <span className="mr-2">Contacto:</span>
+            <span>{store?.step1?.values?.contact}</span>
+          </li>
+          <li className="py-1">
+            <span className="mr-2">Identificación del Caso:</span>
+            <span>{store?.step1?.values?.incident_identification}</span>
+          </li>
         </ul>
       </div>
       <div className="my-4">
@@ -118,7 +158,7 @@ const Step7 = ({ store, handlerStore }) => {
         <h1 className="flex flex-row justify-between border border-slate-300 text-lg text-gray-800 font-semibold py-2 px-4 mb-2">
           <span>III. DATOS DE LAS VICTIMAS.</span>
           <span className="text-base">
-            Número total de personas afectadas: {store?.step6?.values?.length}
+            Número total de personas afectadas: {store?.step6?.values?.length ? store?.step6?.values?.length : 0}
           </span>
         </h1>
         <div className="divide-y divide-dashed divide-slate-300">
@@ -195,6 +235,9 @@ const Step7 = ({ store, handlerStore }) => {
               );
             }
           )}
+          {store?.step6?.values?.length ? (
+            <span>No se regitro ningun usuario!</span>
+          ) : null}
         </div>
       </div>
       <div className="my-4">

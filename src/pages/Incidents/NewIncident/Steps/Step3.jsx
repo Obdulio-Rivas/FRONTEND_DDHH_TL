@@ -94,7 +94,7 @@ const Step3 = ({ handlerStore }) => {
             ]}
             register={register}
             errors={errors}
-            openOption={{ type: "text", index: 7 }}
+            openOption={{ type: "text", index: 6 }}
             required={"*Este campo es obligatorio."}
           />
         </div>
