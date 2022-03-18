@@ -47,8 +47,7 @@ const NewUser = () => {
       <Navbar />
       <form
         className="bg-white border border-slate-300 m-auto rounded px-8 py-8 mt-10 mb-4 flex flex-col md:w-2/3 sm:w-3/4 w-3/4"
-        onSubmit={handleSubmit(onSubmit)}
-      >
+        onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-row items-center justify-start mb-10">
           <AiOutlineUserAdd className="text-4xl" />
           <h2 className="ml-2 text-3xl">Registar Usuario.</h2>
@@ -98,6 +97,7 @@ const NewUser = () => {
               register={register}
               errors={errors}
               required={"*Este campo es obligatorio."}
+              pattern={/^\d{8}-\d{1}$/g}
             />
           </div>
           <div className="md:w-2/6 px-3 mb-6 md:mb-0">

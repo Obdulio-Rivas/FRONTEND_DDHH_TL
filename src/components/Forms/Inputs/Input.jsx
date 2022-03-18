@@ -1,6 +1,6 @@
 import React from "react";
 
-const Input = ({ label, name, type, placeholder, register, errors, required, disabled = 0 }) => {
+const Input = ({ label, name, type, placeholder, register, errors, required, disabled = 0,pattern }) => {
 
   return (
     <>
@@ -16,7 +16,7 @@ const Input = ({ label, name, type, placeholder, register, errors, required, dis
         type={type}
         placeholder={placeholder}
         disabled={disabled ==! 0 ? true : false}
-        {...register(name, { required: required })}
+        {...register(name, { required: required, pattern:{value:pattern, message:"Debe digitar el formato correcto."} })}
       />
       {errors[name] && (
         <span className="text-red-500 text-xs italic">
