@@ -93,7 +93,7 @@ const NewUser = () => {
               label={"DUI"}
               name={"dui"}
               type={"text"}
-              placeholder={"DUI"}
+              placeholder={"00000000-0"}
               register={register}
               errors={errors}
               required={"*Este campo es obligatorio."}
@@ -105,10 +105,11 @@ const NewUser = () => {
               label={"Telefono"}
               name={"phone"}
               type={"text"}
-              placeholder={"Telefono"}
+              placeholder={"7777-7777"}
               register={register}
               errors={errors}
               required={"*Este campo es obligatorio."}
+              pattern={/^\d{4}-\d{4}$/g}
             />
           </div>
           <div className="md:w-2/6 px-3 mb-6 md:mb-0">
@@ -132,10 +133,11 @@ const NewUser = () => {
               label={"NIT"}
               name={"nit"}
               type={"text"}
-              placeholder={"NIT"}
+              placeholder={"0000-000000-000-1"}
               register={register}
               errors={errors}
               required={"*Este campo es obligatorio."}
+              pattern={/^\d{4}-\d{6}-\d{3}-\d{1}/}
             />
           </div>
           <div className="md:w-2/6 px-3 mb-6 md:mb-0">
@@ -143,10 +145,11 @@ const NewUser = () => {
               label={"Email"}
               name={"email"}
               type={"text"}
-              placeholder={"Email"}
+              placeholder={"mail@gmail.com"}
               register={register}
               errors={errors}
               required={"*Este campo es obligatorio."}
+              pattern={/^[\w.%-+]+[@\w.-]+\.[a-zA-Z]{2,4}$/g}
             />
           </div>
           <div className="md:w-2/6 px-3 mb-6 md:mb-0">
@@ -158,6 +161,7 @@ const NewUser = () => {
               register={register}
               errors={errors}
               required={"*Este campo es obligatorio."}
+              pattern={/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&._-])([A-Za-z\d$@$!%*?&._-]|[^ ]){8,15}/g}
             />
           </div>
         </div>
