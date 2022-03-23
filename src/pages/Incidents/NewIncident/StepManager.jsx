@@ -78,6 +78,15 @@ const StepManager = ({ children }) => {
             >
               <Link to="/incident/step7">Step 7</Link>
             </li>
+            <li
+              className={`flex items-center h-10 px-2 py-2 -mb-px text-center sm:px-4 -px-1 whitespace-nowrap focus:outline-none ${
+                getStep(location.pathname) === "/step8"
+                  ? "text-blue-600 bg-transparent border-b-4 border-blue-500"
+                  : ""
+              }`}
+            >
+              <Link to="/incident/step8">Step 8</Link>
+            </li>
           </ul>
         </nav>
       </div>

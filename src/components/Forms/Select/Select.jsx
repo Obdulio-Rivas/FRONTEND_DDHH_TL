@@ -7,7 +7,7 @@ const Select = ({
   required,
   register,
   errors,
-  disabled = 0,
+  disabled = 1,
 }) => {
   return (
     <>
@@ -20,9 +20,9 @@ const Select = ({
       <div class="relative">
         <select
           id="name"
-          disabled={disabled ==! 0 ? true : false}
+          disabled={disabled == 0 ? true : false}
           defaultValue={options[0].value}
-          className={`block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded ${disabled ==! 0 ? 'cursor-not-allowed' : null}`}
+          className={`block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded ${disabled == 0 ? 'cursor-not-allowed' : null}`}
           {...register(name, { required: required })}
         >
           {options?.map(({ option, value }, index) => {

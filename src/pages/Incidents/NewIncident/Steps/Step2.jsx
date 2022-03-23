@@ -1,24 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { AiOutlineFileDone } from "react-icons/ai";
+import { FiUser } from "react-icons/fi";
+import { HiOutlineIdentification } from "react-icons/hi";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { useNavigate } from "react-router-dom";
-import DepartmentService from "../../../../services/Dimensions/Department/Department.Service";
-import MunicipalityService from "../../../../services/Dimensions/Municipality/Municipality.Service";
+import { Link, useNavigate } from "react-router-dom";
+import Select from "../../../../components/Forms/Select/Select";
 import Input from "../../../../components/Forms/Inputs/Input";
 import RadioButtons from "../../../../components/Forms/RadioButtons/RadioButtons";
-import Select from "../../../../components/Forms/Select/Select";
-import Checkbox from "../../../../components/Forms/Checkbox/Checkbox";
-import Textarea from "../../../../components/Forms/Textarea/Textarea";
+import DepartmentService from "../../../../services/Dimensions/Department/Department.Service";
+import MunicipalityService from "../../../../services/Dimensions/Municipality/Municipality.Service";
 
 const Step2 = ({ handlerStore }) => {
-  const screenHeight = document.body.clientHeight;
-
-  const [radioValues, setRadioValues] = useState({
-    statal_institution: 1,
-  });
-
+  const navigate = useNavigate();
   const [municipalities, setMunicipalities] = useState([
     { option: "Selecciona una opcion", value: "Default value" },
   ]);
@@ -26,13 +20,10 @@ const Step2 = ({ handlerStore }) => {
     { option: "Selecciona una opcion", value: "Default value" },
   ]);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-
-  const navigate = useNavigate();
+  const [radioValues, setRadioValues] = useState({
+    chronic_disease: 0,
+    physical_disability: 0,
+  });
 
   useEffect(() => {
     async function getSelectOptions() {
@@ -62,6 +53,12 @@ const Step2 = ({ handlerStore }) => {
     getSelectOptions();
   }, []);
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
   const handlerRadioButton = ({ name, value }) => {
     setRadioValues({ ...radioValues, [name]: value });
   };
@@ -85,17 +82,46 @@ const Step2 = ({ handlerStore }) => {
       className="bg-white border border-slate-300 m-auto rounded px-8 py-8 mt-10 mb-4 flex flex-col md:w-2/3 sm:w-3/4 w-3/4"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <div className="flex flex-row items-center justify-start mb-4">
-        <AiOutlineFileDone className="text-4xl" />
-        <h2 className="ml-2 text-3xl">Perfil especifico de los hechos.</h2>
+      <div className="flex flex-row items-center justify-between mb-4">
+        <div className="flex flex-row items-center justify-start">
+          <FiUser className="text-4xl" />
+          <h2 className="ml-2 text-3xl">Agregar Usuario.</h2>
+        </div>
+        <div className="flex flex-row items-center justify-between">
+          <div class="md:w-full px-3 mb-6 md:mb-0">
+            <RadioButtons
+              label={"Victima directa:"}
+              name={"physical_disability"}
+              options={[
+                { label: "Si", value: 1 },
+                { label: "No", value: 0 },
+              ]}
+              register={register}
+              errors={errors}
+              handlerChange={handlerRadioButton}
+              required={"*Este campo es obligatorio."}
+            />
+          </div>
+        </div>
       </div>
       <div className="-mx-3 md:flex mb-6">
         <div className="md:w-2/5 px-3 mb-6 md:mb-0">
           <Input
-            label={"Fecha en que Ocurrieron los Hechos"}
-            name={"date_hechos"}
-            type={"date"}
-            placeholder={"Fecha en que Ocurrieron los Hechos"}
+            label={"Nombres"}
+            name={"name"}
+            type={"text"}
+            placeholder={"Nombres"}
+            register={register}
+            errors={errors}
+            required={"*Este campo es obligatorio."}
+          />
+        </div>
+        <div className="md:w-2/5 px-3 mb-6 md:mb-0">
+          <Input
+            label={"Apellidos"}
+            name={"last_name"}
+            type={"text"}
+            placeholder={"Apellidos"}
             register={register}
             errors={errors}
             required={"*Este campo es obligatorio."}
@@ -103,16 +129,169 @@ const Step2 = ({ handlerStore }) => {
         </div>
         <div className="md:w-1/5 px-3 mb-6 md:mb-0">
           <Input
-            label={"Hora Aprox."}
-            name={"datetime_hechos"}
-            type={"time"}
-            placeholder={"Hora aproximada de los hehos"}
+            label={"Edad"}
+            name={"age"}
+            type={"number"}
+            placeholder={"Edad"}
             register={register}
             errors={errors}
             required={"*Este campo es obligatorio."}
           />
         </div>
-        <div className="relative md:w-2/5 px-3">
+      </div>
+      <div className="-mx-3 md:flex mb-6">
+        <div className="relative md:w-1/3 px-3">
+          <Select
+            label={"Tipo de documento"}
+            options={[
+              { option: "DUI", value: "DUI" },
+              { option: "NIT", value: "NIT" },
+              { option: "CEDULA", value: "CEDULA" },
+            ]}
+            name={"type_dui"}
+            required={"*Este campo es obligatorio."}
+            register={register}
+            errors={errors}
+          />
+        </div>
+        <div class="md:w-2/3 px-3 mb-6 md:mb-0">
+          <Input
+            label={"Numero de documento"}
+            name={"dui"}
+            type={"text"}
+            placeholder={"Numero de documento"}
+            register={register}
+            errors={errors}
+            required={"*Este campo es obligatorio."}
+          />
+        </div>
+        <div class="md:w-1/3 px-3 mb-6 md:mb-0">
+          <RadioButtons
+            label={"Sabe leer y escribir:"}
+            name={"illiterate"}
+            options={[
+              { label: "Si", value: 1 },
+              { label: "No", value: 0 },
+            ]}
+            register={register}
+            errors={errors}
+            handlerChange={handlerRadioButton}
+            required={"*Este campo es obligatorio."}
+          />
+        </div>
+        <div class="md:w-1/3 px-3 mb-6 md:mb-0">
+          <RadioButtons
+            label={"Sexo:"}
+            name={"gender"}
+            options={[
+              { label: "Masculino", value: 1 },
+              { label: "Femenino", value: 0 },
+            ]}
+            register={register}
+            errors={errors}
+            handlerChange={handlerRadioButton}
+            required={"*Este campo es obligatorio."}
+          />
+        </div>
+      </div>
+      <div class="-mx-3 md:flex mb-2">
+        <div class="md:w-2/3 px-3 mb-6 md:mb-0">
+          <Select
+            label={"Orientación Sexual/ Identidad de Género:"}
+            options={[
+              {
+                option: "Seleccione una opcion.",
+                value: "DEFAULT",
+              },
+              { option: "Homosexual", value: "Homosexual" },
+              { option: "Heterosexual", value: "Heterosexual" },
+              { option: "Binario", value: "Binario" },
+              { option: "Otro", value: "Otro" },
+            ]}
+            name={"gender_identity"}
+            required={"*Este campo es obligatorio."}
+            register={register}
+            errors={errors}
+          />
+        </div>
+        <div className="relative md:w-1/3 px-3">
+          <Select
+            label={"Grado Academico:"}
+            options={[
+              {
+                option: "Seleccione una opcion.",
+                value: "DEFAULT",
+              },
+              {
+                option: "Ninguno",
+                value: 0,
+              },
+              {
+                option: "Basico",
+                value: 1,
+              },
+              {
+                option: "Educacion Media",
+                value: 2,
+              },
+              {
+                option: "Graduado de bachillerato",
+                value: 3,
+              },
+              {
+                option: "Universitario",
+                value: 4,
+              },
+              {
+                option: "Graduado de Universidad",
+                value: 5,
+              },
+            ]}
+            name={"academic_grade"}
+            required={"*Este campo es obligatorio."}
+            register={register}
+            errors={errors}
+          />
+        </div>
+        <div className="relative md:w-1/3 px-3">
+          <Select
+            label={"Profesión u Oficio:"}
+            options={[
+              {
+                option: "Seleccione una opcion.",
+                value: "DEFAULT",
+              },
+              { option: "Abogado", value: "Abogado" },
+              { option: "Medico", value: "Medico" },
+              { option: "Ingeniero", value: "Ingeniero" },
+              { option: "Otro", value: "Otro" },
+            ]}
+            name={"profession"}
+            required={"*Este campo es obligatorio."}
+            register={register}
+            errors={errors}
+          />
+        </div>
+      </div>
+      <div className="-mx-3 md:flex mb-6 mt-4">
+        <div className="relative md:w-2/6 px-3">
+          <Select
+            label={"Pais"}
+            name={"country"}
+            options={[
+              {
+                option: "Seleccione una opcion.",
+                value: NaN,
+              },
+              { option: "El Salvador", value: 0 },
+              { option: "Guatemala", value: 1 },
+            ]}
+            required={"*Este campo es obligatorio."}
+            register={register}
+            errors={errors}
+          />
+        </div>
+        <div className="relative md:w-2/6 px-3">
           <Select
             label={"Departamento"}
             name={"deparment"}
@@ -122,8 +301,6 @@ const Step2 = ({ handlerStore }) => {
             errors={errors}
           />
         </div>
-      </div>
-      <div className="-mx-3 md:flex mb-6">
         <div className="relative md:w-2/6 px-3">
           <Select
             label={"Municipio"}
@@ -134,6 +311,8 @@ const Step2 = ({ handlerStore }) => {
             errors={errors}
           />
         </div>
+      </div>
+      <div className="-mx-3 md:flex mb-6">
         <div className="md:w-4/6 px-3 mb-6 md:mb-0">
           <Input
             label={"Direccion"}
@@ -145,102 +324,36 @@ const Step2 = ({ handlerStore }) => {
             required={"*Este campo es obligatorio."}
           />
         </div>
-      </div>
-      <div className="-mx-3 md:flex mb-6">
-        <div className="md:w-2/4 px-3 mb-6 md:mb-0">
-          <Checkbox
-            label={"Causa del desplazamiento"}
-            name={"cause_displacement"}
-            options={[
-              "Amenazas",
-              "Homicidio",
-              "Extorsión",
-              "Desaparición de un Miembro de la Familia",
-              "Reclutamiento Forzoso",
-              "Testigo de un hecho Delictivo",
-              "Agresión Física",
-            ]}
-            register={register}
-            errors={errors}
-            required={"*Este campo es obligatorio."}
-          />
-        </div>
-        <div className="md:w-2/4 px-3 mb-6 md:mb-0">
-          <Checkbox
-            label={"Personas o grupos que generaron el desplazamiento"}
-            name={"people_displacement"}
-            options={[
-              "FAES",
-              "PNC",
-              "Crimen Organizado",
-              "Desconocidos",
-              "Pandillas (MS)",
-              "Pandillas (Barrio 18)",
-              "Particulares",
-              "Otro"
-            ]}
-            register={register}
-            errors={errors}
-            openOption={{ type: "text", index: 7 }}
-            required={"*Este campo es obligatorio."}
-          />
-        </div>
-      </div>
-      <div className="-mx-3 md:flex mb-6">
-        <div className="md:w-full px-3 mb-6 md:mb-0">
-          <Checkbox
-            label={"¿Cuáles instituciones han acompañado?"}
-            name={"institutions_accompanied"}
-            options={[
-              "Ninguna",
-              "PNC",
-              "FGR",
-              "PDDH",
-              "PGR",
-              "ISDEMU",
-              "CONNA",
-              "Otra"
-            ]}
-            register={register}
-            errors={errors}
-            openOption={{ type: "text", index: 7 }}
-            required={"*Este campo es obligatorio."}
-          />
-        </div>
-      </div>
-      <div className="-mx-3 md:flex mb-6">
-        <div className="md:w-2/5 px-3 mb-6 md:mb-0">
-          <RadioButtons
-            label={"¿Interpuso denuncia en alguna instancia estatal?"}
-            name={"statal_institution"}
-            options={["Si", "No"]}
-            register={register}
-            errors={errors}
-            handlerChange={handlerRadioButton}
-            required={"*Este campo es obligatorio."}
-          />
-        </div>
-        <div className="md:w-3/5 px-3 mb-6 md:mb-0">
+        <div className="md:w-2/6 px-3 mb-6 md:mb-0">
           <Input
-            label={"Nombre de la institucion estatal"}
-            name={"statal_institution_name"}
+            label={"Telefono"}
+            name={"phone"}
             type={"text"}
-            placeholder={"Nombre de la institucion estatal"}
+            placeholder={"Telefono"}
             register={register}
             errors={errors}
-            disabled={radioValues?.statal_institution}
             required={"*Este campo es obligatorio."}
           />
         </div>
       </div>
       <div className="-mx-3 md:flex mb-6">
-        <div className="md:w-full md:h-min px-3 mb-6 md:mb-0">
-          <Textarea
-            label={"Descripcion del acompañamiento brindado"}
-            name={"accompanied_descriptions"}
+        <div className="md:w-3/6 px-3 mb-6 md:mb-0">
+          <Input
+            label={"Parroquia"}
+            name={"adress"}
             type={"text"}
-            height={screenHeight / 6}
-            placeholder={"Descripcion del acompañamiento brindado..."}
+            placeholder={"Parroquia"}
+            register={register}
+            errors={errors}
+            required={"*Este campo es obligatorio."}
+          />
+        </div>
+        <div className="md:w-3/6 px-3 mb-6 md:mb-0">
+          <Input
+            label={"Parroco"}
+            name={"phone"}
+            type={"text"}
+            placeholder={"Parroco"}
             register={register}
             errors={errors}
             required={"*Este campo es obligatorio."}
@@ -250,7 +363,7 @@ const Step2 = ({ handlerStore }) => {
       <div class="flex flex-row justify-between -mx-0.5 md:flex mb-2">
         <div onClick={() => handlerClick()}>
           <div className="flex flex-row items-center bg-slate-200 border border-slate-300 rounded-md px-4 py-3 text-lg cursor-pointer">
-            <span className="text-slate-600 h-full ml-2">Regresar</span>
+            <span className="text-slate-600 h-full">Regresar</span>
           </div>
         </div>
         <button

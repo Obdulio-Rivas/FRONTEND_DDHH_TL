@@ -9,7 +9,8 @@ import RadioButtons from "../Forms/RadioButtons/RadioButtons";
 import Select from "../Forms/Select/Select";
 import { useForm } from "react-hook-form";
 const NewUser = () => {
-  const url_image_default = "https://firebasestorage.googleapis.com/v0/b/legalistica.appspot.com/o/images%2Fusers%2Fbb44cf-d7e-d27-7502-bf1ea077b6e.undefined?alt=media&token=aaaf32b3-e744-4bdb-ad72-b84705d19c6c";
+  const url_image_default =
+    "https://firebasestorage.googleapis.com/v0/b/legalistica.appspot.com/o/images%2Fusers%2Fbb44cf-d7e-d27-7502-bf1ea077b6e.undefined?alt=media&token=aaaf32b3-e744-4bdb-ad72-b84705d19c6c";
   const [radioValues, setRadioValues] = useState({
     incident_institution: 1,
   });
@@ -27,7 +28,7 @@ const NewUser = () => {
 
   const onSubmit = async (data, e) => {
     e.preventDefault();
-    const new_user = {...data, url_image: url_image_default}
+    const new_user = { ...data, url_image: url_image_default };
     const response = await UserService.postUsers(new_user);
     console.log(response);
     if (response.is_successful) {
@@ -47,7 +48,8 @@ const NewUser = () => {
       <Navbar />
       <form
         className="bg-white border border-slate-300 m-auto rounded px-8 py-8 mt-10 mb-4 flex flex-col md:w-2/3 sm:w-3/4 w-3/4"
-        onSubmit={handleSubmit(onSubmit)}>
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <div className="flex flex-row items-center justify-start mb-10">
           <AiOutlineUserAdd className="text-4xl" />
           <h2 className="ml-2 text-3xl">Registar Usuario.</h2>
@@ -117,8 +119,8 @@ const NewUser = () => {
               label={"Genero"}
               name={"gender"}
               options={[
-                { option: "Masculino", value: 1 },
-                { option: "Femenino", value: 0 },
+                { label: "Si", value: 1 },
+                { label: "No", value: 0 },
               ]}
               register={register}
               errors={errors}
@@ -161,7 +163,9 @@ const NewUser = () => {
               register={register}
               errors={errors}
               required={"*Este campo es obligatorio."}
-              pattern={/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&._-])([A-Za-z\d$@$!%*?&._-]|[^ ]){8,15}/g}
+              pattern={
+                /(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&._-])([A-Za-z\d$@$!%*?&._-]|[^ ]){8,15}/g
+              }
             />
           </div>
         </div>
@@ -171,8 +175,8 @@ const NewUser = () => {
               label={"Estado"}
               name={"status"}
               options={[
-                { option: "Activo", value: 1 },
-                { option: "Inactivo", value: 0 },
+                { label: "Activo", value: 1 },
+                { label: "Inactivo", value: 0 },
               ]}
               register={register}
               errors={errors}
@@ -185,9 +189,9 @@ const NewUser = () => {
               label={"Rol"}
               name={"role"}
               options={[
-                { option: "Administrador", value: 0 },
-                { option: "Abogado", value: 1 },
-                { option: "Asistente", value: 2 },
+                { label: "Administrador", value: 0 },
+                { label: "Abogado", value: 1 },
+                { label: "Asistente", value: 2 },
               ]}
               register={register}
               errors={errors}

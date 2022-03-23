@@ -19,7 +19,7 @@ import AuthService from "../../../../services/Auth/Auth.Service";
 const Step1 = ({ handlerStore }) => {
   const [lastIncidentCreated, setLastIncidentCreated] = useState(0);
   const [radioValues, setRadioValues] = useState({
-    incident_institution: 1,
+    incident_institution: 0,
   });
 
   const navigate = useNavigate();
@@ -32,6 +32,7 @@ const Step1 = ({ handlerStore }) => {
   } = useForm();
 
   const handlerRadioButton = ({ name, value }) => {
+    console.log(value)
     setRadioValues({ ...radioValues, [name]: value });
   };
 
@@ -115,7 +116,7 @@ const Step1 = ({ handlerStore }) => {
             placeholder={"Expediente"}
             register={register}
             errors={errors}
-            disabled={1}
+            disabled={0}
             required={"*Este campo es obligatorio."}
           />
         </div>
@@ -127,7 +128,7 @@ const Step1 = ({ handlerStore }) => {
             placeholder={"Fecha"}
             register={register}
             errors={errors}
-            disabled={1}
+            disabled={0}
             required={"*Este campo es obligatorio."}
           />
         </div>
@@ -139,7 +140,7 @@ const Step1 = ({ handlerStore }) => {
             placeholder={"Hora"}
             register={register}
             errors={errors}
-            disabled={1}
+            disabled={0}
             required={"*Este campo es obligatorio."}
           />
         </div>
@@ -149,7 +150,7 @@ const Step1 = ({ handlerStore }) => {
           <RadioButtons
             label={"¿Conoce otra institución u organización sobre el caso?"}
             name={"incident_institution"}
-            options={["Si", "No"]}
+            options={[{label: "Si", value: 1}, {label: "No", value: 0}]}
             register={register}
             errors={errors}
             handlerChange={handlerRadioButton}

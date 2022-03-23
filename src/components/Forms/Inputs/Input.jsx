@@ -1,9 +1,17 @@
 import React from "react";
 
-const Input = ({ label, name, type, placeholder, register, errors, required, disabled = 0,pattern }) => {
-
-  if(name!="password")
-  {
+const Input = ({
+  label,
+  name,
+  type,
+  placeholder,
+  register,
+  errors,
+  required,
+  disabled = 1,
+  pattern,
+}) => {
+  if (name != "password") {
     return (
       <>
         <label
@@ -13,12 +21,21 @@ const Input = ({ label, name, type, placeholder, register, errors, required, dis
           {`${label}:`}
         </label>
         <input
-        id={name}
-          className={`appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3 ${disabled ==! 0 ? 'cursor-not-allowed' : null}`}
+          id={name}
+          className={`appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3 ${
+            disabled == 0 ? "cursor-not-allowed" : null
+          }`}
           type={type}
           placeholder={placeholder}
-          disabled={disabled ==! 0 ? true : false}
-          {...register(name, { required: required, pattern:{value:pattern, message:"Debe digitar el formato correcto. Ejemplo: "+placeholder}})}
+          disabled={disabled == 0 ? true : false}
+          {...register(name, {
+            required: required,
+            pattern: {
+              value: pattern,
+              message:
+                "Debe digitar el formato correcto. Ejemplo: " + placeholder,
+            },
+          })}
         />
         {errors[name] && (
           <span className="text-red-500 text-xs italic">
@@ -27,7 +44,7 @@ const Input = ({ label, name, type, placeholder, register, errors, required, dis
         )}
       </>
     );
-  }else{
+  } else {
     return (
       <>
         <label
@@ -37,12 +54,21 @@ const Input = ({ label, name, type, placeholder, register, errors, required, dis
           {`${label}:`}
         </label>
         <input
-        id={name}
-          className={`appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3 ${disabled ==! 0 ? 'cursor-not-allowed' : null}`}
+          id={name}
+          className={`appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3 ${
+            disabled == 0 ? "cursor-not-allowed" : null
+          }`}
           type={type}
           placeholder={placeholder}
-          disabled={disabled ==! 0 ? true : false}
-          {...register(name, { required: required, pattern:{value:pattern, message:"El password debe contener por lo menos una mayuscula, un numero y un caracter especial."}})}
+          disabled={disabled == 0 ? true : false}
+          {...register(name, {
+            required: required,
+            pattern: {
+              value: pattern,
+              message:
+                "El password debe contener por lo menos una mayuscula, un numero y un caracter especial.",
+            },
+          })}
         />
         {errors[name] && (
           <span className="text-red-500 text-xs italic">
