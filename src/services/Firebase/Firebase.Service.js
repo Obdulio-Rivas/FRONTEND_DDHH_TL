@@ -37,7 +37,7 @@ const uploadFile = async (path, file, options = {}) => {
   }
 };
 
-const downloadFile = async (bucket,fullPath)=>{
+const downloadFile = async (bucket, fullPath)=>{
   try {
     const app = firebase.initializeApp(firebaseConfig);
     const storageRef = app.storage().ref();

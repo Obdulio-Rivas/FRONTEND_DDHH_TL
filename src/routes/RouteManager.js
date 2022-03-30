@@ -11,6 +11,7 @@ import NewIncident from "../pages/Incidents/NewIncident/NewIncident";
 import IncidentRoutes from "./Incident/IncidentRoutes";
 import Page404 from "../pages/Page404/Page404";
 import ViewRoutes from "./Views/ViewRoutes";
+import DashboardRoutes from "./Dashboard/Dashboard";
 
 const RouteManager = () => {
 
@@ -55,6 +56,13 @@ const RouteManager = () => {
             path="/view/*"
             element={
               <PrivateRoute forRoles={[0,1,2]} children={<ViewRoutes/>} />
+            }
+          />
+          <Route
+            exact
+            path="/dashboard/*"
+            element={
+              <PrivateRoute forRoles={[0,1,2]} children={<DashboardRoutes/>} />
             }
           />
           <Route

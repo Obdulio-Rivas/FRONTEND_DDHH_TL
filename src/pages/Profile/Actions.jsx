@@ -8,6 +8,7 @@ import toast from "react-hot-toast";
 import AuthService from "../../services/Auth/Auth.Service";
 import UserService from "../../services/User/User.Service";
 import Profile from "../../templates/pdfs/profile/Profile";
+import PDFDownload from "../../templates/pdfs/PDFDownload";
 
 const Actions = ({ user }) => {
   const { id_user } = user;
@@ -35,7 +36,7 @@ const Actions = ({ user }) => {
       toast.success("Contraseña actualizada con exito!", {
         position: "bottom-center",
       });
-    }else{
+    } else {
       toast.error("No fue posible actualizar la contraseña!", {
         position: "bottom-center",
       });
@@ -57,43 +58,39 @@ const Actions = ({ user }) => {
     }
 
     if (form.isHidden) {
-      return <AiOutlineLock
-        className="text-4xl mx-1 cursor-pointer"
-        onClick={() => handlerClick(1)}
-      />;
-    }else{
-      return <AiOutlineUnlock
-        className="text-4xl mx-1 cursor-pointer"
-        onClick={() => handlerClick(1)}
-      />;
+      return (
+        <AiOutlineLock
+          className="text-4xl mx-1 cursor-pointer"
+          onClick={() => handlerClick()}
+        />
+      );
+    } else {
+      return (
+        <AiOutlineUnlock
+          className="text-4xl mx-1 cursor-pointer"
+          onClick={() => handlerClick()}
+        />
+      );
     }
   };
 
-  const handlerClick = (action) => {
-    switch (action) {
-      case 0:
-        return (<Profile />);
-        break;
-      case 1:
-        setForm({
-          ...form,
-          isHidden: !form.isHidden,
-        });
-        break;
-      default:
-        alert("Caso por default");
-        break;
-    }
+  const handlerClick = () => {
+    setForm({
+      ...form,
+      isHidden: !form.isHidden,
+    });
   };
 
   if (form.isHidden) {
     return (
       <>
         <li className="flex flex-row justify-around items-center py-3">
-          <AiOutlinePrinter
-            className="text-4xl mx-1 cursor-pointer"
-            onClick={() => handlerClick(0)}
-          />
+          <PDFDownload
+            document={<Profile user={user} />}
+            filename={`${user?.name} ${user?.last_name} - ${Date.now()}`}
+          >
+            <AiOutlinePrinter className="text-4xl mx-1 cursor-pointer" />
+          </PDFDownload>
           {isCurrentUser(id_user)}
         </li>
       </>
@@ -126,14 +123,20 @@ const Actions = ({ user }) => {
             placeholder="Nueva Contraseña"
             onChange={handleChange}
           />
-          <input className="w-11/12 m-auto mt-4 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer" type="submit" value="Actualizar" />
+          <input
+            className="w-11/12 m-auto mt-4 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer"
+            type="submit"
+            value="Actualizar"
+          />
         </form>
       </li>
       <li className="flex flex-row justify-around items-center py-3">
-        <AiOutlinePrinter
-          className="text-4xl mx-1 cursor-pointer"
-          onClick={() => handlerClick(0)}
-        />
+        <PDFDownload
+          document={<Profile user={user} />}
+          filename={`${user?.name} ${user?.lastname} - ${Date.now()}`}
+        >
+          <AiOutlinePrinter className="text-4xl mx-1 cursor-pointer" />
+        </PDFDownload>
         {isCurrentUser(id_user)}
       </li>
     </>

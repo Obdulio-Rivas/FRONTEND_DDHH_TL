@@ -34,12 +34,12 @@ const Step8 = ({ store, handlerStore }) => {
 
   const onSubmit = (data) => {
     handlerStore({
-      step2: {
-        title: "Step7",
+      step8: {
+        title: "Step8",
         values: data,
       },
     });
-    navigate("/incident/step8");
+    navigate("/incident/step9");
   };
 
   return (

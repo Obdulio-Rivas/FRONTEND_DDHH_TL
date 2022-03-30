@@ -11,6 +11,7 @@ import Step6 from "./Steps/Step6";
 import Step7 from "./Steps/Step7";
 import Step8 from "./Steps/Step8";
 import StepManager from "./StepManager";
+import Step9 from "./Steps/Step9";
 
 const NewIncident = () => {
   const location = useLocation();
@@ -45,6 +46,8 @@ const NewIncident = () => {
         return <Step7 store={store} handlerStore={handlerStore} />;
       case "step8":
         return <Step8 store={store} handlerStore={handlerStore} />;
+      case "step9":
+        return <Step9 store={store} handlerStore={handlerStore} />;
 
       default:
         return <Step1 />;

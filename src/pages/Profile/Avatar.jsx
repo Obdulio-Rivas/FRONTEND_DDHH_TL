@@ -65,10 +65,10 @@ const Avatar = ({ user }) => {
   };
 
   const handlerFile = async (e) => {
-    let type = null;
     const newImage = e.target.files[0];
     if (!!newImage) {
-      type = newImage.type?.split("/")[1];
+      let type = newImage.type?.split("/")[1];
+      console.log(type)
       file.isValid = ["png", "jpg", "jpeg"].some(
         (typeFile) => typeFile === type
       );
@@ -88,7 +88,9 @@ const Avatar = ({ user }) => {
       isUploading: true,
     });
     if (!!metadata) {
-      const response = await FirebaseService.uploadFile("images/users/", metadata, { type });
+      let extension = type;
+      const response = await FirebaseService.uploadFile("images/users/", metadata, {extension});
+      console.log(response)
       const currentUser = await AuthService.getCurrentUser();
       const userUpdated = await UserService.putUsers({
         ...currentUser,

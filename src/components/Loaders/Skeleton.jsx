@@ -10,14 +10,14 @@ const Skeleton = ({ elements = 0 }) => {
   };
 
   return (
-    <div class="flex animate-pulse flex-col items-center w-full justify-center cursor-progress">
+    <div className="flex animate-pulse flex-col items-center w-full justify-center cursor-progress">
       {generateElements(elements).map((element) => {
         return (
           <div key={element} className="flex flex-row items-start w-full py-4">
-            <div class="w-12 bg-gray-300 h-12 rounded-md "></div>
-            <div class="flex flex-col w-full space-y-3 px-2">
-              <div class="w-full bg-gray-300 h-6 rounded-md "></div>
-              <div class="w-full bg-gray-300 h-6 rounded-md "></div>
+            <div className="w-12 bg-gray-300 h-12 rounded-md "></div>
+            <div className="flex flex-col w-full space-y-3 px-2">
+              <div className="w-full bg-gray-300 h-6 rounded-md "></div>
+              <div className="w-full bg-gray-300 h-6 rounded-md "></div>
             </div>
           </div>
         );

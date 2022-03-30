@@ -10,7 +10,7 @@ import Select from "../Forms/Select/Select";
 import { useForm } from "react-hook-form";
 const NewUser = () => {
   const url_image_default =
-    "https://firebasestorage.googleapis.com/v0/b/legalistica.appspot.com/o/images%2Fusers%2Fbb44cf-d7e-d27-7502-bf1ea077b6e.undefined?alt=media&token=aaaf32b3-e744-4bdb-ad72-b84705d19c6c";
+    "https://firebasestorage.googleapis.com/v0/b/legalistica.appspot.com/o/images%2Fusers%2Fb5d570a-da62-7138-4ae8-436e811edf.png?alt=media&token=378cef29-db58-4306-add2-f4900ce0872a";
   const [radioValues, setRadioValues] = useState({
     incident_institution: 1,
   });
