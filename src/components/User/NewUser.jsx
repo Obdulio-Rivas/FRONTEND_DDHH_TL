@@ -11,15 +11,12 @@ import { useForm } from "react-hook-form";
 const NewUser = () => {
   const url_image_default =
     "https://firebasestorage.googleapis.com/v0/b/legalistica.appspot.com/o/images%2Fusers%2Fb5d570a-da62-7138-4ae8-436e811edf.png?alt=media&token=378cef29-db58-4306-add2-f4900ce0872a";
-  const [radioValues, setRadioValues] = useState({
-    incident_institution: 1,
-  });
+  const [radioValues, setRadioValues] = useState();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-    setValue,
   } = useForm();
 
   const handlerRadioButton = ({ name, value }) => {
@@ -119,8 +116,8 @@ const NewUser = () => {
               label={"Genero"}
               name={"gender"}
               options={[
-                { label: "Si", value: 1 },
-                { label: "No", value: 0 },
+                { label: "Masculino", value: 1 },
+                { label: "Femenino", value: 0 },
               ]}
               register={register}
               errors={errors}

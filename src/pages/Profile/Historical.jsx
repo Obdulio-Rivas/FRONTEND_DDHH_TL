@@ -32,7 +32,7 @@ const Historical = ({ user }) => {
               </span>
               <span className="tracking-wide text-xl">Cargando contenido...</span>
             </div>
-            <Skeleton elements={3}/>
+            <Skeleton elements={(Math.random() * (5 - 1) + 1)}/>
           </div>
         </div>
       </div>
@@ -48,9 +48,9 @@ const Historical = ({ user }) => {
               <span clas="text-green-500">
                 <AiOutlineFolder className={"text-2xl"} />
               </span>
-              <span className="tracking-wide text-xl">Ultimos Casos</span>
+              <span className="tracking-wide text-xl">Ultimos Incidentes</span>
             </div>
-            <span>No se han encontrado casos para este usuario.</span>
+            <span>No se han encontrado incidentes registrados por este usuario.</span>
           </div>
         </div>
       </div>

@@ -36,16 +36,18 @@ const Profile = () => {
   return (
     <>
       <Navbar />
-      <div className="container mx-auto my-16 p-5">
+      <div className="container mx-auto mt-10 p-5">
         <div className="md:flex no-wrap md:-mx-2 ">
           <Side user={user} />
 
           <div className="w-full md:w-9/12 mx-2 h-64">
             <About user={user} />
 
-            <div className="my-10"></div>
+            <div className="my-5"></div>
 
             <Historical user={user} />
+            
+            <div className="h-5"></div>
           </div>
         </div>
       </div>

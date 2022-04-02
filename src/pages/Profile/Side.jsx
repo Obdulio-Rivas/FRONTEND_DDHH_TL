@@ -49,9 +49,7 @@ const Side = ({ user }) => {
           {getTypeUser(role)}
         </h3>
         <p className="text-sm text-gray-500 hover:text-gray-600 leading-6">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Reprehenderit, eligendi dolorum sequi illum qui unde aspernatur non
-          deserunt
+          -
         </p>
         <ul className="bg-gray-100 text-gray-600 hover:text-gray-700 py-2 px-3 mt-3 divide-y border-gray-200 border-2 rounded-md">
           <li className="flex items-center py-3">
