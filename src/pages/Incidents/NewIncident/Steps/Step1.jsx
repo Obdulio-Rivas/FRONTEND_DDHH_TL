@@ -166,6 +166,8 @@ const Step1 = ({ handlerStore }) => {
               "Institución u organización que conoce sobre el caso..."
             }
             disabled={radioValues?.incident_institution}
+            validation={radioValues?.incident_institution}
+            required={"Digite una organizacion o institucion."}
             register={register}
             errors={errors}
           />
@@ -177,9 +179,10 @@ const Step1 = ({ handlerStore }) => {
             label={"Contacto"}
             name={"contact"}
             type={"text"}
-            placeholder={"Contacto"}
+            placeholder={"7777-7777"}
             register={register}
             errors={errors}
+            pattern={/^\d{4}-\d{4}$/g}
             required={"*Este campo es obligatorio."}
           />
         </div>
@@ -202,7 +205,6 @@ const Step1 = ({ handlerStore }) => {
             placeholder={"Identificación del Caso"}
             register={register}
             errors={errors}
-            required={"*Este campo es obligatorio."}
           />
         </div>
       </div>

@@ -30,6 +30,14 @@ const UpdateUser = () => {
       const response = await UserService.getUser(id_user_params);
       console.log(response);
       setValue('name', response.data[0].name);
+      setValue('last_name', response.data[0].last_name);
+      setValue('birth_date', response.data[0].birth_date);
+      setValue('dui', response.data[0].dui);
+      setValue('phone', response.data[0].phone);
+      setValue('nit', response.data[0].nit);
+      setValue('email', response.data[0].email);
+      setValue('status', response.data[0].status);
+      setValue('role', response.data[0].role);
     }
     fetchUsers();
   }, [id_user_params, setValue]);

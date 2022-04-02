@@ -232,6 +232,7 @@ const Step3 = ({ handlerStore }) => {
             register={register}
             errors={errors}
             disabled={radioValues?.statal_institution}
+            validation={radioValues?.statal_institution}
             required={"*Este campo es obligatorio."}
           />
         </div>

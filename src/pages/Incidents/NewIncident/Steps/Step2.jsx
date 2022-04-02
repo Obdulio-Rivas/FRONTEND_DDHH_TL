@@ -329,9 +329,10 @@ const Step2 = ({ handlerStore }) => {
             label={"Telefono"}
             name={"phone"}
             type={"text"}
-            placeholder={"Telefono"}
+            placeholder={"7777-7777"}
             register={register}
             errors={errors}
+            pattern={/^\d{4}-\d{4}$/g}
             required={"*Este campo es obligatorio."}
           />
         </div>

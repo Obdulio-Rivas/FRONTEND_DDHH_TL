@@ -93,7 +93,9 @@ const Step5 = ({ handlerStore }) => {
             placeholder={"Numero de personas."}
             register={register}
             errors={errors}
+            required={"Digite una cantidad de personas."}
             disabled={radioValues?.country_leave}
+            validation={radioValues?.country_leave}
           />
         </div>
         <div className="relative md:w-2/5 px-3">
