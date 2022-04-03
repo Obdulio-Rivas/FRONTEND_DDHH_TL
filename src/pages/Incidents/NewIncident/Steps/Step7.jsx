@@ -20,6 +20,10 @@ const Step7 = ({ handlerStore }) => {
     physical_disability: 0,
   });
 
+  const [SelectValues, setSelectValues] = useState({
+    type_dui:"DUI"
+  });
+
   const {
     register,
     handleSubmit,
@@ -34,6 +38,11 @@ const Step7 = ({ handlerStore }) => {
   const handlerRadioButton = ({name, value}) => {
     setRadioValues({...radioValues, [name]: value});
   }
+
+  const handlerSelect = ({name,value})=>{
+    setSelectValues({...SelectValues,[name]:value});
+    console.log(SelectValues);
+  };
 
   const onSubmitVictimToList = (data) => {
     if (victims.length === 0) {
@@ -201,6 +210,7 @@ const Step7 = ({ handlerStore }) => {
               { option: "CEDULA", value: "CEDULA" },
             ]}
             name={"type_dui"}
+            handlerSelect={handlerSelect}
             required={"*Este campo es obligatorio."}
             register={register}
             errors={errors}
@@ -213,6 +223,7 @@ const Step7 = ({ handlerStore }) => {
             type={"text"}
             placeholder={"Numero de documento"}
             register={register}
+            type_documentation={SelectValues?.type_dui}
             errors={errors}
             required={"*Este campo es obligatorio."}
           />
