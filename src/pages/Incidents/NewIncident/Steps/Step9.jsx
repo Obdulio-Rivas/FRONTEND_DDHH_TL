@@ -40,19 +40,20 @@ const Step9 = ({ store, handlerStore }) => {
       isUploading: true,
     });
     if (!!metadata) {
+      let extension = type;
       const response = await FirebaseService.uploadFile(
-        "cases/x/",
+        `cases/${store?.step1?.values?.expediente}/`,
         metadata,
-        { type }
+        { filename: store?.step1?.values?.expediente, extension }
       );
-      if (true) {
+      if (!!response) {
         setFile({
           metadata: null,
           type: null,
           isValid: false,
           isUploading: false,
         });
-        toast.success("Imagen de perfil cambiada con exito!", {
+        toast.success("Incidente cargado con exito!", {
           position: "bottom-center",
         });
       } else {

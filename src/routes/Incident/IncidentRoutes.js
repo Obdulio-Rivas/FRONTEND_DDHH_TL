@@ -7,6 +7,9 @@ const IncidentRoutes = () => {
 
   return (
     <Routes>
+      /**
+        Rutas para crear el incidente.
+       */
       <Route path="/" element={<NewIncident />} />
       <Route path="/step1" element={<NewIncident />} />
       <Route path="/step2" element={<NewIncident />} />
@@ -17,6 +20,13 @@ const IncidentRoutes = () => {
       <Route path="/step7" element={<NewIncident />} />
       <Route path="/step8" element={<NewIncident />} />
       <Route path="/step9" element={<NewIncident />} />
+      /**
+        Rutas para ver el listado de incidentes.
+       */
+        <Route path="/incidentes" element={<NewIncident />} />
+      /**
+        Ruta por si la ruta solicitada no existe.
+       */
       <Route path="*" element={<Page404/>} />
     </Routes>
   );

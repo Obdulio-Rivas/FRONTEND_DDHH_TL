@@ -43,6 +43,9 @@ const login = async (values) => {
 
   const response = await fetchData.json();
 
+  const email = !!response?.data?.email ? response.data.email : 0;
+  const status = !!response?.data?.status ? response.data.status : 0;
+
   if (response.jwt) {
     localStorage.setItem(
       "user",
@@ -54,7 +57,8 @@ const login = async (values) => {
       })
     );
   }
-  return response;
+
+  return {email, status};
 };
 
 const logout = () => {
@@ -96,7 +100,7 @@ const AuthService = {
   check_JWT,
   getCurrentUser,
   updateCuerrentUser,
-  updateJwtUser
+  updateJwtUser,
 };
 
 export default AuthService;

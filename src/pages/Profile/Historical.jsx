@@ -65,7 +65,7 @@ const Historical = ({ user }) => {
             <span clas="text-green-500">
               <AiOutlineFolder className={"text-2xl"} />
             </span>
-            <span className="tracking-wide text-xl">Ultimos Casos</span>
+            <span className="tracking-wide text-xl">Ultimos Incidentes</span>
           </div>
           <ul className="list-inside space-y-2 px-4 divide-y divide-slate-300 divide-dashed">
             {incidents.map(

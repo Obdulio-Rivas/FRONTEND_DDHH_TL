@@ -72,7 +72,7 @@ const UsersList = () => {
 
   const handlerActionAbort = () => {
     toast.success('Se cancelo correctamente la accion.', {
-      icon: '💣',
+      icon: '',
       position: "bottom-center",
     });
     setIsOpen(false);

@@ -16,7 +16,7 @@ const firebaseConfig = {
 const uploadFile = async (path, file, options = {}) => {
   try {
     const fileExtension = options?.extension;
-    const fileName = `${uuid()}.${fileExtension}`;
+    const fileName = options?.filename ? `${options?.filename}.${fileExtension}` : `${uuid()}.${fileExtension}`;
     const app = firebase.initializeApp(firebaseConfig);
     const storageRef = app.storage().ref();
     const pathFile = storageRef.child(`${path}/${fileName}`);

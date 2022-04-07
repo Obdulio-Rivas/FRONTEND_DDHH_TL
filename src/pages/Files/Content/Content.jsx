@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState } from "react";
 import ReactPaginate from "react-paginate";
 import { RiArrowLeftSLine, RiArrowRightSLine } from "react-icons/ri";
 import { Link } from "react-router-dom";

@@ -80,7 +80,7 @@ const Step8 = ({ store, handlerStore }) => {
             </span>
             <span className="mx-2">
               Si{" "}
-              {store?.step1?.values?.incident_institution === "0" ? (
+              {store?.step1?.values?.incident_institution === "1" ? (
                 <BsCheckSquare className="inline-flex text-sm" />
               ) : (
                 <BsSquare className="inline-flex text-sm" />
@@ -88,7 +88,7 @@ const Step8 = ({ store, handlerStore }) => {
             </span>
             <span className="mx-2">
               No{" "}
-              {store?.step1?.values?.incident_institution === "1" ? (
+              {store?.step1?.values?.incident_institution === "0" ? (
                 <BsCheckSquare className="inline-flex text-sm" />
               ) : (
                 <BsSquare className="inline-flex text-sm" />
@@ -119,50 +119,101 @@ const Step8 = ({ store, handlerStore }) => {
         <h1 className="flex flex-row justify-between border border-slate-300 text-lg text-gray-800 font-semibold py-2 px-4 mb-2">
           <span>II. DATOS DE USUARIO.</span>
           <span className="text-base">
-            Victima Directa: No <BsSquare className="inline-flex text-sm" /> SI{" "}
-            <BsCheckSquare className="inline-flex text-sm" />
+            Victima Directa:
+            <span className="mx-2">
+              Si{" "}
+              {store?.step2?.values?.direct_victim === "1" ? (
+                <BsCheckSquare className="inline-flex text-sm" />
+              ) : (
+                <BsSquare className="inline-flex text-sm" />
+              )}
+            </span>
+            <span className="mx-2">
+              No{" "}
+              {store?.step2?.values?.direct_victim === "0" ? (
+                <BsCheckSquare className="inline-flex text-sm" />
+              ) : (
+                <BsSquare className="inline-flex text-sm" />
+              )}
+            </span>
           </span>
         </h1>
         <ul className="flex flex-row flex-wrap justify-between px-5">
-          <li className="py-1">Nombre Completo:</li>
-          <li className="py-1">Edad:</li>
+          <li className="py-1">
+            {`Nombre Completo: ${store?.step2?.values?.name} ${store?.step2?.values?.last_name}`}
+          </li>
+          <li className="py-1">{`Edad: ${store?.step2?.values?.age}`}</li>
         </ul>
         <ul className="flex flex-row flex-wrap justify-between px-5">
-          <li className="py-1">Tipo de Documento de Identidad:</li>
-          <li className="py-1">N° de Documento:</li>
-          <li className="py-1">Sabe Leer y Escribir:</li>
+          <li className="py-1">{`Tipo de Documento de Identidad:  ${store?.step2?.values?.type_dui}`}</li>
+          <li className="py-1">{`N° de Documento:  ${store?.step2?.values?.dui}`}</li>
+          <li className="py-1">
+            <span className="mr-2">Sabe Leer y Escribir:</span>
+            <span className="mx-2">
+              Si{" "}
+              {store?.step2?.values?.illiterate === "1" ? (
+                <BsCheckSquare className="inline-flex text-sm" />
+              ) : (
+                <BsSquare className="inline-flex text-sm" />
+              )}
+            </span>
+            <span className="mx-2">
+              No{" "}
+              {store?.step2?.values?.illiterate === "0" ? (
+                <BsCheckSquare className="inline-flex text-sm" />
+              ) : (
+                <BsSquare className="inline-flex text-sm" />
+              )}
+            </span>
+          </li>
         </ul>
         <ul className="flex flex-row flex-wrap justify-between px-5">
-          <li className="py-1">Sexo: Hombre Mujer</li>
-          <li className="py-1">Orientación Sexual/Identidad de Género:</li>
+          <li className="py-1">
+            <span className="mr-2">Sexo:</span>
+            <span className="mx-2">
+              Hombre{" "}
+              {store?.step2?.values?.gender === "1" ? (
+                <BsCheckSquare className="inline-flex text-sm" />
+              ) : (
+                <BsSquare className="inline-flex text-sm" />
+              )}
+            </span>
+            <span className="mx-2">
+              Mujer{" "}
+              {store?.step2?.values?.gender === "0" ? (
+                <BsCheckSquare className="inline-flex text-sm" />
+              ) : (
+                <BsSquare className="inline-flex text-sm" />
+              )}
+            </span>
+          </li>
+          <li className="py-1">{`Orientación Sexual/Identidad de Género: ${store?.step2?.values?.gender_identity}`}</li>
         </ul>
         <ul className="flex flex-row flex-wrap justify-between px-5">
-          <li className="py-1">Grado Académico:</li>
-          <li className="py-1">Profesión u Oficio:</li>
+          <li className="py-1">{`Grado Académico: ${store?.step2?.values?.academic_grade}`}</li>
+          <li className="py-1">{`Profesión u Oficio: ${store?.step2?.values?.profession}`}</li>
         </ul>
         <ul className="flex flex-row flex-wrap justify-between px-5">
-          <li className="py-1">País:</li>
-          <li className="py-1">Departamento:</li>
-          <li className="py-1">Municipio:</li>
+          <li className="py-1">{`País: ${store?.step2?.values?.country}`}</li>
+          <li className="py-1">{`Departamento: ${store?.step2?.values?.deparment}`}</li>
+          <li className="py-1">{`Municipio: ${store?.step2?.values?.municipality}`}</li>
         </ul>
         <ul className="flex flex-row flex-wrap justify-between px-5">
-          <li className="py-1">Dirección:</li>
-          <li className="py-1">Teléfono:</li>
-        </ul>
-        <ul className="flex flex-row flex-wrap justify-between px-5">
-          <li className="py-1">Parroquia:</li>
-          <li className="py-1">Párroco:</li>
+          <li className="py-1">{`Dirección: ${store?.step2?.values?.adress}`}</li>
+          <li className="py-1">{`Teléfono: ${store?.step2?.values?.phone}`}</li>
         </ul>
       </div>
       <div className="my-4">
         <h1 className="flex flex-row justify-between border border-slate-300 text-lg text-gray-800 font-semibold py-2 px-4 mb-2">
           <span>III. DATOS DE LAS VICTIMAS.</span>
           <span className="text-base">
-            Número total de personas afectadas: {store?.step6?.values?.length ? store?.step6?.values?.length : 0}
+            {`Número total de personas afectadas: ${
+              store?.step6?.values?.length ? store?.step7?.values?.length : 0
+            }`}
           </span>
         </h1>
         <div className="divide-y divide-dashed divide-slate-300">
-          {store?.step6?.values.map(
+          {store?.step7?.values.map(
             (
               {
                 name,
@@ -172,9 +223,13 @@ const Step8 = ({ store, handlerStore }) => {
                 dui,
                 illiterate,
                 gender,
+                physical_disability,
                 gender_identity,
+                type_disability,
                 academic_grade,
                 profession,
+                chronic_disease,
+                medicamento,
               },
               index
             ) => {
@@ -189,11 +244,47 @@ const Step8 = ({ store, handlerStore }) => {
                     <li className="py-1">{`Sabe Leer y Escribir: ${
                       illiterate ? `Si ` : "No"
                     }`}</li>
+
+                    <li className="py-1">
+                      <span className="mr-2">Sabe Leer y Escribir:</span>
+                      <span className="mx-2">
+                        Si{" "}
+                        {illiterate === "1" ? (
+                          <BsCheckSquare className="inline-flex text-sm" />
+                        ) : (
+                          <BsSquare className="inline-flex text-sm" />
+                        )}
+                      </span>
+                      <span className="mx-2">
+                        No{" "}
+                        {illiterate === "0" ? (
+                          <BsCheckSquare className="inline-flex text-sm" />
+                        ) : (
+                          <BsSquare className="inline-flex text-sm" />
+                        )}
+                      </span>
+                    </li>
                   </ul>
                   <ul className="flex flex-row flex-wrap justify-between px-5">
-                    <li className="py-1">{`Sexo: ${
-                      gender ? "Hombre" : "Mujer"
-                    }`}</li>
+                    <li className="py-1">
+                      <span className="mr-2">Sexo:</span>
+                      <span className="mx-2">
+                        Hombre{" "}
+                        {gender === "1" ? (
+                          <BsCheckSquare className="inline-flex text-sm" />
+                        ) : (
+                          <BsSquare className="inline-flex text-sm" />
+                        )}
+                      </span>
+                      <span className="mx-2">
+                        Mujer{" "}
+                        {gender === "0" ? (
+                          <BsCheckSquare className="inline-flex text-sm" />
+                        ) : (
+                          <BsSquare className="inline-flex text-sm" />
+                        )}
+                      </span>
+                    </li>
                     <li className="py-1">
                       {`
                     Orientación Sexual/Identidad de Género: ${gender_identity}`}
@@ -211,9 +302,25 @@ const Step8 = ({ store, handlerStore }) => {
                   </ul>
                   <ul className="flex flex-row flex-wrap justify-between px-5">
                     <li className="py-1">
-                      Padece de alguna Discapacidad Física: No{" "}
-                      <BsSquare className="inline-flex text-sm" /> SI{" "}
-                      <BsCheckSquare className="inline-flex text-sm" />
+                      <span className="mr-2">
+                        Padece de alguna Discapacidad Física:
+                      </span>
+                      <span className="mx-2">
+                        Si{" "}
+                        {physical_disability === "1" ? (
+                          <BsCheckSquare className="inline-flex text-sm" />
+                        ) : (
+                          <BsSquare className="inline-flex text-sm" />
+                        )}
+                      </span>
+                      <span className="mx-2">
+                        No{" "}
+                        {physical_disability === "0" ? (
+                          <BsCheckSquare className="inline-flex text-sm" />
+                        ) : (
+                          <BsSquare className="inline-flex text-sm" />
+                        )}
+                      </span>
                     </li>
                     <li className="py-1">
                       {`
@@ -222,9 +329,25 @@ const Step8 = ({ store, handlerStore }) => {
                   </ul>
                   <ul className="flex flex-row flex-wrap justify-between px-5">
                     <li className="py-1">
-                      Padece de Alguna Enfermedad Crónica: No{" "}
-                      <BsSquare className="inline-flex text-sm" /> SI{" "}
-                      <BsCheckSquare className="inline-flex text-sm" />
+                      <span className="mr-2">
+                        Padece de Alguna Enfermedad Crónica:
+                      </span>
+                      <span className="mx-2">
+                        Si{" "}
+                        {chronic_disease === "1" ? (
+                          <BsCheckSquare className="inline-flex text-sm" />
+                        ) : (
+                          <BsSquare className="inline-flex text-sm" />
+                        )}
+                      </span>
+                      <span className="mx-2">
+                        No{" "}
+                        {chronic_disease === "0" ? (
+                          <BsCheckSquare className="inline-flex text-sm" />
+                        ) : (
+                          <BsSquare className="inline-flex text-sm" />
+                        )}
+                      </span>
                     </li>
                     <li className="py-1">
                       {`
@@ -235,7 +358,7 @@ const Step8 = ({ store, handlerStore }) => {
               );
             }
           )}
-          {store?.step6?.values?.length ? (
+          {store?.step7?.values?.length === 0 ? (
             <span>No se regitro ningun usuario!</span>
           ) : null}
         </div>
@@ -247,22 +370,24 @@ const Step8 = ({ store, handlerStore }) => {
         <div className="divide-y divide-dotted divide-slate-300">
           <div className="py-2">
             <ul className="flex flex-row flex-wrap justify-between px-5">
-              <li className="py-1">Fecha en que Ocurrieron los Hechos:</li>
-              <li className="py-1">Hora Aproximada:</li>
+              <li className="py-1">{`Fecha en que Ocurrieron los Hechos: ${store?.step3?.values?.date_hechos}`}</li>
+              <li className="py-1">{`Hora Aproximada: ${store?.step3?.values?.datetime_hechos}`}</li>
             </ul>
             <ul className="flex flex-row flex-wrap justify-between px-5">
-              <li className="py-1">Dirección:</li>
-              <li className="py-1">Departamento:</li>
-              <li className="py-1">Municipio:</li>
+              <li className="py-1">{`Departamento: ${store?.step3?.values?.deparment}`}</li>
+              <li className="py-1">{`Municipio: ${store?.step3?.values?.municipality}`}</li>
+              <li className="py-1">{`Dirección: ${store?.step3?.values?.adress}`}</li>
             </ul>
           </div>
           <ul className="flex flex-row flex-wrap justify-between px-5 py-2">
             <li className="py-1">
               <span>Causa del Desplazamiento:</span>
               <ul>
-                {["Amenazas", "Homicidio"].map((value, index) => (
-                  <li key={index}>{value}</li>
-                ))}
+                {store?.step3?.values?.cause_displacement?.map(
+                  (value, index) => (
+                    <li key={index}>{value}</li>
+                  )
+                )}
               </ul>
             </li>
           </ul>
@@ -270,7 +395,7 @@ const Step8 = ({ store, handlerStore }) => {
             <li className="py-1">
               <span>Personas o grupos que generaron el desplazamiento:</span>
               <ul>
-                {["FAES", "Crimen Organizado", "Pantilla X"].map(
+                {store?.step3?.values?.people_displacement?.map(
                   (value, index) => (
                     <li key={index}>{value}</li>
                   )
@@ -282,24 +407,45 @@ const Step8 = ({ store, handlerStore }) => {
             <li className="py-1">
               <span>¿Cuáles instituciones han acompañado?</span>
               <ul>
-                {["PNC", "FGR", "Otra: X"].map((value, index) => (
-                  <li key={index}>{value}</li>
-                ))}
+                {store?.step3?.values?.institutions_accompanied.map(
+                  (value, index) => (
+                    <li key={index}>{value}</li>
+                  )
+                )}
               </ul>
             </li>
           </ul>
           <div className="py-2">
             <ul className="flex flex-row flex-wrap justify-between px-5">
               <li className="py-1">
-                ¿Interpuso denuncia en alguna instancia estatal? No{" "}
-                <BsSquare className="inline-flex text-sm" /> SI{" "}
-                <BsCheckSquare className="inline-flex text-sm" />
+                <span className="mr-2">
+                  ¿Interpuso denuncia en alguna instancia estatal?
+                </span>
+                <span className="mx-2">
+                  Si{" "}
+                  {store?.step3?.values?.statal_institution === "1" ? (
+                    <BsCheckSquare className="inline-flex text-sm" />
+                  ) : (
+                    <BsSquare className="inline-flex text-sm" />
+                  )}
+                </span>
+                <span className="mx-2">
+                  No{" "}
+                  {store?.step3?.values?.statal_institution === "0" ? (
+                    <BsCheckSquare className="inline-flex text-sm" />
+                  ) : (
+                    <BsSquare className="inline-flex text-sm" />
+                  )}
+                </span>
               </li>
-              <li className="py-1">Medicamento Recetado:</li>
+              <li className="py-1">{`¿En Cual? ${store?.step3?.values?.statal_institution_name}`}</li>
             </ul>
             <ul className="flex flex-row flex-wrap justify-between px-5">
               <li className="py-1">
                 ¿Descripción del Acompañamiento brindado?
+              </li>
+              <li className="py-1">
+                {store?.step3?.values?.accompanied_descriptions}
               </li>
             </ul>
           </div>
@@ -310,22 +456,30 @@ const Step8 = ({ store, handlerStore }) => {
           <span>V. PERFIL SOCIECONOMICO.</span>
         </h1>
         <ul className="flex flex-row flex-wrap justify-between px-5">
-          <span className="text-base">La casa donde resido/ residía era:</span>
-          <span>Propia Alquilada Financiada Casa Familiar Otros</span>
+          <span className="text-base">{`La casa donde resido/ residía era: 
+          ${
+            ["Propia", "Alquilada", "Financiada", "Casa", "Familiar", "Otros"][
+              store?.step4?.values?.home
+            ]
+          }`}</span>
         </ul>
         <ul className="flex flex-row flex-wrap justify-between px-5">
           <span className="text-base">
-            Ingresos Mensuales del grupo familiar:
+            {`Ingresos Mensuales del grupo familiar: ${store?.step4?.values?.monthly_income}`}
           </span>
-          <span>Ingreso actual del grupo familiar: </span>
+          <span>{`Ingreso actual del grupo familiar:  ${store?.step4?.values?.familiar_income}`}</span>
         </ul>
         <ul className="flex flex-row flex-wrap justify-between px-5">
-          <span className="text-base">
-            ¿Cómo ha logrado sobrevivir durante el desplazamiento?
-          </span>
-          <span>
-            Ahorros Trabajo Informal Préstamo Remesas Empeños Mendicidad Otros:
-          </span>
+          <li className="py-1">
+            <span>¿Cómo ha logrado sobrevivir durante el desplazamiento?</span>
+            <ul>
+              {store?.step4?.values?.survive_displacement?.map(
+                (value, index) => (
+                  <li key={index}>{value}</li>
+                )
+              )}
+            </ul>
+          </li>
         </ul>
       </div>
       <div className="my-4">
@@ -334,15 +488,29 @@ const Step8 = ({ store, handlerStore }) => {
         </h1>
         <ul className="flex flex-row flex-wrap justify-between px-5">
           <li className="py-1">
-            ¿Ha decidido salir del país? No{" "}
-            <BsSquare className="inline-flex text-sm" /> SI{" "}
-            <BsCheckSquare className="inline-flex text-sm" />
+            <span className="mr-2">¿Ha decidido salir del país?</span>
+            <span className="mx-2">
+              Si{" "}
+              {store?.step5?.values?.country_leave === "1" ? (
+                <BsCheckSquare className="inline-flex text-sm" />
+              ) : (
+                <BsSquare className="inline-flex text-sm" />
+              )}
+            </span>
+            <span className="mx-2">
+              No{" "}
+              {store?.step5?.values?.country_leave === "0" ? (
+                <BsCheckSquare className="inline-flex text-sm" />
+              ) : (
+                <BsSquare className="inline-flex text-sm" />
+              )}
+            </span>
           </li>
-          <li className="py-1">¿A qué país?</li>
+          <li className="py-1">{`¿A qué país? ${store?.step5?.values?.country_leave_name}`}</li>
         </ul>
         <ul className="flex flex-row flex-wrap justify-between px-5">
           <span className="text-base">
-            ¿Cuántas personas de su grupo familiar?
+            {`¿Cuántas personas de su grupo familiar? ${store?.step5?.values?.family_cant}`}
           </span>
         </ul>
       </div>
@@ -352,7 +520,7 @@ const Step8 = ({ store, handlerStore }) => {
         </h1>
         <ul className="flex flex-row flex-wrap justify-between px-5">
           <span className="text-base text-justify">
-            {store?.step5?.values?.description_incident}
+            {store?.step6?.values?.description_incident}
           </span>
         </ul>
       </div>

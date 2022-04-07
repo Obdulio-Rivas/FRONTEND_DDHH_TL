@@ -13,8 +13,6 @@ const UpdateUser = () => {
   const params = useParams();
   const { id_user: id_user_params } = params;
 
-  console.log(params);
-
   const [radioValues, setRadioValues] = useState({});
 
   const {
@@ -28,7 +26,7 @@ const UpdateUser = () => {
     async function fetchUsers() {
       // You can await here
       const response = await UserService.getUser(id_user_params);
-      console.log(response);
+      setValue('id_user', response.data[0].id_user);
       setValue('name', response.data[0].name);
       setValue('last_name', response.data[0].last_name);
       setValue('birth_date', response.data[0].birth_date);
@@ -36,8 +34,6 @@ const UpdateUser = () => {
       setValue('phone', response.data[0].phone);
       setValue('nit', response.data[0].nit);
       setValue('email', response.data[0].email);
-      setValue('status', response.data[0].status);
-      setValue('role', response.data[0].role);
     }
     fetchUsers();
   }, [id_user_params, setValue]);
@@ -51,7 +47,6 @@ const UpdateUser = () => {
     const response = await UserService.putUsers(data);
     if (response.is_successful) {
       AuthService.updateJwtUser(response);
-      console.log(response);
       toast.success("Usuario actualizado con exito!", {
         position: "bottom-center",
       });
@@ -138,8 +133,8 @@ const UpdateUser = () => {
               label={"Genero"}
               name={"gender"}
               options={[
-                { label: "Si", value: 1 },
-                { label: "No", value: 0 },
+                { label: "Masculino", value: 1 },
+                { label: "Femenino", value: 0 },
               ]}
               register={register}
               errors={errors}
@@ -159,32 +154,6 @@ const UpdateUser = () => {
               errors={errors}
               required={"*Este campo es obligatorio."}
               pattern={/^\d{4}-\d{6}-\d{3}-\d{1}/}
-            />
-          </div>
-          <div className="md:w-2/6 px-3 mb-6 md:mb-0">
-            <Input
-              label={"Email"}
-              name={"email"}
-              type={"text"}
-              placeholder={"mail@gmail.com"}
-              register={register}
-              errors={errors}
-              required={"*Este campo es obligatorio."}
-              pattern={/^[\w.%-+]+[@\w.-]+\.[a-zA-Z]{2,4}$/g}
-            />
-          </div>
-          <div className="md:w-2/6 px-3 mb-6 md:mb-0">
-            <Input
-              label={"Password"}
-              name={"password"}
-              type={"password"}
-              placeholder={"Password"}
-              register={register}
-              errors={errors}
-              required={"*Este campo es obligatorio."}
-              pattern={
-                /(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&._-])([A-Za-z\d$@$!%*?&._-]|[^ ]){8,15}/g
-              }
             />
           </div>
         </div>
@@ -223,9 +192,9 @@ const UpdateUser = () => {
           <button
             className="bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-md px-7 py-3 transition duration-1000"
             type="submit"
-            value={"Enviar"}
+            value={"Actualizar"}
           >
-            Registrar
+            Actualizar
           </button>
         </div>
       </form>

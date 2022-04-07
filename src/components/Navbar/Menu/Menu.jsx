@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import {
-  AiOutlineMenu
-} from "react-icons/ai";
+import { AiOutlineMenu } from "react-icons/ai";
 import getMenu from "../../../const/menus";
 import Avatar from "../Avatar/Avatar";
 import Dropdown from "../Dropdown/Dropdown";
@@ -9,13 +7,25 @@ import ItemMenu from "../ItemMenu/ItemMenu";
 import AuthService from "../../../services/Auth/Auth.Service";
 
 const Menu = () => {
-
-  let userRole = AuthService.getCurrentUser() ? AuthService.getCurrentUser().role : 0;
+  let userRole = AuthService.getCurrentUser()
+    ? AuthService.getCurrentUser().role
+    : 0;
   const options_menu = getMenu(userRole);
   const [isNavbarOpen, setIsNavbarOpen] = useState(false);
+  const [optionStatus, setOptionStatus] = useState({
+    option: 'Inicio',
+    optionSelected: true
+  });
 
   const haddlerClick = () => {
     setIsNavbarOpen(!isNavbarOpen);
+  };
+
+  const haddlerClickOption = (option, optionSelected) => {
+    setOptionStatus((prevState) => ({
+      option: option,
+      optionSelected: prevState.option !== option ? true : optionSelected
+    }));
   };
 
   return (
@@ -33,16 +43,17 @@ const Menu = () => {
           isNavbarOpen ? null : "hidden"
         }`}
       >
+        
         <ul className="flex flex-col w-full space-y-2 m-auto lg:w-auto lg:flex-row lg:space-y-0 lg:space-x-2">
-          {options_menu.map((option_menu)=>{
-            if(option_menu.type==='normal'){
-              return <ItemMenu {...option_menu} />
-            }else{
-              return <Dropdown {...option_menu} />
-            }
-          })}
-          <Avatar user={null}/>
-        </ul>
+            {options_menu.map((option_menu) => {
+              if (option_menu.type === "normal") {
+                return <ItemMenu {...option_menu} optionStatus={optionStatus} haddlerClickOption={haddlerClickOption}/>;
+              } else {
+                return <Dropdown {...option_menu} optionStatus={optionStatus} haddlerClickOption={haddlerClickOption}/>;
+              }
+            })}
+            <Avatar optionStatus={optionStatus} haddlerClickOption={haddlerClickOption}/>
+          </ul>
       </div>
     </>
   );

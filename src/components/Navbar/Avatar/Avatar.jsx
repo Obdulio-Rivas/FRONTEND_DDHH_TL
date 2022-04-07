@@ -48,11 +48,10 @@ const SingOut = () => {
 };
 
 const Avatar = (props) => {
-  const { user } = props;
-  const [isOpenAvatar, setIsOpenAvatar] = useState(false);
+  const { optionStatus, haddlerClickOption } = props;
 
   const haddlerClick = () => {
-    setIsOpenAvatar(!isOpenAvatar);
+    haddlerClickOption('Avatar', !optionStatus.optionSelected);
   };
 
   return (
@@ -71,12 +70,12 @@ const Avatar = (props) => {
       </button>
       <div
         className={`right-0 p-2 mt-1 bg-white rounded-md lg:shadow lg:absolute lg:border ${
-          isOpenAvatar ? null : "hidden"
+          (optionStatus.option === 'Avatar' && optionStatus.optionSelected) ? null : "hidden"
         }`}
       >
         <ul className="space-y-2 lg:w-48">
           {options?.map(({ key, icon, option, href, font_color }) => (
-            <li key={key}>
+            <li key={key} onClick={() => haddlerClick()}>
               <Link
                 to={href}
                 className={`flex p-2 font-normal text-sm text-${font_color}-600 rounded-md hover:bg-zinc-100 hover:text-${font_color}-900`}

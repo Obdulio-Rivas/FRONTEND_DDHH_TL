@@ -2,25 +2,36 @@ import React from "react";
 
 const StatusPill = ({ value = 0 }) => {
 
-  function getStatusName(value) {
-    let status = "";
+  const getStatus = (value) => {
     switch (value) {
       case 0:
-        status = "Inactivo";
-        break;
+        return (
+          <span className="bg-red-500 py-1 px-2 rounded text-white text-sm">
+            Inactivo
+          </span>
+        );
       case 1:
-        status = "Activo";
-        break;
+        return (
+          <span className="bg-green-500 py-1 px-2 rounded text-white text-sm">
+            Activo
+          </span>
+        );
+      case 2:
+        return (
+          <span className="bg-yellow-500 py-1 px-2 rounded text-white text-sm">
+            Pendiente
+          </span>
+        );
       default:
-        status = "Unknown";
-        break;
+        return <span></span>;
     }
-    return status;
-  }
+  };
 
-  return <div className="flex w-full flex-row justify-center">
-    <span className={`m-auto px-3 py-1 uppercase leading-wide font-bold text-xs rounded-full shadow-sm text-white bg-${value ? 'green' : 'red'}-500`}>{getStatusName(value)}</span>
-  </div>;
+  return (
+    <div className="flex w-full flex-row justify-center">
+      {getStatus(value)}
+    </div>
+  );
 };
 
 export default StatusPill;

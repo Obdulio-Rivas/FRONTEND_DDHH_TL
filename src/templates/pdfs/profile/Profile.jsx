@@ -27,7 +27,11 @@ const Profile = ({ user }) => {
   useEffect(() => {
     async function getIncidentsOfUser(id_user) {
       const response = await IncidentService.getIncidentsByUser(id_user);
-      setIncidents(response.data.map((incidente, index)=> index <= 5 ? incidente : null));
+      setIncidents(
+        response?.data?.map((incidente, index) =>
+          index <= 5 ? incidente : null
+        )
+      );
     }
     getIncidentsOfUser(user.id_user);
   }, []);
@@ -56,6 +60,33 @@ const Profile = ({ user }) => {
         return "Abogado";
       default:
         return "Asistente";
+    }
+  };
+
+  const getStatus = (status) => {
+    console.log(status);
+    switch (status) {
+      case 0:
+        return "Inactivo";
+      case 1:
+        return "Activo";
+      case 2:
+        return "Pendiente";
+      default:
+        return "-";
+    }
+  };
+
+  const getStatusColor = (status) => {
+    switch (status) {
+      case 0:
+        return "#EF4444";
+      case 1:
+        return "#22C55E";
+      case 2:
+        return "#EAB308";
+      default:
+        return "#FFFFFF";
     }
   };
 
@@ -94,7 +125,7 @@ const Profile = ({ user }) => {
       fontSize: 10,
       fontWeight: "medium",
       color: "#FFF",
-      backgroundColor: user?.status === 1 ? "#22C55E" : "#EF4444",
+      backgroundColor: getStatusColor(user?.status),
       paddingVertical: "4",
       paddingHorizontal: "6",
       display: "flex",
@@ -230,9 +261,9 @@ const Profile = ({ user }) => {
           >{`${user?.name} ${user?.last_name}`}</Text>
         </View>
         <View style={[styles.principalContent, styles.status, styles.mt_5]}>
-          <Text style={styles.profileStatus}>{`${
-            user?.status === 1 ? "Activo" : "Inactivo"
-          }`}</Text>
+          <Text style={styles.profileStatus}>{`${getStatus(
+            user?.status
+          )}`}</Text>
           <Text style={styles.profileRole}>{getRole(user?.role)}</Text>
         </View>
         <View style={[styles.principalContent, styles.status, styles.mt_15]}>
@@ -289,13 +320,16 @@ const Profile = ({ user }) => {
         </View>
 
         <View style={[styles.container, styles.mt_5, styles.px_40]}>
-          {incidents.map(
+          {incidents?.map(
             (
               { id_incident, id_type_incident, expediente, created_at },
               index
             ) => {
               return (
-                <View key={index} style={[styles.container_row, styles.mt_15, styles.wd_100]}>
+                <View
+                  key={index}
+                  style={[styles.container_row, styles.mt_15, styles.wd_100]}
+                >
                   <View>
                     <Image
                       style={[styles.icons, styles.mr_5]}
@@ -322,6 +356,13 @@ const Profile = ({ user }) => {
                 </View>
               );
             }
+          )}
+          {!incidents ? (
+            <Text style={styles.textTiny}>
+              {"No se han encontrado incidentes registrados por este usuario."}
+            </Text>
+          ) : (
+            <Text>{""}</Text>
           )}
         </View>
       </Page>

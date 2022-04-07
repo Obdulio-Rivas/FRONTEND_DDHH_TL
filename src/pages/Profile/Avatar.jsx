@@ -68,7 +68,6 @@ const Avatar = ({ user }) => {
     const newImage = e.target.files[0];
     if (!!newImage) {
       let type = newImage.type?.split("/")[1];
-      console.log(type)
       file.isValid = ["png", "jpg", "jpeg"].some(
         (typeFile) => typeFile === type
       );
@@ -119,7 +118,7 @@ const Avatar = ({ user }) => {
 
   return (
     <>
-      <div className="image overflow-hidden relative">
+      <div className="image overflow-hidden relative bg-slate-100">
         <form action="#" onSubmit={handlerSubmit}>
           {isUploadingImage(file)}
         </form>

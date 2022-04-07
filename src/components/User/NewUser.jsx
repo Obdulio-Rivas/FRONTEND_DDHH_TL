@@ -169,20 +169,6 @@ const NewUser = () => {
         <div className="-mx-3 md:flex mb-6">
           <div className="md:w-2/6 px-3 mb-6 md:mb-0">
             <RadioButtons
-              label={"Estado"}
-              name={"status"}
-              options={[
-                { label: "Activo", value: 1 },
-                { label: "Inactivo", value: 0 },
-              ]}
-              register={register}
-              errors={errors}
-              handlerChange={handlerRadioButton}
-              required={"*Este campo es obligatorio."}
-            />
-          </div>
-          <div className="md:w-2/6 px-3 mb-6 md:mb-0">
-            <RadioButtons
               label={"Rol"}
               name={"role"}
               options={[

@@ -8,15 +8,28 @@ const Side = ({ user }) => {
   const { id_user, name, last_name, role, status, created_at, url_image } = user;
 
   const getStatus = (status) => {
-    return status === 1 ? (
-      <span className="bg-green-500 py-1 px-2 rounded text-white text-sm">
-        Active
-      </span>
-    ) : (
-      <span className="bg-red-500 py-1 px-2 rounded text-white text-sm">
-        Inactivo
-      </span>
-    );
+    switch (status) {
+      case 0:
+        return (
+          <span className="bg-red-500 py-1 px-2 rounded text-white text-sm">
+            Inactivo
+          </span>
+        );
+      case 1:
+        return (
+          <span className="bg-green-500 py-1 px-2 rounded text-white text-sm">
+            Activo
+          </span>
+        );
+      case 2:
+        return (
+          <span className="bg-yellow-500 py-1 px-2 rounded text-white text-sm">
+            Pendiente
+          </span>
+        );
+      default:
+        return <span></span>;
+    }
   };
 
   const getTypeUser = (role) => {
@@ -40,7 +53,7 @@ const Side = ({ user }) => {
 
   return (
     <div className="w-full md:w-3/12 md:mx-2 mby-3">
-      <div className="bg-white p-3 border-t-4 border-blue-400">
+      <div className="bg-white p-3 border-gray-200 border-2 rounded-md">
         <Avatar user={user}/>
         <h1 className="text-gray-900 font-bold text-xl leading-8 my-1">
           {name + " " + last_name}
