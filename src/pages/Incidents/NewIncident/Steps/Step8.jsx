@@ -32,6 +32,7 @@ const Step8 = ({ store, handlerStore }) => {
   //const getBiAnsewer
 
   const onSubmit = async (data) => {
+    let id_user = AuthService.getCurrentUser().id_user;
     let id_incident = 0;
     let ids_victims = [];
 
@@ -48,10 +49,10 @@ const Step8 = ({ store, handlerStore }) => {
       ids_victims.push(response.id_victim)
     });
 
-    ids_victims.map(id_victim => async (value) => {
+    /*ids_victims.map(id_victim => async (value) => {
       let response = await VictimService.postVictim(value)
       
-    });
+    });*/
     //navigate("/incident/step9");
   };
 
