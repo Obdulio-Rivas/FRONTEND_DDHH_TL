@@ -8,6 +8,7 @@ const Select = ({
   register,
   errors,
   disabled = 1,
+  handlerSelect =null
 }) => {
   return (
     <>
@@ -24,6 +25,7 @@ const Select = ({
           defaultValue={options[0].value}
           className={`block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded ${disabled == 0 ? 'cursor-not-allowed' : null}`}
           {...register(name, { required: required })}
+          onChange={!!handlerSelect ? (e)=> handlerSelect(e.target):null}
         >
           {options?.map(({ option, value }, index) => {
             return (

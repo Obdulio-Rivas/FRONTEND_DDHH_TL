@@ -25,6 +25,10 @@ const Step2 = ({ handlerStore }) => {
     physical_disability: 0,
   });
 
+  const [SelectValues, setSelectValues] = useState({
+    type_dui:"DUI"
+  });
+
   useEffect(() => {
     async function getSelectOptions() {
       let arrayValues = [
@@ -61,6 +65,11 @@ const Step2 = ({ handlerStore }) => {
 
   const handlerRadioButton = ({ name, value }) => {
     setRadioValues({ ...radioValues, [name]: value });
+  };
+
+  const handlerSelect = ({name,value})=>{
+    setSelectValues({...SelectValues,[name]:value});
+    console.log(SelectValues);
   };
 
   const onSubmit = (data) => {
@@ -148,6 +157,7 @@ const Step2 = ({ handlerStore }) => {
               { option: "NIT", value: "NIT" },
               { option: "CEDULA", value: "CEDULA" },
             ]}
+            handlerSelect={handlerSelect}
             name={"type_dui"}
             required={"*Este campo es obligatorio."}
             register={register}
@@ -161,6 +171,7 @@ const Step2 = ({ handlerStore }) => {
             type={"text"}
             placeholder={"Numero de documento"}
             register={register}
+            type_documentation={SelectValues?.type_dui}
             errors={errors}
             required={"*Este campo es obligatorio."}
           />
