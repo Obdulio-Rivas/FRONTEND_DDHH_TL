@@ -5,6 +5,7 @@ import UsersStatus from "./Charts/UsersStatus";
 import IncidentCreated from "./Charts/IncidentCreated";
 import AuthService from "../../services/Auth/Auth.Service";
 import LatestIncidents from "./Charts/LatestIncidents";
+import IncidentHistoryByType from "./Charts/IncidentHistoryByType";
 
 const Dashboard = () => {
   return (
@@ -36,7 +37,7 @@ const Dashboard = () => {
               <LatestIncidents/>
             </div>
             <div className="box row-start-6 row-end-9 col-start-1 col-end-12 border border-solid border-gray-300 rounded-md justify-center items-center p-6">
-              <PlatformLogins />
+              <IncidentHistoryByType />
             </div>
           </div>
         </div>

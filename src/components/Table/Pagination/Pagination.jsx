@@ -43,7 +43,7 @@ const Pagination = ({ previousPage, nextPage, canPreviousPage, canNextPage, stat
   
   return (
     <div className="py-3 px-4 flex items-center justify-between">
-      <div className="flex-1 flex justify-between sm:hidden">
+      <div className="flex-1 flex justify-between sm:hidden items-center">
         <Button onClick={() => previousPage()} disabled={!canPreviousPage}>
           Previous
         </Button>
@@ -52,8 +52,8 @@ const Pagination = ({ previousPage, nextPage, canPreviousPage, canNextPage, stat
         </Button>
       </div>
       <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
-        <div className="flex gap-x-2">
-          <span className="text-sm text-gray-700">
+        <div className="flex gap-x-2 items-center justify-between text-base text-gray-700">
+          <span>
             Page <span className="font-medium">{state.pageIndex + 1}</span> of{" "}
             <span className="font-medium">{pageOptions.length}</span>
           </span>

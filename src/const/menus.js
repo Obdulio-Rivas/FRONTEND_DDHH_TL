@@ -28,8 +28,8 @@ const options_menu = {
       href: "#",
       type: "dropdown",
       options: [
-        { key: 0, option: "Dashboard", href: "/Dashboard" },
-        { key: 1, option: "Logs del sistema", href: "/Logs" },
+        { key: 0, option: "Dashboard", href: "/dashboard" },
+        { key: 1, option: "Logs del sistema", href: "/log" },
       ],
     },
   ],

@@ -12,6 +12,7 @@ import Page404 from "../pages/Page404/Page404";
 import ViewRoutes from "./Views/ViewRoutes";
 import DashboardRoutes from "./Dashboard/DashboardRoutes";
 import Confirmation from "../pages/Confirmation/Confirmation";
+import LogRoutes from "./Log/LogRoutes";
 
 const RouteManager = () => {
 
@@ -53,8 +54,18 @@ const RouteManager = () => {
             path="/dashboard/*"
             element={
               <PrivateRoute
-                forRoles={[0, 1, 2]}
+                forRoles={[0]}
                 children={<DashboardRoutes />}
+              />
+            }
+          />
+          <Route
+            exact
+            path="/log/*"
+            element={
+              <PrivateRoute
+                forRoles={[0]}
+                children={<LogRoutes />}
               />
             }
           />
