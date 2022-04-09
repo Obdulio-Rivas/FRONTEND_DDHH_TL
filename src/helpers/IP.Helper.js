@@ -5,7 +5,6 @@ const getPublicIP = async () => {
   );
 
   const response = await fetchData.json();
-  console.log(response)
   return response.ip;
 };
 

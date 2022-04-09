@@ -6,9 +6,11 @@ import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import AuthService from "../../../../services/Auth/Auth.Service";
 import VictimService from "../../../../services/Victim/Victim.Service";
+import IncidentVictimsService from "../../../../services/IncidentVictims/IncidentVictims.Service";
 
 const Step8 = ({ store, handlerStore }) => {
   const [currentUser, setCurrentUser] = useState(AuthService.getCurrentUser());
+  const [idsVictims, setIdsVictims] = useState([]);
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
 
@@ -29,12 +31,10 @@ const Step8 = ({ store, handlerStore }) => {
     ][monthNumber];
   };
 
-  //const getBiAnsewer
-
   const onSubmit = async (data) => {
-    let id_user = AuthService.getCurrentUser().id_user;
+    let id_user = currentUser.id_user;
     let id_incident = 0;
-    let ids_victims = [];
+    let array = []
 
     handlerStore({
       step8: {
@@ -43,16 +43,24 @@ const Step8 = ({ store, handlerStore }) => {
       },
     });
 
-    store.step7.values.map(async (value) => {
-      let response = await VictimService.postVictim(value);
-      console.log(response);
-      ids_victims.push(response.id_victim)
+    /** Registrar Incidente */
+
+
+    for (let i = 0; i < store.step7.values.length; i++) {
+      let response = await VictimService.postVictim(store.step7.values[i]);
+      array.push(response.data.id_victim)
+    }
+    
+    array.map(async (_id_victim) => {
+      let newIncidentVictim = {
+        id_incident: id_incident,
+        id_user: id_user,
+        id_victim: _id_victim,
+      };
+      let response = await IncidentVictimsService.postIncidentVictim(newIncidentVictim);
+      console.log(response)
     });
 
-    /*ids_victims.map(id_victim => async (value) => {
-      let response = await VictimService.postVictim(value)
-      
-    });*/
     //navigate("/incident/step9");
   };
 

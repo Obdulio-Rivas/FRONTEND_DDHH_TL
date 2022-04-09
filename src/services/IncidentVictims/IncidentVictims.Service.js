@@ -1,7 +1,7 @@
 import API_URL from "../../const/api.js";
 import AuthService from "../Auth/Auth.Service.js";
 
-const getIncident_Victim = async (id_incident_victim) => {
+const getIncidentVictim = async (id_incident_victim) => {
   const requestOptions = {
     method: "GET",
     headers: {
@@ -10,12 +10,12 @@ const getIncident_Victim = async (id_incident_victim) => {
       "access-control-allow-credentials": true,
     },
   };
-  const fetchData = await fetch(`${API_URL}/incident_victims/${id_incident_victim}`, requestOptions);
+  const fetchData = await fetch(`${API_URL}/incident_victim/${id_incident_victim}`, requestOptions);
   const response = await fetchData.json();
   return response;
 };
 
-const getIncidents_Victims = async () => {
+const getIncidentsVictims = async () => {
   const requestOptions = {
     method: "GET",
     headers: {
@@ -24,12 +24,12 @@ const getIncidents_Victims = async () => {
       "access-control-allow-credentials": true,
     },
   };
-  const fetchData = await fetch(`${API_URL}/incident_victims/`, requestOptions);
+  const fetchData = await fetch(`${API_URL}/incident_victim/`, requestOptions);
   const response = await fetchData.json();
   return response;
 };
 
-const postIncident_Victim = async (values) => {
+const postIncidentVictim = async (values) => {
   const requestOptions = {
     method: "POST",
     headers: {
@@ -40,7 +40,7 @@ const postIncident_Victim = async (values) => {
     body: JSON.stringify(values),
   };
 
-  const fetchData = await fetch(`${API_URL}/incident_victims/`, requestOptions);
+  const fetchData = await fetch(`${API_URL}incident_victim/`, requestOptions);
 
   const response = await fetchData.json();
   return response;
@@ -63,11 +63,11 @@ const postIncident_Victim = async (values) => {
   return response;
 };*/
 
-const CaseService = {
-getIncident_Victim,
-getIncidents_Victims,
-postIncident_Victim,
+const IncidentVictimsService = {
+getIncidentVictim,
+getIncidentsVictims,
+postIncidentVictim,
   //getIncidentsByUser,
 };
 
-export default CaseService;
+export default IncidentVictimsService;
