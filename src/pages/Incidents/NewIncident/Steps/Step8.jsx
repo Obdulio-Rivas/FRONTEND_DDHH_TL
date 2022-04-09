@@ -5,13 +5,12 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import AuthService from "../../../../services/Auth/Auth.Service";
+import VictimService from "../../../../services/Victim/Victim.Service";
 
 const Step8 = ({ store, handlerStore }) => {
   const [currentUser, setCurrentUser] = useState(AuthService.getCurrentUser());
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
-
-  console.log(store);
 
   const getMonthName = (monthNumber) => {
     return [
@@ -32,14 +31,28 @@ const Step8 = ({ store, handlerStore }) => {
 
   //const getBiAnsewer
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
+    let id_incident = 0;
+    let ids_victims = [];
+
     handlerStore({
       step8: {
         title: "Step8",
         values: data,
       },
     });
-    navigate("/incident/step9");
+
+    store.step7.values.map(async (value) => {
+      let response = await VictimService.postVictim(value);
+      console.log(response);
+      ids_victims.push(response.id_victim)
+    });
+
+    ids_victims.map(id_victim => async (value) => {
+      let response = await VictimService.postVictim(value)
+      
+    });
+    //navigate("/incident/step9");
   };
 
   return (

@@ -287,27 +287,27 @@ const Step7 = ({ handlerStore }) => {
               },
               {
                 option: "Ninguno",
-                value: 0,
+                value: "Ninguno",
               },
               {
                 option: "Basico",
-                value: 1,
+                value: "Basico",
               },
               {
                 option: "Educacion Media",
-                value: 2,
+                value: "Educacion Media",
               },
               {
                 option: "Graduado de bachillerato",
-                value: 3,
+                value: "Graduado de bachillerato",
               },
               {
                 option: "Universitario",
-                value: 4,
+                value: "Universitario",
               },
               {
                 option: "Graduado de Universidad",
-                value: 5,
+                value: "Graduado de Universidad",
               },
             ]}
             name={"academic_grade"}

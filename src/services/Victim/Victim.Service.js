@@ -41,7 +41,7 @@ const postVictim = async (values) => {
     body: JSON.stringify(values),
   };
 
-  const fetchData = await fetch(`${API_URL}/victim/`, requestOptions);
+  const fetchData = await fetch(`${API_URL}victim/`, requestOptions);
 
   const response = await fetchData.json();
   return response;
