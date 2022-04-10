@@ -14,7 +14,7 @@ const LatestIncidents = () => {
 
   useEffect(() => {
     async function getLastIncidentsCreated() {
-      const response = await IncidentService.getIncidentsByUser(3);
+      const response = await IncidentService.getIncidents();
       setIncidents(response.data);
       setIsLoading(false);
     }
@@ -70,7 +70,7 @@ const LatestIncidents = () => {
               { id_incident, id_type_incident, expediente, created_at },
               index
             ) => {
-              if (index === 5) {
+              if (index > 5) {
                 return null;
               }
 

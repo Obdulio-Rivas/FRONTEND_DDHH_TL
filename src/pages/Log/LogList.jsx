@@ -3,7 +3,8 @@ import toast, { Toaster } from "react-hot-toast";
 import AuthService from "../../services/Auth/Auth.Service";
 import UserService from "../../services/User/User.Service";
 import Navbar from "../../components/Navbar/Navbar";
-import { AiOutlineAudit, AiOutlineLine, AiOutlineFileSearch } from "react-icons/ai";
+import { AiOutlineAudit, AiOutlineFileSearch } from "react-icons/ai";
+import { RiFileList3Line } from "react-icons/ri";
 
 import { useTable, usePagination, useSortBy } from "react-table";
 
@@ -86,7 +87,7 @@ const LogList = () => {
     );
   }
 
-  if (logs?.length === 0) {
+  if (logs.length === 0) {
     return (
       <>
         <Navbar />
@@ -118,7 +119,7 @@ const LogList = () => {
                     className="min-w-full divide-y divide-gray-200"
                   >
                     <thead className="bg-gray-50">
-                      {headerGroups.map((headerGroup) => (
+                      {headerGroups?.map((headerGroup) => (
                         <tr {...headerGroup.getHeaderGroupProps()}>
                           {headerGroup.headers.map((column) => (
                             <th
@@ -154,8 +155,8 @@ const LogList = () => {
                                 case "type_log":
                                   return (
                                     <td {...cell.getCellProps()}>
-                                      <div className="flex w-full flex-row justify-center items-center">
-                                        <AiOutlineLine />
+                                      <div className="flex w-full flex-row justify-center items-center text-base">
+                                        <RiFileList3Line/>
                                         <span className="ml-2">{cell.value}</span>
                                       </div>
                                     </td>
@@ -185,7 +186,7 @@ const LogList = () => {
                                       className="mx-auto py-4 text-center whitespace-nowrap"
                                       {...cell.getCellProps()}
                                     >
-                                      {cell.render("Cell")}
+                                      {cell.value.split('T')[0]}
                                     </td>
                                   );
                               }

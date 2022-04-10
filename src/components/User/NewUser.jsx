@@ -152,22 +152,6 @@ const NewUser = () => {
             />
           </div>
           <div className="md:w-2/6 px-3 mb-6 md:mb-0">
-            <Input
-              label={"Password"}
-              name={"password"}
-              type={"password"}
-              placeholder={"Password"}
-              register={register}
-              errors={errors}
-              required={"*Este campo es obligatorio."}
-              pattern={
-                /(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&._-])([A-Za-z\d$@$!%*?&._-]|[^ ]){8,15}/g
-              }
-            />
-          </div>
-        </div>
-        <div className="-mx-3 md:flex mb-6">
-          <div className="md:w-2/6 px-3 mb-6 md:mb-0">
             <RadioButtons
               label={"Rol"}
               name={"role"}

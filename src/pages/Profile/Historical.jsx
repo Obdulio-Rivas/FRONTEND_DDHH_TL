@@ -73,7 +73,7 @@ const Historical = ({ user }) => {
                 { id_incident, id_type_incident, expediente, created_at },
                 index
               ) => {
-                if (index === 5) {
+                if (index > 6) {
                   return null;
                 }
 

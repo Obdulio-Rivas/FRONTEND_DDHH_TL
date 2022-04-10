@@ -80,8 +80,8 @@ const login = async (values) => {
 
   //Registramos el resultado del intento de incio de sesion.
   LogService.postLog({
-    id_user: response.is_successful ? response?.data?.id_user: -1,
-    role_user: response.is_successful ? response?.data?.role: -1,
+    id_user: response.is_successful ? response.data.id_user: -1,
+    role_user: response.is_successful ? response.data.role: -1,
     type_log: "Inicio de sesion",
     title_log: response.is_successful
       ? "Inicio de sesion correcto"
