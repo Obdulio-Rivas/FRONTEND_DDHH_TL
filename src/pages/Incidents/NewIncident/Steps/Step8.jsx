@@ -10,7 +10,44 @@ import IncidentVictimsService from "../../../../services/IncidentVictims/Inciden
 
 const Step8 = ({ store, handlerStore }) => {
   const [currentUser, setCurrentUser] = useState(AuthService.getCurrentUser());
-  const [idsVictims, setIdsVictims] = useState([]);
+  const [currentIncident, setCurrentIncident] = useState({
+    //registro institucional
+    expediente: "",
+    incident_date: "",
+    hour: "",
+    incident_institution: 0,
+    incident_institution_name: "",
+    name_reference: "",
+    contact: "",
+    incident_identification: "",
+    //datos especificos del caso
+    date_hechos: "",
+    incident_time: "",
+    adress: "",
+    deparment: 0,
+    municipality: 0,
+    cause_displacement: "",
+    people_displacement: "",
+    institutions_accompanied: "",
+    statal_institution: 0,
+    statal_institution_name: "",
+    accompanied_descriptions: "",
+    //perfil socioeconomico
+    home: 0,
+    monthly_income: 0.00,
+    familiar_income: 0.00,
+    survive_displacement: "",
+    //perfil migratorio
+    country_leave: 0,
+    country_leave_name: "",
+    family_cant: "",
+    //general
+    status: 0,
+    description_incident: "",
+    //Foreign key.
+    id_type_incident: 0,
+    id_user: 0,
+  });
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
 
@@ -34,8 +71,13 @@ const Step8 = ({ store, handlerStore }) => {
   const onSubmit = async (data) => {
     let id_user = currentUser.id_user;
     let id_incident = 0;
-    let array = []
-
+    let array = [];
+    const step1 = store.step1.values;
+    const step3 = store.step3.values;
+    const step4 = store.step4.values;
+    const step5 = store.step5.values;
+    const step6 = store.step6.values;
+    
     handlerStore({
       step8: {
         title: "Step8",
@@ -43,10 +85,55 @@ const Step8 = ({ store, handlerStore }) => {
       },
     });
 
+    setCurrentIncident(
+      {expediente : step1.expediente,
+        incident_date: step1.incident_date,
+        hour: step1.incident_date,
+        incident_institution: step1.incident_institution,
+        incident_institution_name: step1.incident_institution_name,
+        name_reference: step1.name_reference,
+        contact: step1.contact,
+        incident_identification: step1.incident_identification,
+        //datos especificos del caso
+        date_hechos: step3.date_hechos,
+        incident_time: step3.incident_time,
+        adress: step3.adress,
+        deparment: step3.deparment,
+        municipality: step3.municipality,
+        cause_displacement: step3.cause_displacement,
+        people_displacement: step3.people_displacement,
+        institutions_accompanied: step3.institutions_accompanied,
+        statal_institution: step3.statal_institution,
+        statal_institution_name: step3.statal_institution_name,
+        accompanied_descriptions: step3.accompanied_descriptions,
+        //perfil socioeconomico
+        home: step4.home,
+        monthly_income: step4.monthly_income,
+        familiar_income: step4.familiar_income,
+        survive_displacement: step4.survive_displacement,
+        //perfil migratorio
+        country_leave: step5.country_leave,
+        country_leave_name: step5.country_leave_name,
+        family_cant: step5.family_cant,
+        //general
+        status: 0,
+        description_incident: step6.description_incident,
+        //Foreign key.
+        id_type_incident: 0,
+        id_user: 0,
+      }
+    )
+    console.log(step1)
+    console.log(step3)
+    console.log(step4)
+    console.log(step5)
+    console.log(step6)
+    console.log(currentIncident);
     /** Registrar Incidente */
+    
 
 
-    for (let i = 0; i < store.step7.values.length; i++) {
+   /* for (let i = 0; i < store.step7.values.length; i++) {
       let response = await VictimService.postVictim(store.step7.values[i]);
       array.push(response.data.id_victim)
     }
@@ -59,7 +146,7 @@ const Step8 = ({ store, handlerStore }) => {
       };
       let response = await IncidentVictimsService.postIncidentVictim(newIncidentVictim);
       console.log(response)
-    });
+    });*/
 
     //navigate("/incident/step9");
   };
