@@ -13,6 +13,7 @@ import ViewRoutes from "./Views/ViewRoutes";
 import DashboardRoutes from "./Dashboard/DashboardRoutes";
 import Confirmation from "../pages/Confirmation/Confirmation";
 import LogRoutes from "./Log/LogRoutes";
+import FormatsRoutes from "./Formats/FormatsRoutes";
 
 const RouteManager = () => {
 
@@ -39,7 +40,14 @@ const RouteManager = () => {
             exact
             path="/incident/*"
             element={
-              <PrivateRoute forRoles={[0]} children={<IncidentRoutes />} />
+              <PrivateRoute forRoles={[0, 1]} children={<IncidentRoutes />} />
+            }
+          />
+          <Route
+            exact
+            path="/formats/*"
+            element={
+              <PrivateRoute forRoles={[0, 1]} children={<FormatsRoutes />} />
             }
           />
           <Route
