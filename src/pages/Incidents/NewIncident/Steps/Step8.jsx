@@ -9,6 +9,11 @@ import VictimService from "../../../../services/Victim/Victim.Service";
 import IncidentVictimsService from "../../../../services/IncidentVictims/IncidentVictims.Service";
 
 const Step8 = ({ store, handlerStore }) => {
+    const step1 = store.step1.values;
+    const step3 = store.step3.values;
+    const step4 = store.step4.values;
+    const step5 = store.step5.values;
+    const step6 = store.step6.values;
   const [currentUser, setCurrentUser] = useState(AuthService.getCurrentUser());
   const [currentIncident, setCurrentIncident] = useState({
     //registro institucional
@@ -72,12 +77,7 @@ const Step8 = ({ store, handlerStore }) => {
     let id_user = currentUser.id_user;
     let id_incident = 0;
     let array = [];
-    const step1 = store.step1.values;
-    const step3 = store.step3.values;
-    const step4 = store.step4.values;
-    const step5 = store.step5.values;
-    const step6 = store.step6.values;
-    
+
     handlerStore({
       step8: {
         title: "Step8",
@@ -133,7 +133,7 @@ const Step8 = ({ store, handlerStore }) => {
     
 
 
-   /* for (let i = 0; i < store.step7.values.length; i++) {
+    for (let i = 0; i < store.step7.values.length; i++) {
       let response = await VictimService.postVictim(store.step7.values[i]);
       array.push(response.data.id_victim)
     }
@@ -146,7 +146,7 @@ const Step8 = ({ store, handlerStore }) => {
       };
       let response = await IncidentVictimsService.postIncidentVictim(newIncidentVictim);
       console.log(response)
-    });*/
+    });
 
     //navigate("/incident/step9");
   };
