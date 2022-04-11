@@ -123,22 +123,17 @@ const Content = ({
               "flex justify-center border-2 border-gray-200 rounded-xl px-2 py-6 bg-gray-50 cursor-pointer"
             }
           >
-            <div>
+            <div className="truncate">
               <img
                 className="mx-auto"
                 src={getIconElement(type)}
                 alt="Icon element"
               />
-              <div
-                className="capitalize text-base text-ellipsis overflow-hidden whitespace-nowrap"
-                style={{
-                  white_space: "nowrap",
-                  text_overflow: "ellipsis",
-                  overflow: "hidden",
-                }}
+              <span
+                className="capitalize text-sm"
               >
                 {name}
-              </div>
+              </span>
             </div>
           </div>
         );

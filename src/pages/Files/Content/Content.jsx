@@ -29,7 +29,6 @@ const Content = ({
     setSearch(value);
   };
 
-
   const handlerClick = (value) => {
     changeFolder(value);
   };
@@ -129,15 +128,13 @@ const Content = ({
                 src={getIconElement(type)}
                 alt="Icon element"
               />
-              <div
-                className="capitalize text-base text-ellipsis overflow-hidden whitespace-nowrap"
-                style={{
-                  white_space: "nowrap",
-                  text_overflow: "ellipsis",
-                  overflow: "hidden",
-                }}
-              >
-                {name}
+              <div className="truncate">
+                <img
+                  className="mx-auto"
+                  src={getIconElement(type)}
+                  alt="Icon element"
+                />
+                <span className="capitalize text-sm">{name}</span>
               </div>
             </div>
           </div>
@@ -159,9 +156,11 @@ const Content = ({
           onChange={handlerChange}
         />
         <ReactPaginate
-          className={`flex flex-row text-slate-500 font-medium justify-between items-center text-xl ${(pageCount === 0) ? 'hidden': null}`}
-          previousLabel={<RiArrowLeftSLine  className="text-3xl"/>}
-          nextLabel={<RiArrowRightSLine className="text-3xl"/>}
+          className={`flex flex-row text-slate-500 font-medium justify-between items-center text-xl ${
+            pageCount === 0 ? "hidden" : null
+          }`}
+          previousLabel={<RiArrowLeftSLine className="text-3xl" />}
+          nextLabel={<RiArrowRightSLine className="text-3xl" />}
           pageCount={pageCount}
           onPageChange={handlePageClick}
           containerClassName={"flex flex-row justify-between items-center"}
@@ -171,7 +170,7 @@ const Content = ({
       </div>
       <div>
         {isLoading ? (
-          <Cubes elements={(Math.random() * (11 - 1) + 1)} />
+          <Cubes elements={Math.random() * (11 - 1) + 1} />
         ) : (
           <div
             className={
