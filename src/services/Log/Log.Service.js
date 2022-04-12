@@ -32,6 +32,21 @@ const getLogs = async () => {
   return response;
 };
 
+const getLogsByType = async (type_log) => {
+  const requestOptions = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "platform-uuid": _platform_uuid,
+      "platform-user": AuthService?.getCurrentUser()?.id_user || -1,
+      "access-control-allow-credentials": true,
+    },
+  };
+  const fetchData = await fetch(`${API_URL}/log/log_by_type/${type_log}`, requestOptions);
+  const response = await fetchData.json();
+  return response;
+};
+
 const postLog = async (values) => {
   const requestOptions = {
     method: "POST",
@@ -55,6 +70,7 @@ const LogService = {
   getLog,
   getLogs,
   postLog,
+  getLogsByType
 };
 
 export default LogService;

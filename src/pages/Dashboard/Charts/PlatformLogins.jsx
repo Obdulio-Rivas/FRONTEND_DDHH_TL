@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -10,8 +10,41 @@ import {
   Legend,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
+import AuthService from "../../../services/Auth/Auth.Service";
+import LogService from "../../../services/Log/Log.Service";
 
 const PlatformLogins = () => {
+  const [loginStatus, setLoginStatus] = useState({
+    successful: 0,
+    unsuccessful: 0,
+  });
+
+  useEffect(() => {
+    async function fetchUsers() {
+      let successful = 0;
+      let unsuccessful = 0;
+      const response = await LogService.getLogsByType('Inicio de sesion');
+      console.log(response)
+      response.data.map((log) => {
+        if (true) {
+          successful++;
+        } else {
+          unsuccessful++;
+        }
+        return true;
+      });
+      setLoginStatus({
+        successful: successful,
+        unsuccessful: unsuccessful
+      });
+      if (response.is_successful) {
+        AuthService.updateJwtUser(response);
+      }
+    }
+    fetchUsers();
+    console.log(loginStatus)
+  }, []);
+
   ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -40,13 +73,18 @@ const PlatformLogins = () => {
   };
 
   const labels = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
+    "Enero",
+    "Febrero",
+    "Marzo",
+    "Abril",
+    "Mayo",
+    "Junio",
+    "Julio",
+    "Agosto",
+    "Septiembre",
+    "Octubre",
+    "Noviembre",
+    "Diciembre",
   ];
   const data = {
     labels,

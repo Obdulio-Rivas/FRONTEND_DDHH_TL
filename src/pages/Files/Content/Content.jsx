@@ -122,20 +122,13 @@ const Content = ({
               "flex justify-center border-2 border-gray-200 rounded-xl px-2 py-6 bg-gray-50 cursor-pointer"
             }
           >
-            <div>
+            <div className="truncate">
               <img
                 className="mx-auto"
                 src={getIconElement(type)}
                 alt="Icon element"
               />
-              <div className="truncate">
-                <img
-                  className="mx-auto"
-                  src={getIconElement(type)}
-                  alt="Icon element"
-                />
-                <span className="capitalize text-sm">{name}</span>
-              </div>
+              <span className="capitalize text-sm">{name}</span>
             </div>
           </div>
         );

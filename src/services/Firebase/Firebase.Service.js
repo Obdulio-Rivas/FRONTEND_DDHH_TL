@@ -2,6 +2,9 @@ import firebase from "firebase/compat/app";
 import "firebase/compat/storage";
 import "firebase/compat/firestore";
 import uuid from "react-uuid";
+import LogService from "../Log/Log.Service";
+import IPHelper from "../../helpers/IP.Helper";
+import AuthService from "../Auth/Auth.Service";
 
 const firebaseConfig = {
   apiKey: "AIzaSyC7RoyxLzXl4uYm-9M7HVIfv-HoYbcRmxc",
@@ -16,7 +19,9 @@ const firebaseConfig = {
 const uploadFile = async (path, file, options = {}) => {
   try {
     const fileExtension = options?.extension;
-    const fileName = options?.filename ? `${options?.filename}.${fileExtension}` : `${uuid()}.${fileExtension}`;
+    const fileName = options?.filename
+      ? `${options?.filename}.${fileExtension}`
+      : `${uuid()}.${fileExtension}`;
     const app = firebase.initializeApp(firebaseConfig);
     const storageRef = app.storage().ref();
     const pathFile = storageRef.child(`${path}/${fileName}`);
@@ -31,23 +36,33 @@ const uploadFile = async (path, file, options = {}) => {
     };
     return metadata;
   } catch (e) {
-    //Crear un servicio de log.
-    console.log(e);
+    LogService.postLog({
+      id_user: AuthService.getCurrentUser().id_user,
+      role_user: AuthService.getCurrentUser().role,
+      type_log: "Error",
+      title_log: "Error al subir el archivo",
+      description: `Error: ${e}`,
+      ip_client: await IPHelper.getPublicIP(),
+    });
     return null;
   }
 };
 
-const downloadFile = async (bucket, fullPath)=>{
+const downloadFile = async (bucket, fullPath) => {
   try {
     const app = firebase.initializeApp(firebaseConfig);
     const storageRef = app.storage().ref();
     const pathFile = storageRef.child(fullPath);
-    return await pathFile.getDownloadURL(
-      `gs://${bucket}/${fullPath}`
-    );
+    return await pathFile.getDownloadURL(`gs://${bucket}/${fullPath}`);
   } catch (e) {
-    //Crear un servicio de log.
-    console.log(e);
+    LogService.postLog({
+      id_user: AuthService.getCurrentUser().id_user,
+      role_user: AuthService.getCurrentUser().role,
+      type_log: "Error",
+      title_log: "Error al descargar el archivo",
+      description: `Error: ${e}`,
+      ip_client: await IPHelper.getPublicIP(),
+    });
     return null;
   }
 };
@@ -87,12 +102,17 @@ const listFiles = async (path) => {
         },
       });
     });
-    console.log(fileList);
     return fileList;
   } catch (e) {
-    //Crear un servicio de log.
-    console.log(e);
-    return e;
+    LogService.postLog({
+      id_user: AuthService.getCurrentUser().id_user,
+      role_user: AuthService.getCurrentUser().role,
+      type_log: "Error",
+      title_log: "Error al listar archivos",
+      description: `Error: ${e}`,
+      ip_client: await IPHelper.getPublicIP(),
+    });
+    return null;
   }
 };
 
