@@ -1,5 +1,6 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
+import InicidentList from "../../pages/Incidents/IncidentList/IncidentList";
 import NewIncident from "../../pages/Incidents/NewIncident/NewIncident";
 import Page404 from "../../pages/Page404/Page404";
 
@@ -23,7 +24,7 @@ const IncidentRoutes = () => {
       /**
         Rutas para ver el listado de incidentes.
        */
-        <Route path="/incidentes" element={<NewIncident />} />
+        <Route path="/incidentes" element={<InicidentList />} />
       /**
         Ruta por si la ruta solicitada no existe.
        */

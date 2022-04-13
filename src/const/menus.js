@@ -19,7 +19,7 @@ const options_menu = {
       type: "dropdown",
       options: [
         { key: 0, option: "Nuevo incidente", href: "/incident/step1" },
-        { key: 1, option: "Listado de incidentes", href: "/incident/" },
+        { key: 1, option: "Listado de incidentes", href: "/incident/incidentes" },
       ],
     },
     {
