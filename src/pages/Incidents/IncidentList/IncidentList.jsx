@@ -4,23 +4,27 @@ import AuthService from "../../../services/Auth/Auth.Service";
 import Navbar from "../../../components/Navbar/Navbar";
 
 import { useTable, usePagination, useSortBy } from "react-table";
-import { MdRemoveCircle } from "react-icons/md";
+import { MdRemoveCircle,MdListAlt } from "react-icons/md";
 import { BiEdit } from "react-icons/bi";
 import { ImProfile } from "react-icons/im";
 import RolePill from "../../../components/Table/RolePill/RolePill";
-import StatusPill from "../../../components/Table/StatusPill/StatusPill";
 import Pagination from "../../../components/Table/Pagination/Pagination";
 import Modal from "../../../components/Modal/Modal";
 import { Link } from "react-router-dom";
 import Dots from "../../../components/Loaders/Dots";
 import CaseService from "../../../services/Incident/Incident.Service";
+import IncidentVictimsService from "../../../services/IncidentVictims/IncidentVictims.Service";
+import StatusIncident from "../../../components/Table/StatusPill/StatusIncident";
+import VictimService from "../../../services/Victim/Victim.Service";
 
 const IncidentList = () => {
   const [Incidents, setIncidents] = useState([]);
+  const [Victims, setVictims] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpenIncident, setIsOpenIncident] = useState(false);
   const [is_loading, setIsLoading] = useState(true);
   const [incidentSelected, setincidentSelected] = useState(null);
-
+  let arrayVictims = [];
   useEffect(() => {
     async function fetchIncidents() {
       const response = await CaseService.getIncidents();
@@ -35,6 +39,21 @@ const IncidentList = () => {
 
   const closeModal = () => {
     setIsOpen(false);
+    setIsOpenIncident(false);
+  };
+
+  const openModalVictim = (value) => {
+    async function getIncidentData(id_incident) {
+      const responseIncidentVictims = await IncidentVictimsService.getIncidentVictimByIdIncident(id_incident);
+      for (let i = 0; i < responseIncidentVictims.data.length; i++) {
+        const responseVictim = await VictimService.getVictim(responseIncidentVictims.data[i].id_victim);
+        arrayVictims.push(responseVictim.data[0].name + ' ' + responseVictim.data[0].last_name);
+      }
+      setVictims(arrayVictims);
+      setincidentSelected(responseIncidentVictims.data[0]);
+      setIsOpenIncident(true);
+    }
+    getIncidentData(value);
   };
 
   const openModal = (value) => {
@@ -71,6 +90,9 @@ const IncidentList = () => {
       }
     }
     deleteIncident();
+  };
+  const handlerActionOKIncident = () => {
+        setIsOpenIncident(false);
   };
 
   const handlerActionAbort = () => {
@@ -221,7 +243,7 @@ const IncidentList = () => {
                                   case "status":
                                     return (
                                       <td {...cell.getCellProps()}>
-                                        <StatusPill value={cell.value} />
+                                        <StatusIncident value={cell.value} />
                                       </td>
                                     );
                                   case "id_incident":
@@ -246,6 +268,15 @@ const IncidentList = () => {
                                             }}
                                           >
                                             <MdRemoveCircle />
+                                          </button>
+
+                                          <button
+                                          className={`text-xl mx-2 text-gray-600`}
+                                            onClick={() => {
+                                              openModalVictim(cell.value);
+                                            }}
+                                          >
+                                            <MdListAlt />
                                           </button>
                                         </div>
                                       </td>
@@ -283,12 +314,25 @@ const IncidentList = () => {
                 </div>
               </div>
               <Modal
+                modaltype={'eliminar'}
                 title={"Eliminar usuario"}
                 children={`Realmente desea elminar el usuario "${incidentSelected?.expediente}"`}
                 isOpen={isOpen}
                 closeModal={closeModal}
                 handlerActionOK={handlerActionOK}
                 handlerActionAbort={handlerActionAbort}
+              />
+              <Modal
+                modaltype={''}
+                title={"Victimas asociadas al caso."}
+                children={`${Victims.map((Nombre, index)=>{
+                  let nombre = '';
+                  nombre = nombre + Nombre+"\n";
+                  return '-'+nombre;
+                })}`}
+                isOpen={isOpenIncident}
+                closeModal={closeModal}
+                handlerActionOK={handlerActionOKIncident}
               />
             </div>
           </main>

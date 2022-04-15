@@ -55,6 +55,7 @@ const getIncidentsByUser = async (id_user) => {
       "access-control-allow-credentials": true,
     },
   };
+  
   const fetchData = await fetch(
     `${API_URL}/incident/incidents_by_user/${id_user}`,
     requestOptions

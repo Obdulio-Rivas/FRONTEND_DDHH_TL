@@ -15,6 +15,20 @@ const getIncidentVictim = async (id_incident_victim) => {
   return response;
 };
 
+const getIncidentVictimByIdIncident = async (id_incident) => {
+  const requestOptions = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "user-access-token": AuthService.getCurrentUser().jwt,
+      "access-control-allow-credentials": true,
+    },
+  };
+  const fetchData = await fetch(`${API_URL}/incident_victim/incident/${id_incident}`, requestOptions);
+  const response = await fetchData.json();
+  return response;
+};
+
 const getIncidentsVictims = async () => {
   const requestOptions = {
     method: "GET",
@@ -67,6 +81,7 @@ const IncidentVictimsService = {
 getIncidentVictim,
 getIncidentsVictims,
 postIncidentVictim,
+getIncidentVictimByIdIncident,
   //getIncidentsByUser,
 };
 

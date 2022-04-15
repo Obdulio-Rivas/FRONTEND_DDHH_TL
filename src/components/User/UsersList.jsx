@@ -288,6 +288,7 @@ const UsersList = () => {
                 </div>
               </div>
               <Modal
+                modaltype={"eliminar"}
                 title={"Eliminar usuario"}
                 children={`Realmente desea elminar el usuario "${userSelected?.name}"`}
                 isOpen={isOpen}
