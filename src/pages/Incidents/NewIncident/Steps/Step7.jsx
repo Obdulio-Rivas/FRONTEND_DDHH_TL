@@ -401,7 +401,7 @@ const Step7 = ({ handlerStore }) => {
               { option: "Otro", value: "Otro" },
             ]}
             disabled={radioValues?.chronic_disease}
-            name={"medicamento"}
+            name={"prescription_drug"}
             required={"*Este campo es obligatorio."}
             register={register}
             errors={errors}

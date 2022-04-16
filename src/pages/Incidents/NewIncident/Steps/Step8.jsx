@@ -11,6 +11,7 @@ import CaseService from "../../../../services/Incident/Incident.Service";
 
 const Step8 = ({ store, handlerStore }) => {
     const step1 = store.step1?.values;
+    const step2 = store.step2?.values;
     const step3 = store.step3?.values;
     const step4 = store.step4?.values;
     const step5 = store.step5?.values;
@@ -144,16 +145,22 @@ const Step8 = ({ store, handlerStore }) => {
     )*/
     //console.log(Incidentobject);
 
+    /**Registrando el denunciante */
+    let victimResponse = await VictimService.postVictim(step2);
+    array.push(victimResponse.data.id_victim);
+    console.log(victimResponse);
+
     /** Registrar Incidente */
       let caseResponse = await CaseService.postIncident(Incidentobject);
       id_incident=caseResponse.data.id_incident;
       console.log(caseResponse);
 
-    /**Registrar las victimas*/
+    /**Registrar las victimas */
     for (let i = 0; i < store.step7.values.length; i++) {
       let response = await VictimService.postVictim(store.step7.values[i]);
       array.push(response.data.id_victim)
     }
+
     /**Registrar la relacion de incidente victima */
     array.map(async (_id_victim) => {
       let newIncidentVictim = {
