@@ -80,19 +80,20 @@ const ViewIncident = () => {
               <ul className="flex flex-row flex-wrap justify-between px-5">
                 <li className="py-1">
                   <span>Expediente:</span>
-                  <span>{incident.expediente}</span>
+                  <span>{incident[0].expediente}</span>
                 </li>
                 <li className="py-1">
                   <span className="mr-2">Fecha:</span>
-                  <span>{incident.incident_date}</span>
+                  <span>{incident[0].incident_date}</span>
                 </li>
                 <li className="py-1">
                   <span className="mr-2">Hora:</span>
                   <span>
-                    {incident.hour?.split(":")[0] >= 12 &&
-                    incident.hour?.split(":")[1] > 0
-                      ? `${incident.hour} PM`
-                      : `${incident.hour} AM`}
+                    {
+                    incident[0].hour?.split(":")[0] >= 12 &&
+                    incident[0].hour?.split(":")[1] > 0
+                      ? `${incident[0].hour} PM`
+                      : `${incident[0].hour} AM`}
                   </span>
                 </li>
               </ul>
@@ -103,7 +104,7 @@ const ViewIncident = () => {
                   </span>
                   <span className="mx-2">
                     Si{" "}
-                    {incident.incident_institution === "1" ? (
+                    {incident[0].incident_institution === 1 ? (
                       <BsCheckSquare className="inline-flex text-sm" />
                     ) : (
                       <BsSquare className="inline-flex text-sm" />
@@ -111,7 +112,7 @@ const ViewIncident = () => {
                   </span>
                   <span className="mx-2">
                     No{" "}
-                    {incident.incident_institution === "0" ? (
+                    {incident[0].incident_institution === 0 ? (
                       <BsCheckSquare className="inline-flex text-sm" />
                     ) : (
                       <BsSquare className="inline-flex text-sm" />
@@ -120,7 +121,7 @@ const ViewIncident = () => {
                 </li>
                 <li className="py-1">
                   <span className="mr-2">¿Cuál?</span>
-                  <span>{incident.incident_institution_name}</span>
+                  <span>{incident[0].incident_institution_name}</span>
                 </li>
               </ul>
               <ul className="flex flex-row flex-wrap justify-between px-5">

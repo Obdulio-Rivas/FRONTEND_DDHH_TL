@@ -255,7 +255,7 @@ const IncidentList = () => {
                                         <div className="flex w-full flex-row justify-center">
                                           <Link
                                             className={`text-xl mx-2 text-gray-600`}
-                                            to={`profile/${cell.value}`}
+                                            to={`/view/incident/${cell.value}`}
                                           >
                                             <ImProfile />
                                           </Link>
