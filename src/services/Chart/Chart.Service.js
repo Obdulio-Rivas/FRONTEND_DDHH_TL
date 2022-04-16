@@ -1,6 +1,20 @@
 import API_URL from "../../const/api.js";
 import AuthService from "../Auth/Auth.Service.js";
 
+const getUsersStatus = async () => {
+  const requestOptions = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "user-access-token": AuthService.getCurrentUser().jwt,
+      "access-control-allow-credentials": true,
+    },
+  };
+  const fetchData = await fetch(`${API_URL}/chart/users_status`, requestOptions);
+  const response = await fetchData.json();
+  return response;
+};
+
 const getLoginsOfCurrentYear = async (start_date) => {
   const requestOptions = {
     method: "GET",
@@ -31,6 +45,7 @@ const getIncidentsOfCurrentYear = async (start_date) => {
 };
 
 const ChartService = {
+  getUsersStatus,
   getLoginsOfCurrentYear,
   getIncidentsOfCurrentYear
 };

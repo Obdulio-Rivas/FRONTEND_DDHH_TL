@@ -1,15 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
-import UserService from "../../../services/User/User.Service";
 import AuthService from "../../../services/Auth/Auth.Service";
+import ChartService from "../../../services/Chart/Chart.Service";
 
 const UsersStatus = () => {
-  const [usersStatus, setUsersStatus] = useState({
-    activeUsers: 0,
-    inactiveUsers: 0,
-    pendingUsers: 0,
-  });
+  const [userStatus, setUserStatus] = useState([]);
+
+  useEffect(() => {
+    async function fetchIncidents() {
+      const response = await ChartService.getUsersStatus();
+      setUserStatus(response.data[0]);
+      if (response.is_successful) {
+        AuthService.updateJwtUser(response);
+      }
+    }
+    fetchIncidents();
+  }, []);
 
   ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -30,43 +37,15 @@ const UsersStatus = () => {
     },
   };
 
-  useEffect(() => {
-    async function fetchUsers() {
-      let activeUsers = 0;
-      let inactiveUsers = 0;
-      let pendingUsers = 0;
-      const response = await UserService.getUsers();
-      response.data.map((user) => {
-        if (user.status === 0) {
-          inactiveUsers++;
-        } else if (user.status === 1) {
-          activeUsers++;
-        } else {
-          pendingUsers++;
-        }
-        return true;
-      });
-      setUsersStatus({
-        activeUsers: activeUsers,
-        inactiveUsers: inactiveUsers,
-        pendingUsers: pendingUsers,
-      });
-      if (response.is_successful) {
-        AuthService.updateJwtUser(response);
-      }
-    }
-    fetchUsers();
-  }, []);
-
   const data = {
     labels: ["Activos", "Inactivos", "Pendientes"],
     datasets: [
       {
         label: "# de usuarios",
         data: [
-          usersStatus.activeUsers,
-          usersStatus.inactiveUsers,
-          usersStatus.pendingUsers,
+          userStatus.active,
+          userStatus.inactive,
+          userStatus.pending
         ],
         backgroundColor: [
           "rgb(162, 213, 171)",

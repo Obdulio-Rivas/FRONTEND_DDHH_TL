@@ -17,7 +17,7 @@ const IncidentCreated = () => {
   const [incidents, setIncidents] = useState([]);
 
   useEffect(() => {
-    async function fetchLogins() {
+    async function fetchIncidents() {
       let current_year = moment().format("YYYY");
       let start_date = `${current_year}-01-01`;
       const response = await ChartService.getIncidentsOfCurrentYear(start_date);
@@ -27,7 +27,7 @@ const IncidentCreated = () => {
         AuthService.updateJwtUser(response);
       }
     }
-    fetchLogins();
+    fetchIncidents();
   }, []);
 
 

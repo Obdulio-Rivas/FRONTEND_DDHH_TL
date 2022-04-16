@@ -12,7 +12,6 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import AuthService from "../../../services/Auth/Auth.Service";
-import LogService from "../../../services/Log/Log.Service";
 import ChartService from "../../../services/Chart/Chart.Service";
 
 const PlatformLogins = () => {
