@@ -144,7 +144,7 @@ const LogList = () => {
                       ))}
                     </thead>
                     <tbody
-                      className="bg-white divide-y divide-gray-200  text-sm"
+                      className="bg-white divide-y divide-gray-200  text-sm px-2"
                       {...getTableBodyProps()}
                     >
                       {page?.map((page, i) => {
@@ -156,7 +156,7 @@ const LogList = () => {
                                 case "type_log":
                                   return (
                                     <td {...cell.getCellProps()}>
-                                      <div className="flex w-full flex-row justify-center items-center text-base">
+                                      <div className="flex w-full flex-row justify-start items-center text-base">
                                         <RiFileList3Line/>
                                         <span className="ml-2">{cell.value}</span>
                                       </div>
@@ -164,7 +164,7 @@ const LogList = () => {
                                   );
                                 case "description":
                                   return (
-                                    <td className="text-center text-ellipsis" {...cell.getCellProps()}>
+                                    <td className="text-start text-ellipsis max-w-xs w-3/5 truncate" {...cell.getCellProps()}>
                                       {cell.value}
                                     </td>
                                   );
