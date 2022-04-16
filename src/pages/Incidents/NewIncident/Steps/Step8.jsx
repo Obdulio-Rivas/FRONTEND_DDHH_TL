@@ -70,8 +70,7 @@ const Step8 = ({ store, handlerStore }) => {
         incident_identification: step1.incident_identification,
         //datos especificos del caso
         date_hechos: step3.date_hechos,
-        datetime_hechos : step3.datetime_hechos,
-        incident_time: "",
+        incident_time: step3.incident_time,
         adress: step3.adress,
         deparment: step3.deparment,
         municipality: step3.municipality,

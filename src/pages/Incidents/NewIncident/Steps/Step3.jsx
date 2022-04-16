@@ -104,7 +104,7 @@ const Step3 = ({ handlerStore }) => {
         <div className="md:w-1/5 px-3 mb-6 md:mb-0">
           <Input
             label={"Hora Aprox."}
-            name={"datetime_hechos"}
+            name={"incident_time"}
             type={"time"}
             placeholder={"Hora aproximada de los hehos"}
             register={register}
