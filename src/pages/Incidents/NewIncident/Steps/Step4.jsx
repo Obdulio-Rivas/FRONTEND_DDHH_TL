@@ -61,7 +61,7 @@ const Step4 = ({ handlerStore }) => {
           <Input
             label={"Ingresos Mensuales del grupo familiar"}
             name={"monthly_income"}
-            type={"text"}
+            type={"number"}
             placeholder={"Institución u organización que conoce sobre el caso..."}
             register={register}
             errors={errors}
@@ -71,7 +71,7 @@ const Step4 = ({ handlerStore }) => {
           <Input
             label={"Ingreso actual del grupo familiar"}
             name={"familiar_income"}
-            type={"text"}
+            type={"number"}
             placeholder={"Institución u organización que conoce sobre el caso..."}
             register={register}
             errors={errors}
