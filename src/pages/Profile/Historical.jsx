@@ -85,9 +85,7 @@ const Historical = ({ user }) => {
                         <Link
                           to={`/view/incident/${id_incident}`}
                           className="font-semibold text-slate-700 text-lg"
-                        >{`${expediente} - ${getIncidentType(
-                          id_type_incident
-                        )}`}</Link>
+                        >{expediente}</Link>
                       </div>
                     </div>
                     <div className="text-gray-500 text-md">

@@ -16,38 +16,20 @@ import LogService from "../../../services/Log/Log.Service";
 import ChartService from "../../../services/Chart/Chart.Service";
 
 const PlatformLogins = () => {
-  const [loginStatus, setLoginStatus] = useState({
-    successful: 0,
-    unsuccessful: 0,
-  });
+  const [logins, setLogins] = useState([]);
 
   useEffect(() => {
-    async function fetchUsers() {
-      let successful = 0;
-      let unsuccessful = 0;
-      let today = moment().add(-1, "d").format("YYYY-MM-DD");
+    async function fetchLogins() {
       let current_year = moment().format("YYYY");
       let start_date = `${current_year}-01-01`;
-      const response = await ChartService.getLoginsBetweenDates(start_date, today);
-      console.log(response)
-      response.data.map((log) => {
-        if (true) {
-          successful++;
-        } else {
-          unsuccessful++;
-        }
-        return true;
-      });
-      setLoginStatus({
-        successful: successful,
-        unsuccessful: unsuccessful
-      });
+      const response = await ChartService.getLoginsOfCurrentYear(start_date);
+      console.log(response.data);
+      setLogins(response.data);
       if (response.is_successful) {
         AuthService.updateJwtUser(response);
       }
     }
-    fetchUsers();
-    console.log(loginStatus)
+    fetchLogins();
   }, []);
 
   ChartJS.register(
@@ -71,45 +53,30 @@ const PlatformLogins = () => {
         position: "top",
         text: "Inicios en la plataforma",
         font: {
-            size: 30
-        }
+          size: 30,
+        },
       },
     },
   };
 
-  const labels = [
-    "Enero",
-    "Febrero",
-    "Marzo",
-    "Abril",
-    "Mayo",
-    "Junio",
-    "Julio",
-    "Agosto",
-    "Septiembre",
-    "Octubre",
-    "Noviembre",
-    "Diciembre",
-  ];
-  
+  const labels = logins.map((data_object) => {
+    return data_object.month_name;
+  });
+
   const data = {
     labels,
     datasets: [
       {
         label: "Inicios Exitosos",
-        data: labels.map(() =>
-          Math.random()
-        ),
-        borderColor: "rgb(255, 99, 132)",
-        backgroundColor: "rgba(255, 99, 132, 0.5)",
+        data: logins.map(({ success }) => success),
+        borderColor: "rgba(162, 223, 181, 0.5)",
+        backgroundColor: "rgb(162, 223, 181)",
       },
       {
         label: "Inicios Fallidos",
-        data: labels.map(() =>
-        Math.random()
-        ),
-        borderColor: "rgb(53, 162, 235)",
-        backgroundColor: "rgba(53, 162, 235, 0.5)",
+        data: logins.map(({ failed }) => failed),
+        borderColor: "rgba(255, 107, 107, 0.5)",
+        backgroundColor: "rgb(255, 107, 107)",
       },
     ],
   };
