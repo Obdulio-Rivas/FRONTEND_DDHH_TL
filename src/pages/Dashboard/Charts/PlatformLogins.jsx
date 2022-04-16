@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import moment from "moment";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -12,6 +13,7 @@ import {
 import { Line } from "react-chartjs-2";
 import AuthService from "../../../services/Auth/Auth.Service";
 import LogService from "../../../services/Log/Log.Service";
+import ChartService from "../../../services/Chart/Chart.Service";
 
 const PlatformLogins = () => {
   const [loginStatus, setLoginStatus] = useState({
@@ -23,7 +25,10 @@ const PlatformLogins = () => {
     async function fetchUsers() {
       let successful = 0;
       let unsuccessful = 0;
-      const response = await LogService.getLogsByType('Inicio de sesion');
+      let today = moment().add(-1, "d").format("YYYY-MM-DD");
+      let current_year = moment().format("YYYY");
+      let start_date = `${current_year}-01-01`;
+      const response = await ChartService.getLoginsBetweenDates(start_date, today);
       console.log(response)
       response.data.map((log) => {
         if (true) {
@@ -86,6 +91,7 @@ const PlatformLogins = () => {
     "Noviembre",
     "Diciembre",
   ];
+  
   const data = {
     labels,
     datasets: [

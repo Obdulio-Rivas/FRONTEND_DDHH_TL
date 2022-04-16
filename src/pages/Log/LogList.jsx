@@ -21,6 +21,7 @@ const LogList = () => {
     async function fetchLogs() {
       const response = await LogService.getLogs();
       setLogs(response.data);
+      console.log(response.data)
       setIsLoading(false);
       if (response.is_successful) {
         AuthService.updateJwtUser(response);
