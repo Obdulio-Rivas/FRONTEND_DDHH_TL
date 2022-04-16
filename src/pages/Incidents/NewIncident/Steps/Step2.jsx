@@ -100,10 +100,10 @@ const Step2 = ({ handlerStore }) => {
           <div class="md:w-full px-3 mb-6 md:mb-0">
             <RadioButtons
               label={"Victima directa:"}
-              name={"direct_victim"}
+              name={"type_victim"}
               options={[
-                { label: "Si", value: 1 },
-                { label: "No", value: 0 },
+                { label: "Si", value: "denunciante y victima"},
+                { label: "No", value: "denunciante"},
               ]}
               register={register}
               errors={errors}

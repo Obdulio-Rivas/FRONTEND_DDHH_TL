@@ -47,7 +47,10 @@ const IncidentList = () => {
       const responseIncidentVictims = await IncidentVictimsService.getIncidentVictimByIdIncident(id_incident);
       for (let i = 0; i < responseIncidentVictims.data.length; i++) {
         const responseVictim = await VictimService.getVictim(responseIncidentVictims.data[i].id_victim);
-        arrayVictims.push(responseVictim.data[0].name + ' ' + responseVictim.data[0].last_name);
+        if(responseVictim.data[i].type_victim!=='denunciante')
+        {
+          arrayVictims.push(responseVictim.data[0].name + ' ' + responseVictim.data[0].last_name);
+        }
       }
       setVictims(arrayVictims);
       setincidentSelected(responseIncidentVictims.data[0]);
