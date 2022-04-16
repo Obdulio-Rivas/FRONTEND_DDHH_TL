@@ -14,7 +14,7 @@ const Home = () => {
               <h1 className="flex flex-row text-6xl m-auto mt-4 font-medium text-gray-700 leading-snug">
                 Hola {AuthService.getCurrentUser()?.name},{" "}
                 {`${
-                  AuthService.getCurrentUser()?.genre
+                  AuthService.getCurrentUser()?.gender
                     ? "bienvenido"
                     : "bienvenida"
                 }`}{" "}

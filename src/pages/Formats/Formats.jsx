@@ -16,7 +16,7 @@ const Formats = () => {
   useEffect(() => {
     async function getRootFiles() {
       setIsLoading(true);
-      const response = await FirebaseService.listFiles("/formatos");
+      const response = await FirebaseService.listFiles("/formats");
       setContent(response);
       setContentFiltro(response);
       setIsLoading(false);
