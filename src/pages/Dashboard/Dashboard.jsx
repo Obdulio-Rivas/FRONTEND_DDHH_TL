@@ -26,13 +26,13 @@ const Dashboard = () => {
             <div className="box row-start-1 row-end-3 col-start-1 col-end-5 border border-solid border-gray-300 rounded-md justify-center items-center p-6">
               <UsersStatus />
             </div>
-            <div className="box row-start-1 row-end-3 col-start-5 col-end-12 border border-solid border-gray-300 rounded-md justify-center items-center p-6">
+            <div className="box row-start-1 row-end-3 col-start-5 col-end-13 border border-solid border-gray-300 rounded-md justify-center items-center p-6">
               <PlatformLogins />
             </div>
             <div className="box row-start-3 row-end-6 col-start-1 col-end-9 border border-solid border-gray-300 rounded-md justify-center items-center p-6">
               <IncidentCreated/>
             </div>
-            <div className="box row-start-3 row-end-6 col-start-9 col-end-12 border border-solid border-gray-300 rounded-md justify-center items-center p-6">
+            <div className="box row-start-3 row-end-6 col-start-9 col-end-13 border border-solid border-gray-300 rounded-md justify-center items-center p-6">
               <LatestIncidents/>
             </div>
           </div>

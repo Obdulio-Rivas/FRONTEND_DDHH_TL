@@ -19,11 +19,21 @@ const options_menu = {
       type: "dropdown",
       options: [
         { key: 0, option: "Nuevo incidente", href: "/incident/step1" },
-        { key: 1, option: "Listado de incidentes", href: "/incident/incidentes" },
+        { key: 1, option: "Listado de incidentes", href: "/incident/incidents" },
       ],
     },
     {
       key: 4,
+      title: "Formatos",
+      href: "#",
+      type: "dropdown",
+      options: [
+        { key: 0, option: "Subir formato", href: "/formats/upload" },
+        { key: 1, option: "Listado de formatos", href: "/formats" },
+      ],
+    },
+    {
+      key: 5,
       title: "Metricas",
       href: "#",
       type: "dropdown",
@@ -42,10 +52,18 @@ const options_menu = {
       type: "dropdown",
       options: [
         { key: 0, option: "Nuevo incidente", href: "/incident/step1" },
-        { key: 1, option: "Listado de incidentes", href: "/incident/" },
+        { key: 1, option: "Listado de incidentes", href: "/incident/incidents" },
       ],
     },
-    { key: 2, title: "Formatos", href: "/formats", type: "normal" },
+    {
+      key: 2,
+      title: "Formatos",
+      href: "#",
+      type: "dropdown",
+      options: [
+        { key: 0, option: "Listado de formatos", href: "/formats" },
+      ],
+    },
   ],
   2: [
     { key: 0, title: "Inicio", href: "/home", type: "normal" },
@@ -56,7 +74,7 @@ const options_menu = {
       type: "dropdown",
       options: [
         { key: 0, option: "Nuevo incidente", href: "/incident/step1" },
-        { key: 1, option: "Listado de incidentes", href: "/incident/" },
+        { key: 1, option: "Listado de incidentes", href: "/incident/incidents" },
       ],
     },
     { key: 2, title: "Directorio", href: "/Directorio", type: "normal" },

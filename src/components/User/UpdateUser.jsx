@@ -156,8 +156,6 @@ const UpdateUser = () => {
               pattern={/^\d{4}-\d{6}-\d{3}-\d{1}/}
             />
           </div>
-        </div>
-        <div className="-mx-3 md:flex mb-6">
           <div className="md:w-2/6 px-3 mb-6 md:mb-0">
             <RadioButtons
               label={"Estado"}
