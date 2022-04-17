@@ -14,6 +14,7 @@ import DashboardRoutes from "./Dashboard/DashboardRoutes";
 import Confirmation from "../pages/Confirmation/Confirmation";
 import LogRoutes from "./Log/LogRoutes";
 import FormatsRoutes from "./Formats/FormatsRoutes";
+import RecoverPassword from "../pages/RecoverPassword/RecoverPassword";
 
 const RouteManager = () => {
 
@@ -22,6 +23,7 @@ const RouteManager = () => {
       <Router>
         <Routes>
           <Route exact path="/" element={<Login />} />
+          <Route exact path="/recover_password" element={<RecoverPassword />} />
           <Route
             exact
             path="/home"

@@ -166,7 +166,7 @@ const NewUser = () => {
             />
           </div>
         </div>
-        <div class="flex flex-row justify-end -mx-0.5 md:flex mb-2">
+        <div className="flex flex-row justify-end -mx-0.5 md:flex mb-2">
           <button
             className="bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-md px-7 py-3 transition duration-1000"
             type="submit"

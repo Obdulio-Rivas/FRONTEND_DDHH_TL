@@ -5,7 +5,7 @@ import Actions from "./Actions";
 
 const Side = ({ user }) => {
 
-  const { id_user, name, last_name, role, status, created_at, url_image } = user;
+  const { name, last_name, role, status, created_at } = user;
 
   const getStatus = (status) => {
     switch (status) {

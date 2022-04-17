@@ -1,6 +1,5 @@
 import React from "react";
 import { AiOutlineUser } from "react-icons/ai";
-import Navbar from "../../components/Navbar/Navbar";
 
 const About = ({ user }) => {
   const { name, last_name, gender, phone, dui, nit, email, birth_date } = user;

@@ -89,7 +89,6 @@ const Avatar = ({ user }) => {
     if (!!metadata) {
       let extension = type;
       const response = await FirebaseService.uploadFile("images/users/", metadata, {extension});
-      console.log(response)
       const currentUser = await AuthService.getCurrentUser();
       const userUpdated = await UserService.putUsers({
         ...currentUser,

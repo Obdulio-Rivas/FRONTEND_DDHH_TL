@@ -22,7 +22,6 @@ const PlatformLogins = () => {
       let current_year = moment().format("YYYY");
       let start_date = `${current_year}-01-01`;
       const response = await ChartService.getLoginsOfCurrentYear(start_date);
-      console.log(response.data);
       setLogins(response.data);
       if (response.is_successful) {
         AuthService.updateJwtUser(response);

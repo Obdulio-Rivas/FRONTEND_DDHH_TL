@@ -8,10 +8,6 @@ const Historical = ({ user }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [incidents, setIncidents] = useState([]);
 
-  const getIncidentType = (id_type_incident) => {
-    return "Incidente de tipo x.";
-  };
-
   useEffect(() => {
     async function getIncidentsOfUser(id_user) {
       const response = await IncidentService.getIncidentsByUser(id_user);

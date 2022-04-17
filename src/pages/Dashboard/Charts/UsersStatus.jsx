@@ -11,7 +11,6 @@ const UsersStatus = () => {
     async function fetchIncidents() {
       const response = await ChartService.getUsersStatus();
       setUserStatus(response.data[0]);
-      console.log(response.data[0])
       if (response.is_successful) {
         AuthService.updateJwtUser(response);
       }

@@ -42,23 +42,6 @@ const ViewIncident = () => {
     );
   }
 
-  const getMonthName = (monthNumber) => {
-    return [
-      "Enero",
-      "Febrero",
-      "Marzo",
-      "Abril",
-      "Mayo",
-      "Junio",
-      "Julio",
-      "Agosto",
-      "Septiembre",
-      "Octubre",
-      "Noviembre",
-      "Diciembre",
-    ][monthNumber];
-  };
-
   return (
     <>
       <Navbar />

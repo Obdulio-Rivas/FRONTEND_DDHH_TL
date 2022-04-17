@@ -94,7 +94,7 @@ const Content = ({
               "flex justify-center border-2 border-gray-200 rounded-xl px-2 py-6 bg-gray-50 text-ellipsis"
             }
           >
-            <div>
+            <div className="truncate">
               <img
                 className="mx-auto"
                 src={getIconElement(type)}

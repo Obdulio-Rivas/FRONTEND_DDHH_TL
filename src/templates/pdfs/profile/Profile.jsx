@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {
   Page,
-  Font,
   Text,
   Image,
   View,
@@ -34,7 +33,7 @@ const Profile = ({ user }) => {
       );
     }
     getIncidentsOfUser(user.id_user);
-  }, []);
+  }, [user.id_user]);
 
   useEffect(() => {
     async function getRootFiles() {
@@ -46,7 +45,6 @@ const Profile = ({ user }) => {
           `${response[bg_number].parent.fullPath}/${response[bg_number].name}`
         );
         setBGProfile(bg_url);
-        console.log(bg_url);
       }
     }
     getRootFiles();
@@ -64,7 +62,6 @@ const Profile = ({ user }) => {
   };
 
   const getStatus = (status) => {
-    console.log(status);
     switch (status) {
       case 0:
         return "Inactivo";
@@ -249,10 +246,13 @@ const Profile = ({ user }) => {
         <View style={{ marginBottom: 10 }}>
           <Image
             style={{ width: "100%", height: 140, display: "block" }}
+            width={'100%'}
             src={bgProfile}
+            source={bgProfile}
           />
           <View style={styles.avatar}>
-            <Image src={user.url_image} style={styles.imgAvatar} />
+            <Image src={user.url_image} source={user.url_image} style={styles.imgAvatar} 
+            width={'auto'}/>
           </View>
         </View>
         <View style={styles.principalContent}>
@@ -340,12 +340,7 @@ const Profile = ({ user }) => {
                     <View style={[styles.col_full]}>
                       <Text
                         style={styles.textSmall}
-                      >{`Expediente #${expediente}.`}</Text>
-                    </View>
-                    <View style={[styles.col_full]}>
-                      <Text
-                        style={styles.textExtraSmall}
-                      >{`Tipo: ${id_type_incident}.`}</Text>
+                      >{`Incidente - ${expediente}.`}</Text>
                     </View>
                     <View style={[styles.col_full]}>
                       <Text
