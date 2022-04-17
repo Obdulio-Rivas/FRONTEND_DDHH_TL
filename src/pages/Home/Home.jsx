@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import AuthService from "../../services/Auth/Auth.Service";
-import Navbar from "../Navbar/Navbar";
+import Navbar from "../../components/Navbar/Navbar";
 
 const Home = () => {
   return (

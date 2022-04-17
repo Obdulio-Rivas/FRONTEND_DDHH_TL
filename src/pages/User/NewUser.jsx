@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import Navbar from "../Navbar/Navbar";
+import Navbar from "../../components/Navbar/Navbar";
 import { AiOutlineUserAdd } from "react-icons/ai";
 import UserService from "../../services/User/User.Service";
 import AuthService from "../../services/Auth/Auth.Service";
 import toast, { Toaster } from "react-hot-toast";
-import Input from "../Forms/Inputs/Input";
-import RadioButtons from "../Forms/RadioButtons/RadioButtons";
-import Select from "../Forms/Select/Select";
+import Input from "../../components/Forms/Inputs/Input";
+import RadioButtons from "../../components/Forms/RadioButtons/RadioButtons";
 import { useForm } from "react-hook-form";
 const NewUser = () => {
   const url_image_default =

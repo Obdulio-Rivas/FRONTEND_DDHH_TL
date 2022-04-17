@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import Navbar from "../Navbar/Navbar";
+import Navbar from "../../components/Navbar/Navbar";
 import UserService from "../../services/User/User.Service";
 import AuthService from "../../services/Auth/Auth.Service";
 import toast, { Toaster } from "react-hot-toast";
-import Input from "../Forms/Inputs/Input";
-import RadioButtons from "../Forms/RadioButtons/RadioButtons";
+import Input from "../../components/Forms/Inputs/Input";
+import RadioButtons from "../../components/Forms/RadioButtons/RadioButtons";
 import { useForm } from "react-hook-form";
 import { AiOutlineUserAdd } from "react-icons/ai";
 

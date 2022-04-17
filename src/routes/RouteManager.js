@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Navigate, Route, Routes } from "react-router-dom";
-import Home from "../components/Home/Home";
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Home from "../pages/Home/Home";
 import Login from "../components/Login/Login";
 import UserRoutes from "./User/UserRoutes";
 import PrivateRoute from "./PrivateRoute";

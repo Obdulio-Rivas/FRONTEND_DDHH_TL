@@ -21,7 +21,7 @@ const LogList = () => {
     async function fetchLogs() {
       const response = await LogService.getLogs();
       setLogs(response.data);
-      console.log(response.data)
+      console.log(response.data);
       setIsLoading(false);
       if (response.is_successful) {
         AuthService.updateJwtUser(response);
@@ -104,13 +104,11 @@ const LogList = () => {
       <>
         <Toaster />
         <Navbar />
-
-        <div className="bg-white border border-slate-300 m-auto rounded px-8 pt-8 mt-10 mb-2 flex flex-col md:w-2/3 sm:w-3/4 w-3/4">
+        <div className="bg-white border border-slate-300 m-auto rounded px-8 pt-8 mt-14 mb-2 flex flex-col md:w-2/3 sm:w-3/4 w-3/4">
           <div className="flex flex-row items-center justify-start mb-5">
             <AiOutlineAudit className="text-4xl" />
             <h2 className="ml-2 text-3xl">Logs del sistema.</h2>
           </div>
-
           <main className="max-w-full">
             <div className="mb-2 flex flex-col">
               <div className="overflow-x-auto -mx-4 sm:-mx-6 lg:-mx-8">
@@ -157,14 +155,19 @@ const LogList = () => {
                                   return (
                                     <td {...cell.getCellProps()}>
                                       <div className="flex w-full flex-row justify-start items-center text-base">
-                                        <RiFileList3Line/>
-                                        <span className="ml-2">{cell.value}</span>
+                                        <RiFileList3Line />
+                                        <span className="ml-2">
+                                          {cell.value}
+                                        </span>
                                       </div>
                                     </td>
                                   );
                                 case "description":
                                   return (
-                                    <td className="text-start text-ellipsis max-w-xs w-3/5 truncate" {...cell.getCellProps()}>
+                                    <td
+                                      className="text-start text-ellipsis max-w-xs w-3/5 truncate"
+                                      {...cell.getCellProps()}
+                                    >
                                       {cell.value}
                                     </td>
                                   );
@@ -176,7 +179,7 @@ const LogList = () => {
                                           className={`text-xl mx-2 text-gray-600`}
                                           to={`/log/${cell.value}`}
                                         >
-                                          <AiOutlineFileSearch/>
+                                          <AiOutlineFileSearch />
                                         </Link>
                                       </div>
                                     </td>
@@ -187,7 +190,7 @@ const LogList = () => {
                                       className="mx-auto py-4 text-center whitespace-nowrap"
                                       {...cell.getCellProps()}
                                     >
-                                      {cell.value.split('T')[0]}
+                                      {cell.value.split("T")[0]}
                                     </td>
                                   );
                               }

@@ -1,8 +1,8 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import NewUser from "../../components/User/NewUser";
-import UsersList from "../../components/User/UsersList";
-import UpdateUser from "../../components/User/UpdateUser";
+import NewUser from "../../pages/User/NewUser";
+import UsersList from "../../pages/User/UsersList";
+import UpdateUser from "../../pages/User/UpdateUser";
 import Profile from "../../pages/Profile/Profile";
 import Page404 from "../../pages/Page404/Page404";
 

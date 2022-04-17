@@ -2,18 +2,19 @@ import React, { useState, useEffect, useMemo } from "react";
 import toast, {Toaster} from "react-hot-toast";
 import AuthService from "../../services/Auth/Auth.Service";
 import UserService from "../../services/User/User.Service";
-import Navbar from "../Navbar/Navbar";
+import Navbar from "../../components/Navbar/Navbar";
 
 import { useTable, usePagination, useSortBy } from "react-table";
 import { MdRemoveCircle } from "react-icons/md";
+import { FiUsers } from "react-icons/fi";
 import { BiEdit } from "react-icons/bi";
 import { ImProfile } from "react-icons/im";
-import RolePill from "../Table/RolePill/RolePill";
-import StatusPill from "../Table/StatusPill/StatusPill";
-import Pagination from "../Table/Pagination/Pagination";
-import Modal from "../Modal/Modal";
+import RolePill from "../../components/Table/RolePill/RolePill";
+import StatusPill from "../../components/Table/StatusPill/StatusPill";
+import Pagination from "../../components/Table/Pagination/Pagination";
+import Modal from "../../components/Modal/Modal";
 import { Link } from "react-router-dom";
-import Dots from "../Loaders/Dots";
+import Dots from "../../components/Loaders/Dots";
 
 const UsersList = () => {
   const [users, setUsers] = useState([]);
@@ -158,18 +159,18 @@ const UsersList = () => {
   } else {
     return (
       <>
-      <Toaster/>
+        <Toaster />
         <Navbar />
-        <div className="container mx-auto my-4 min-h-full pt-4 text-gray-900">
-          <main className="max-w-full mx-auto px-4 sm:px-6 lg:px-4 pt-4">
-            <div className="">
-              <h1 className="text-xl font-semibold">User Tables</h1>
-            </div>
-            <div className="mt-4 mb-4 flex flex-col">
+        <div className="bg-white border border-slate-300 m-auto rounded px-8 pt-8 mt-14 mb-2 flex flex-col md:w-2/3 sm:w-3/4 w-3/4">
+          <div className="flex flex-row items-center justify-start mb-5">
+            <FiUsers className="text-4xl" />
+            <h2 className="ml-2 text-3xl">Usuarios en el sistema.</h2>
+          </div>
+          <main className="max-w-full">
+            <div className="mb-2 flex flex-col">
               <div className="overflow-x-auto -mx-4 sm:-mx-6 lg:-mx-8">
-                <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                  <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                    <table
+                <div className="py-2 align-middle inline-block min-w-full sm:px-4 lg:px-4">
+                <table
                       {...getTableProps()}
                       className="min-w-full divide-y divide-gray-200"
                     >
@@ -272,22 +273,22 @@ const UsersList = () => {
                         })}
                       </tbody>
                     </table>
-                    {/* Paginacion */}
-                    <Pagination
-                      previousPage={previousPage}
-                      nextPage={nextPage}
-                      canPreviousPage={canPreviousPage}
-                      canNextPage={canNextPage}
-                      state={state}
-                      pageOptions={pageOptions}
-                      setPageSize={setPageSize}
-                      gotoPage={gotoPage}
-                      pageCount={pageCount}
-                    />
-                  </div>
+                  {/* Paginacion */}
+                  <Pagination
+                    previousPage={previousPage}
+                    nextPage={nextPage}
+                    canPreviousPage={canPreviousPage}
+                    canNextPage={canNextPage}
+                    state={state}
+                    pageOptions={pageOptions}
+                    setPageSize={setPageSize}
+                    gotoPage={gotoPage}
+                    pageCount={pageCount}
+                  />
                 </div>
               </div>
-              <Modal
+            </div>
+            <Modal
                 modaltype={"eliminar"}
                 title={"Eliminar usuario"}
                 children={`Realmente desea elminar el usuario "${userSelected?.name}"`}
@@ -296,7 +297,6 @@ const UsersList = () => {
                 handlerActionOK={handlerActionOK}
                 handlerActionAbort={handlerActionAbort}
               />
-            </div>
           </main>
         </div>
       </>

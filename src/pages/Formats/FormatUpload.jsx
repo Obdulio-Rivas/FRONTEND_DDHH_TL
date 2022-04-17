@@ -57,6 +57,7 @@ const FormatUpload = () => {
         filename: metadata.name,
         extension,
       });
+      console.log(response)
       if (!!response) {
         setFile({
           metadata: null,
