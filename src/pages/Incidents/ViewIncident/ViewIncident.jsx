@@ -8,20 +8,54 @@ import IncidentService from "../../../services/Incident/Incident.Service";
 import Incident from "../../../templates/pdfs/incident/Incident";
 import PDFDownload from "../../../templates/pdfs/PDFDownload";
 import { AiOutlinePrinter } from "react-icons/ai";
+import IncidentVictimsService from "../../../services/IncidentVictims/IncidentVictims.Service";
+import VictimService from "../../../services/Victim/Victim.Service";
+import MunicipalityService from "../../../services/Dimensions/Municipality/Municipality.Service";
+import DepartmentService from "../../../services/Dimensions/Department/Department.Service";
 
 const ViewIncident = () => {
   let { id_incident } = useParams();
   const [isLoading, setIsLoading] = useState(true);
   const [incident, setIncident] = useState([]);
   const [victims, setVictims] = useState([]);
+  const [denunciante, setDenunciante] = useState({});
   const [incidentUser, setIncidentUser] = useState([]);
+  const [department, setDepartment] = useState([]);
+  const [municipality, setMunicipality] = useState([]);
 
   useEffect(() => {
     async function getIncidentsOfUser(id_incident) {
+      let arrayIncidenteVictim = [];
+      let arrayVictims = [];
+      const departmentResponse = await DepartmentService.getDepartments();
+      setDepartment(departmentResponse.data);
+      const municipalityResponse = await MunicipalityService.getMunicipalities();
+      setMunicipality(municipalityResponse.data);
       const response = await IncidentService.getIncident(id_incident);
       console.log(response);
       setIncident(response.data);
+      /**Trayendo el id de las victimas relacionadas */
+      const incidentVictimResponse = await IncidentVictimsService.getIncidentVictimByIdIncident(id_incident);
+      incidentVictimResponse.data.map(({id_victim})=>{
+       return arrayIncidenteVictim.push(id_victim);
+      });
+      /**Mostrando las victimas relacionadas al caso */
+      for (let i = 0; i < arrayIncidenteVictim.length; i++) {
+        let victimResponse = await VictimService.getVictim(arrayIncidenteVictim[i]);
+        if(victimResponse.data[0].type_victim!=='victima')
+        {
+          setDenunciante(victimResponse.data[0]);
+          console.log(denunciante);
+        }
+        if(victimResponse.data[0].type_victim==='victima')
+        {
+          arrayVictims.push(victimResponse.data[0]);
+          console.log(arrayVictims);
+        }
+      }
+      setVictims(arrayVictims);
       setIsLoading(false);
+      
     }
     getIncidentsOfUser(id_incident);
   }, []);
@@ -127,15 +161,15 @@ const ViewIncident = () => {
               <ul className="flex flex-row flex-wrap justify-between px-5">
                 <li className="py-1">
                   <span className="mr-2">Nombre de quien Refiere:</span>
-                  <span>{incident.name_reference}</span>
+                  <span>{incident[0].name_reference}</span>
                 </li>
                 <li className="py-1">
                   <span className="mr-2">Contacto:</span>
-                  <span>{incident.contact}</span>
+                  <span>{incident[0].contact}</span>
                 </li>
                 <li className="py-1">
                   <span className="mr-2">Identificación del Caso:</span>
-                  <span>{incident.incident_identification}</span>
+                  <span>{incident[0].incident_identification}</span>
                 </li>
               </ul>
             </div>
@@ -146,7 +180,7 @@ const ViewIncident = () => {
                   Victima Directa:
                   <span className="mx-2">
                     Si{" "}
-                    {incident.direct_victim === "1" ? (
+                    {denunciante?.type_victim === "denunciante y victima" ? (
                       <BsCheckSquare className="inline-flex text-sm" />
                     ) : (
                       <BsSquare className="inline-flex text-sm" />
@@ -154,7 +188,7 @@ const ViewIncident = () => {
                   </span>
                   <span className="mx-2">
                     No{" "}
-                    {incident.direct_victim === "0" ? (
+                    {denunciante?.type_victim === "denunciante" ? (
                       <BsCheckSquare className="inline-flex text-sm" />
                     ) : (
                       <BsSquare className="inline-flex text-sm" />
@@ -164,18 +198,18 @@ const ViewIncident = () => {
               </h1>
               <ul className="flex flex-row flex-wrap justify-between px-5">
                 <li className="py-1">
-                  {`Nombre Completo: ${incident.name} ${incident.last_name}`}
+                  {`Nombre Completo: ${denunciante?.name} ${denunciante?.last_name}`}
                 </li>
-                <li className="py-1">{`Edad: ${incident.age}`}</li>
+                <li className="py-1">{`Edad: ${denunciante?.age}`}</li>
               </ul>
               <ul className="flex flex-row flex-wrap justify-between px-5">
-                <li className="py-1">{`Tipo de Documento de Identidad:  ${incident.type_dui}`}</li>
-                <li className="py-1">{`N° de Documento:  ${incident.dui}`}</li>
+                <li className="py-1">{`Tipo de Documento de Identidad:  ${denunciante?.type_dui}`}</li>
+                <li className="py-1">{`N° de Documento:  ${denunciante?.dui}`}</li>
                 <li className="py-1">
                   <span className="mr-2">Sabe Leer y Escribir:</span>
                   <span className="mx-2">
                     Si{" "}
-                    {incident.illiterate === "1" ? (
+                    {denunciante?.illiterate === 1 ? (
                       <BsCheckSquare className="inline-flex text-sm" />
                     ) : (
                       <BsSquare className="inline-flex text-sm" />
@@ -183,7 +217,7 @@ const ViewIncident = () => {
                   </span>
                   <span className="mx-2">
                     No{" "}
-                    {incident.illiterate === "0" ? (
+                    {denunciante?.illiterate === 0 ? (
                       <BsCheckSquare className="inline-flex text-sm" />
                     ) : (
                       <BsSquare className="inline-flex text-sm" />
@@ -196,7 +230,7 @@ const ViewIncident = () => {
                   <span className="mr-2">Sexo:</span>
                   <span className="mx-2">
                     Hombre{" "}
-                    {incident.gender === "1" ? (
+                    {denunciante?.gender === 1 ? (
                       <BsCheckSquare className="inline-flex text-sm" />
                     ) : (
                       <BsSquare className="inline-flex text-sm" />
@@ -204,27 +238,27 @@ const ViewIncident = () => {
                   </span>
                   <span className="mx-2">
                     Mujer{" "}
-                    {incident.gender === "0" ? (
+                    {denunciante?.gender === 0 ? (
                       <BsCheckSquare className="inline-flex text-sm" />
                     ) : (
                       <BsSquare className="inline-flex text-sm" />
                     )}
                   </span>
                 </li>
-                <li className="py-1">{`Orientación Sexual/Identidad de Género: ${incident.gender_identity}`}</li>
+                <li className="py-1">{`Orientación Sexual/Identidad de Género: ${denunciante?.gender_identity}`}</li>
               </ul>
               <ul className="flex flex-row flex-wrap justify-between px-5">
-                <li className="py-1">{`Grado Académico: ${incident.academic_grade}`}</li>
-                <li className="py-1">{`Profesión u Oficio: ${incident.profession}`}</li>
+                <li className="py-1">{`Grado Académico: ${denunciante?.academic_grade}`}</li>
+                <li className="py-1">{`Profesión u Oficio: ${denunciante?.profession}`}</li>
               </ul>
               <ul className="flex flex-row flex-wrap justify-between px-5">
-                <li className="py-1">{`País: ${incident.country}`}</li>
-                <li className="py-1">{`Departamento: ${incident.deparment}`}</li>
-                <li className="py-1">{`Municipio: ${incident.municipality}`}</li>
+                <li className="py-1">{`País: ${denunciante?.country}`}</li>
+                <li className="py-1">{`Departamento: ${department.filter(x => x.id_department === denunciante?.department)[0]?.department}`}</li>
+                <li className="py-1">{`Municipio: ${municipality.filter(x=>x.id_municipality === denunciante?.municipality)[0]?.municipality }`}</li>
               </ul>
               <ul className="flex flex-row flex-wrap justify-between px-5">
-                <li className="py-1">{`Dirección: ${incident.adress}`}</li>
-                <li className="py-1">{`Teléfono: ${incident.phone}`}</li>
+                <li className="py-1">{`Dirección: ${denunciante?.adress}`}</li>
+                <li className="py-1">{`Teléfono: ${denunciante?.phone}`}</li>
               </ul>
             </div>
             <div className="my-4">
@@ -253,7 +287,7 @@ const ViewIncident = () => {
                       academic_grade,
                       profession,
                       chronic_disease,
-                      medicamento,
+                      prescription_drug,
                     },
                     index
                   ) => {
@@ -265,15 +299,12 @@ const ViewIncident = () => {
                         </ul>
                         <ul className="flex flex-row flex-wrap justify-between px-5">
                           <li className="py-1">{`${type_dui}: ${dui}`}</li>
-                          <li className="py-1">{`Sabe Leer y Escribir: ${
-                            illiterate ? `Si ` : "No"
-                          }`}</li>
 
                           <li className="py-1">
                             <span className="mr-2">Sabe Leer y Escribir:</span>
                             <span className="mx-2">
                               Si{" "}
-                              {illiterate === "1" ? (
+                              {illiterate === 1 ? (
                                 <BsCheckSquare className="inline-flex text-sm" />
                               ) : (
                                 <BsSquare className="inline-flex text-sm" />
@@ -281,7 +312,7 @@ const ViewIncident = () => {
                             </span>
                             <span className="mx-2">
                               No{" "}
-                              {illiterate === "0" ? (
+                              {illiterate === 0 ? (
                                 <BsCheckSquare className="inline-flex text-sm" />
                               ) : (
                                 <BsSquare className="inline-flex text-sm" />
@@ -294,7 +325,7 @@ const ViewIncident = () => {
                             <span className="mr-2">Sexo:</span>
                             <span className="mx-2">
                               Hombre{" "}
-                              {gender === "1" ? (
+                              {gender === 1 ? (
                                 <BsCheckSquare className="inline-flex text-sm" />
                               ) : (
                                 <BsSquare className="inline-flex text-sm" />
@@ -302,7 +333,7 @@ const ViewIncident = () => {
                             </span>
                             <span className="mx-2">
                               Mujer{" "}
-                              {gender === "0" ? (
+                              {gender === 0 ? (
                                 <BsCheckSquare className="inline-flex text-sm" />
                               ) : (
                                 <BsSquare className="inline-flex text-sm" />
@@ -331,7 +362,7 @@ const ViewIncident = () => {
                             </span>
                             <span className="mx-2">
                               Si{" "}
-                              {physical_disability === "1" ? (
+                              {physical_disability === 1 ? (
                                 <BsCheckSquare className="inline-flex text-sm" />
                               ) : (
                                 <BsSquare className="inline-flex text-sm" />
@@ -339,7 +370,7 @@ const ViewIncident = () => {
                             </span>
                             <span className="mx-2">
                               No{" "}
-                              {physical_disability === "0" ? (
+                              {physical_disability === 0 ? (
                                 <BsCheckSquare className="inline-flex text-sm" />
                               ) : (
                                 <BsSquare className="inline-flex text-sm" />
@@ -348,7 +379,7 @@ const ViewIncident = () => {
                           </li>
                           <li className="py-1">
                             {`
-                    Tipo de Discapacidad: ${academic_grade}`}
+                    Tipo de Discapacidad: ${type_disability}`}
                           </li>
                         </ul>
                         <ul className="flex flex-row flex-wrap justify-between px-5">
@@ -358,7 +389,7 @@ const ViewIncident = () => {
                             </span>
                             <span className="mx-2">
                               Si{" "}
-                              {chronic_disease === "1" ? (
+                              {chronic_disease === 1 ? (
                                 <BsCheckSquare className="inline-flex text-sm" />
                               ) : (
                                 <BsSquare className="inline-flex text-sm" />
@@ -366,7 +397,7 @@ const ViewIncident = () => {
                             </span>
                             <span className="mx-2">
                               No{" "}
-                              {chronic_disease === "0" ? (
+                              {chronic_disease === 0 ? (
                                 <BsCheckSquare className="inline-flex text-sm" />
                               ) : (
                                 <BsSquare className="inline-flex text-sm" />
@@ -375,7 +406,7 @@ const ViewIncident = () => {
                           </li>
                           <li className="py-1">
                             {`
-                    Medicamento Recetado: ${academic_grade}`}
+                    Medicamento Recetado: ${prescription_drug}`}
                           </li>
                         </ul>
                       </div>
@@ -394,22 +425,20 @@ const ViewIncident = () => {
               <div className="divide-y divide-dotted divide-slate-300">
                 <div className="py-2">
                   <ul className="flex flex-row flex-wrap justify-between px-5">
-                    <li className="py-1">{`Fecha en que Ocurrieron los Hechos: ${incident?.date_hechos}`}</li>
-                    <li className="py-1">{`Hora Aproximada: ${incident?.datetime_hechos}`}</li>
+                    <li className="py-1">{`Fecha en que Ocurrieron los Hechos: ${incident[0]?.date_hechos}`}</li>
+                    <li className="py-1">{`Hora Aproximada: ${incident[0]?.datetime_hechos}`}</li>
                   </ul>
                   <ul className="flex flex-row flex-wrap justify-between px-5">
-                    <li className="py-1">{`Departamento: ${incident?.deparment}`}</li>
-                    <li className="py-1">{`Municipio: ${incident?.municipality}`}</li>
-                    <li className="py-1">{`Dirección: ${incident?.adress}`}</li>
+                    <li className="py-1">{`Departamento: ${department.filter(x => x.id_department===incident[0]?.deparment)[0]?.department}`}</li>
+                    <li className="py-1">{`Municipio: ${municipality.filter(x => x.id_municipality===incident[0]?.municipality)[0]?.municipality}`}</li>
+                    <li className="py-1">{`Dirección: ${incident[0]?.adress}`}</li>
                   </ul>
                 </div>
                 <ul className="flex flex-row flex-wrap justify-between px-5 py-2">
                   <li className="py-1">
                     <span>Causa del Desplazamiento:</span>
                     <ul>
-                      {incident?.cause_displacement?.map((value, index) => (
-                        <li key={index}>{value}</li>
-                      ))}
+                      {incident[0]?.cause_displacement}
                     </ul>
                   </li>
                 </ul>
@@ -419,9 +448,7 @@ const ViewIncident = () => {
                       Personas o grupos que generaron el desplazamiento:
                     </span>
                     <ul>
-                      {incident?.people_displacement?.map((value, index) => (
-                        <li key={index}>{value}</li>
-                      ))}
+                      {incident[0]?.people_displacement}
                     </ul>
                   </li>
                 </ul>
@@ -429,11 +456,7 @@ const ViewIncident = () => {
                   <li className="py-1">
                     <span>¿Cuáles instituciones han acompañado?</span>
                     <ul>
-                      {incident?.institutions_accompanied?.map(
-                        (value, index) => (
-                          <li key={index}>{value}</li>
-                        )
-                      )}
+                      {incident[0]?.institutions_accompanied}
                     </ul>
                   </li>
                 </ul>
@@ -445,7 +468,7 @@ const ViewIncident = () => {
                       </span>
                       <span className="mx-2">
                         Si{" "}
-                        {incident?.statal_institution === "1" ? (
+                        {incident[0]?.statal_institution === 1 ? (
                           <BsCheckSquare className="inline-flex text-sm" />
                         ) : (
                           <BsSquare className="inline-flex text-sm" />
@@ -453,21 +476,21 @@ const ViewIncident = () => {
                       </span>
                       <span className="mx-2">
                         No{" "}
-                        {incident?.statal_institution === "0" ? (
+                        {incident[0]?.statal_institution === 0 ? (
                           <BsCheckSquare className="inline-flex text-sm" />
                         ) : (
                           <BsSquare className="inline-flex text-sm" />
                         )}
                       </span>
                     </li>
-                    <li className="py-1">{`¿En Cual? ${incident?.statal_institution_name}`}</li>
+                    <li className="py-1">{`¿En Cual? ${incident[0]?.statal_institution_name}`}</li>
                   </ul>
                   <ul className="flex flex-row flex-wrap justify-between px-5">
                     <li className="py-1">
                       ¿Descripción del Acompañamiento brindado?
                     </li>
                     <li className="py-1">
-                      {incident?.accompanied_descriptions}
+                      {incident[0]?.accompanied_descriptions}
                     </li>
                   </ul>
                 </div>
@@ -481,15 +504,15 @@ const ViewIncident = () => {
                 <span className="text-base">{`La casa donde resido/ residía era: 
           ${
             ["Propia", "Alquilada", "Financiada", "Casa", "Familiar", "Otros"][
-              incident?.home
+              incident[0]?.home
             ]
           }`}</span>
               </ul>
               <ul className="flex flex-row flex-wrap justify-between px-5">
                 <span className="text-base">
-                  {`Ingresos Mensuales del grupo familiar: ${incident?.monthly_income}`}
+                  {`Ingresos Mensuales del grupo familiar: ${incident[0]?.monthly_income}`}
                 </span>
-                <span>{`Ingreso actual del grupo familiar:  ${incident?.familiar_income}`}</span>
+                <span>{`Ingreso actual del grupo familiar:  ${incident[0]?.familiar_income}`}</span>
               </ul>
               <ul className="flex flex-row flex-wrap justify-between px-5">
                 <li className="py-1">
@@ -513,7 +536,7 @@ const ViewIncident = () => {
                   <span className="mr-2">¿Ha decidido salir del país?</span>
                   <span className="mx-2">
                     Si{" "}
-                    {incident?.country_leave === "1" ? (
+                    {incident[0]?.country_leave === 1 ? (
                       <BsCheckSquare className="inline-flex text-sm" />
                     ) : (
                       <BsSquare className="inline-flex text-sm" />
@@ -521,18 +544,18 @@ const ViewIncident = () => {
                   </span>
                   <span className="mx-2">
                     No{" "}
-                    {incident?.country_leave === "0" ? (
+                    {incident[0]?.country_leave === 0 ? (
                       <BsCheckSquare className="inline-flex text-sm" />
                     ) : (
                       <BsSquare className="inline-flex text-sm" />
                     )}
                   </span>
                 </li>
-                <li className="py-1">{`¿A qué país? ${incident?.country_leave_name}`}</li>
+                <li className="py-1">{`¿A qué país? ${incident[0]?.country_leave_name}`}</li>
               </ul>
               <ul className="flex flex-row flex-wrap justify-between px-5">
                 <span className="text-base">
-                  {`¿Cuántas personas de su grupo familiar? ${incident?.family_cant}`}
+                  {`¿Cuántas personas de su grupo familiar? ${incident[0]?.family_cant}`}
                 </span>
               </ul>
             </div>
@@ -542,7 +565,7 @@ const ViewIncident = () => {
               </h1>
               <ul className="flex flex-row flex-wrap justify-between px-5">
                 <span className="text-base text-justify">
-                  {incident?.description_incident}
+                  {incident[0]?.description_incident}
                 </span>
               </ul>
             </div>
@@ -568,7 +591,7 @@ const ViewIncident = () => {
                 <div className="flex flex-row justify-around items-center py-3">
                   <PDFDownload
                     document={<Incident />}
-                    filename={`${incident?.expediente} - ${Date.now()}`}
+                    filename={`${incident[0]?.expediente} - ${Date.now()}`}
                   >
                     <div className="flex flex-row justify-center items-center">
                       <AiOutlinePrinter className="text-4xl mx-1 cursor-pointer" />
