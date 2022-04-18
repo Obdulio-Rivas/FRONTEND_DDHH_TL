@@ -480,7 +480,7 @@ const creation_agreement = `Yo ${currentUser.name} ${currentUser.last_name}, doy
           <div className="py-2">
             <ul className="flex flex-row flex-wrap justify-between px-5">
               <li className="py-1">{`Fecha en que Ocurrieron los Hechos: ${store?.step3?.values?.date_hechos}`}</li>
-              <li className="py-1">{`Hora Aproximada: ${store?.step3?.values?.datetime_hechos}`}</li>
+              <li className="py-1">{`Hora Aproximada: ${store?.step3?.values?.incident_time}`}</li>
             </ul>
             <ul className="flex flex-row flex-wrap justify-between px-5">
               <li className="py-1">{`Departamento: ${store?.step3?.values?.deparment}`}</li>

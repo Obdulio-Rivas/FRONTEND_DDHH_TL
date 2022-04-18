@@ -426,7 +426,7 @@ const ViewIncident = () => {
                 <div className="py-2">
                   <ul className="flex flex-row flex-wrap justify-between px-5">
                     <li className="py-1">{`Fecha en que Ocurrieron los Hechos: ${incident[0]?.date_hechos}`}</li>
-                    <li className="py-1">{`Hora Aproximada: ${incident[0]?.datetime_hechos}`}</li>
+                    <li className="py-1">{`Hora Aproximada: ${incident[0]?.incident_time}`}</li>
                   </ul>
                   <ul className="flex flex-row flex-wrap justify-between px-5">
                     <li className="py-1">{`Departamento: ${department.filter(x => x.id_department===incident[0]?.deparment)[0]?.department}`}</li>
