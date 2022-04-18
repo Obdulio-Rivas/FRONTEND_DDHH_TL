@@ -235,27 +235,27 @@ const Step2 = ({ handlerStore }) => {
               },
               {
                 option: "Ninguno",
-                value: 0,
+                value: "Ninguno",
               },
               {
                 option: "Basico",
-                value: 1,
+                value: "Basico",
               },
               {
                 option: "Educacion Media",
-                value: 2,
+                value: "Educacion Media",
               },
               {
                 option: "Graduado de bachillerato",
-                value: 3,
+                value: "Graduado de bachillerato",
               },
               {
                 option: "Universitario",
-                value: 4,
+                value: "Universitario",
               },
               {
                 option: "Graduado de Universidad",
-                value: 5,
+                value: "Graduado de Universidad",
               },
             ]}
             name={"academic_grade"}
@@ -294,8 +294,8 @@ const Step2 = ({ handlerStore }) => {
                 option: "Seleccione una opcion.",
                 value: NaN,
               },
-              { option: "El Salvador", value: 0 },
-              { option: "Guatemala", value: 1 },
+              { option: "El Salvador", value: "El Salvador" },
+              { option: "Guatemala", value: "Guatemala" },
             ]}
             required={"*Este campo es obligatorio."}
             register={register}

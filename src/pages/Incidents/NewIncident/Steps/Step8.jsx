@@ -62,7 +62,7 @@ const Step8 = ({ store, handlerStore }) => {
     let Incidentobject = {
         expediente : step1.expediente,
         incident_date: step1.incident_date,
-        hour: step1.incident_date,
+        hour: step1.hour,
         incident_institution: step1.incident_institution,
         incident_institution_name: step1.incident_institution_name,
         name_reference: step1.name_reference,

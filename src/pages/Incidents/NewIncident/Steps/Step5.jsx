@@ -102,10 +102,10 @@ const Step5 = ({ handlerStore }) => {
           <Select
             label={"¿A qué país?"}
             options={[
-              { option: "Seleccione una opcion", value: 0 },
-              { option: "El Salvador", value: 1 },
-              { option: "Guatemala", value: 2 },
-              { option: "Nicaragua", value: 3 },
+              { option: "Seleccione una opcion", value: "Ninguno" },
+              { option: "El Salvador", value: "El Salvador" },
+              { option: "Guatemala", value: "Guatemala" },
+              { option: "Nicaragua", value: "Nicaragua" },
             ]}
             disabled={radioValues?.country_leave}
             name={"country_leave_name"}

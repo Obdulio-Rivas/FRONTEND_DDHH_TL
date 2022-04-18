@@ -45,10 +45,10 @@ const Step4 = ({ handlerStore }) => {
             label={"La casa donde resido/ residía era"}
             name={"home"}
             options={[
-              { label: "Propia", value: 1 },
-              { label: "Alquilada", value: 2 },
-              { label: "Financiada", value: 3 },
-              { label: "Casa Familiar", value: 4 },
+              { label: "Propia", value: "Propia" },
+              { label: "Alquilada", value: "Alquilada" },
+              { label: "Financiada", value: "Financiada" },
+              { label: "Casa Familiar", value: "Casa Familiar" },
             ]}
             register={register}
             errors={errors}
