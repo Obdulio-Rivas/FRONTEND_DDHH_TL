@@ -20,7 +20,7 @@ const LogList = () => {
   useEffect(() => {
     async function fetchLogs() {
       const response = await LogService.getLogs();
-      setLogs(response.data);
+      setLogs(!response?.data ? [] : response?.data);
       setIsLoading(false);
       if (response.is_successful) {
         AuthService.updateJwtUser(response);

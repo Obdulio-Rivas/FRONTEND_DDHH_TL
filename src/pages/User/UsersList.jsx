@@ -25,7 +25,7 @@ const UsersList = () => {
   useEffect(() => {
     async function fetchUsers() {
       const response = await UserService.getUsers();
-      setUsers(response.data);
+      setUsers(!response?.data ? [] : response?.data);
       setIsLoading(false);
       if (response.is_successful) {
         AuthService.updateJwtUser(response);

@@ -18,8 +18,8 @@ import StatusIncident from "../../../components/Table/StatusPill/StatusIncident"
 import VictimService from "../../../services/Victim/Victim.Service";
 
 const IncidentList = () => {
-  const [Incidents, setIncidents] = useState([]);
-  const [Victims, setVictims] = useState([]);
+  const [incidents, setIncidents] = useState([]);
+  const [victims, setVictims] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenIncident, setIsOpenIncident] = useState(false);
   const [is_loading, setIsLoading] = useState(true);
@@ -28,7 +28,7 @@ const IncidentList = () => {
   useEffect(() => {
     async function fetchIncidents() {
       const response = await CaseService.getIncidents();
-      setIncidents(response.data);
+      setIncidents(!response?.data ? [] : response?.data);
       setIsLoading(false);
       if (response.is_successful) {
         AuthService.updateJwtUser(response);
@@ -79,7 +79,7 @@ const IncidentList = () => {
         setIsOpen(false);
         AuthService.updateJwtUser(response);
         let remainingIncidents = [];
-        remainingIncidents = Incidents.filter(
+        remainingIncidents = incidents.filter(
           (element) => element.id_incident !== incidentSelected.id_incident
         );
         setincidentSelected(remainingIncidents);
@@ -105,7 +105,6 @@ const IncidentList = () => {
     });
     setIsOpen(false);
   };
-
   //Craer un archivo de constantes.
   const columns = useMemo(
     () => [
@@ -129,7 +128,7 @@ const IncidentList = () => {
     []
   );
 
-  const data = useMemo(() => Incidents, [Incidents]);
+  const data = useMemo(() => incidents, [incidents]);
 
   const {
     getTableProps,
@@ -164,7 +163,7 @@ const IncidentList = () => {
     );
   }
 
-  if (Incidents.length === 0) {
+  if (incidents.length === 0) {
     return (
       <>
         <Navbar />
@@ -176,6 +175,7 @@ const IncidentList = () => {
       </>
     );
   } else {
+    
     return (
       <>
       <Toaster/>
@@ -194,9 +194,9 @@ const IncidentList = () => {
                       className="min-w-full divide-y divide-gray-200"
                     >
                       <thead className="bg-gray-50">
-                        {headerGroups.map((headerGroup) => (
+                        {headerGroups?.map((headerGroup) => (
                           <tr {...headerGroup.getHeaderGroupProps()}>
-                            {headerGroup.headers.map((column) => (
+                            {headerGroup.headers?.map((column) => (
                               <th
                                 scope="col"
                                 className="mx-auto py-4 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
@@ -221,11 +221,11 @@ const IncidentList = () => {
                         className="bg-white divide-y divide-gray-200"
                         {...getTableBodyProps()}
                       >
-                        {page.map((page, i) => {
+                        {page?.map((page, i) => {
                           prepareRow(page);
                           return (
                             <tr {...page.getRowProps()}>
-                              {page.cells.map((cell) => {
+                              {page.cells?.map((cell) => {
                                 switch (cell.column.id) {
                                   case "url_image":
                                     return (
@@ -328,7 +328,7 @@ const IncidentList = () => {
               <Modal
                 modaltype={''}
                 title={"Victimas asociadas al caso."}
-                children={`${Victims.map((Nombre, index)=>{
+                children={`${victims?.map((Nombre, index)=>{
                   let nombre = '';
                   nombre = nombre + Nombre+"\n";
                   return '-'+nombre;
