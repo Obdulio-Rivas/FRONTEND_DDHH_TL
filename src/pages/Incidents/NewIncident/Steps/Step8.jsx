@@ -652,6 +652,11 @@ const creation_agreement = `Yo ${currentUser.name} ${currentUser.last_name}, doy
             value={currentUser?.id_user}
           />
           <input
+            className="hidden"
+            {...register("creation_agreement")}
+            value={creation_agreement}
+          />
+          <input
             className="cursor-pointer font-bold text-gray-800"
             type="submit"
             value={"Acepto el acuerdo"}
