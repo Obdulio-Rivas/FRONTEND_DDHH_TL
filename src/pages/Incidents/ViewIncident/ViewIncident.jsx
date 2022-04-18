@@ -575,16 +575,7 @@ const ViewIncident = () => {
               </h1>
               <div className="flex flex-row flex-wrap justify-between px-5">
                 <p className="text-base text-justify">
-                  Yo <b>{`${incidentUser.name} ${incidentUser.last_name}`}</b>,
-                  doy fe que la informacion plasmada en la ficha actual y
-                  elaborada por mi persona ha sido recopilada de viva voz por la
-                  persona que ha venido en calidad de victima directa o conocido
-                  de la misma a declarar los hechos anteriormente descritos a mi
-                  persona, a las {new Date().getHours()} horas con{" "}
-                  {new Date().getMinutes()} minutos del dia{" "}
-                  {new Date().getDate()} del mes de{" "}
-                  {getMonthName(new Date().getMonth())} del año{" "}
-                  {new Date().getFullYear()}.
+                 {incident[0]?.creation_agreement}
                 </p>
               </div>
               <div className="flex flex-row flex-wrap justify-end px-5 mt-6">

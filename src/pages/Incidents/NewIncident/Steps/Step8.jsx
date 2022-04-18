@@ -16,6 +16,7 @@ const Step8 = ({ store, handlerStore }) => {
     const step4 = store.step4?.values;
     const step5 = store.step5?.values;
     const step6 = store.step6?.values;
+
   const [currentUser, setCurrentUser] = useState(AuthService.getCurrentUser());
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
@@ -36,8 +37,21 @@ const Step8 = ({ store, handlerStore }) => {
       "Diciembre",
     ][monthNumber];
   };
+//Fecha
+const month_name = getMonthName(new Date().getMonth());
+const year = new Date().getFullYear();
+const hours = new Date().getHours();
+const minutes = new Date().getMinutes();
+const date = new Date().getDate();
 
+const creation_agreement = `Yo ${currentUser.name} ${currentUser.last_name}, doy fe
+    que la informacion plasmada en la ficha actual y elaborada por mi
+    persona ha sido recopilada de viva voz por la persona que ha venido
+    en calidad de victima directa o conocido de la misma a declarar los
+    hechos anteriormente descritos a mi persona, a las ${hours} horas con ${minutes} 
+    minutos del dia ${date} del mes de ${month_name} del año ${year}.`
   const onSubmit = async (data) => {
+
     let id_user = currentUser.id_user;
     let id_incident = 0;
     let array = [];
@@ -92,6 +106,7 @@ const Step8 = ({ store, handlerStore }) => {
         //general
         status: 0,
         description_incident: step6.description_incident,
+        creation_agreement:creation_agreement,
         //Foreign key.
         id_type_incident: 0,
         id_user: id_user,
@@ -104,44 +119,6 @@ const Step8 = ({ store, handlerStore }) => {
       },
     });
 
-    /*setCurrentIncident(
-      {expediente : step1.expediente,
-        incident_date: step1.incident_date,
-        hour: step1.incident_date,
-        incident_institution: step1.incident_institution,
-        incident_institution_name: step1.incident_institution_name,
-        name_reference: step1.name_reference,
-        contact: step1.contact,
-        incident_identification: step1.incident_identification,
-        //datos especificos del caso
-        date_hechos: step3.date_hechos,
-        incident_time: step3.incident_time,
-        adress: step3.adress,
-        deparment: step3.deparment,
-        municipality: step3.municipality,
-        cause_displacement: step3.cause_displacement,
-        people_displacement: step3.people_displacement,
-        institutions_accompanied: step3.institutions_accompanied,
-        statal_institution: step3.statal_institution,
-        statal_institution_name: step3.statal_institution_name,
-        accompanied_descriptions: step3.accompanied_descriptions,
-        //perfil socioeconomico
-        home: step4.home,
-        monthly_income: step4.monthly_income,
-        familiar_income: step4.familiar_income,
-        survive_displacement: step4.survive_displacement,
-        //perfil migratorio
-        country_leave: step5.country_leave,
-        country_leave_name: step5.country_leave_name,
-        family_cant: step5.family_cant,
-        //general
-        status: 0,
-        description_incident: step6.description_incident,
-        //Foreign key.
-        id_type_incident: 0,
-        id_user: 0,
-      }
-    )*/
     //console.log(Incidentobject);
 
     /**Registrando el denunciante */
@@ -662,15 +639,7 @@ const Step8 = ({ store, handlerStore }) => {
         </h1>
         <div className="flex flex-row flex-wrap justify-between px-5">
           <p className="text-base text-justify">
-            Yo <b>{`${currentUser.name} ${currentUser.last_name}`}</b>, doy fe
-            que la informacion plasmada en la ficha actual y elaborada por mi
-            persona ha sido recopilada de viva voz por la persona que ha venido
-            en calidad de victima directa o conocido de la misma a declarar los
-            hechos anteriormente descritos a mi persona, a las{" "}
-            {new Date().getHours()} horas con {new Date().getMinutes()} minutos
-            del dia {new Date().getDate()} del mes de{" "}
-            {getMonthName(new Date().getMonth())} del año{" "}
-            {new Date().getFullYear()}.
+          {creation_agreement}
           </p>
         </div>
         <form
