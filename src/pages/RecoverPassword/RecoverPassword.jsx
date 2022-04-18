@@ -1,8 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { MdPassword } from "react-icons/md";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
 import { Navigate, useNavigate } from "react-router-dom";
 import Input from "../../components/Forms/Inputs/Input";
 import AuthService from "../../services/Auth/Auth.Service.js";
@@ -11,12 +8,24 @@ const RecoverPassword = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
   const navigate = useNavigate();
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const [msg, setMsg] = useState("-");
+
+  const onSubmit = async (data) => {
+    const response = await AuthService.recoverUserPassword(data);
+    if (response.is_successful) {
+      reset();
+      AuthService.updateJwtUser(response);
+      setMsg("Hemos enviado un mensaje a tu correo, con los pasos a seguir.");
+    } else {
+      setMsg(
+        "Uuuuups, no ha sido posible restablecer tu contraseña, contacta al administrador."
+      );
+    }
   };
 
   const handlerClick = () => {
@@ -43,8 +52,8 @@ const RecoverPassword = () => {
             <div className="flex flex-row items-center justify-start mb-4">
               <p className="text-xl font-normal">
                 Estamos aquí para ayudarte a recuperar tu contraseña. Ingrese la
-                dirección de correo electrónico que utilizó cuando se unió y le
-                enviaremos instrucciones para restablecer su contraseña.
+                dirección de correo electrónico que utilizó cuando se unió y tu
+                DUI, le enviaremos instrucciones para restablecer su contraseña.
               </p>
             </div>
             <div className="-mx-3 md:flex">
@@ -58,11 +67,23 @@ const RecoverPassword = () => {
                   errors={errors}
                 />
               </div>
+              <div className="md:w-full px-3 md:mb-0">
+                <Input
+                  label={"Ingresa tu DUI"}
+                  name={"dui"}
+                  type={"text"}
+                  placeholder={"Numero de DUI"}
+                  register={register}
+                  errors={errors}
+                />
+              </div>
             </div>
             <div className="-mx-3 md:flex mb-6">
-              <div className="md:w-full px-3 mb-6 md:mb-0">-</div>
+              <div className="md:w-full px-3 mb-6 md:mb-0">
+                <span className={'text-sm text-slate-400'}>{msg}</span>
+              </div>
             </div>
-            <div class="flex flex-row justify-between -mx-0.5 md:flex mb-2">
+            <div className="flex flex-row justify-between -mx-0.5 md:flex mb-2">
               <div onClick={() => handlerClick()}>
                 <div className="flex flex-row items-center bg-slate-200 border border-slate-300 rounded-md px-4 py-3 text-lg cursor-pointer">
                   <span className="text-slate-600 h-full">Regresar</span>

@@ -44,10 +44,6 @@ const check_JWT = () => {
 };
 
 const login = async (values) => {
-  // POST request using fetch with async/await
-  /**
-      "access-control-allow-credentials": false,
-   */
   const requestOptions = {
     method: "POST",
     headers: {
@@ -130,6 +126,25 @@ const updateJwtUser = (response) => {
   }
 };
 
+const recoverUserPassword = async (values) => {
+  const requestOptions = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(values),
+  };
+
+  const fetchData = await fetch(
+    `${API_URL}authentication/recover_user_password`,
+    requestOptions
+  );
+
+  const response = await fetchData.json();
+
+  return response;
+};
+
 const AuthService = {
   login,
   logout,
@@ -137,6 +152,7 @@ const AuthService = {
   getCurrentUser,
   updateCuerrentUser,
   updateJwtUser,
+  recoverUserPassword
 };
 
 export default AuthService;
