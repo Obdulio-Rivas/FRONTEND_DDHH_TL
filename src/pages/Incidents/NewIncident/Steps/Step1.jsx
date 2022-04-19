@@ -191,7 +191,7 @@ const Step1 = ({ handlerStore }) => {
             label={"Nombre de quien Refiere"}
             name={"name_reference"}
             type={"text"}
-            placeholder={"Nombre de quien Refiere"}
+            placeholder={"Nombre de quien refiere"}
             register={register}
             errors={errors}
             required={"*Este campo es obligatorio."}

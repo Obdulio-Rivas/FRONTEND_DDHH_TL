@@ -90,7 +90,7 @@ const Step5 = ({ handlerStore }) => {
             label={"¿Cuántas personas de su grupo familiar?"}
             name={"family_cant"}
             type={"number"}
-            placeholder={"Numero de personas."}
+            placeholder={"Número de personas."}
             register={register}
             errors={errors}
             required={"Digite una cantidad de personas."}
@@ -102,7 +102,7 @@ const Step5 = ({ handlerStore }) => {
           <Select
             label={"¿A qué país?"}
             options={[
-              { option: "Seleccione una opcion", value: "Ninguno" },
+              { option: "Seleccione una opción", value: "Ninguno" },
               { option: "El Salvador", value: "El Salvador" },
               { option: "Guatemala", value: "Guatemala" },
               { option: "Nicaragua", value: "Nicaragua" },

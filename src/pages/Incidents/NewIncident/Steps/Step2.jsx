@@ -14,10 +14,10 @@ import MunicipalityService from "../../../../services/Dimensions/Municipality/Mu
 const Step2 = ({ handlerStore }) => {
   const navigate = useNavigate();
   const [municipalities, setMunicipalities] = useState([
-    { option: "Selecciona una opcion", value: "Default value" },
+    { option: "Selecciona una opción", value: "Default value" },
   ]);
   const [departments, setDepartments] = useState([
-    { option: "Selecciona una opcion", value: "Default value" },
+    { option: "Selecciona una opción", value: "Default value" },
   ]);
 
   const [radioValues, setRadioValues] = useState({
@@ -32,7 +32,7 @@ const Step2 = ({ handlerStore }) => {
   useEffect(() => {
     async function getSelectOptions() {
       let arrayValues = [
-        { option: "Selecciona una opcion por favor", value: 0 },
+        { option: "Selecciona una opción por favor", value: 0 },
       ];
       let response = await DepartmentService.getDepartments();
       arrayValues = response?.data?.map(({ id_department, department }) => {
@@ -46,7 +46,7 @@ const Step2 = ({ handlerStore }) => {
   useEffect(() => {
     async function getSelectOptions() {
       let arrayValues = [
-        { option: "Selecciona una opcion por favor", value: 0 },
+        { option: "Selecciona una opción por favor", value: 0 },
       ];
       let response = await MunicipalityService.getMunicipalities();
       arrayValues = response?.data?.map(({ id_municipality, municipality }) => {
@@ -99,7 +99,7 @@ const Step2 = ({ handlerStore }) => {
         <div className="flex flex-row items-center justify-between">
           <div class="md:w-full px-3 mb-6 md:mb-0">
             <RadioButtons
-              label={"Victima directa:"}
+              label={"Víctima directa:"}
               name={"type_victim"}
               options={[
                 { label: "Si", value: "denunciante y victima"},
@@ -166,10 +166,10 @@ const Step2 = ({ handlerStore }) => {
         </div>
         <div class="md:w-2/3 px-3 mb-6 md:mb-0">
           <Input
-            label={"Numero de documento"}
+            label={"Número de documento"}
             name={"dui"}
             type={"text"}
-            placeholder={"Numero de documento"}
+            placeholder={"Número de documento"}
             register={register}
             type_documentation={SelectValues?.type_dui}
             errors={errors}
@@ -208,10 +208,10 @@ const Step2 = ({ handlerStore }) => {
       <div class="-mx-3 md:flex mb-2">
         <div class="md:w-2/3 px-3 mb-6 md:mb-0">
           <Select
-            label={"Orientación Sexual/ Identidad de Género:"}
+            label={"Orientación Sexual/ Identidad de Género"}
             options={[
               {
-                option: "Seleccione una opcion.",
+                option: "Seleccione una opción.",
                 value: "DEFAULT",
               },
               { option: "Homosexual", value: "Homosexual" },
@@ -227,10 +227,10 @@ const Step2 = ({ handlerStore }) => {
         </div>
         <div className="relative md:w-1/3 px-3">
           <Select
-            label={"Grado Academico:"}
+            label={"Grado Academico"}
             options={[
               {
-                option: "Seleccione una opcion.",
+                option: "Seleccione una opción.",
                 value: "DEFAULT",
               },
               {
@@ -266,10 +266,10 @@ const Step2 = ({ handlerStore }) => {
         </div>
         <div className="relative md:w-1/3 px-3">
           <Select
-            label={"Profesión u Oficio:"}
+            label={"Profesión u Oficio"}
             options={[
               {
-                option: "Seleccione una opcion.",
+                option: "Seleccione una opción.",
                 value: "DEFAULT",
               },
               { option: "Abogado", value: "Abogado" },
@@ -287,11 +287,11 @@ const Step2 = ({ handlerStore }) => {
       <div className="-mx-3 md:flex mb-6 mt-4">
         <div className="relative md:w-2/6 px-3">
           <Select
-            label={"Pais"}
+            label={"País"}
             name={"country"}
             options={[
               {
-                option: "Seleccione una opcion.",
+                option: "Seleccione una opción.",
                 value: NaN,
               },
               { option: "El Salvador", value: "El Salvador" },
@@ -326,10 +326,10 @@ const Step2 = ({ handlerStore }) => {
       <div className="-mx-3 md:flex mb-6">
         <div className="md:w-4/6 px-3 mb-6 md:mb-0">
           <Input
-            label={"Direccion"}
+            label={"Dirección"}
             name={"adress"}
             type={"text"}
-            placeholder={"Direccion"}
+            placeholder={"Dirección"}
             register={register}
             errors={errors}
             required={"*Este campo es obligatorio."}
@@ -337,7 +337,7 @@ const Step2 = ({ handlerStore }) => {
         </div>
         <div className="md:w-2/6 px-3 mb-6 md:mb-0">
           <Input
-            label={"Telefono"}
+            label={"Teléfono"}
             name={"phone"}
             type={"text"}
             placeholder={"7777-7777"}
@@ -362,10 +362,10 @@ const Step2 = ({ handlerStore }) => {
         </div>
         <div className="md:w-3/6 px-3 mb-6 md:mb-0">
           <Input
-            label={"Parroco"}
+            label={"Párroco"}
             name={"phone"}
             type={"text"}
-            placeholder={"Parroco"}
+            placeholder={"Párroco"}
             register={register}
             errors={errors}
             required={"*Este campo es obligatorio."}

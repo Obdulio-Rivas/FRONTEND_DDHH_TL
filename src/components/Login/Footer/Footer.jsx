@@ -15,9 +15,9 @@ const Footer = () => {
             className="text-blue-700 font-semibold hover:underline hover:decoration-wavy"
             to="/"
           >
-            Legalistica.
+            Legalística.
           </Link>{" "}
-          Todos los derechos Reservados | Redes sociales
+          Todos los derechos reservados | Redes sociales
         </p>
         <a
           href="https://www.facebook.com/tuteladh"

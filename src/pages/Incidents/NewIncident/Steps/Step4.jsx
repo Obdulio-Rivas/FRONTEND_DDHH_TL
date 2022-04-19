@@ -37,7 +37,7 @@ const Step4 = ({ handlerStore }) => {
     >
       <div className="flex flex-row items-center justify-start mb-4">
         <GrMoney className="text-4xl" />
-        <h2 className="ml-2 text-3xl">Perfil socioeconomico.</h2>
+        <h2 className="ml-2 text-3xl">Perfil socioeconómico.</h2>
       </div>
       <div className="-mx-3 md:flex mb-6">
         <div className="md:w-full px-3 mb-6 md:mb-0">
@@ -62,7 +62,7 @@ const Step4 = ({ handlerStore }) => {
             label={"Ingresos Mensuales del grupo familiar"}
             name={"monthly_income"}
             type={"number"}
-            placeholder={"Institución u organización que conoce sobre el caso..."}
+            placeholder={"Ingresos Mensuales del grupo familiar..."}
             register={register}
             errors={errors}
           />
@@ -72,7 +72,7 @@ const Step4 = ({ handlerStore }) => {
             label={"Ingreso actual del grupo familiar"}
             name={"familiar_income"}
             type={"number"}
-            placeholder={"Institución u organización que conoce sobre el caso..."}
+            placeholder={"Ingreso actual del grupo familiar..."}
             register={register}
             errors={errors}
           />

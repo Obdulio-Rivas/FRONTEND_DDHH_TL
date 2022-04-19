@@ -18,11 +18,11 @@ const Home = () => {
                     ? "bienvenido"
                     : "bienvenida"
                 }`}{" "}
-                a Legalistica!
+                a Legalística!
               </h1>
               <p className="text-2xl mt-3 font-normal text-gray-500 leading-tight">
-                Sabemos lo importante que es tu tiempo, asi que aqui tienes
-                algunas opciones rapidas.
+                Sabemos lo importante que es tu tiempo, asi que aquí tienes
+                algunas opciones rápidas.
               </p>
               <div className="mt-10">
                 <Link

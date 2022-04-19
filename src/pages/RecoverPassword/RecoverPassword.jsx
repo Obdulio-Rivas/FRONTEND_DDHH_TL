@@ -23,7 +23,7 @@ const RecoverPassword = () => {
       setMsg("Hemos enviado un mensaje a tu correo, con los pasos a seguir.");
     } else {
       setMsg(
-        "Uuuuups, no ha sido posible restablecer tu contraseña, contacta al administrador."
+        "Uuuuups, no ha sido posible reestablecer tu contraseña, contacta al administrador."
       );
     }
   };
@@ -53,7 +53,7 @@ const RecoverPassword = () => {
               <p className="text-xl font-normal">
                 Estamos aquí para ayudarte a recuperar tu contraseña. Ingrese la
                 dirección de correo electrónico que utilizó cuando se unió y tu
-                DUI, le enviaremos instrucciones para restablecer su contraseña.
+                DUI, le enviaremos instrucciones para reestablecer su contraseña.
               </p>
             </div>
             <div className="-mx-3 md:flex">

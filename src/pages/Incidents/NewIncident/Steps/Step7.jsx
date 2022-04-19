@@ -102,7 +102,7 @@ const Step7 = ({ handlerStore }) => {
       >
         <div className="flex flex-row items-center justify-start mb-4">
           <FiUsers className="text-4xl" />
-          <h2 className="ml-2 text-3xl">Listado de Victimas.</h2>
+          <h2 className="ml-2 text-3xl">Listado de Víctimas.</h2>
         </div>
         <div class="flex flex-col justify-between -mx-0.5 md:flex mb-6">
           {victims.map((victim, index) => {
@@ -138,7 +138,7 @@ const Step7 = ({ handlerStore }) => {
             <div className="flex flex-row items-center bg-slate-200 border border-slate-300 rounded-md px-4 py-3 text-lg cursor-pointer">
               <FiUser />
               <span className="text-slate-600 h-full ml-2">
-                Agregar Victima
+                Agregar Víctima
               </span>
             </div>
           </div>
@@ -163,7 +163,7 @@ const Step7 = ({ handlerStore }) => {
     >
       <div className="flex flex-row items-center justify-start mb-4">
         <FiUsers className="text-4xl" />
-        <h2 className="ml-2 text-3xl">Agregar Victimas.</h2>
+        <h2 className="ml-2 text-3xl">Agregar Víctimas.</h2>
       </div>
       <div className="-mx-3 md:flex mb-6">
         <div className="md:w-2/5 px-3 mb-6 md:mb-0">
@@ -218,10 +218,10 @@ const Step7 = ({ handlerStore }) => {
         </div>
         <div class="md:w-2/3 px-3 mb-6 md:mb-0">
           <Input
-            label={"Numero de documento"}
+            label={"Número de documento"}
             name={"dui"}
             type={"text"}
-            placeholder={"Numero de documento"}
+            placeholder={"Número de documento"}
             register={register}
             type_documentation={SelectValues?.type_dui}
             errors={errors}
@@ -260,10 +260,10 @@ const Step7 = ({ handlerStore }) => {
       <div class="-mx-3 md:flex mb-2">
         <div class="md:w-2/3 px-3 mb-6 md:mb-0">
           <Select
-            label={"Orientación Sexual/ Identidad de Género:"}
+            label={"Orientación Sexual/ Identidad de Género"}
             options={[
               {
-                option: "Seleccione una opcion.",
+                option: "Seleccione una opción.",
                 value: "DEFAULT",
               },
               { option: "Homosexual", value: "Homosexual" },
@@ -279,7 +279,7 @@ const Step7 = ({ handlerStore }) => {
         </div>
         <div className="relative md:w-1/3 px-3">
           <Select
-            label={"Grado Academico:"}
+            label={"Grado Académico"}
             options={[
               {
                 option: "Seleccione una opcion.",
@@ -318,10 +318,10 @@ const Step7 = ({ handlerStore }) => {
         </div>
         <div className="relative md:w-1/3 px-3">
           <Select
-            label={"Profesión u Oficio:"}
+            label={"Profesión u Oficio"}
             options={[
               {
-                option: "Seleccione una opcion.",
+                option: "Seleccione una opción.",
                 value: "DEFAULT",
               },
               { option: "Abogado", value: "Abogado" },
@@ -353,10 +353,10 @@ const Step7 = ({ handlerStore }) => {
         </div>
         <div className="relative md:w-4/5 px-3">
           <Select
-            label={"Tipo de Discapacidad:"}
+            label={"Tipo de Discapacidad"}
             options={[
               {
-                option: "Seleccione una opcion.",
+                option: "Seleccione una opción.",
                 value: "DEFAULT",
               },
               { option: "Enfermedad 1", value: "Enfermedad 1" },
@@ -389,10 +389,10 @@ const Step7 = ({ handlerStore }) => {
         </div>
         <div className="relative md:w-4/5 px-3">
           <Select
-            label={"Medicamento recetado:"}
+            label={"Medicamento recetado"}
             options={[
               {
-                option: "Seleccione una opcion.",
+                option: "Seleccione una opción.",
                 value: "DEFAULT",
               },
               { option: "Medicamento 1", value: "Medicamento 1" },
@@ -413,7 +413,7 @@ const Step7 = ({ handlerStore }) => {
           <div className="flex flex-row items-center bg-slate-200 border border-slate-300 rounded-md px-4 py-3 text-lg cursor-pointer">
             {victims.length === 0 ? <FiUser /> : <FiUsers />}
             <span className="text-slate-600 h-full ml-2">
-              Victimas agregadas: {victims.length}
+              Víctimas agregadas: {victims.length}
             </span>
           </div>
         </div>
@@ -422,7 +422,7 @@ const Step7 = ({ handlerStore }) => {
           type="submit"
           value={"Enviar"}
         >
-          Agregar Victima
+          Agregar Víctima
         </button>
       </div>
       <Toaster />

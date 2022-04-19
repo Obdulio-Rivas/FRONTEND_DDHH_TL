@@ -20,10 +20,10 @@ const Step3 = ({ handlerStore }) => {
   });
 
   const [municipalities, setMunicipalities] = useState([
-    { option: "Selecciona una opcion", value: "Default value" },
+    { option: "Selecciona una opción", value: "Default value" },
   ]);
   const [departments, setDepartments] = useState([
-    { option: "Selecciona una opcion", value: "Default value" },
+    { option: "Selecciona una opción", value: "Default value" },
   ]);
 
   const {
@@ -37,7 +37,7 @@ const Step3 = ({ handlerStore }) => {
   useEffect(() => {
     async function getSelectOptions() {
       let arrayValues = [
-        { option: "Selecciona una opcion por favor", value: 0 },
+        { option: "Selecciona una opción por favor", value: 0 },
       ];
       let response = await DepartmentService.getDepartments();
       arrayValues = response?.data?.map(({ id_department, department }) => {
@@ -51,7 +51,7 @@ const Step3 = ({ handlerStore }) => {
   useEffect(() => {
     async function getSelectOptions() {
       let arrayValues = [
-        { option: "Selecciona una opcion por favor", value: 0 },
+        { option: "Selecciona una opción por favor", value: 0 },
       ];
       let response = await MunicipalityService.getMunicipalities();
       arrayValues = response?.data?.map(({ id_municipality, municipality }) => {
@@ -87,7 +87,7 @@ const Step3 = ({ handlerStore }) => {
     >
       <div className="flex flex-row items-center justify-start mb-4">
         <AiOutlineFileDone className="text-4xl" />
-        <h2 className="ml-2 text-3xl">Perfil especifico de los hechos.</h2>
+        <h2 className="ml-2 text-3xl">Perfil específico de los hechos.</h2>
       </div>
       <div className="-mx-3 md:flex mb-6">
         <div className="md:w-2/5 px-3 mb-6 md:mb-0">
@@ -136,10 +136,10 @@ const Step3 = ({ handlerStore }) => {
         </div>
         <div className="md:w-4/6 px-3 mb-6 md:mb-0">
           <Input
-            label={"Direccion"}
+            label={"Dirección"}
             name={"adress"}
             type={"text"}
-            placeholder={"Direccion"}
+            placeholder={"Dirección"}
             register={register}
             errors={errors}
             required={"*Este campo es obligatorio."}
@@ -225,10 +225,10 @@ const Step3 = ({ handlerStore }) => {
         </div>
         <div className="md:w-3/5 px-3 mb-6 md:mb-0">
           <Input
-            label={"Nombre de la institucion estatal"}
+            label={"Nombre de la institución estatal"}
             name={"statal_institution_name"}
             type={"text"}
-            placeholder={"Nombre de la institucion estatal"}
+            placeholder={"Nombre de la institución estatal"}
             register={register}
             errors={errors}
             disabled={radioValues?.statal_institution}
@@ -240,11 +240,11 @@ const Step3 = ({ handlerStore }) => {
       <div className="-mx-3 md:flex mb-6">
         <div className="md:w-full md:h-min px-3 mb-6 md:mb-0">
           <Textarea
-            label={"Descripcion del acompañamiento brindado"}
+            label={"Descripción del acompañamiento brindado"}
             name={"accompanied_descriptions"}
             type={"text"}
             height={screenHeight / 6}
-            placeholder={"Descripcion del acompañamiento brindado..."}
+            placeholder={"Descripción del acompañamiento brindado..."}
             register={register}
             errors={errors}
             required={"*Este campo es obligatorio."}

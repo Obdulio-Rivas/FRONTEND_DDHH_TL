@@ -42,7 +42,7 @@ const Textarea = ({
         onChange={(e) => handlerChange(e)}
       />
       <div>
-        <span>Numero de palabras: {numberOfWords}</span>
+        <span>Número de palabras: {numberOfWords}</span>
       </div>
       {errors[name] && (
         <span className="text-red-500 text-xs italic">
