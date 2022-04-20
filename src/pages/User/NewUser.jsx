@@ -26,7 +26,6 @@ const NewUser = () => {
     e.preventDefault();
     const new_user = { ...data, url_image: url_image_default };
     const response = await UserService.postUsers(new_user);
-    console.log(response);
     if (response.is_successful) {
       AuthService.updateJwtUser(response);
       toast.success("El usuario a sido agregado correctamente.", {

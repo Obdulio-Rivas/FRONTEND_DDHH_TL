@@ -259,21 +259,12 @@ const IncidentList = () => {
                                           >
                                             <ImProfile />
                                           </Link>
-                                          <button
-                                          className={`text-xl mx-2 text-gray-600`}
-                                            onClick={() => {
-                                              openModalVictim(cell.value);
-                                            }}
+                                          <Link
+                                            className={`text-xl mx-2 text-gray-600`}
+                                            to={`/incident/verify/${cell.value}`}
                                           >
                                             <MdListAlt />
-                                          </button>
-                                          <button
-                                            onClick={() => {
-                                              openModal(cell.value);
-                                            }}
-                                          >
-                                            <MdRemoveCircle />
-                                          </button>
+                                          </Link>
                                         </div>
                                       </td>
                                     );

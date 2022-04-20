@@ -8,12 +8,11 @@ import {
   Document,
   StyleSheet,
 } from "@react-pdf/renderer";
-import IncidentService from "../../../services/Incident/Incident.Service";
 
 import tick_box_checked from "./icons/tick_box_checked.png";
 import tick_box_unchecked from "./icons/tick_box_unchecked.png";
 
-const Incident = ({ user }) => {
+const Incident = ({ incident, victims, user }) => {
   
   return (
     <Document>
@@ -21,6 +20,9 @@ const Incident = ({ user }) => {
         <View>
           <Image src={tick_box_checked} />
           <Image src={tick_box_unchecked} />
+        </View>
+        <View>
+          <Text>{`${JSON.stringify(incident)}`}</Text>
         </View>
       </Page>
     </Document>

@@ -32,7 +32,6 @@ const ViewIncident = () => {
       const municipalityResponse = await MunicipalityService.getMunicipalities();
       setMunicipality(municipalityResponse.data);
       const response = await IncidentService.getIncident(id_incident);
-      console.log(response);
       setIncident(response.data);
       /**Trayendo el id de las victimas relacionadas */
       const incidentVictimResponse = await IncidentVictimsService.getIncidentVictimByIdIncident(id_incident);
