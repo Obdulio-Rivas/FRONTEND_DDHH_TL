@@ -46,6 +46,23 @@ const postIncident = async (values) => {
   return response;
 };
 
+const putIncident = async (values) => {
+  const requestOptions = {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      "user-access-token": AuthService.getCurrentUser().jwt,
+      "access-control-allow-credentials": true,
+    },
+    body: JSON.stringify(values),
+  };
+
+  const fetchData = await fetch(`${API_URL}/incident/`, requestOptions);
+
+  const response = await fetchData.json();
+  return response;
+};
+
 const getIncidentsByUser = async (id_user) => {
   const requestOptions = {
     method: "GET",
@@ -55,7 +72,6 @@ const getIncidentsByUser = async (id_user) => {
       "access-control-allow-credentials": true,
     },
   };
-  
   const fetchData = await fetch(
     `${API_URL}/incident/incidents_by_user/${id_user}`,
     requestOptions
@@ -68,6 +84,7 @@ const CaseService = {
   getIncident,
   getIncidents,
   postIncident,
+  putIncident,
   getIncidentsByUser,
 };
 

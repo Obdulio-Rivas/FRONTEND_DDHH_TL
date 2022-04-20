@@ -14,6 +14,7 @@ import IncidentService from "../../../services/Incident/Incident.Service";
 import Incident from "../../../templates/pdfs/incident/Incident";
 import IncidentVictimsService from "../../../services/IncidentVictims/IncidentVictims.Service";
 import VictimService from "../../../services/Victim/Victim.Service";
+import CaseService from "../../../services/Incident/Incident.Service";
 import Navbar from "../../../components/Navbar/Navbar";
 
 const VerifyIncident = () => {
@@ -27,6 +28,7 @@ const VerifyIncident = () => {
     isValid: false,
     isUploading: false,
   });
+  let objectIncident = {};
 
   const navigate = useNavigate();
 
@@ -121,7 +123,6 @@ const VerifyIncident = () => {
         metadata,
         { filename: incident?.expediente, extension }
       );
-      console.log("Cambiar el estado del incidente a 1");
       if (!!response) {
         setFile({
           metadata: null,
@@ -129,6 +130,10 @@ const VerifyIncident = () => {
           isValid: false,
           isUploading: false,
         });
+        objectIncident = incident;
+        objectIncident.status = 1
+        const responseIncident = await CaseService.putIncident(objectIncident);
+        console.log(responseIncident);
         toast.success("Incidente verificado y cargado con exito!", {
           position: "bottom-center",
         });
