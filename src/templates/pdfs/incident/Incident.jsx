@@ -12,7 +12,7 @@ import {
 import tick_box_checked from "./icons/tick_box_checked.png";
 import tick_box_unchecked from "./icons/tick_box_unchecked.png";
 
-const Incident = ({ incident, victims, user }) => {
+const Incident = ({ incident, victims, complainant }) => {
   
   return (
     <Document>
@@ -23,6 +23,12 @@ const Incident = ({ incident, victims, user }) => {
         </View>
         <View>
           <Text>{`${JSON.stringify(incident)}`}</Text>
+        </View>
+        <View>
+          <Text>{`${JSON.stringify(victims)}`}</Text>
+        </View>
+        <View>
+          <Text>{`${JSON.stringify(complainant)}`}</Text>
         </View>
       </Page>
     </Document>

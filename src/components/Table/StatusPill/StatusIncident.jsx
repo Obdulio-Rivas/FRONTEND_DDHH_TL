@@ -12,14 +12,8 @@ const StatusIncident = ({ value = 0 }) => {
         );
       case 1:
         return (
-          <span className="bg-green-500 py-1 px-2 rounded text-white text-sm">
-            En Curso
-          </span>
-        );
-      case 2:
-        return (
-          <span className="bg-red-500 py-1 px-2 rounded text-white text-sm">
-            Finalizado
+          <span className="bg-blue-500 py-1 px-2 rounded text-white text-sm">
+            Verificado
           </span>
         );
       default:

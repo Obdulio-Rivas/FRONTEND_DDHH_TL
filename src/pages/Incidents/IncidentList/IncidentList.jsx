@@ -24,7 +24,7 @@ const IncidentList = () => {
   const [isOpenIncident, setIsOpenIncident] = useState(false);
   const [is_loading, setIsLoading] = useState(true);
   const [incidentSelected, setincidentSelected] = useState(null);
-  let arrayVictims = [];
+
   useEffect(() => {
     async function fetchIncidents() {
       const response = await CaseService.getIncidents();
@@ -36,40 +36,6 @@ const IncidentList = () => {
     }
     fetchIncidents();
   }, []);
-
-  const closeModal = () => {
-    setIsOpen(false);
-    setIsOpenIncident(false);
-  };
-
-  const openModalVictim = (value) => {
-    async function getIncidentData(id_incident) {
-      const responseIncidentVictims = await IncidentVictimsService.getIncidentVictimByIdIncident(id_incident);
-      for (let i = 0; i < responseIncidentVictims.data.length; i++) {
-        const responseVictim = await VictimService.getVictim(responseIncidentVictims.data[i].id_victim);
-        if(responseVictim.data[i].type_victim!=='denunciante')
-        {
-          arrayVictims.push(responseVictim.data[0].name + ' ' + responseVictim.data[0].last_name);
-        }
-      }
-      setVictims(arrayVictims);
-      setincidentSelected(responseIncidentVictims.data[0]);
-      setIsOpenIncident(true);
-    }
-    getIncidentData(value);
-  };
-
-  const openModal = (value) => {
-    async function getIncidentData(id_incident) {
-      const response = await CaseService.getIncident(id_incident);
-      /*const [{status}] = response.data;
-      status = status+1;
-      response.data[0].status = status;*/
-      setincidentSelected(response.data[0]);
-      setIsOpen(true);
-    }
-    getIncidentData(value);
-  };
 
   const handlerActionOK = () => {
     async function deleteIncident() {
@@ -300,27 +266,6 @@ const IncidentList = () => {
                   </div>
                 </div>
               </div>
-              <Modal
-                modaltype={'eliminar'}
-                title={"Eliminar usuario"}
-                children={`Realmente desea elminar el usuario "${incidentSelected?.expediente}"`}
-                isOpen={isOpen}
-                closeModal={closeModal}
-                handlerActionOK={handlerActionOK}
-                handlerActionAbort={handlerActionAbort}
-              />
-              <Modal
-                modaltype={''}
-                title={"Victimas asociadas al caso."}
-                children={`${victims?.map((Nombre, index)=>{
-                  let nombre = '';
-                  nombre = nombre + Nombre+"\n";
-                  return '-'+nombre;
-                })}`}
-                isOpen={isOpenIncident}
-                closeModal={closeModal}
-                handlerActionOK={handlerActionOKIncident}
-              />
             </div>
           </main>
         </div>

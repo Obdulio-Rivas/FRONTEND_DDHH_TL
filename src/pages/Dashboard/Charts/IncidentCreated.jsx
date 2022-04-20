@@ -68,14 +68,9 @@ const IncidentCreated = () => {
         backgroundColor: "rgb(255, 217, 61)",
       },
       {
-        label: "En curso",
+        label: "Verificados",
         data: incidents.map(({ number_of_progress }) => number_of_progress),
         backgroundColor: "rgb(254, 177, 57)",
-      },
-      {
-        label: "Completados",
-        data: incidents.map(({ number_of_completed }) => number_of_completed),
-        backgroundColor: "rgb(162, 213, 171)",
       },
     ],
   };

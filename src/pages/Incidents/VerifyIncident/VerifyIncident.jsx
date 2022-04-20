@@ -20,13 +20,15 @@ const VerifyIncident = () => {
   let { id_incident } = useParams();
   const [incident, setIncident] = useState({});
   const [victims, setVictims] = useState([]);
-  const [denunciante, setDenunciante] = useState({});
+  const [complainant, setComplainant] = useState({});
   const [file, setFile] = useState({
     metadata: null,
     type: null,
     isValid: false,
     isUploading: false,
   });
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function getIncident() {
@@ -36,56 +38,78 @@ const VerifyIncident = () => {
       if (response.is_successful) {
         AuthService.updateJwtUser(response);
         setIncident(response?.data[0]);
-        /**Trayendo el id de las victimas relacionadas */
-        const incidentVictimResponse =
-          await IncidentVictimsService.getIncidentVictimByIdIncident(
-            id_incident
-          );
-
-        console.log(incidentVictimResponse);
-        incidentVictimResponse?.data?.map(({ id_victim }) => {
-          return arrayIncidenteVictim.push(id_victim);
-        });
-        /**Mostrando las victimas relacionadas al caso */
-        for (let i = 0; i < arrayIncidenteVictim?.length; i++) {
-          let victimResponse = await VictimService.getVictim(
-            arrayIncidenteVictim[i]
-          );
-          if (victimResponse.data[0].type_victim !== "victima") {
-            setDenunciante(victimResponse.data[0]);
-            console.log(denunciante);
+        if (response?.data[0]?.status === 0) {
+          /**Trayendo el id de las victimas relacionadas */
+          const incidentVictimResponse =
+            await IncidentVictimsService.getIncidentVictimByIdIncident(
+              id_incident
+            );
+          incidentVictimResponse?.data?.map(({ id_victim }) => {
+            return arrayIncidenteVictim.push(id_victim);
+          });
+          /**Mostrando las victimas relacionadas al caso */
+          for (let i = 0; i < arrayIncidenteVictim?.length; i++) {
+            let victimResponse = await VictimService.getVictim(
+              arrayIncidenteVictim[i]
+            );
+            if (victimResponse.data[0].type_victim !== "victima") {
+              setComplainant(victimResponse.data[0]);
+            }
+            if (victimResponse.data[0].type_victim === "victima") {
+              arrayVictims.push(victimResponse.data[0]);
+            }
           }
-          if (victimResponse.data[0].type_victim === "victima") {
-            arrayVictims.push(victimResponse.data[0]);
-            console.log(arrayVictims);
-          }
+          setVictims(arrayVictims);
+          toast.success("Informacion del incidente cargada correctamente.", {
+            position: "bottom-center",
+          });
+        } else {
+          toast.error(
+            "No puedes validar un incidente, que ya ha sido validado!",
+            {
+              position: "bottom-center",
+            }
+          );
         }
-        setVictims(arrayVictims);
       } else {
+        toast.error("No fue posible cargar la informacion del incidente!", {
+          position: "bottom-center",
+        });
       }
     }
     getIncident();
   }, []);
 
   const handlerFile = async (e) => {
-    let type = null;
-    const newImage = e.target.files[0];
-    if (!!newImage) {
-      type = newImage.type?.split("/")[1];
-      file.isValid = ["png", "jpg", "jpeg"].some(
-        (typeFile) => typeFile === type
-      );
-      setFile({
-        ...file,
-        metadata: newImage,
-        type: type,
-      });
+    let type = "pdf";
+    const newFormat = e.target.files[0];
+    console.log(newFormat);
+    if (!!newFormat) {
+      if (newFormat.type === "application/pdf") {
+        setFile({
+          ...file,
+          metadata: newFormat,
+          type: type,
+          isValid: true,
+        });
+      } else {
+        setFile({
+          ...file,
+          metadata: null,
+          type: null,
+          isValid: false,
+        });
+        toast.error("El tipo de archivo seleccionado no es valido!", {
+          position: "bottom-center",
+        });
+      }
     }
   };
 
   const handlerSubmit = async (e) => {
     e.preventDefault();
     const { metadata, type } = file;
+    console.log(type);
     setFile({
       ...file,
       isUploading: true,
@@ -97,6 +121,7 @@ const VerifyIncident = () => {
         metadata,
         { filename: incident?.expediente, extension }
       );
+      console.log("Cambiar el estado del incidente a 1");
       if (!!response) {
         setFile({
           metadata: null,
@@ -104,15 +129,51 @@ const VerifyIncident = () => {
           isValid: false,
           isUploading: false,
         });
-        toast.success("Incidente cargado con exito!", {
+        toast.success("Incidente verificado y cargado con exito!", {
           position: "bottom-center",
         });
+        navigate(`/incident/incidents`);
       } else {
         toast.error("Uppppppps ocurrio un error, intenta de nuevo!", {
           position: "bottom-center",
         });
       }
     }
+  };
+
+  const isIncidentPending = () => {
+    return (
+      <>
+        <PDFDownload
+          document={
+            <Incident
+              incident={incident}
+              victims={victims}
+              complainant={complainant}
+            />
+          }
+          filename={`${AuthService.getCurrentUser()?.name} ${
+            AuthService.getCurrentUser()?.last_name
+          } - ${Date.now()}`}
+        >
+          <div className={"flex flex-row justify-start items-center"}>
+            <AiOutlinePrinter className="text-4xl mx-1 cursor-pointer" />{" "}
+            <span>Descargar ficha</span>
+          </div>
+        </PDFDownload>
+        <button
+          className={`${
+            file.isValid
+              ? " bg-blue-500 hover:bg-blue-600 cursor-pointer"
+              : "bg-slate-500 hover:bg-slate-600 cursor-not-allowed"
+          } text-white font-bold rounded-md px-7 py-3 transition duration-1000`}
+          type="submit"
+          value={"Subir ficha"}
+        >
+          Subir ficha
+        </button>
+      </>
+    );
   };
 
   return (
@@ -146,30 +207,16 @@ const VerifyIncident = () => {
                   name="file"
                   id="file"
                   onChange={handlerFile}
+                  disabled={incident?.status === 0 ? false : true}
                 />
               </label>
             </div>
           </div>
         </div>
         <div className="flex flex-row justify-between items-center -mx-0.5 md:flex mb-2">
-          <PDFDownload
-            document={<Incident incident={incident} />}
-            filename={`${AuthService.getCurrentUser()?.name} ${
-              AuthService.getCurrentUser()?.last_name
-            } - ${Date.now()}`}
-          >
-            <div className={"flex flex-row justify-start items-center"}>
-              <AiOutlinePrinter className="text-4xl mx-1 cursor-pointer" />{" "}
-              <span>Descargar ficha</span>
-            </div>
-          </PDFDownload>
-          <button
-            className="bg-green-500 hover:bg-green-600 text-white font-bold rounded-md px-7 py-3 transition duration-1000"
-            type="submit"
-            value={"Subir ficha"}
-          >
-            Subir ficha
-          </button>
+          {incident?.status === 0
+            ? isIncidentPending()
+            : `Este incidente ya fue validado, puedes consultarlo en la lista de incidentes!`}
         </div>
       </form>
       <Toaster
