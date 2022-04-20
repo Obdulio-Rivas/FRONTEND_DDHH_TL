@@ -259,20 +259,6 @@ const IncidentList = () => {
                                           >
                                             <ImProfile />
                                           </Link>
-                                          <Link
-                                            className={`text-xl mx-2 text-gray-600`}
-                                            to={`updateUser/${cell.value}`}
-                                          >
-                                            <BiEdit />
-                                          </Link>
-                                          <button
-                                            onClick={() => {
-                                              openModal(cell.value);
-                                            }}
-                                          >
-                                            <MdRemoveCircle />
-                                          </button>
-
                                           <button
                                           className={`text-xl mx-2 text-gray-600`}
                                             onClick={() => {
@@ -280,6 +266,13 @@ const IncidentList = () => {
                                             }}
                                           >
                                             <MdListAlt />
+                                          </button>
+                                          <button
+                                            onClick={() => {
+                                              openModal(cell.value);
+                                            }}
+                                          >
+                                            <MdRemoveCircle />
                                           </button>
                                         </div>
                                       </td>

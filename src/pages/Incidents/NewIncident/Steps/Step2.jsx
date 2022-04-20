@@ -363,7 +363,7 @@ const Step2 = ({ handlerStore }) => {
         <div className="md:w-3/6 px-3 mb-6 md:mb-0">
           <Input
             label={"Párroco"}
-            name={"phone"}
+            name={"parroco"}
             type={"text"}
             placeholder={"Párroco"}
             register={register}
