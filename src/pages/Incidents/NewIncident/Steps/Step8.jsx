@@ -102,7 +102,7 @@ const creation_agreement = `Yo ${currentUser.name} ${currentUser.last_name}, doy
         //perfil migratorio
         country_leave: step5.country_leave,
         country_leave_name: step5.country_leave_name,
-        family_cant: step5.family_cant,
+        family_cant: step5.family_cant === "" ? 0 : step5.family_cant,
         //general
         status: 0,
         description_incident: step6.description_incident,
@@ -148,7 +148,7 @@ const creation_agreement = `Yo ${currentUser.name} ${currentUser.last_name}, doy
       console.log(response)
     });
 
-    //navigate("/incident/step9");
+    navigate(`/incident/verify/${id_incident}`);
   };
 
   return (

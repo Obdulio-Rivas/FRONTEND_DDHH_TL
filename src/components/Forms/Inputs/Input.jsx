@@ -13,23 +13,23 @@ const Input = ({
   validation,
   type_documentation=null
 }) => {
-  if (name === "password") {
+  if (name == "password") {
     return (
       <>
         <label
           className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
-          htmlFor={name}
+          for={name}
         >
           {`${label}:`}
         </label>
         <input
           id={name}
           className={`appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3 ${
-            disabled === 0 ? "cursor-not-allowed" : null
+            disabled == 0 ? "cursor-not-allowed" : null
           }`}
           type={type}
           placeholder={placeholder}
-          disabled={disabled === 0 ? true : false}
+          disabled={disabled == 0 ? true : false}
           {...register(name, {
             required: required,
             pattern: {
@@ -46,24 +46,24 @@ const Input = ({
         )}
       </>
     );
-  }else if(name === "dui" && type_documentation != null)
+  }else if(name == "dui" && type_documentation != null)
   {
     return (
       <>
         <label
           className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
-          htmlFor={name}
+          for={name}
         >
           {`${label}:`}
         </label>
         <input
           id={name}
           className={`appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3 ${
-            disabled === 0 ? "cursor-not-allowed" : null
+            disabled == 0 ? "cursor-not-allowed" : null
           }`}
           type={type}
           placeholder={placeholder}
-          disabled={disabled === 0 ? true : false}
+          disabled={disabled == 0 ? true : false}
           {...register(name, type_documentation === "DUI" ? {
             required: required,
             pattern: {
@@ -71,7 +71,7 @@ const Input = ({
               message:
                 "Debe digitar el formato correcto del dui. Ejemplo: 00000000-0",
             },
-          } : type_documentation === "NIT" ? {
+          } : type_documentation == "NIT" ? {
             required: required,
             pattern: {
               value: /^\d{4}-\d{6}-\d{3}-\d{1}/,
@@ -99,19 +99,19 @@ const Input = ({
       <>
         <label
           className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
-          htmlFor={name}
+          for={name}
         >
           {`${label}:`}
         </label>
         <input
           id={name}
           className={`appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3 ${
-            disabled === 0 ? "cursor-not-allowed" : null
+            disabled == 0 ? "cursor-not-allowed" : null
           }`}
           type={type}
           placeholder={placeholder}
-          disabled={disabled === 0 ? true : false}
-          {...register(name, validation === 0 ? {required:null} : {
+          disabled={disabled == 0 ? true : false}
+          {...register(name, validation == 0 ? {required:null} : {
             required: required,
             pattern: {
               value: pattern,
