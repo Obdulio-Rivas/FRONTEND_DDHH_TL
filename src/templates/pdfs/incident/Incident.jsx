@@ -12,7 +12,6 @@ import {
 import logo from "./icons/tick_box_checked.png";
 
 const Incident = ({ incident, victims, complainant }) => {
-  
   return (
     <Document>
       <Page size="A4" wrap style={{ padding: 16 }}>
@@ -23,7 +22,9 @@ const Incident = ({ incident, victims, complainant }) => {
           <Text>{`${JSON.stringify(incident)}`}</Text>
         </View>
         <View>
-          <Text>{`${JSON.stringify(victims)}`}</Text>
+          {victims.map((victim) => {
+            return <Text>{JSON.stringify(victim)}</Text>;
+          })}
         </View>
         <View>
           <Text>{`${JSON.stringify(complainant)}`}</Text>
