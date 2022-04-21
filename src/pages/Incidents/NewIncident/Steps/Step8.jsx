@@ -164,7 +164,7 @@ const Step8 = ({ store, handlerStore }) => {
       <div className="max-w-5xl mx-auto my-10 bg-white p-16 border border-slate-200">
         <div className="my-4 mb-10">
           <h1 className="text-2xl text-gray-900 font-bold text-center">
-            Aun faltan pasos que llenar
+            Aun faltan pasos que llenar.
           </h1>
         </div>
       </div>
