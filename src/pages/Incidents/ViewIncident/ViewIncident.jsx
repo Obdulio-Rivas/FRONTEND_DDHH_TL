@@ -12,6 +12,7 @@ import IncidentVictimsService from "../../../services/IncidentVictims/IncidentVi
 import VictimService from "../../../services/Victim/Victim.Service";
 import MunicipalityService from "../../../services/Dimensions/Municipality/Municipality.Service";
 import DepartmentService from "../../../services/Dimensions/Department/Department.Service";
+import toast from "react-hot-toast";
 
 const ViewIncident = () => {
   let { id_incident } = useParams();
@@ -19,7 +20,6 @@ const ViewIncident = () => {
   const [incident, setIncident] = useState([]);
   const [victims, setVictims] = useState([]);
   const [denunciante, setDenunciante] = useState({});
-  const [incidentUser, setIncidentUser] = useState([]);
   const [department, setDepartment] = useState([]);
   const [municipality, setMunicipality] = useState([]);
 
@@ -29,32 +29,43 @@ const ViewIncident = () => {
       let arrayVictims = [];
       const departmentResponse = await DepartmentService.getDepartments();
       setDepartment(departmentResponse.data);
-      const municipalityResponse = await MunicipalityService.getMunicipalities();
+      const municipalityResponse =
+        await MunicipalityService.getMunicipalities();
       setMunicipality(municipalityResponse.data);
       const response = await IncidentService.getIncident(id_incident);
-      setIncident(response.data);
-      /**Trayendo el id de las victimas relacionadas */
-      const incidentVictimResponse = await IncidentVictimsService.getIncidentVictimByIdIncident(id_incident);
-      incidentVictimResponse.data.map(({id_victim})=>{
-       return arrayIncidenteVictim.push(id_victim);
-      });
-      /**Mostrando las victimas relacionadas al caso */
-      for (let i = 0; i < arrayIncidenteVictim.length; i++) {
-        let victimResponse = await VictimService.getVictim(arrayIncidenteVictim[i]);
-        if(victimResponse.data[0].type_victim!=='victima')
-        {
-          setDenunciante(victimResponse.data[0]);
-          console.log(denunciante);
+      if (response.is_successful) {
+        AuthService.updateJwtUser(response);
+        setIncident(response.data);
+        /**Trayendo el id de las victimas relacionadas */
+        const incidentVictimResponse =
+          await IncidentVictimsService.getIncidentVictimByIdIncident(
+            id_incident
+          );
+        incidentVictimResponse.data.map(({ id_victim }) => {
+          return arrayIncidenteVictim.push(id_victim);
+        });
+        /**Mostrando las victimas relacionadas al caso */
+        for (let i = 0; i < arrayIncidenteVictim.length; i++) {
+          let victimResponse = await VictimService.getVictim(
+            arrayIncidenteVictim[i]
+          );
+          if (victimResponse.data[0].type_victim !== "victima") {
+            setDenunciante(victimResponse.data[0]);
+          }
+          if (victimResponse.data[0].type_victim === "victima") {
+            arrayVictims.push(victimResponse.data[0]);
+          }
         }
-        if(victimResponse.data[0].type_victim==='victima')
-        {
-          arrayVictims.push(victimResponse.data[0]);
-          console.log(arrayVictims);
-        }
+        setVictims(arrayVictims);
+        setIsLoading(false);
+        toast.success(`Incidente cargado con exito!`, {
+          position: "bottom-center",
+        });
+      }else{
+        toast.error(`No se encontro ningun incidente!`, {
+          position: "bottom-center",
+        });
       }
-      setVictims(arrayVictims);
-      setIsLoading(false);
-      
     }
     getIncidentsOfUser(id_incident);
   }, []);
@@ -122,8 +133,7 @@ const ViewIncident = () => {
                 <li className="py-1">
                   <span className="mr-2">Hora:</span>
                   <span>
-                    {
-                    incident[0].hour?.split(":")[0] >= 12 &&
+                    {incident[0].hour?.split(":")[0] >= 12 &&
                     incident[0].hour?.split(":")[1] > 0
                       ? `${incident[0].hour} PM`
                       : `${incident[0].hour} AM`}
@@ -252,8 +262,16 @@ const ViewIncident = () => {
               </ul>
               <ul className="flex flex-row flex-wrap justify-between px-5">
                 <li className="py-1">{`País: ${denunciante?.country}`}</li>
-                <li className="py-1">{`Departamento: ${department.filter(x => x.id_department === denunciante?.department)[0]?.department}`}</li>
-                <li className="py-1">{`Municipio: ${municipality.filter(x=>x.id_municipality === denunciante?.municipality)[0]?.municipality }`}</li>
+                <li className="py-1">{`Departamento: ${
+                  department.filter(
+                    (x) => x.id_department === denunciante?.department
+                  )[0]?.department
+                }`}</li>
+                <li className="py-1">{`Municipio: ${
+                  municipality.filter(
+                    (x) => x.id_municipality === denunciante?.municipality
+                  )[0]?.municipality
+                }`}</li>
               </ul>
               <ul className="flex flex-row flex-wrap justify-between px-5">
                 <li className="py-1">{`Dirección: ${denunciante?.adress}`}</li>
@@ -428,17 +446,23 @@ const ViewIncident = () => {
                     <li className="py-1">{`Hora Aproximada: ${incident[0]?.incident_time}`}</li>
                   </ul>
                   <ul className="flex flex-row flex-wrap justify-between px-5">
-                    <li className="py-1">{`Departamento: ${department.filter(x => x.id_department===incident[0]?.deparment)[0]?.department}`}</li>
-                    <li className="py-1">{`Municipio: ${municipality.filter(x => x.id_municipality===incident[0]?.municipality)[0]?.municipality}`}</li>
+                    <li className="py-1">{`Departamento: ${
+                      department.filter(
+                        (x) => x.id_department === incident[0]?.deparment
+                      )[0]?.department
+                    }`}</li>
+                    <li className="py-1">{`Municipio: ${
+                      municipality.filter(
+                        (x) => x.id_municipality === incident[0]?.municipality
+                      )[0]?.municipality
+                    }`}</li>
                     <li className="py-1">{`Dirección: ${incident[0]?.adress}`}</li>
                   </ul>
                 </div>
                 <ul className="flex flex-row flex-wrap justify-between px-5 py-2">
                   <li className="py-1">
                     <span>Causa del Desplazamiento:</span>
-                    <ul>
-                      {incident[0]?.cause_displacement}
-                    </ul>
+                    <ul>{incident[0]?.cause_displacement}</ul>
                   </li>
                 </ul>
                 <ul className="flex flex-row flex-wrap justify-between px-5 py-2">
@@ -446,17 +470,13 @@ const ViewIncident = () => {
                     <span>
                       Personas o grupos que generaron el desplazamiento:
                     </span>
-                    <ul>
-                      {incident[0]?.people_displacement}
-                    </ul>
+                    <ul>{incident[0]?.people_displacement}</ul>
                   </li>
                 </ul>
                 <ul className="flex flex-row flex-wrap justify-between px-5 py-2">
                   <li className="py-1">
                     <span>¿Cuáles instituciones han acompañado?</span>
-                    <ul>
-                      {incident[0]?.institutions_accompanied}
-                    </ul>
+                    <ul>{incident[0]?.institutions_accompanied}</ul>
                   </li>
                 </ul>
                 <div className="py-2">
@@ -574,13 +594,16 @@ const ViewIncident = () => {
               </h1>
               <div className="flex flex-row flex-wrap justify-between px-5">
                 <p className="text-base text-justify">
-                 {incident[0]?.creation_agreement}
+                  {incident[0]?.creation_agreement}
                 </p>
               </div>
               <div className="flex flex-row flex-wrap justify-end px-5 mt-6">
                 <div className="flex flex-row justify-around items-center py-3">
                   <PDFDownload
-                    document={<Incident />}
+                    document={<Incident 
+                      incident={incident}
+                      victims={victims}
+                      complainant={null} />}
                     filename={`${incident[0]?.expediente} - ${Date.now()}`}
                   >
                     <div className="flex flex-row justify-center items-center">

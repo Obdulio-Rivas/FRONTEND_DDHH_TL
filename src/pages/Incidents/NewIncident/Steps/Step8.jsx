@@ -10,12 +10,12 @@ import IncidentVictimsService from "../../../../services/IncidentVictims/Inciden
 import CaseService from "../../../../services/Incident/Incident.Service";
 
 const Step8 = ({ store, handlerStore }) => {
-    const step1 = store.step1?.values;
-    const step2 = store.step2?.values;
-    const step3 = store.step3?.values;
-    const step4 = store.step4?.values;
-    const step5 = store.step5?.values;
-    const step6 = store.step6?.values;
+  const step1 = store.step1?.values;
+  const step2 = store.step2?.values;
+  const step3 = store.step3?.values;
+  const step4 = store.step4?.values;
+  const step5 = store.step5?.values;
+  const step6 = store.step6?.values;
 
   const [currentUser, setCurrentUser] = useState(AuthService.getCurrentUser());
   const { register, handleSubmit } = useForm();
@@ -37,79 +37,83 @@ const Step8 = ({ store, handlerStore }) => {
       "Diciembre",
     ][monthNumber];
   };
-//Fecha
-const month_name = getMonthName(new Date().getMonth());
-const year = new Date().getFullYear();
-const hours = new Date().getHours();
-const minutes = new Date().getMinutes();
-const date = new Date().getDate();
 
-const creation_agreement = `Yo ${currentUser.name} ${currentUser.last_name}, doy fe
+  //Fecha
+  const month_name = getMonthName(new Date().getMonth());
+  const year = new Date().getFullYear();
+  const hours = new Date().getHours();
+  const minutes = new Date().getMinutes();
+  const date = new Date().getDate();
+
+  const creation_agreement = `Yo ${currentUser.name} ${currentUser.last_name}, doy fe
     que la informacion plasmada en la ficha actual y elaborada por mi
     persona ha sido recopilada de viva voz por la persona que ha venido
     en calidad de victima directa o conocido de la misma a declarar los
     hechos anteriormente descritos a mi persona, a las ${hours} horas con ${minutes} 
-    minutos del dia ${date} del mes de ${month_name} del año ${year}.`
+    minutos del dia ${date} del mes de ${month_name} del año ${year}.`;
   const onSubmit = async (data) => {
-
     let id_user = currentUser.id_user;
     let id_incident = 0;
     let array = [];
-    let cause_displacement ="";
-    let people_displacement ="";
-    let institutions_accompanied="";
-    let survive_displacement="";
+    let cause_displacement = "";
+    let people_displacement = "";
+    let institutions_accompanied = "";
+    let survive_displacement = "";
 
     for (let i = 0; i < step3.cause_displacement.length; i++) {
-      cause_displacement = cause_displacement+' - '+step3.cause_displacement[i]; 
+      cause_displacement =
+        cause_displacement + " - " + step3.cause_displacement[i];
     }
     for (let i = 0; i < step3.people_displacement.length; i++) {
-      people_displacement = people_displacement+' - '+step3.people_displacement[i];
+      people_displacement =
+        people_displacement + " - " + step3.people_displacement[i];
     }
     for (let i = 0; i < step3.institutions_accompanied.length; i++) {
-      institutions_accompanied = institutions_accompanied+' - '+step3.institutions_accompanied[i];
+      institutions_accompanied =
+        institutions_accompanied + " - " + step3.institutions_accompanied[i];
     }
     for (let i = 0; i < step4.survive_displacement.length; i++) {
-      survive_displacement = survive_displacement+' - '+step4.survive_displacement[i];
+      survive_displacement =
+        survive_displacement + " - " + step4.survive_displacement[i];
     }
 
     let Incidentobject = {
-        expediente : step1.expediente,
-        incident_date: step1.incident_date,
-        hour: step1.hour,
-        incident_institution: step1.incident_institution,
-        incident_institution_name: step1.incident_institution_name,
-        name_reference: step1.name_reference,
-        contact: step1.contact,
-        incident_identification: step1.incident_identification,
-        //datos especificos del caso
-        date_hechos: step3.date_hechos,
-        incident_time: step3.incident_time,
-        adress: step3.adress,
-        deparment: step3.deparment,
-        municipality: step3.municipality,
-        cause_displacement: cause_displacement,
-        people_displacement: people_displacement,
-        institutions_accompanied: institutions_accompanied,
-        statal_institution: step3.statal_institution,
-        statal_institution_name: step3.statal_institution_name,
-        accompanied_descriptions: step3.accompanied_descriptions,
-        //perfil socioeconomico
-        home: step4.home,
-        monthly_income: step4.monthly_income,
-        familiar_income: step4.familiar_income,
-        survive_displacement: survive_displacement,
-        //perfil migratorio
-        country_leave: step5.country_leave,
-        country_leave_name: step5.country_leave_name,
-        family_cant: step5.family_cant === "" ? 0 : step5.family_cant,
-        //general
-        status: 0,
-        description_incident: step6.description_incident,
-        creation_agreement:creation_agreement,
-        //Foreign key.
-        id_type_incident: 0,
-        id_user: id_user,
+      expediente: step1.expediente,
+      incident_date: step1.incident_date,
+      hour: step1.hour,
+      incident_institution: step1.incident_institution,
+      incident_institution_name: step1.incident_institution_name,
+      name_reference: step1.name_reference,
+      contact: step1.contact,
+      incident_identification: step1.incident_identification,
+      //datos especificos del caso
+      date_hechos: step3.date_hechos,
+      incident_time: step3.incident_time,
+      adress: step3.adress,
+      deparment: step3.deparment,
+      municipality: step3.municipality,
+      cause_displacement: cause_displacement,
+      people_displacement: people_displacement,
+      institutions_accompanied: institutions_accompanied,
+      statal_institution: step3.statal_institution,
+      statal_institution_name: step3.statal_institution_name,
+      accompanied_descriptions: step3.accompanied_descriptions,
+      //perfil socioeconomico
+      home: step4.home,
+      monthly_income: step4.monthly_income,
+      familiar_income: step4.familiar_income,
+      survive_displacement: survive_displacement,
+      //perfil migratorio
+      country_leave: step5.country_leave,
+      country_leave_name: step5.country_leave_name,
+      family_cant: step5.family_cant === "" ? 0 : step5.family_cant,
+      //general
+      status: 0,
+      description_incident: step6.description_incident,
+      creation_agreement: creation_agreement,
+      //Foreign key.
+      id_type_incident: 0,
+      id_user: id_user,
     };
 
     handlerStore({
@@ -127,14 +131,14 @@ const creation_agreement = `Yo ${currentUser.name} ${currentUser.last_name}, doy
     console.log(victimResponse);
 
     /** Registrar Incidente */
-      let caseResponse = await CaseService.postIncident(Incidentobject);
-      id_incident=caseResponse.data.id_incident;
-      console.log(caseResponse);
+    let caseResponse = await CaseService.postIncident(Incidentobject);
+    id_incident = caseResponse.data.id_incident;
+    console.log(caseResponse);
 
     /**Registrar las victimas */
     for (let i = 0; i < store.step7.values.length; i++) {
       let response = await VictimService.postVictim(store.step7.values[i]);
-      array.push(response.data.id_victim)
+      array.push(response.data.id_victim);
     }
 
     /**Registrar la relacion de incidente victima */
@@ -144,12 +148,28 @@ const creation_agreement = `Yo ${currentUser.name} ${currentUser.last_name}, doy
         id_user: id_user,
         id_victim: _id_victim,
       };
-      let response = await IncidentVictimsService.postIncidentVictim(newIncidentVictim);
-      console.log(response)
+      let response = await IncidentVictimsService.postIncidentVictim(
+        newIncidentVictim
+      );
+      console.log(response);
     });
 
     navigate(`/incident/verify/${id_incident}`);
   };
+
+  console.log(!!store.step1)
+
+  if (!store.step1 || !store.step2 || !store.step3 || !store.step4 || !store.step5 || !store.step6 || !store.step7 ) {
+    return (
+      <div className="max-w-5xl mx-auto my-10 bg-white p-16 border border-slate-200">
+        <div className="my-4 mb-10">
+          <h1 className="text-2xl text-gray-900 font-bold text-center">
+            Aun faltan pasos que llenar
+          </h1>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-5xl mx-auto my-10 bg-white p-16 border border-slate-200">
@@ -638,9 +658,7 @@ const creation_agreement = `Yo ${currentUser.name} ${currentUser.last_name}, doy
           <span>VIII. ACUERDO DE CREACION.</span>
         </h1>
         <div className="flex flex-row flex-wrap justify-between px-5">
-          <p className="text-base text-justify">
-          {creation_agreement}
-          </p>
+          <p className="text-base text-justify">{creation_agreement}</p>
         </div>
         <form
           className="flex flex-row flex-wrap justify-end px-5 mt-6"

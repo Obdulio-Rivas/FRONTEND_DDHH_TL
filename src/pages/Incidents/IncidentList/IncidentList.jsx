@@ -4,24 +4,18 @@ import AuthService from "../../../services/Auth/Auth.Service";
 import Navbar from "../../../components/Navbar/Navbar";
 
 import { useTable, usePagination, useSortBy } from "react-table";
-import { MdRemoveCircle,MdListAlt } from "react-icons/md";
-import { BiEdit } from "react-icons/bi";
+import { AiOutlineFolderView } from "react-icons/ai";
+import { RiFoldersLine } from "react-icons/ri";
 import { ImProfile } from "react-icons/im";
-import RolePill from "../../../components/Table/RolePill/RolePill";
+import { BsUiChecksGrid } from "react-icons/bs";
 import Pagination from "../../../components/Table/Pagination/Pagination";
-import Modal from "../../../components/Modal/Modal";
 import { Link } from "react-router-dom";
 import Dots from "../../../components/Loaders/Dots";
 import CaseService from "../../../services/Incident/Incident.Service";
-import IncidentVictimsService from "../../../services/IncidentVictims/IncidentVictims.Service";
 import StatusIncident from "../../../components/Table/StatusPill/StatusIncident";
-import VictimService from "../../../services/Victim/Victim.Service";
 
 const IncidentList = () => {
   const [incidents, setIncidents] = useState([]);
-  const [victims, setVictims] = useState([]);
-  const [isOpen, setIsOpen] = useState(false);
-  const [isOpenIncident, setIsOpenIncident] = useState(false);
   const [is_loading, setIsLoading] = useState(true);
   const [incidentSelected, setincidentSelected] = useState(null);
 
@@ -42,7 +36,6 @@ const IncidentList = () => {
       const response = await CaseService.deleteIncident(incidentSelected.id_incident);
       setincidentSelected(response.data[0]);
       if (response.is_successful) {
-        setIsOpen(false);
         AuthService.updateJwtUser(response);
         let remainingIncidents = [];
         remainingIncidents = incidents.filter(
@@ -60,17 +53,7 @@ const IncidentList = () => {
     }
     deleteIncident();
   };
-  const handlerActionOKIncident = () => {
-        setIsOpenIncident(false);
-  };
 
-  const handlerActionAbort = () => {
-    toast.success('Se cancelo correctamente la accion.', {
-      icon: '',
-      position: "bottom-center",
-    });
-    setIsOpen(false);
-  };
   //Craer un archivo de constantes.
   const columns = useMemo(
     () => [
@@ -146,16 +129,16 @@ const IncidentList = () => {
       <>
       <Toaster/>
         <Navbar />
-        <div className="container mx-auto my-4 min-h-full pt-4 text-gray-900">
-          <main className="max-w-full mx-auto px-4 sm:px-6 lg:px-4 pt-4">
-            <div className="">
-              <h1 className="text-xl font-semibold">Incident Tables</h1>
-            </div>
-            <div className="mt-4 mb-4 flex flex-col">
+        <div className="bg-white border border-slate-300 m-auto rounded px-8 pt-8 mt-14 mb-2 flex flex-col md:w-2/3 sm:w-3/4 w-3/4">
+          <div className="flex flex-row items-center justify-start mb-5">
+            <RiFoldersLine className="text-4xl" />
+            <h2 className="ml-2 text-3xl">Listado de Incidentes.</h2>
+          </div>
+          <main className="max-w-full">
+            <div className="mb-2 flex flex-col">
               <div className="overflow-x-auto -mx-4 sm:-mx-6 lg:-mx-8">
-                <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                  <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                    <table
+                <div className="py-2 align-middle inline-block min-w-full sm:px-4 lg:px-4">
+                <table
                       {...getTableProps()}
                       className="min-w-full divide-y divide-gray-200"
                     >
@@ -193,22 +176,6 @@ const IncidentList = () => {
                             <tr {...page.getRowProps()}>
                               {page.cells?.map((cell) => {
                                 switch (cell.column.id) {
-                                  case "url_image":
-                                    return (
-                                      <td {...cell.getCellProps()}>
-                                        <img
-                                          className="rounded-full w-8 h-8 max-h-8 border-2 border-slate-200 object-cover m-auto"
-                                          src={cell.value}
-                                          alt="user avatar"
-                                        />
-                                      </td>
-                                    );
-                                  case "role":
-                                    return (
-                                      <td {...cell.getCellProps()}>
-                                        <RolePill value={cell.value} />
-                                      </td>
-                                    );
                                   case "status":
                                     return (
                                       <td {...cell.getCellProps()}>
@@ -223,13 +190,13 @@ const IncidentList = () => {
                                             className={`text-xl mx-2 text-gray-600`}
                                             to={`/view/incident/${cell.value}`}
                                           >
-                                            <ImProfile />
+                                            <AiOutlineFolderView />
                                           </Link>
                                           <Link
                                             className={`text-xl mx-2 text-gray-600`}
                                             to={`/incident/verify/${cell.value}`}
                                           >
-                                            <MdListAlt />
+                                            <BsUiChecksGrid />
                                           </Link>
                                         </div>
                                       </td>
@@ -263,7 +230,6 @@ const IncidentList = () => {
                       gotoPage={gotoPage}
                       pageCount={pageCount}
                     />
-                  </div>
                 </div>
               </div>
             </div>

@@ -18,7 +18,7 @@ const Input = ({
       <>
         <label
           className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
-          for={name}
+          htmlFor={name}
         >
           {`${label}:`}
         </label>
@@ -52,7 +52,7 @@ const Input = ({
       <>
         <label
           className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
-          for={name}
+          htmlFor={name}
         >
           {`${label}:`}
         </label>
@@ -99,7 +99,7 @@ const Input = ({
       <>
         <label
           className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
-          for={name}
+          htmlFor={name}
         >
           {`${label}:`}
         </label>
