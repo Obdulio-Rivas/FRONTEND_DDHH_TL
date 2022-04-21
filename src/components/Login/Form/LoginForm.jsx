@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import AuthService from "../../../services/Auth/Auth.Service.js";
+import toast, {Toaster} from "react-hot-toast";
 import Button from "../../Forms/Button/Button";
 import Input from "../../Forms/Input/Input";
 
@@ -18,6 +19,9 @@ const LoginForm = () => {
       console.log(status);
       navigate(`/confirmation/${email}`);
     } else {
+      toast.error("Las credenciales no son correctas.",{
+        position:"bottom-center"
+      })
       navigate("/");
     }
   };
@@ -72,6 +76,7 @@ const LoginForm = () => {
             ¿Olvidaste tu contraseña?
           </Link>
         </form>
+        <Toaster/>
       </>
     );
   }
