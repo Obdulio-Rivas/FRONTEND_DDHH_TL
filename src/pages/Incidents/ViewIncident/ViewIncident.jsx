@@ -19,7 +19,7 @@ const ViewIncident = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [incident, setIncident] = useState([]);
   const [victims, setVictims] = useState([]);
-  const [denunciante, setDenunciante] = useState({});
+  const [complainant, setComplainant] = useState({});
   const [department, setDepartment] = useState([]);
   const [municipality, setMunicipality] = useState([]);
 
@@ -50,7 +50,7 @@ const ViewIncident = () => {
             arrayIncidenteVictim[i]
           );
           if (victimResponse.data[0].type_victim !== "victima") {
-            setDenunciante(victimResponse.data[0]);
+            setComplainant(victimResponse.data[0]);
           }
           if (victimResponse.data[0].type_victim === "victima") {
             arrayVictims.push(victimResponse.data[0]);
@@ -87,23 +87,6 @@ const ViewIncident = () => {
       </>
     );
   }
-
-  const getMonthName = (monthNumber) => {
-    return [
-      "Enero",
-      "Febrero",
-      "Marzo",
-      "Abril",
-      "Mayo",
-      "Junio",
-      "Julio",
-      "Agosto",
-      "Septiembre",
-      "Octubre",
-      "Noviembre",
-      "Diciembre",
-    ][monthNumber];
-  };
 
   return (
     <>
@@ -189,7 +172,7 @@ const ViewIncident = () => {
                   Victima Directa:
                   <span className="mx-2">
                     Si{" "}
-                    {denunciante?.type_victim === "denunciante y victima" ? (
+                    {complainant?.type_victim === "denunciante y victima" ? (
                       <BsCheckSquare className="inline-flex text-sm" />
                     ) : (
                       <BsSquare className="inline-flex text-sm" />
@@ -197,7 +180,7 @@ const ViewIncident = () => {
                   </span>
                   <span className="mx-2">
                     No{" "}
-                    {denunciante?.type_victim === "denunciante" ? (
+                    {complainant?.type_victim === "denunciante" ? (
                       <BsCheckSquare className="inline-flex text-sm" />
                     ) : (
                       <BsSquare className="inline-flex text-sm" />
@@ -207,18 +190,18 @@ const ViewIncident = () => {
               </h1>
               <ul className="flex flex-row flex-wrap justify-between px-5">
                 <li className="py-1">
-                  {`Nombre Completo: ${denunciante?.name} ${denunciante?.last_name}`}
+                  {`Nombre Completo: ${complainant?.name} ${complainant?.last_name}`}
                 </li>
-                <li className="py-1">{`Edad: ${denunciante?.age}`}</li>
+                <li className="py-1">{`Edad: ${complainant?.age}`}</li>
               </ul>
               <ul className="flex flex-row flex-wrap justify-between px-5">
-                <li className="py-1">{`Tipo de Documento de Identidad:  ${denunciante?.type_dui}`}</li>
-                <li className="py-1">{`N° de Documento:  ${denunciante?.dui}`}</li>
+                <li className="py-1">{`Tipo de Documento de Identidad:  ${complainant?.type_dui}`}</li>
+                <li className="py-1">{`N° de Documento:  ${complainant?.dui}`}</li>
                 <li className="py-1">
                   <span className="mr-2">Sabe Leer y Escribir:</span>
                   <span className="mx-2">
                     Si{" "}
-                    {denunciante?.illiterate === 1 ? (
+                    {complainant?.illiterate === 1 ? (
                       <BsCheckSquare className="inline-flex text-sm" />
                     ) : (
                       <BsSquare className="inline-flex text-sm" />
@@ -226,7 +209,7 @@ const ViewIncident = () => {
                   </span>
                   <span className="mx-2">
                     No{" "}
-                    {denunciante?.illiterate === 0 ? (
+                    {complainant?.illiterate === 0 ? (
                       <BsCheckSquare className="inline-flex text-sm" />
                     ) : (
                       <BsSquare className="inline-flex text-sm" />
@@ -239,7 +222,7 @@ const ViewIncident = () => {
                   <span className="mr-2">Sexo:</span>
                   <span className="mx-2">
                     Hombre{" "}
-                    {denunciante?.gender === 1 ? (
+                    {complainant?.gender === 1 ? (
                       <BsCheckSquare className="inline-flex text-sm" />
                     ) : (
                       <BsSquare className="inline-flex text-sm" />
@@ -247,35 +230,35 @@ const ViewIncident = () => {
                   </span>
                   <span className="mx-2">
                     Mujer{" "}
-                    {denunciante?.gender === 0 ? (
+                    {complainant?.gender === 0 ? (
                       <BsCheckSquare className="inline-flex text-sm" />
                     ) : (
                       <BsSquare className="inline-flex text-sm" />
                     )}
                   </span>
                 </li>
-                <li className="py-1">{`Orientación Sexual/Identidad de Género: ${denunciante?.gender_identity}`}</li>
+                <li className="py-1">{`Orientación Sexual/Identidad de Género: ${complainant?.gender_identity}`}</li>
               </ul>
               <ul className="flex flex-row flex-wrap justify-between px-5">
-                <li className="py-1">{`Grado Académico: ${denunciante?.academic_grade}`}</li>
-                <li className="py-1">{`Profesión u Oficio: ${denunciante?.profession}`}</li>
+                <li className="py-1">{`Grado Académico: ${complainant?.academic_grade}`}</li>
+                <li className="py-1">{`Profesión u Oficio: ${complainant?.profession}`}</li>
               </ul>
               <ul className="flex flex-row flex-wrap justify-between px-5">
-                <li className="py-1">{`País: ${denunciante?.country}`}</li>
+                <li className="py-1">{`País: ${complainant?.country}`}</li>
                 <li className="py-1">{`Departamento: ${
                   department.filter(
-                    (x) => x.id_department === denunciante?.department
+                    (x) => x.id_department === complainant?.department
                   )[0]?.department
                 }`}</li>
                 <li className="py-1">{`Municipio: ${
                   municipality.filter(
-                    (x) => x.id_municipality === denunciante?.municipality
+                    (x) => x.id_municipality === complainant?.municipality
                   )[0]?.municipality
                 }`}</li>
               </ul>
               <ul className="flex flex-row flex-wrap justify-between px-5">
-                <li className="py-1">{`Dirección: ${denunciante?.adress}`}</li>
-                <li className="py-1">{`Teléfono: ${denunciante?.phone}`}</li>
+                <li className="py-1">{`Dirección: ${complainant?.adress}`}</li>
+                <li className="py-1">{`Teléfono: ${complainant?.phone}`}</li>
               </ul>
             </div>
             <div className="my-4">
@@ -603,7 +586,7 @@ const ViewIncident = () => {
                     document={<Incident 
                       incident={incident}
                       victims={victims}
-                      complainant={null} />}
+                      complainant={complainant} />}
                     filename={`${incident[0]?.expediente} - ${Date.now()}`}
                   >
                     <div className="flex flex-row justify-center items-center">

@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useNavigate, useParams } from "react-router-dom";
-import FileUpload from "../../../components/Forms/FileUpload/FileUpload";
 import { MdAttachFile } from "react-icons/md";
 import { AiOutlinePrinter } from "react-icons/ai";
 import toast, { Toaster } from "react-hot-toast";
