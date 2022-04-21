@@ -9,8 +9,7 @@ import {
   StyleSheet,
 } from "@react-pdf/renderer";
 
-import tick_box_checked from "./icons/tick_box_checked.png";
-import tick_box_unchecked from "./icons/tick_box_unchecked.png";
+import logo from "./icons/tick_box_checked.png";
 
 const Incident = ({ incident, victims, complainant }) => {
   
@@ -18,8 +17,7 @@ const Incident = ({ incident, victims, complainant }) => {
     <Document>
       <Page size="A4" wrap style={{ padding: 16 }}>
         <View>
-          <Image src={tick_box_checked} />
-          <Image src={tick_box_unchecked} />
+          <Image src={logo} />
         </View>
         <View>
           <Text>{`${JSON.stringify(incident)}`}</Text>
