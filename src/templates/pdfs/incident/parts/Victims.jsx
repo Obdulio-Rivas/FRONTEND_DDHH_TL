@@ -177,7 +177,7 @@ export const Victims = ({victim,cantVictim}) => {
         <View>
             <View style={[styles.col_full,styles.mt_5]}>
                 <Text style={[styles.textNormal, styles.col_75]}>{`Nombre completo: ${victim.name} ${victim.last_name}`}</Text>
-                <Text style={[styles.textNormal, styles.col_25]}>{`Edad: ${victim.age} ${cantVictim}`}</Text>
+                <Text style={[styles.textNormal, styles.col_25]}>{`Edad: ${victim.age}`}</Text>
             </View>
             <View style={[styles.col_full,styles.mt_5]}>
                 <Text style={[styles.textNormal, styles.col_50]}>{`DUI: ${victim.dui}`}</Text>
