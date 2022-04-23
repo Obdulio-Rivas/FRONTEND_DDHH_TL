@@ -77,7 +77,7 @@ const options_menu = {
         { key: 1, option: "Listado de incidentes", href: "/incident/incidents" },
       ],
     },
-    { key: 2, title: "Directorio", href: "/Directorio", type: "normal" },
+    { key: 2, title: "Directorio", href: "/directory", type: "normal" },
   ],
 };
 

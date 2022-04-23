@@ -15,6 +15,7 @@ import Confirmation from "../pages/Confirmation/Confirmation";
 import LogRoutes from "./Log/LogRoutes";
 import FormatsRoutes from "./Formats/FormatsRoutes";
 import RecoverPassword from "../pages/RecoverPassword/RecoverPassword";
+import Directory from "../pages/Directory/Directory";
 
 const RouteManager = () => {
 
@@ -89,6 +90,13 @@ const RouteManager = () => {
             path="/profile"
             element={
               <PrivateRoute forRoles={[0, 1, 2]} children={<Profile />} />
+            }
+          />
+          <Route
+            exact
+            path="/directory"
+            element={
+              <PrivateRoute forRoles={[0, 1, 2]} children={<Directory />} />
             }
           />
           <Route exact path="/confirmation/:email" element={<Confirmation/>} />
