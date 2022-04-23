@@ -266,9 +266,8 @@ const Step7 = ({ handlerStore }) => {
                 option: "Seleccione una opción.",
                 value: "DEFAULT",
               },
-              { option: "Homosexual", value: "Homosexual" },
               { option: "Heterosexual", value: "Heterosexual" },
-              { option: "Binario", value: "Binario" },
+              { option: "Comunidad LGBT+", value: "Comunidad LGBT+" },
               { option: "Otro", value: "Otro" },
             ]}
             name={"gender_identity"}
