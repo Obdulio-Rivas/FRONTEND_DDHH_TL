@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import {
     Page,
     Font,
@@ -8,8 +8,6 @@ import {
     Document,
     StyleSheet,
   } from "@react-pdf/renderer";
-import MunicipalityService from '../../../../services/Dimensions/Municipality/Municipality.Service';
-import DepartmentService from '../../../../services/Dimensions/Department/Department.Service';
   
 
 const styles = StyleSheet.create({
@@ -126,7 +124,7 @@ const styles = StyleSheet.create({
       display: "flex",
       flexDirection: "row",
       flexWrap: "wrap",
-      justifyContent: "flex-start",
+      justifyContent: "center",
       alignContent: "center",
       alignItems: "center",
     },
@@ -149,7 +147,6 @@ const styles = StyleSheet.create({
       width: "50%",
       display: "flex",
       flexDirection: "row",
-      justifyContent: "flex-start",
       alignContent: "center",
       alignItems: "center",
     },
@@ -157,7 +154,6 @@ const styles = StyleSheet.create({
       width: "75%",
       display: "flex",
       flexDirection: "row",
-      justifyContent: "flex-start",
       alignContent: "center",
       alignItems: "center",
     },
@@ -165,7 +161,6 @@ const styles = StyleSheet.create({
         width: "25%",
         display: "flex",
         flexDirection: "row",
-        justifyContent: "flex-start",
         alignContent: "center",
         alignItems: "center",
       },
@@ -173,7 +168,6 @@ const styles = StyleSheet.create({
         width: "35%",
         display: "flex",
         flexDirection: "row",
-        justifyContent: "flex-start",
         alignContent: "center",
         alignItems: "center",
       },
@@ -181,53 +175,26 @@ const styles = StyleSheet.create({
         width: "40%",
         display: "flex",
         flexDirection: "row",
-        justifyContent: "flex-start",
         alignContent: "center",
         alignItems: "center",
       },
+      justifyBetween: {
+        justifyContent: 'space-between',
+      },
+      textCenter: {
+        textAlign: 'center',
+      }
   });
 
-export default function Complainant({complainant}) {
-  const [department, setDepartment] = useState([]);
-  const [municipality, setMunicipality] = useState([]);
-  useEffect(() => {
-    async function getDepartmentMunicipality() {
-      const departmentResponse = await DepartmentService.getDepartments();
-      setDepartment(departmentResponse.data);
-      const municipalityResponse = await MunicipalityService.getMunicipalities();
-      setMunicipality(municipalityResponse.data);
-    }
-    getDepartmentMunicipality();
-  }, []);
+export default function Narrative({incident}) {
+
+
 
   return (
     <View style={[styles.container_row, styles.mt_5, styles.wd_100]}>
         <View>
             <View style={[styles.col_full,styles.mt_5]}>
-                <Text style={[styles.textSmall, styles.col_75]}>{`Nombre completo: ${complainant.name} ${complainant.last_name}`}</Text>
-                <Text style={[styles.textSmall, styles.col_25]}>{`Edad: ${complainant.age}`}</Text>
-            </View>
-            <View style={[styles.col_full,styles.mt_5]}>
-                <Text style={[styles.textSmall, styles.col_35]}>{`tipo de documento: ${complainant.type_dui}`}</Text>
-                <Text style={[styles.textSmall, styles.col_40]}>{`DUI: ${complainant.dui}`}</Text>
-                <Text style={[styles.textSmall, styles.col_25]}>{`Sabe leer y escribir: ${complainant.illiterate === 0 ? "No" : "Si"}`}</Text>
-            </View>
-            <View style={[styles.col_full,styles.mt_5]}>
-                <Text style={[styles.textSmall, styles.col_25]}>{`Sexo: ${complainant.gender === 0 ? "Femenino" : "Masculino"}`}</Text>
-                <Text style={[styles.textSmall, styles.col_75]}>{`Orientación Sexual/Identidad de Género: ${complainant.gender_identity}`}</Text>
-            </View>
-            <View style={[styles.col_full,styles.mt_5]}>
-                <Text style={[styles.textSmall, styles.col_50]}>{`Grado Académico: ${complainant.academic_grade}`}</Text>
-                <Text style={[styles.textSmall, styles.col_50]}>{`Profesión u Oficio: ${complainant.profession}`}</Text>
-            </View>
-            <View style={[styles.col_full,styles.mt_5]}>
-                <Text style={[styles.textSmall, styles.col_25]}>{`País: ${complainant.country}`}</Text>
-                <Text style={[styles.textSmall, styles.col_50]}>{`Departamento: ${department.filter((x) => x.id_department === complainant?.department)[0]?.department}`}</Text>
-                <Text style={[styles.textSmall, styles.col_25]}>{`Municipio: ${municipality.filter((x) => x.id_municipality === complainant?.municipality)[0]?.municipality}`}</Text>
-            </View>
-            <View style={[styles.col_full,styles.mt_5]}>
-                <Text style={[styles.textSmall, styles.col_75]}>{`Dirección: ${complainant.adress}`}</Text>
-                <Text style={[styles.textSmall, styles.col_25]}>{`Teléfono: ${complainant.phone}`}</Text>
+                <Text style={[styles.col_full, styles.textSmall]}>{`Narrativa: ${incident.description_incident}`}</Text>
             </View>
         </View>
     </View>

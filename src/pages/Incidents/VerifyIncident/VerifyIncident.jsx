@@ -19,6 +19,7 @@ import Navbar from "../../../components/Navbar/Navbar";
 const VerifyIncident = () => {
   let { id_incident } = useParams();
   const [incident, setIncident] = useState({});
+  const [isReady, setIsReady] = useState(false);
   const [victims, setVictims] = useState([]);
   const [complainant, setComplainant] = useState({});
   const [file, setFile] = useState({
@@ -61,6 +62,7 @@ const VerifyIncident = () => {
             }
           }
           setVictims(arrayVictims);
+          setIsReady(!isReady);
           toast.success("Informacion del incidente cargada correctamente.", {
             position: "bottom-center",
           });
@@ -129,7 +131,7 @@ const VerifyIncident = () => {
           isValid: false,
           isUploading: false,
         });
-        objectIncident = incident;
+        objectIncident.id_incident = incident.id_incident;
         objectIncident.status = 1
         const responseIncident = await CaseService.putIncident(objectIncident);
         console.log(responseIncident);
@@ -160,7 +162,7 @@ const VerifyIncident = () => {
             AuthService.getCurrentUser()?.last_name
           } - ${Date.now()}`}
         >
-          <div className={"flex flex-row justify-start items-center"}>
+          <div className={`flex flex-row justify-start items-center ${!isReady && 'hidden'}`}>
             <AiOutlinePrinter className="text-4xl mx-1 cursor-pointer" />{" "}
             <span>Descargar ficha</span>
           </div>

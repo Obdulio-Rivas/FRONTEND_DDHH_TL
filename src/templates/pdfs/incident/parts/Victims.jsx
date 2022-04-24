@@ -168,7 +168,7 @@ import {
       },
   });
 
-export const Victims = ({victim,cantVictim}) => {
+export const Victims = ({victim}) => {
   return (
     <View style={[styles.container_row, styles.mt_15, styles.wd_100]}>
         <View style={[styles.principalContent]}>

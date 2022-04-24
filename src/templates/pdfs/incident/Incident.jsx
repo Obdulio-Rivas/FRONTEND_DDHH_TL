@@ -11,6 +11,12 @@ import {
 import { Victims } from "./parts/Victims";
 import Complainant from "./parts/Complainant";
 import logo from "./icons/tick_box_checked.png";
+import InstitutionalRegistration from "./parts/InstitutionalRegistration";
+import Narrative from "./parts/Narrative";
+import CreationAgreement from "./parts/CreationAgreement";
+import MigratoryProfile from "./parts/MigratoryProfile";
+import SocioeconomicProfile from "./parts/SocioeconomicProfile";
+import ProfileFacts from "./parts/ProfileFacts";
 const styles = StyleSheet.create({
   avatar: {
     width: 120,
@@ -34,7 +40,7 @@ const styles = StyleSheet.create({
     border: "1 slate #D4D4D5",
     with: 30,
     height: 30,
-    display: "block"
+    display: "block",
   },
   principalContent: {
     display: "flex",
@@ -155,55 +161,136 @@ const styles = StyleSheet.create({
     alignContent: "center",
     alignItems: "center",
   },
+  justifyBetween: {
+    justifyContent: "space-between",
+  },
+  textCenter: {
+    textAlign: "center",
+  },
 });
 
-
 const Incident = ({ incident, victims, complainant }) => {
-  const cantVictim = victims?.length;
+  
   return (
     <Document>
       <Page size="A4" wrap style={{ padding: 16 }}>
+
         <View>
-          <Image src={logo} />
-        </View>
-        <View>
-          <Text>{`${JSON.stringify(incident)}`}</Text>
+          <View
+            style={[styles.col_full, styles.border, styles.mt_5, styles.px_20]}
+          >
+            <Text style={[styles.textMedium]}>
+              I. DATOS DE REGISTRO INSTITUCIONAL.
+            </Text>
+          </View>
+          <InstitutionalRegistration
+            incident={incident}
+          ></InstitutionalRegistration>
         </View>
 
         <View>
           <View>
-            <View style={[styles.col_full, styles.border,styles.mt_5]}>
-                  <Text style={[styles.textMedium, styles.col_50,styles.ml_25]}>
-                  II. DATOS DE USUARIO.
-                  </Text>
-                  <Text style={[styles.textNormal, styles.col_50]}>
-                  {`Victima Directa: ${
-                    complainant.type_victim=== "denunciante y victima" ? "Si": "No"
-                  }`}
-                  </Text>
-              </View>
+            <View
+              style={[
+                styles.col_full,
+                styles.border,
+                styles.mt_5,
+                styles.px_20,
+                styles.justifyBetween,
+              ]}
+            >
+              <Text style={[styles.textMedium]}>II. DATOS DE USUARIO.</Text>
+              <Text style={[styles.textNormal]}>
+                {`Victima Directa: ${
+                  complainant.type_victim === "denunciante y victima"
+                    ? "Si"
+                    : "No"
+                }`}
+              </Text>
+            </View>
           </View>
           <Complainant complainant={complainant}></Complainant>
         </View>
 
         <View>
           <View>
-            <View style={[styles.col_full, styles.border,styles.mt_5]}>
-                <Text style={[styles.textMedium, styles.col_50,styles.ml_25]}>
+            <View
+              style={[
+                styles.col_full,
+                styles.border,
+                styles.mt_5,
+                styles.px_20,
+                styles.justifyBetween,
+              ]}
+            >
+              <Text style={[styles.textMedium]}>
                 III. DATOS DE LAS VICTIMAS.
-                </Text>
-                <Text style={[styles.textNormal, styles.col_50]}>
+              </Text>
+              <Text style={[styles.textSmall]}>
                 {`Número total de personas afectadas: ${
                   victims?.length ? victims?.length : 0
                 }`}
-                </Text>
+              </Text>
             </View>
           </View>
-          {victims.map((victim) => {
-            return( 
-              <Victims victim={victim} cantVictim={cantVictim}></Victims>
-            );
+          {victims.map((victim, index) => {
+            return <Victims key={index} victim={victim}></Victims>;
           })}
+        </View>
+
+        <View>
+          <View
+            style={[styles.col_full, styles.border, styles.mt_5, styles.px_20]}
+          >
+            <Text style={[styles.textMedium]}>
+              IV. PERFIL ESPECIFICO DE LOS HECHOS.
+            </Text>
+          </View>
+          <ProfileFacts
+            incident={incident}
+          ></ProfileFacts>
+        </View>
+
+        <View>
+          <View
+            style={[styles.col_full, styles.border, styles.mt_5, styles.px_20]}
+          >
+            <Text style={[styles.textMedium]}>V. PERFIL SOCIECONOMICO.</Text>
+          </View>
+          <SocioeconomicProfile
+            incident={incident}
+          ></SocioeconomicProfile>
+        </View>
+
+        <View>
+          <View
+            style={[styles.col_full, styles.border, styles.mt_5, styles.px_20]}
+          >
+            <Text style={[styles.textMedium]}>VI. PERFIL MIGRATORIO.</Text>
+          </View>
+          <MigratoryProfile
+            incident={incident}
+          ></MigratoryProfile>
+        </View>
+
+        <View>
+          <View
+            style={[styles.col_full, styles.border, styles.mt_5, styles.px_20]}
+          >
+            <Text style={[styles.textMedium]}>
+              VII. NARRATIVA DE LOS HECHOS.
+            </Text>
+          </View>
+          <Narrative incident={incident}></Narrative>
+        </View>
+
+        <View>
+          <View
+            style={[styles.col_full, styles.border, styles.mt_5, styles.px_20]}
+          >
+            <Text style={[styles.textMedium]}>VIII. ACUERDO DE CREACION.</Text>
+          </View>
+          <CreationAgreement incident={incident}></CreationAgreement>
         </View>
       </Page>
     </Document>
