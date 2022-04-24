@@ -115,7 +115,7 @@ const Step3 = ({ handlerStore }) => {
         <div className="relative md:w-2/5 px-3">
           <Select
             label={"Departamento"}
-            name={"deparment"}
+            name={"department"}
             options={departments}
             required={"*Este campo es obligatorio."}
             register={register}
