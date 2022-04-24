@@ -14,10 +14,10 @@ import MunicipalityService from "../../../../services/Dimensions/Municipality/Mu
 const Step2 = ({ handlerStore }) => {
   const navigate = useNavigate();
   const [municipalities, setMunicipalities] = useState([
-    { option: "Selecciona una opción", value: "Default value" },
+    { option: "Selecciona una opción", value: 0 },
   ]);
   const [departments, setDepartments] = useState([
-    { option: "Selecciona una opción", value: "Default value" },
+    { option: "Selecciona una opción", value: 0 },
   ]);
 
   const [radioValues, setRadioValues] = useState({
