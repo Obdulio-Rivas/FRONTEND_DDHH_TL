@@ -582,18 +582,7 @@ const ViewIncident = () => {
               </div>
               <div className="flex flex-row flex-wrap justify-end px-5 mt-6">
                 <div className="flex flex-row justify-around items-center py-3">
-                  <PDFDownload
-                    document={<Incident 
-                      incident={incident}
-                      victims={victims}
-                      complainant={complainant} />}
-                    filename={`${incident[0]?.expediente} - ${Date.now()}`}
-                  >
-                    <div className="flex flex-row justify-center items-center">
-                      <AiOutlinePrinter className="text-4xl mx-1 cursor-pointer" />
-                      <span>Descargar PDF</span>
-                    </div>
-                  </PDFDownload>
+                  
                 </div>
               </div>
             </div>
