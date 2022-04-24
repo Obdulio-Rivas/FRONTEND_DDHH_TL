@@ -379,7 +379,7 @@ const ViewIncident = () => {
                           </li>
                           <li className="py-1">
                             {`
-                    Tipo de Discapacidad: ${type_disability}`}
+                    Tipo de Discapacidad: ${type_disability!=null ? type_disability:"-"}`}
                           </li>
                         </ul>
                         <ul className="flex flex-row flex-wrap justify-between px-5">
@@ -406,7 +406,7 @@ const ViewIncident = () => {
                           </li>
                           <li className="py-1">
                             {`
-                    Medicamento Recetado: ${prescription_drug}`}
+                    Medicamento Recetado: ${prescription_drug!=null ? prescription_drug:"-"}`}
                           </li>
                         </ul>
                       </div>
@@ -485,7 +485,7 @@ const ViewIncident = () => {
                         )}
                       </span>
                     </li>
-                    <li className="py-1">{`¿En Cual? ${incident[0]?.statal_institution_name}`}</li>
+                    <li className="py-1">{`¿En Cual? ${incident[0]?.statal_institution_name!= null ? incident[0]?.statal_institution_name : "-" }`}</li>
                   </ul>
                   <ul className="flex flex-row flex-wrap justify-between px-5">
                     <li className="py-1">
@@ -553,11 +553,11 @@ const ViewIncident = () => {
                     )}
                   </span>
                 </li>
-                <li className="py-1">{`¿A qué país? ${incident[0]?.country_leave_name}`}</li>
+                <li className="py-1">{`¿A qué país? ${incident[0]?.country_leave_name==="0" ? "-":incident[0]?.country_leave_name}`}</li>
               </ul>
               <ul className="flex flex-row flex-wrap justify-between px-5">
                 <span className="text-base">
-                  {`¿Cuántas personas de su grupo familiar? ${incident[0]?.family_cant}`}
+                  {`¿Cuántas personas de su grupo familiar? ${incident[0]?.family_cant===0?"-" : incident[0]?.family_cant}`}
                 </span>
               </ul>
             </div>
