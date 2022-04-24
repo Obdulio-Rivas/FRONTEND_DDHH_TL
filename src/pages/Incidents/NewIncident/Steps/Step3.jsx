@@ -20,10 +20,10 @@ const Step3 = ({ handlerStore }) => {
   });
 
   const [municipalities, setMunicipalities] = useState([
-    { option: "Selecciona una opción", value: "Default value" },
+    { option: "Selecciona una opción", value: 0 },
   ]);
   const [departments, setDepartments] = useState([
-    { option: "Selecciona una opción", value: "Default value" },
+    { option: "Selecciona una opción", value: 0 },
   ]);
 
   const {
