@@ -431,7 +431,7 @@ const ViewIncident = () => {
                   <ul className="flex flex-row flex-wrap justify-between px-5">
                     <li className="py-1">{`Departamento: ${
                       department.filter(
-                        (x) => x.id_department === incident[0]?.deparment
+                        (x) => x.id_department === incident[0]?.department
                       )[0]?.department
                     }`}</li>
                     <li className="py-1">{`Municipio: ${
