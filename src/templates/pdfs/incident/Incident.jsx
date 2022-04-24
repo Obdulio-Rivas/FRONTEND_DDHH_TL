@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {
   Page,
   Font,
@@ -10,13 +10,13 @@ import {
 } from "@react-pdf/renderer";
 import { Victims } from "./parts/Victims";
 import Complainant from "./parts/Complainant";
-import logo from "./icons/tick_box_checked.png";
 import InstitutionalRegistration from "./parts/InstitutionalRegistration";
 import Narrative from "./parts/Narrative";
 import CreationAgreement from "./parts/CreationAgreement";
 import MigratoryProfile from "./parts/MigratoryProfile";
 import SocioeconomicProfile from "./parts/SocioeconomicProfile";
 import ProfileFacts from "./parts/ProfileFacts";
+
 const styles = StyleSheet.create({
   avatar: {
     width: 120,
@@ -81,11 +81,17 @@ const styles = StyleSheet.create({
   mt_25: {
     marginTop: 25,
   },
+  mt_50: {
+    marginTop: 50,
+  },
   mr_5: {
     marginRight: 5,
   },
   ml_25: {
     marginLeft: 25,
+  },
+  mb_10: {
+    marginBottom: 10,
   },
   solid_divider: {
     height: 1,
@@ -116,7 +122,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   textBig: {
-    fontSize: 18,
+    fontSize: 20,
   },
   icons: {
     width: 20,
@@ -167,13 +173,44 @@ const styles = StyleSheet.create({
   textCenter: {
     textAlign: "center",
   },
+  table: {
+    width: "100%",
+    display: "flex",
+    flexDirection: "column",
+    marginVertical: 5,
+  },
+  tableRow: {
+    display: "flex",
+    flexWrap: "nowrap",
+    flexDirection: "row",
+  },
+  tableCell: {
+    display: "flex",
+    flexDirection: "row",
+    width: "100%",
+  },
 });
 
 const Incident = ({ incident, victims, complainant }) => {
-  
   return (
     <Document>
-      <Page size="A4" wrap style={{ padding: 16 }}>
+      <Page
+        size="A4"
+        wrap
+        style={{
+          paddingTop: "2cm",
+          paddingBottom: "3cm",
+          paddingHorizontal: "1.5cm",
+        }}
+      >
+        <View>
+          <View style={[styles.col_full, styles.mb_10]}>
+            <Text style={[styles.textBig, styles.textCenter]}>
+              FICHA DE REGISTRO Y SEGUIMIENTO DE CASOS DE DESPLAZAMIENTO FORZADO
+              (Interno/Externo)
+            </Text>
+          </View>
+        </View>
 
         <View>
           <View
@@ -233,8 +270,16 @@ const Incident = ({ incident, victims, complainant }) => {
               </Text>
             </View>
           </View>
-          {victims.map((victim, index) => {
-            return <Victims key={index} victim={victim}></Victims>;
+          {victims.map((victim, index, array) => {
+            const is_last_one =
+              array.length === 1 || array.length === index ? true : false;
+            return (
+              <Victims
+                key={index}
+                victim={victim}
+                is_last_one={is_last_one}
+              ></Victims>
+            );
           })}
         </View>
 
@@ -246,9 +291,7 @@ const Incident = ({ incident, victims, complainant }) => {
               IV. PERFIL ESPECIFICO DE LOS HECHOS.
             </Text>
           </View>
-          <ProfileFacts
-            incident={incident}
-          ></ProfileFacts>
+          <ProfileFacts incident={incident}></ProfileFacts>
         </View>
 
         <View>
@@ -257,9 +300,7 @@ const Incident = ({ incident, victims, complainant }) => {
           >
             <Text style={[styles.textMedium]}>V. PERFIL SOCIECONOMICO.</Text>
           </View>
-          <SocioeconomicProfile
-            incident={incident}
-          ></SocioeconomicProfile>
+          <SocioeconomicProfile incident={incident}></SocioeconomicProfile>
         </View>
 
         <View>
@@ -268,9 +309,7 @@ const Incident = ({ incident, victims, complainant }) => {
           >
             <Text style={[styles.textMedium]}>VI. PERFIL MIGRATORIO.</Text>
           </View>
-          <MigratoryProfile
-            incident={incident}
-          ></MigratoryProfile>
+          <MigratoryProfile incident={incident}></MigratoryProfile>
         </View>
 
         <View>
@@ -291,6 +330,29 @@ const Incident = ({ incident, victims, complainant }) => {
             <Text style={[styles.textMedium]}>VIII. ACUERDO DE CREACION.</Text>
           </View>
           <CreationAgreement incident={incident}></CreationAgreement>
+        </View>
+
+        <View style={[styles.table, styles.mt_50]}>
+          <View style={[styles.tableRow]}>
+            <Text style={[styles.tableCell, styles.textCenter]}>
+              {"____________"}
+            </Text>
+            <Text style={[styles.tableCell, styles.textCenter]}>
+              {"____________"}
+            </Text>
+          </View>
+          <View style={[styles.tableRow, styles.mt_5, styles.textWeightMedium]}>
+            <Text
+              style={[styles.tableCell, styles.textCenter, styles.textSmall]}
+            >
+              {"Administrador"}
+            </Text>
+            <Text
+              style={[styles.tableCell, styles.textCenter, styles.textSmall]}
+            >
+              {"Usuario"}
+            </Text>
+          </View>
         </View>
       </Page>
     </Document>

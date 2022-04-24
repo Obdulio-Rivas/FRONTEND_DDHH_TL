@@ -199,13 +199,17 @@ export default function InstitutionalRegistration({incident}) {
                 <Text style={[styles.col_25, styles.textSmall]}>{`Hora: ${incident.hour}`}</Text>
             </View>
             <View style={[styles.col_full,styles.mt_5 ,styles.justifyBetween]}>
-                <Text style={[styles.col_50, styles.textSmall]}>{`¿Conoce otra institución u organización sobre el caso? ${incident.incident_institution != 0 ? "Si" : "No"}`}</Text>
-                <Text style={[styles.col_50, styles.textSmall]}>{`¿Cuál? ${incident.incident_institution_name != null ? incident.incident_institution_name: "-"}`}</Text>
+                <Text style={[styles.col_full, styles.textSmall]}>{`¿Conoce otra institución u organización sobre el caso? ${incident.incident_institution != 0 ? "Si" : "No"}`}</Text>
             </View>
             <View style={[styles.col_full,styles.mt_5 ,styles.justifyBetween]}>
-                <Text style={[styles.col_35, styles.textSmall]}>{`Nombre de quien refiere: ${incident.name_reference}`}</Text>
-                <Text style={[styles.col_35, styles.textSmall]}>{`Contacto: ${incident.contact}`}</Text>
-                <Text style={[styles.col_30, styles.textSmall]}>{`Identificación: ${incident.incident_identification}`}</Text>
+                <Text style={[styles.col_full, styles.textSmall]}>{`¿Cuál? ${incident.incident_institution_name != null ? incident.incident_institution_name: "-"}`}</Text>
+            </View>
+            <View style={[styles.col_full,styles.mt_5 ,styles.justifyBetween]}>
+                <Text style={[styles.col_full, styles.textSmall]}>{`Nombre de quien refiere: ${incident.name_reference}`}</Text>
+            </View>
+            <View style={[styles.col_full,styles.mt_5 ,styles.justifyBetween]}>
+                <Text style={[styles.col_50, styles.textSmall]}>{`Contacto: ${incident.contact}`}</Text>
+                <Text style={[styles.col_50, styles.textSmall]}>{`Identificación: ${incident.incident_identification}`}</Text>
             </View>
         </View>
     </View>

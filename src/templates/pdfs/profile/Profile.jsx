@@ -242,7 +242,7 @@ const Profile = ({ user }) => {
 
   return (
     <Document>
-      <Page size="A4" wrap style={{ padding: 16 }}>
+      <Page size="A4" style={{ padding: 16 }} wrap>
         <View style={{ marginBottom: 10 }}>
           <Image
             style={{ width: "100%", height: 140, display: "block" }}

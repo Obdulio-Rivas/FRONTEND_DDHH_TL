@@ -168,39 +168,41 @@ import {
       },
   });
 
-export const Victims = ({victim}) => {
+export const Victims = ({victim, is_last_one = true}) => {
   return (
-    <View style={[styles.container_row, styles.mt_15, styles.wd_100]}>
-        <View style={[styles.principalContent]}>
-          <div style={[styles.dotted_divider, styles.wd_100]}></div>
-        </View>
+    <View style={[styles.container_row, styles.mt_5, styles.wd_100]}>
         <View>
             <View style={[styles.col_full,styles.mt_5]}>
-                <Text style={[styles.textNormal, styles.col_75]}>{`Nombre completo: ${victim.name} ${victim.last_name}`}</Text>
-                <Text style={[styles.textNormal, styles.col_25]}>{`Edad: ${victim.age}`}</Text>
+                <Text style={[styles.textSmall, styles.col_75]}>{`Nombre completo: ${victim.name} ${victim.last_name}`}</Text>
+                <Text style={[styles.textSmall, styles.col_25]}>{`Edad: ${victim.age}`}</Text>
             </View>
             <View style={[styles.col_full,styles.mt_5]}>
-                <Text style={[styles.textNormal, styles.col_50]}>{`DUI: ${victim.dui}`}</Text>
-                <Text style={[styles.textNormal, styles.col_50]}>{`Sabe leer y escribir: ${victim.illiterate === 0 ? "No" : "Si"}`}</Text>
+                <Text style={[styles.textSmall, styles.col_50]}>{`DUI: ${victim.dui}`}</Text>
+                <Text style={[styles.textSmall, styles.col_50]}>{`Sabe leer y escribir: ${victim.illiterate === 0 ? "No" : "Si"}`}</Text>
             </View>
             <View style={[styles.col_full,styles.mt_5]}>
-                <Text style={[styles.textNormal, styles.col_25]}>{`Sexo: ${victim.gender === 0 ? "Femenino" : "Masculino"}`}</Text>
-                <Text style={[styles.textNormal, styles.col_75]}>{`Orientación Sexual/Identidad de Género: ${victim.gender_identity}`}</Text>
+                <Text style={[styles.textSmall, styles.col_25]}>{`Sexo: ${victim.gender === 0 ? "Femenino" : "Masculino"}`}</Text>
+                <Text style={[styles.textSmall, styles.col_75]}>{`Orientación Sexual/Identidad de Género: ${victim.gender_identity}`}</Text>
             </View>
             <View style={[styles.col_full,styles.mt_5]}>
-                <Text style={[styles.textNormal, styles.col_50]}>{`Grado Académico: ${victim.academic_grade}`}</Text>
-                <Text style={[styles.textNormal, styles.col_50]}>{`Profesión u Oficio: ${victim.profession}`}</Text>
+                <Text style={[styles.textSmall, styles.col_50]}>{`Grado Académico: ${victim.academic_grade}`}</Text>
+                <Text style={[styles.textSmall, styles.col_50]}>{`Profesión u Oficio: ${victim.profession}`}</Text>
             </View>
             <View style={[styles.col_full,styles.mt_5]}>
-                <Text style={[styles.textNormal, styles.col_50]}>
+                <Text style={[styles.textSmall, styles.col_50]}>
                   {`Padece de alguna Discapacidad Física: ${victim.physical_disability === 0 ? "No": "Si"}`}
                   </Text>
-                <Text style={[styles.textNormal, styles.col_50]}>{`Tipo de Discapacidad: ${victim.type_disability !== null ? victim.type_disability : "-"}`}</Text>
+                <Text style={[styles.textSmall, styles.col_50]}>{`Tipo de Discapacidad: ${victim.type_disability !== null ? victim.type_disability : "-"}`}</Text>
             </View>
             <View style={[styles.col_full,styles.mt_5]}>
-                <Text style={[styles.textNormal, styles.col_50]}>{`Padece de Alguna Enfermedad Crónica: ${victim.chronic_disease === 0? "No" : "Si"}`}</Text>
-                <Text style={[styles.textNormal, styles.col_50]}>{`Medicamento Recetado: ${victim.prescription_drug !== null ? victim.prescription_drug : "-"}`}</Text>
+                <Text style={[styles.textSmall, styles.col_50]}>{`Padece de Alguna Enfermedad Crónica: ${victim.chronic_disease === 0? "No" : "Si"}`}</Text>
             </View>
+            <View style={[styles.col_full,styles.mt_5]}>
+                <Text style={[styles.textSmall, styles.col_50]}>{`Medicamento Recetado: ${victim.prescription_drug !== null ? victim.prescription_drug : "-"}`}</Text>
+            </View>
+        </View>
+        <View style={[styles.principalContent]}>
+          {!is_last_one && <div style={[styles.dotted_divider, styles.wd_100]}></div>}
         </View>
     </View>
     );

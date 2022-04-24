@@ -132,7 +132,7 @@ const VerifyIncident = () => {
           isUploading: false,
         });
         objectIncident.id_incident = incident.id_incident;
-        objectIncident.status = 1
+        objectIncident.status = 1;
         const responseIncident = await CaseService.putIncident(objectIncident);
         console.log(responseIncident);
         toast.success("Incidente verificado y cargado con exito!", {
@@ -158,11 +158,13 @@ const VerifyIncident = () => {
               complainant={complainant}
             />
           }
-          filename={`${AuthService.getCurrentUser()?.name} ${
-            AuthService.getCurrentUser()?.last_name
-          } - ${Date.now()}`}
+          filename={`${incident?.expediente} - ${Date.now()}`}
         >
-          <div className={`flex flex-row justify-start items-center ${!isReady && 'hidden'}`}>
+          <div
+            className={`flex flex-row justify-start items-center ${
+              !isReady && "hidden"
+            }`}
+          >
             <AiOutlinePrinter className="text-4xl mx-1 cursor-pointer" />{" "}
             <span>Descargar ficha</span>
           </div>

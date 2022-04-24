@@ -73,36 +73,6 @@ const About = () => {
                   <span className="text-center">Manual de Uso</span>
                 </div>
               </div>
-              <div
-                className="item w-1/3 flex-auto p-4"
-                onClick={() =>
-                  handlerDownloadFile(
-                    "legalistica.appspot.com",
-                    "documentos/MANUAL DE USUARIO.pdf",
-                    "MANUAL DE USUARIO.pdf"
-                  )
-                }
-              >
-                <div className="flex flex-wrap flex-col justify-center items-center max-w-max m-auto p-4 cursor-pointer">
-                  <AiFillFilePdf className="text-red-600 text-8xl m-auto" />
-                  <span className="text-center">Manual de Uso</span>
-                </div>
-              </div>
-              <div
-                className="item w-1/3 flex-auto p-4"
-                onClick={() =>
-                  handlerDownloadFile(
-                    "legalistica.appspot.com",
-                    "documentos/MANUAL DE USUARIO.pdf",
-                    "MANUAL DE USUARIO.pdf"
-                  )
-                }
-              >
-                <div className="flex flex-wrap flex-col justify-center items-center max-w-max m-auto p-4 cursor-pointer">
-                  <AiFillFilePdf className="text-red-600 text-8xl m-auto" />
-                  <span className="text-center">Manual de Uso</span>
-                </div>
-              </div>
             </div>
           </div>
         </div>

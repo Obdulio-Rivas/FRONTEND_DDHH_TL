@@ -191,7 +191,7 @@ export default function CreationAgreement({ incident }) {
 
   return (
     <View style={[styles.container_row, styles.mt_5, styles.wd_100]}>
-      <View style={[styles.col_full, styles.mt_5]}>
+      <View style={[styles.col_full]}>
         <Text
           style={[styles.col_full, styles.textSmall]}
         >{`${creation_agreement}`}</Text>

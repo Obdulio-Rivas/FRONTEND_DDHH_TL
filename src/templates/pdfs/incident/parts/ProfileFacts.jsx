@@ -208,7 +208,7 @@ export default function ProfileFacts({ incident }) {
         <View style={[styles.col_full, styles.mt_5, styles.justifyBetween]}>
           <Text
             style={[styles.col_50, styles.textSmall]}
-          >{`Fecha en que Ocurrieron los Hechos: ${incident.date_hechos}`}</Text>
+          >{`Fecha de los Hechos: ${incident.date_hechos}`}</Text>
           <Text
             style={[styles.col_50, styles.textSmall]}
           >{`Hora Aprox. ${incident.incident_time}`}</Text>
@@ -222,39 +222,41 @@ export default function ProfileFacts({ incident }) {
           <Text style={[styles.col_50, styles.textSmall]}>{`Departamento: ${
             department.filter((x) => x.id_department === incident?.deparment)[0]
               ?.department
-          }`}</Text>
+          }.`}</Text>
           <Text style={[styles.col_50, styles.textSmall]}>{`Municipio: ${
             municipality.filter(
               (x) => x.id_municipality === incident?.municipality
             )[0]?.municipality
-          }`}</Text>
+          }.`}</Text>
         </View>
-        <View style={[styles.col_full, styles.mt_5, styles.justifyBetween]}>
+        <View style={[styles.col_full, styles.mt_5]}>
           <Text
-            style={[styles.col_50, styles.textSmall]}
-          >{`Causa del Desplazamiento: ${incident.cause_displacement
-            .split("-")
-            ?.map((elemento) => elemento)}.`}</Text>
-          <Text
-            style={[styles.col_50, styles.textSmall]}
-          >{`Personas o grupos que generaron el desplazamiento: ${incident.people_displacement}`}</Text>
+            style={[styles.col_full, styles.textSmall]}
+          >{`Causa del Desplazamiento: ${incident.cause_displacement}.`}</Text>
         </View>
-        <View style={[styles.col_full, styles.mt_5, styles.justifyBetween]}>
+        <View style={[styles.col_full, styles.mt_5]}>
           <Text
-            style={[styles.col_50, styles.textSmall]}
+            style={[styles.col_full, styles.textSmall]}
+          >{`Personas o grupos que generaron el desplazamiento: ${incident.people_displacement}.`}</Text>
+        </View>
+        <View style={[styles.col_full, styles.mt_5]}>
+          <Text
+            style={[styles.col_full, styles.textSmall]}
           >{`¿Cuáles instituciones han acompañado? ${incident.institutions_accompanied}`}</Text>
         </View>
-        <View style={[styles.col_full, styles.mt_5, styles.justifyBetween]}>
+        <View style={[styles.col_full, styles.mt_5]}>
           <Text
-            style={[styles.col_35, styles.textSmall]}
+            style={[styles.col_full, styles.textSmall]}
           >{`¿Interpuso denuncia en alguna instancia estatal? ${incident.statal_institution===0 ? "No" : "Si"}`}</Text>
+        </View>
+        <View style={[styles.col_full, styles.mt_5,]}>
           <Text
-            style={[styles.col_35, styles.textSmall]}
+            style={[styles.col_full, styles.textSmall]}
           >{`¿En Cual? ${incident.statal_institution_name!=null ? incident.statal_institution_name : "-"}`}</Text>
         </View>
-        <View style={[styles.col_full, styles.mt_5, styles.justifyBetween]}>
+        <View style={[styles.col_full, styles.mt_5]}>
           <Text
-            style={[styles.col_50, styles.textSmall]}
+            style={[styles.col_full, styles.textSmall]}
           >{`¿Descripción del Acompañamiento brindado? ${incident.accompanied_descriptions}`}</Text>
         </View>
       </View>
