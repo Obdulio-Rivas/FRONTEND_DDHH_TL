@@ -198,7 +198,7 @@ export default function MigratoryProfile({incident}) {
                 <Text style={[styles.col_50, styles.textSmall]}>{`¿A qué país? ${incident.country_leave_name===0? "-" :incident.country_leave_name}`}</Text>
             </View>
             <View style={[styles.col_full,styles.mt_5]}>
-                <Text style={[styles.col_full, styles.textSmall]}>{`¿Cuántas personas de su grupo familiar? ${incident.family_cant===0?"-": incident.family_cant}`}</Text>
+                <Text style={[styles.col_full, styles.textSmall]}>{`¿Cuántas personas de su grupo familiar? ${incident.family_cant==="0"?"-": incident.family_cant}`}</Text>
             </View>
         </View>
     </View>
