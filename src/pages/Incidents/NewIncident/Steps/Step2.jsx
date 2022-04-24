@@ -291,7 +291,7 @@ const Step2 = ({ handlerStore }) => {
             options={[
               {
                 option: "Seleccione una opción.",
-                value: NaN,
+                value: "-",
               },
               { option: "El Salvador", value: "El Salvador" },
               { option: "Guatemala", value: "Guatemala" },
