@@ -247,10 +247,10 @@ export default function ProfileFacts({ incident }) {
         <View style={[styles.col_full, styles.mt_5, styles.justifyBetween]}>
           <Text
             style={[styles.col_35, styles.textSmall]}
-          >{`¿Interpuso denuncia en alguna instancia estatal? ${incident.statal_institution}`}</Text>
+          >{`¿Interpuso denuncia en alguna instancia estatal? ${incident.statal_institution===0 ? "No" : "Si"}`}</Text>
           <Text
             style={[styles.col_35, styles.textSmall]}
-          >{`¿En Cual? ${incident.statal_institution_name}`}</Text>
+          >{`¿En Cual? ${incident.statal_institution_name!=null ? incident.statal_institution_name : "-"}`}</Text>
         </View>
         <View style={[styles.col_full, styles.mt_5, styles.justifyBetween]}>
           <Text
