@@ -339,8 +339,8 @@ minutos del dia ${date} del mes de ${month_name} del año ${year}.`;
         </ul>
         <ul className="flex flex-row flex-wrap justify-between px-5">
           <li className="py-1">{`País: ${store?.step2?.values?.country}`}</li>
-          <li className="py-1">{`Departamento: ${department.filter((x) => x.id_department === store?.step2?.values?.deparment)[0]?.department}`}</li>
-          <li className="py-1">{`Municipio: ${municipality.filter((x) => x.id_municipality === store?.step2?.values?.municipality)[0]?.municipality}`}</li>
+          <li className="py-1">{`Departamento: ${department.filter((x) => x.id_department == store?.step2?.values?.department)[0]?.department}`}</li>
+          <li className="py-1">{`Municipio: ${municipality.filter((x) => x.id_municipality == store?.step2?.values?.municipality)[0]?.municipality}`}</li>
         </ul>
         <ul className="flex flex-row flex-wrap justify-between px-5">
           <li className="py-1">{`Dirección: ${store?.step2?.values?.adress}`}</li>
@@ -518,8 +518,8 @@ minutos del dia ${date} del mes de ${month_name} del año ${year}.`;
               <li className="py-1">{`Hora Aproximada: ${store?.step3?.values?.incident_time}`}</li>
             </ul>
             <ul className="flex flex-row flex-wrap justify-between px-5">
-              <li className="py-1">{`Departamento: ${department.filter((x) => x.id_department === store?.step3?.values?.deparment)[0]?.department}`}</li>
-              <li className="py-1">{`Municipio:  ${municipality.filter((x) => x.id_municipality === store?.step3?.values?.municipality)[0]?.municipality}`}</li>
+              <li className="py-1">{`Departamento: ${department.filter((x) => x.id_department == store?.step3?.values?.department)[0]?.department}`}</li>
+              <li className="py-1">{`Municipio:  ${municipality.filter((x) => x.id_municipality == store?.step3?.values?.municipality)[0]?.municipality}`}</li>
               <li className="py-1">{`Dirección: ${store?.step3?.values?.adress}`}</li>
             </ul>
           </div>
