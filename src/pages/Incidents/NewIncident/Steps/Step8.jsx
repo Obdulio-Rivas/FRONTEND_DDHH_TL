@@ -8,6 +8,8 @@ import AuthService from "../../../../services/Auth/Auth.Service";
 import VictimService from "../../../../services/Victim/Victim.Service";
 import IncidentVictimsService from "../../../../services/IncidentVictims/IncidentVictims.Service";
 import CaseService from "../../../../services/Incident/Incident.Service";
+import DepartmentService from "../../../../services/Dimensions/Department/Department.Service";
+import MunicipalityService from "../../../../services/Dimensions/Municipality/Municipality.Service";
 
 const Step8 = ({ store, handlerStore }) => {
   const step1 = store.step1?.values;
@@ -20,6 +22,18 @@ const Step8 = ({ store, handlerStore }) => {
   const [currentUser, setCurrentUser] = useState(AuthService.getCurrentUser());
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
+
+  const [department, setDepartment] = useState([]);
+  const [municipality, setMunicipality] = useState([]);
+  useEffect(() => {
+    async function getDepartmentMunicipality() {
+      const departmentResponse = await DepartmentService.getDepartments();
+      setDepartment(departmentResponse.data);
+      const municipalityResponse = await MunicipalityService.getMunicipalities();
+      setMunicipality(municipalityResponse.data);
+    }
+    getDepartmentMunicipality();
+  }, []);
 
   const getMonthName = (monthNumber) => {
     return [
@@ -325,8 +339,8 @@ minutos del dia ${date} del mes de ${month_name} del año ${year}.`;
         </ul>
         <ul className="flex flex-row flex-wrap justify-between px-5">
           <li className="py-1">{`País: ${store?.step2?.values?.country}`}</li>
-          <li className="py-1">{`Departamento: ${store?.step2?.values?.deparment}`}</li>
-          <li className="py-1">{`Municipio: ${store?.step2?.values?.municipality}`}</li>
+          <li className="py-1">{`Departamento: ${department.filter((x) => x.id_department === store?.step2?.values?.deparment)[0]?.department}`}</li>
+          <li className="py-1">{`Municipio: ${municipality.filter((x) => x.id_municipality === store?.step2?.values?.municipality)[0]?.municipality}`}</li>
         </ul>
         <ul className="flex flex-row flex-wrap justify-between px-5">
           <li className="py-1">{`Dirección: ${store?.step2?.values?.adress}`}</li>
@@ -504,8 +518,8 @@ minutos del dia ${date} del mes de ${month_name} del año ${year}.`;
               <li className="py-1">{`Hora Aproximada: ${store?.step3?.values?.incident_time}`}</li>
             </ul>
             <ul className="flex flex-row flex-wrap justify-between px-5">
-              <li className="py-1">{`Departamento: ${store?.step3?.values?.deparment}`}</li>
-              <li className="py-1">{`Municipio: ${store?.step3?.values?.municipality}`}</li>
+              <li className="py-1">{`Departamento: ${department.filter((x) => x.id_department === store?.step3?.values?.deparment)[0]?.department}`}</li>
+              <li className="py-1">{`Municipio:  ${municipality.filter((x) => x.id_municipality === store?.step3?.values?.municipality)[0]?.municipality}`}</li>
               <li className="py-1">{`Dirección: ${store?.step3?.values?.adress}`}</li>
             </ul>
           </div>
