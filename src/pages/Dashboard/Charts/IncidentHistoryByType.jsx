@@ -53,7 +53,7 @@ const IncidentHistoryByType = () => {
     datasets: [
       {
         label: "Tipo 1",
-        data: labels.map(() =>
+        data: labels?.map(() =>
           Math.random()
         ),
         borderColor: "rgb(255, 99, 132)",
@@ -61,7 +61,7 @@ const IncidentHistoryByType = () => {
       },
       {
         label: "Tipo 2",
-        data: labels.map(() =>
+        data: labels?.map(() =>
         Math.random()
         ),
         borderColor: "rgb(53, 162, 235)",

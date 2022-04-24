@@ -22,8 +22,8 @@ const PlatformLogins = () => {
       let current_year = moment().format("YYYY");
       let start_date = `${current_year}-01-01`;
       const response = await ChartService.getLoginsOfCurrentYear(start_date);
-      setLogins(response.data);
-      if (response.is_successful) {
+      setLogins(response?.data);
+      if (response?.is_successful) {
         AuthService.updateJwtUser(response);
       }
     }
@@ -57,7 +57,7 @@ const PlatformLogins = () => {
     },
   };
 
-  const labels = logins.map((data_object) => {
+  const labels = logins?.map((data_object) => {
     return data_object.month_name;
   });
 
@@ -66,13 +66,13 @@ const PlatformLogins = () => {
     datasets: [
       {
         label: "Inicios Exitosos",
-        data: logins.map(({ success }) => success),
+        data: logins?.map(({ success }) => success),
         borderColor: "rgba(162, 223, 181, 0.5)",
         backgroundColor: "rgb(162, 223, 181)",
       },
       {
         label: "Inicios Fallidos",
-        data: logins.map(({ failed }) => failed),
+        data: logins?.map(({ failed }) => failed),
         borderColor: "rgba(255, 107, 107, 0.5)",
         backgroundColor: "rgb(255, 107, 107)",
       },

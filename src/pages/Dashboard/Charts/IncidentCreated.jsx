@@ -21,8 +21,8 @@ const IncidentCreated = () => {
       let current_year = moment().format("YYYY");
       let start_date = `${current_year}-01-01`;
       const response = await ChartService.getIncidentsOfCurrentYear(start_date);
-      setIncidents(response.data);
-      if (response.is_successful) {
+      setIncidents(response?.data);
+      if (response?.is_successful) {
         AuthService.updateJwtUser(response);
       }
     }
@@ -55,7 +55,7 @@ const IncidentCreated = () => {
     },
   };
 
-  const labels = incidents.map((data_object) => {
+  const labels = incidents?.map((data_object) => {
     return data_object.month_name;
   });
 
@@ -64,12 +64,12 @@ const IncidentCreated = () => {
     datasets: [
       {
         label: "Pendientes",
-        data: incidents.map(({ number_of_pendings }) => number_of_pendings),
+        data: incidents?.map(({ number_of_pendings }) => number_of_pendings),
         backgroundColor: "rgb(255, 217, 61)",
       },
       {
         label: "Verificados",
-        data: incidents.map(({ number_of_verify }) => number_of_verify),
+        data: incidents?.map(({ number_of_verify }) => number_of_verify),
         backgroundColor: "rgb(162, 213, 171)",
       },
     ],

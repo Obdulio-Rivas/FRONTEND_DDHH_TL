@@ -10,8 +10,8 @@ const UsersStatus = () => {
   useEffect(() => {
     async function fetchIncidents() {
       const response = await ChartService.getUsersStatus();
-      setUserStatus(response.data[0]);
-      if (response.is_successful) {
+      setUserStatus(response?.data[0]);
+      if (response?.is_successful) {
         AuthService.updateJwtUser(response);
       }
     }

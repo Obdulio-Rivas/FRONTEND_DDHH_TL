@@ -11,7 +11,7 @@ const LatestIncidents = () => {
   useEffect(() => {
     async function getLastIncidentsCreated() {
       const response = await IncidentService.getIncidents();
-      setIncidents(response.data);
+      setIncidents(response?.data);
       setIsLoading(false);
     }
     getLastIncidentsCreated();
@@ -61,7 +61,7 @@ const LatestIncidents = () => {
           <span className="tracking-wide text-xl">Ultimos Incidentes</span>
         </div>
         <ul className="list-inside space-y-2 px-4 divide-y divide-slate-300 divide-dashed">
-          {incidents.map(
+          {incidents?.map(
             (
               { id_incident, id_type_incident, expediente, created_at },
               index
@@ -82,7 +82,7 @@ const LatestIncidents = () => {
                     </div>
                   </div>
                   <div className="text-gray-500 text-md">
-                    {created_at.split("T")[0]}
+                    {created_at?.split("T")[0]}
                   </div>
                 </li>
               );
