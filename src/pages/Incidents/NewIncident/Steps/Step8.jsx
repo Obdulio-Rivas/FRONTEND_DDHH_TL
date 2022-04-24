@@ -45,12 +45,13 @@ const Step8 = ({ store, handlerStore }) => {
   const minutes = new Date().getMinutes();
   const date = new Date().getDate();
 
-  const creation_agreement = `Yo ${currentUser.name} ${currentUser.last_name}, doy fe
-    que la informacion plasmada en la ficha actual y elaborada por mi
-    persona ha sido recopilada de viva voz por la persona que ha venido
-    en calidad de victima directa o conocido de la misma a declarar los
-    hechos anteriormente descritos a mi persona, a las ${hours} horas con ${minutes} 
-    minutos del dia ${date} del mes de ${month_name} del año ${year}.`;
+const creation_agreement = `Yo ${currentUser.name} ${currentUser.last_name}, doy fe
+que la informacion plasmada en la ficha actual y elaborada por mi
+persona ha sido recopilada de viva voz por la persona que ha venido
+en calidad de victima directa o conocido de la misma a declarar los
+hechos anteriormente descritos a mi persona, a las ${hours} horas con ${minutes}
+minutos del dia ${date} del mes de ${month_name} del año ${year}.`;
+
   const onSubmit = async (data) => {
     let id_user = currentUser.id_user;
     let id_incident = 0;
@@ -110,7 +111,7 @@ const Step8 = ({ store, handlerStore }) => {
       //general
       status: 0,
       description_incident: step6.description_incident,
-      creation_agreement: creation_agreement,
+      creation_agreement: creation_agreement.replace(/(\r\n|\n|\r)/gm, ""),
       //Foreign key.
       id_type_incident: 0,
       id_user: id_user,
