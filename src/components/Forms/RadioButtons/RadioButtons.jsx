@@ -10,7 +10,6 @@ const RadioButtons = ({
   errors,
   handlerChange = null,
 }) => {
-  console.log(valueRadio)
   return (
     <>
       <label
