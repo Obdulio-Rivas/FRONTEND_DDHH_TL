@@ -4,12 +4,13 @@ const RadioButtons = ({
   label,
   options = [""],
   name,
+  valueRadio = 0,
   required,
   register,
   errors,
-  handlerChange = null
+  handlerChange = null,
 }) => {
-
+  console.log(valueRadio)
   return (
     <>
       <label
@@ -28,7 +29,7 @@ const RadioButtons = ({
                 name={name}
                 id={`${name}_${index}`}
                 className="form-checkbox h-5 w-5 text-gray-600"
-                defaultChecked={index === (array.length - 1) ? true: false}
+                defaultChecked={valueRadio===option.value ? true : false}
                 {...register(name, { required: required })}
               />
               <span className="ml-2 text-gray-700">{option.label}</span>

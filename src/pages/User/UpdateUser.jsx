@@ -14,7 +14,7 @@ const UpdateUser = () => {
   const { id_user: id_user_params } = params;
 
   const [radioValues, setRadioValues] = useState({});
-
+  const [user, setUser] = useState([]);
   const {
     register,
     handleSubmit,
@@ -34,8 +34,11 @@ const UpdateUser = () => {
       setValue('phone', response.data[0].phone);
       setValue('nit', response.data[0].nit);
       setValue('email', response.data[0].email);
+
+      setUser(response.data);
     }
-    fetchUsers();
+
+    return fetchUsers();
   }, [id_user_params, setValue]);
 
   const handlerRadioButton = ({ name, value }) => {
@@ -129,6 +132,7 @@ const UpdateUser = () => {
             />
           </div>
           <div className="md:w-2/6 px-3 mb-6 md:mb-0">
+            {user[0]?.gender!==undefined ? 
             <RadioButtons
               label={"Genero"}
               name={"gender"}
@@ -139,8 +143,9 @@ const UpdateUser = () => {
               register={register}
               errors={errors}
               handlerChange={handlerRadioButton}
+              valueRadio={user[0]?.gender}
               required={"*Este campo es obligatorio."}
-            />
+            /> : <div></div>}
           </div>
         </div>
         <div className="-mx-3 md:flex mb-6">
@@ -157,7 +162,8 @@ const UpdateUser = () => {
             />
           </div>
           <div className="md:w-2/6 px-3 mb-6 md:mb-0">
-            <RadioButtons
+            {user[0]?.status!==undefined?
+              <RadioButtons
               label={"Estado"}
               name={"status"}
               options={[
@@ -167,11 +173,14 @@ const UpdateUser = () => {
               register={register}
               errors={errors}
               handlerChange={handlerRadioButton}
+              valueRadio={user[0]?.status}
               required={"*Este campo es obligatorio."}
-            />
+              /> : <div></div>
+            }
           </div>
           <div className="md:w-2/6 px-3 mb-6 md:mb-0">
-            <RadioButtons
+            {user[0]?.role!==undefined?
+              <RadioButtons
               label={"Rol"}
               name={"role"}
               options={[
@@ -182,8 +191,11 @@ const UpdateUser = () => {
               register={register}
               errors={errors}
               handlerChange={handlerRadioButton}
+              valueRadio={user[0]?.role}
               required={"*Este campo es obligatorio."}
-            />
+            />:<div></div>
+            }
+            
           </div>
         </div>
         <div class="flex flex-row justify-end -mx-0.5 md:flex mb-2">
