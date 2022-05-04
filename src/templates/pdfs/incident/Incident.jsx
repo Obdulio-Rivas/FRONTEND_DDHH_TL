@@ -345,12 +345,12 @@ const Incident = ({ incident, victims, complainant }) => {
             <Text
               style={[styles.tableCell, styles.textCenter, styles.textSmall]}
             >
-              {"Administrador"}
+              {"Técnico"}
             </Text>
             <Text
               style={[styles.tableCell, styles.textCenter, styles.textSmall]}
             >
-              {"Usuario"}
+              {`${complainant.name} ${complainant.last_name}`}
             </Text>
           </View>
         </View>
