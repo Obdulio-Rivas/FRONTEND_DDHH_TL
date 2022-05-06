@@ -266,7 +266,7 @@ minutos del dia ${date} del mes de ${month_name} del año ${year}.`;
             Victima Directa:
             <span className="mx-2">
               Si{" "}
-              {store?.step2?.values?.direct_victim === "1" ? (
+              {store?.step2?.values?.type_victim === "denunciante y victima" ? (
                 <BsCheckSquare className="inline-flex text-sm" />
               ) : (
                 <BsSquare className="inline-flex text-sm" />
@@ -274,7 +274,7 @@ minutos del dia ${date} del mes de ${month_name} del año ${year}.`;
             </span>
             <span className="mx-2">
               No{" "}
-              {store?.step2?.values?.direct_victim === "0" ? (
+              {store?.step2?.values?.type_victim === "denunciante" ? (
                 <BsCheckSquare className="inline-flex text-sm" />
               ) : (
                 <BsSquare className="inline-flex text-sm" />
@@ -352,7 +352,7 @@ minutos del dia ${date} del mes de ${month_name} del año ${year}.`;
           <span>III. DATOS DE LAS VICTIMAS.</span>
           <span className="text-base">
             {`Número total de personas afectadas: ${
-              store?.step6?.values?.length ? store?.step7?.values?.length : 0
+              store?.step7?.values?.length 
             }`}
           </span>
         </h1>
